@@ -68,3 +68,4 @@ prod-update.sh
 src/Service.Host/client/build/
 
 config.env
+local-update.sh

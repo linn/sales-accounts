@@ -60,7 +60,7 @@
                     builder.RegisterModule<AmazonSqsModule>();
                     builder.RegisterModule<LoggingModule>();
                     //builder.RegisterModule<ServiceModule>();
-                    //builder.RegisterModule<PersistenceModule>();
+                    builder.RegisterModule<PersistenceModule>();
                 });
 
             base.ConfigureApplicationContainer(existingContainer);
@@ -75,7 +75,7 @@
                     builder.RegisterModule<AmazonSqsModule>();
                     builder.RegisterModule<LoggingModule>();
                     //builder.RegisterModule<ServiceModule>();
-                    //builder.RegisterModule<PersistenceModule>();
+                    builder.RegisterModule<PersistenceModule>();
                 });
 
             base.ConfigureRequestContainer(lifetimeScope, context);
