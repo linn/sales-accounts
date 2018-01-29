@@ -9,6 +9,11 @@
             this.ClosedOn = closedOn;
         }
 
+        private SalesAccountCloseActivity()
+        {
+            // ef
+        }
+
         public DateTime ClosedOn { get; set; }
     }
 }
