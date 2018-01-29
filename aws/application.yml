@@ -1,4 +1,4 @@
-Description: Template
+Description: SalesAccounts
 AWSTemplateFormatVersion: '2010-09-09'
 Parameters:
   targetCluster:
@@ -50,7 +50,7 @@ Parameters:
     Type: String
     Description: Environment suffix e.g -int -sys
 Resources:
-  templateRole:
+  salesAccountsRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -62,7 +62,7 @@ Resources:
             Action: [ "sts:AssumeRole" ]
       Path: "/"
       Policies:
-      - PolicyName: templateServices
+      - PolicyName: salesAccountsServices
         PolicyDocument:
           Version: '2012-10-17'
           Statement:
@@ -71,15 +71,15 @@ Resources:
             - sqs:SendMessage
             Resource:
               Fn::ImportValue: logging-queue-arn
-  templateTaskDefinition:
+  salesAccountsTaskDefinition:
     Type: AWS::ECS::TaskDefinition
     Properties:
-      TaskRoleArn: !GetAtt templateRole.Arn
+      TaskRoleArn: !GetAtt salesAccountsRole.Arn
       ContainerDefinitions:
-      - Name: template
+      - Name: salesAccounts
         Cpu: '1'
         Essential: 'true'
-        Image: !Sub docker.io/linn/template:${dockerTag}
+        Image: !Sub docker.io/linn/sales-accounts:${dockerTag}
         PortMappings:
         - ContainerPort: 5050
         Memory: '250'
@@ -87,7 +87,7 @@ Resources:
           LogDriver: gelf
           Options:
             'gelf-address': 'udp://syslog.linn.co.uk:12201'
-            'tag': !Sub template-${dockerTag}-ecs-task
+            'tag': !Sub sales-accounts-${dockerTag}-ecs-task
         Environment:
         - Name: DATABASE_HOST
           Value: !Ref databaseHost
@@ -117,16 +117,16 @@ Resources:
           Value: !Ref loggingMaxInnerExceptionDepth
         - Name: awsRegion
           Value: !Ref AWS::Region
-  templateService:
+  salesAccountsService:
     Type: AWS::ECS::Service
     Properties:
       Cluster: !Ref targetCluster
       DesiredCount: !Ref desiredCount
-      TaskDefinition: !Ref templateTaskDefinition
+      TaskDefinition: !Ref salesAccountsTaskDefinition
       Role: ecsServiceRole
       LoadBalancers:
-      - ContainerName: template
+      - ContainerName: salesAccounts
         ContainerPort: 5050
         TargetGroupArn:
           Fn::ImportValue:
-            !Sub "template-target-group-arn${environmentSuffix}"
+            !Sub "sales-accounts-target-group-arn${environmentSuffix}"
