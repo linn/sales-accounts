@@ -5,20 +5,23 @@
     <RootNamespace>Linn.SalesAccounts.Service.Host</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="views\" />
     <Folder Include="Properties\" />
     <Compile Remove="client\build\**" />
     <Compile Remove="client\coverage\**" />
     <Compile Remove="node_modules\**" />
+    <Compile Remove="viedws\**" />
     <Content Remove="client\build\**" />
     <Content Remove="client\coverage\**" />
     <Content Remove="node_modules\**" />
+    <Content Remove="viedws\**" />
     <EmbeddedResource Remove="client\build\**" />
     <EmbeddedResource Remove="client\coverage\**" />
     <EmbeddedResource Remove="node_modules\**" />
+    <EmbeddedResource Remove="viedws\**" />
     <None Remove="client\build\**" />
     <None Remove="client\coverage\**" />
     <None Remove="node_modules\**" />
+    <None Remove="viedws\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Linn.Common.Configuration" Version="1.1.2" />
