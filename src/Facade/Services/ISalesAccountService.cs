@@ -2,7 +2,6 @@
 {
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
-    using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public interface ISalesAccountService
