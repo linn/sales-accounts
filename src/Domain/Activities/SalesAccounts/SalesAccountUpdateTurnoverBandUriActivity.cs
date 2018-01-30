@@ -12,6 +12,6 @@
             // ef
         }
 
-        public string TurnoverBandUri { get; set; }
+        public string TurnoverBandUri { get; private set; }
     }
 }

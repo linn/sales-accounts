@@ -12,6 +12,6 @@
             // ef
         }
 
-        public string DiscountSchemeUri { get; set; }
+        public string DiscountSchemeUri { get; private set; }
     }
 }

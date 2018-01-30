@@ -7,7 +7,6 @@
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Domain.Repositories;
-    using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public class SalesAccountService : ISalesAccountService
