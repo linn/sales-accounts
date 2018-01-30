@@ -14,6 +14,6 @@
             // ef
         }
 
-        public DateTime ClosedOn { get; set; }
+        public DateTime ClosedOn { get; private set; }
     }
 }

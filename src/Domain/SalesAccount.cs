@@ -20,11 +20,11 @@
             // ef
         }
 
-        public int AccountId { get; }
+        public int AccountId { get; private set; }
 
-        public int OutletNumber { get; }
+        public int OutletNumber { get; private set; }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
         public DateTime? ClosedOn { get; private set; }
 

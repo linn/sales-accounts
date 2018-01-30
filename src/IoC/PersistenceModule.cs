@@ -15,7 +15,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ServiceDbContext>().SingleInstance();
-            builder.RegisterType<ServiceDbContext>().As<DbContext>();
+            builder.Register(c => c.Resolve<ServiceDbContext>()).As<DbContext>();
             builder.RegisterType<TransactionManager>().As<ITransactionManager>();
 
             // repositories

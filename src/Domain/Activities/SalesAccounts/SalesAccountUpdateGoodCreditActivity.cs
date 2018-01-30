@@ -12,6 +12,6 @@
             // ef
         }
 
-        public bool EligibleForGoodCreditDiscount { get; set; }
+        public bool EligibleForGoodCreditDiscount { get; private set; }
     }
 }

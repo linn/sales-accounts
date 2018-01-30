@@ -1,5 +1,5 @@
-﻿Go to persistence folder
-cd /c/projects/discounting/src/Persistence
+﻿Open bash and go to persistence folder
+cd /c/projects/sales-accounts/src/Persistence
 
 Make Migration
 dotnet ef migrations add first-thing -o Migrations
