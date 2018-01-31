@@ -2,6 +2,7 @@
 {
     using Autofac;
 
+    using Linn.Common.Configuration;
     using Linn.Common.Facade;
     using Linn.Common.Proxy;
     using Linn.SalesAccounts.Domain;
@@ -19,7 +20,7 @@
 
             // proxies
             builder.RegisterType<RestClient>().As<IRestClient>();
-            builder.RegisterType<DiscountSchemeService>().As<IDiscountSchemeService>();
+            builder.RegisterType<DiscountSchemeService>().As<IDiscountSchemeService>().WithParameter("proxyRoot", ConfigurationManager.Configuration["PROXY_ROOT"]);
 
             // resource builders
             builder.RegisterType<SalesAccountResourceBuilder>().As<IResourceBuilder<SalesAccount>>();
