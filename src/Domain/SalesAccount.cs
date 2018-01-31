@@ -1,15 +1,17 @@
 ﻿namespace Linn.SalesAccounts.Domain
 {
     using System;
+    using System.Linq;
 
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.Exceptions;
+    using Linn.SalesAccounts.Domain.External;
 
     public class SalesAccount : ActivityEntity<SalesAccountActivity>
     {
         public SalesAccount(SalesAccountCreateActivity createActivity)
         {
             this.AccountId = createActivity.AccountId;
-            this.OutletNumber = createActivity.OutletNumber;
             this.Name = createActivity.Name;
             this.ClosedOn = createActivity.ClosedOn;
             this.Activities.Add(createActivity);
@@ -22,13 +24,13 @@
 
         public int AccountId { get; private set; }
 
-        public int OutletNumber { get; private set; }
-
         public string Name { get; private set; }
 
         public DateTime? ClosedOn { get; private set; }
 
         public bool EligibleForGoodCreditDiscount { get; set; }
+
+        public bool EligibleForRebate { get; set; }
 
         public string TurnoverBandUri { get; set; }
 
@@ -40,17 +42,18 @@
 
             this.Activities.Add(closeAccountActivity);
         }
-
-        public void UpdateAccount(string name, string discountSchemeUri, string turnoverBandUri, bool eligibleForGoodCredit)
+        
+        public void UpdateAccount(
+            DiscountScheme discountScheme,
+            string turnoverBandUri,
+            bool eligibleForGoodCredit,
+            bool eligibleForRebate)
         {
-            if (name != this.Name)
-            {
-                //this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountSchemeUri));
-            }
+            this.CheckUpdate(discountScheme, turnoverBandUri);
 
-            if (discountSchemeUri != this.DiscountSchemeUri)
+            if (discountScheme.DiscountSchemeUri != this.DiscountSchemeUri)
             {
-                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountSchemeUri));
+                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme.DiscountSchemeUri));
             }
 
             if (turnoverBandUri != this.TurnoverBandUri)
@@ -61,6 +64,19 @@
             if (eligibleForGoodCredit != this.EligibleForGoodCreditDiscount)
             {
                 this.UpdateGoodCredit(new SalesAccountUpdateGoodCreditActivity(eligibleForGoodCredit));
+            }
+
+            if (eligibleForRebate != this.EligibleForRebate)
+            {
+                this.UpdateRebate(new SalesAccountUpdateRebateActivity(eligibleForRebate));
+            }
+        }
+
+        private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
+        {
+            if (!discountScheme.TurnoverBandUris.Contains(turnoverBandUri))
+            {
+                throw new InvalidTurnoverBandException($"Discount scheme {discountScheme.Name} does not contain turnover band {turnoverBandUri}");
             }
         }
 
@@ -73,6 +89,12 @@
         private void UpdateGoodCredit(SalesAccountUpdateGoodCreditActivity updateActivity)
         {
             this.EligibleForGoodCreditDiscount = updateActivity.EligibleForGoodCreditDiscount;
+            this.Activities.Add(updateActivity);
+        }
+
+        private void UpdateRebate(SalesAccountUpdateRebateActivity updateActivity)
+        {
+            this.EligibleForRebate = updateActivity.EligibleForRebate;
             this.Activities.Add(updateActivity);
         }
 

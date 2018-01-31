@@ -17,7 +17,7 @@
         public void SetUp()
         {
             this.salesAccountCreateResource =
-                new SalesAccountCreateResource { Name = "new", AccountId = 2, OutletNumber = 4 };
+                new SalesAccountCreateResource { Name = "new", AccountId = 2 };
             this.Response = this.Browser.Post(
                 "/sales/accounts",
                 with =>

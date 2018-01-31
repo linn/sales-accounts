@@ -11,15 +11,14 @@
 
     using NUnit.Framework;
 
-    public class WhenUpdatingSalesAccount : ContextBase
+    public class WhenUpdatingSalesAccountWithInvalidDiscountScheme : ContextBase
     {
         private SalesAccountUpdateResource updateResource;
 
         [SetUp]
         public void SetUp()
         {
-            this.DiscountSchemeService.GetDiscountScheme("/ds/1")
-                .Returns(new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } });
+            this.DiscountSchemeService.GetDiscountScheme("/ds/1").Returns((DiscountScheme)null);
             this.updateResource = new SalesAccountUpdateResource
                                       {
                                           DiscountSchemeUri = "/ds/1",
@@ -30,25 +29,15 @@
         }
 
         [Test]
-        public void ShouldGetFromRepository()
+        public void ShouldNotCommitTransaction()
         {
-            this.SalesAccountRepository.Received().GetById(1);
+            this.TransactionManager.DidNotReceive().Commit();
         }
 
         [Test]
-        public void ShouldCommitTransaction()
+        public void ShouldReturnBadRequestResult()
         {
-            this.TransactionManager.Received().Commit();
-        }
-
-        [Test]
-        public void ShouldReturnSuccessResult()
-        {
-            this.Result.Should().BeOfType<SuccessResult<SalesAccount>>();
-            var dataResult = ((SuccessResult<SalesAccount>)this.Result).Data;
-            dataResult.DiscountSchemeUri.Should().Be("/ds/1");
-            dataResult.TurnoverBandUri.Should().Be("/tb/1");
-            dataResult.EligibleForGoodCreditDiscount.Should().BeTrue();
+            this.Result.Should().BeOfType<BadRequestResult<SalesAccount>>();
         }
     }
 }

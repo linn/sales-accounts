@@ -6,7 +6,9 @@
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.Exceptions;
     using Linn.SalesAccounts.Domain.Repositories;
+    using Linn.SalesAccounts.Domain.Services;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public class SalesAccountService : ISalesAccountService
@@ -15,12 +17,16 @@
 
         private readonly ISalesAccountRepository salesAccountRepository;
 
+        private readonly IDiscountSchemeService discountSchemeService;
+
         public SalesAccountService(
             ITransactionManager transactionManager,
-            ISalesAccountRepository salesAccountRepository)
+            ISalesAccountRepository salesAccountRepository,
+            IDiscountSchemeService discountSchemeService)
         {
             this.transactionManager = transactionManager;
             this.salesAccountRepository = salesAccountRepository;
+            this.discountSchemeService = discountSchemeService;
         }
 
         public IResult<SalesAccount> GetSalesAccount(int id)
@@ -38,7 +44,6 @@
         {
             var createActivity = new SalesAccountCreateActivity(
                 createResource.AccountId,
-                createResource.OutletNumber,
                 createResource.Name,
                 string.IsNullOrEmpty(createResource.ClosedOn) ? (DateTime?)null : DateTime.Parse(createResource.ClosedOn));
             var account = new SalesAccount(createActivity);
@@ -57,11 +62,25 @@
                 return new NotFoundResult<SalesAccount>();
             }
 
-            account.UpdateAccount(
-                updateResource.DiscountSchemeUri,
-                updateResource.TurnoverBandUri,
-                updateResource.EligibleForGoodCreditDiscount);
-            this.transactionManager.Commit();
+            var discountScheme = this.discountSchemeService.GetDiscountScheme(updateResource.DiscountSchemeUri);
+            if (discountScheme == null)
+            {
+                return new BadRequestResult<SalesAccount>($"Could not find discount scheme {updateResource.DiscountSchemeUri}");
+            }
+
+            try
+            {
+                account.UpdateAccount(
+                    discountScheme,
+                    updateResource.TurnoverBandUri,
+                    updateResource.EligibleForGoodCreditDiscount,
+                    updateResource.EligibleForRebate);
+                this.transactionManager.Commit();
+            }
+            catch (InvalidTurnoverBandException exception)
+            {
+                return new BadRequestResult<SalesAccount>(exception.Message);
+            }
 
             return new SuccessResult<SalesAccount>(account);
         }

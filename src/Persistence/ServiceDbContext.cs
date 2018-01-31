@@ -18,12 +18,14 @@
             builder.Entity<SalesAccountActivity>().HasKey(a => a.Id);
             builder.Entity<SalesAccountActivity>().HasDiscriminator<string>("ActivityType")
                 .HasValue<SalesAccountCreateActivity>("create").HasValue<SalesAccountCloseActivity>("close")
+                .HasValue<SalesAccountUpdateRebateActivity>("update-rebate")
                 .HasValue<SalesAccountUpdateGoodCreditActivity>("update-good-credit")
                 .HasValue<SalesAccountUpdateDiscountSchemeUriActivity>("update-discount-scheme")
                 .HasValue<SalesAccountUpdateTurnoverBandUriActivity>("update-turnover-band");
 
             builder.Entity<SalesAccountCreateActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateGoodCreditActivity>().HasBaseType<SalesAccountActivity>();
+            builder.Entity<SalesAccountUpdateRebateActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateDiscountSchemeUriActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateTurnoverBandUriActivity>().HasBaseType<SalesAccountActivity>();
 

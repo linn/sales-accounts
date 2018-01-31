@@ -17,7 +17,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.createActivity = new SalesAccountCreateActivity(1, 2, "n", 1.December(2018));
+            this.createActivity = new SalesAccountCreateActivity(1, "n", 1.December(2018));
             this.result = new SalesAccount(this.createActivity);
         }
 
@@ -25,7 +25,6 @@
         public void ShouldCreateAccount()
         {
             this.result.AccountId.Should().Be(this.createActivity.AccountId);
-            this.result.OutletNumber.Should().Be(this.createActivity.OutletNumber);
             this.result.Name.Should().Be(this.createActivity.Name);
             this.result.ClosedOn.Should().Be(this.createActivity.ClosedOn);
         }

@@ -14,7 +14,7 @@
         [SetUp]
         public void SetUpContext()
         {
-            this.Sut = new SalesAccount(new SalesAccountCreateActivity(10, 20, "Account 10"));
+            this.Sut = new SalesAccount(new SalesAccountCreateActivity(10, "Account 10"));
         }
 
         protected IEnumerable<SalesAccountActivity> ActivitiesExcludingCreate()

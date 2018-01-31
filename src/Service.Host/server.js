@@ -8,7 +8,7 @@ new WebpackDevServer(webpack(config), {
     historyApiFallback: true,
     proxy: {
         '/sales/accounts/assets': {
-            target: 'http://localhost:53555',
+            target: 'http://localhost:51610',
             secure: false
         }
     }
