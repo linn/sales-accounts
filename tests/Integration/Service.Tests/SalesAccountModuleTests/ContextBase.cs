@@ -1,5 +1,7 @@
 ﻿namespace Linn.SalesAccounts.Service.Tests.SalesAccountModuleTests
 {
+    using System.Collections.Generic;
+
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
@@ -40,8 +42,10 @@
                         with.Dependency(this.TransactionManager);
                         with.Dependency<SalesAccountService>();
                         with.Dependency<IResourceBuilder<SalesAccount>>(new SalesAccountResourceBuilder());
+                        with.Dependency<IResourceBuilder<IEnumerable<SalesAccount>>>(new SalesAccountsResourceBuilder());
                         with.Module<SalesAccountModule>();
                         with.ResponseProcessor<SalesAccountJsonResponseProcessor>();
+                        with.ResponseProcessor<SalesAccountsJsonResponseProcessor>();
                     });
 
             this.Browser = new Browser(bootstrapper);

@@ -15,6 +15,7 @@
             this.salesAccountService = salesAccountService;
 
             this.Get("/sales/accounts/{id:int}", parameters => this.GetSalesAccount(parameters.id));
+            this.Get("/sales/accounts", _ => this.GetSalesAccounts());
             this.Post("/sales/accounts", _ => this.AddSalesAccount());
             this.Put("/sales/accounts/{id:int}", parameters => this.UpdateSalesAccount(parameters.id));
             this.Delete("/sales/accounts/{id:int}", parameters => this.CloseSalesAccount(parameters.id));
@@ -22,8 +23,15 @@
 
         private object GetSalesAccount(int id)
         {
-            var salesAccount = this.salesAccountService.GetSalesAccount(id);
+            var salesAccount = this.salesAccountService.GetById(id);
             return this.Negotiate.WithModel(salesAccount);
+        }
+
+        private object GetSalesAccounts()
+        {
+            var resource = this.Bind<SalesAccountSearchResource>();
+            var salesAccounts = this.salesAccountService.Get(resource.SearchTerm);
+            return this.Negotiate.WithModel(salesAccounts);
         }
 
         private object AddSalesAccount()

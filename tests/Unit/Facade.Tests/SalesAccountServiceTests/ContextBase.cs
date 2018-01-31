@@ -1,5 +1,7 @@
 ﻿namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
 {
+    using System.Collections.Generic;
+
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
@@ -21,6 +23,8 @@
         protected IDiscountSchemeService DiscountSchemeService { get; private set; }
 
         protected IResult<SalesAccount> Result { get; set; }
+
+        protected IResult<IEnumerable<SalesAccount>> Results { get; set; }
 
         protected ITransactionManager TransactionManager { get; private set; }
 

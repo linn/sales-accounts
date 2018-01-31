@@ -19,7 +19,7 @@
         {
             this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name") { Id = 1 });
             this.SalesAccountRepository.GetById(1).Returns(this.salesAccount);
-            this.Result = this.Sut.GetSalesAccount(1);
+            this.Result = this.Sut.GetById(1);
         }
 
         [Test]
