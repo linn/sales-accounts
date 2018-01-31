@@ -27,6 +27,8 @@
 
         public bool EligibleForGoodCreditDiscount { get; set; }
 
+        public bool EligibleForRebate { get; set; }
+
         public string TurnoverBandUri { get; set; }
 
         public string DiscountSchemeUri { get; set; }
