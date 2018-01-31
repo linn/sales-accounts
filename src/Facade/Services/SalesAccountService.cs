@@ -59,7 +59,8 @@
             account.UpdateAccount(
                 updateResource.DiscountSchemeUri,
                 updateResource.TurnoverBandUri,
-                updateResource.EligibleForGoodCreditDiscount);
+                updateResource.EligibleForGoodCreditDiscount,
+                updateResource.EligibleForRebate);
             this.transactionManager.Commit();
 
             return new SuccessResult<SalesAccount>(account);

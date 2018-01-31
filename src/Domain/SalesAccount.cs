@@ -40,7 +40,11 @@
             this.Activities.Add(closeAccountActivity);
         }
 
-        public void UpdateAccount(string discountSchemeUri, string turnoverBandUri, bool eligibleForGoodCredit)
+        public void UpdateAccount(
+            string discountSchemeUri,
+            string turnoverBandUri,
+            bool eligibleForGoodCredit,
+            bool eligibleForRebate)
         {
             if (discountSchemeUri != this.DiscountSchemeUri)
             {
@@ -56,6 +60,11 @@
             {
                 this.UpdateGoodCredit(new SalesAccountUpdateGoodCreditActivity(eligibleForGoodCredit));
             }
+
+            if (eligibleForRebate != this.EligibleForRebate)
+            {
+                this.UpdateRebate(new SalesAccountUpdateRebateActivity(eligibleForRebate));
+            }
         }
 
         private void UpdateDiscountScheme(SalesAccountUpdateDiscountSchemeUriActivity updateActivity)
@@ -67,6 +76,12 @@
         private void UpdateGoodCredit(SalesAccountUpdateGoodCreditActivity updateActivity)
         {
             this.EligibleForGoodCreditDiscount = updateActivity.EligibleForGoodCreditDiscount;
+            this.Activities.Add(updateActivity);
+        }
+
+        private void UpdateRebate(SalesAccountUpdateRebateActivity updateActivity)
+        {
+            this.EligibleForRebate = updateActivity.EligibleForRebate;
             this.Activities.Add(updateActivity);
         }
 
