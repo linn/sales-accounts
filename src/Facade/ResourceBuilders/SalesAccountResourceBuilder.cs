@@ -16,7 +16,6 @@
                        {
                            Name = salesAccount.Name,
                            AccountId = salesAccount.AccountId,
-                           OutletNumber = salesAccount.OutletNumber,
                            EligibleForGoodCreditDiscount = salesAccount.EligibleForGoodCreditDiscount,
                            DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                            TurnoverBandUri = salesAccount.TurnoverBandUri,

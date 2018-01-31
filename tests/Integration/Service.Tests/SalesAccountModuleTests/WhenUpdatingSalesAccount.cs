@@ -4,6 +4,7 @@
 
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.External;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     using Nancy;
@@ -17,6 +18,7 @@
     {
         private SalesAccount salesAccount;
         private SalesAccountUpdateResource salesAccountUpdateResource;
+        private DiscountScheme discountScheme;
 
         [SetUp]
         public void SetUp()
@@ -28,8 +30,11 @@
                                                       EligibleForGoodCreditDiscount = true
                                                   };
 
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, 2, "name")) { Id = 111 };
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 111 };
 
+            this.discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/10", TurnoverBandUris = new[] { "/tb/10" } };
+            this.DiscountSchemeService.GetDiscountScheme(this.salesAccountUpdateResource.DiscountSchemeUri)
+                .Returns(this.discountScheme);
             this.SalesAccountRepository.GetById(111).Returns(this.salesAccount);
 
             this.Response = this.Browser.Put(

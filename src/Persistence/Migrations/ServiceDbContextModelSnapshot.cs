@@ -55,9 +55,9 @@ namespace Linn.SalesAccounts.Persistence.Migrations
 
                     b.Property<bool>("EligibleForGoodCreditDiscount");
 
-                    b.Property<string>("Name");
+                    b.Property<bool>("EligibleForRebate");
 
-                    b.Property<int>("OutletNumber");
+                    b.Property<string>("Name");
 
                     b.Property<string>("TurnoverBandUri");
 
@@ -88,8 +88,6 @@ namespace Linn.SalesAccounts.Persistence.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("OutletNumber");
-
                     b.ToTable("SalesAccountCreateActivity");
 
                     b.HasDiscriminator().HasValue("create");
@@ -115,6 +113,17 @@ namespace Linn.SalesAccounts.Persistence.Migrations
                     b.ToTable("SalesAccountUpdateGoodCreditActivity");
 
                     b.HasDiscriminator().HasValue("update-good-credit");
+                });
+
+            modelBuilder.Entity("Linn.SalesAccounts.Domain.Activities.SalesAccounts.SalesAccountUpdateRebateActivity", b =>
+                {
+                    b.HasBaseType("Linn.SalesAccounts.Domain.Activities.SalesAccounts.SalesAccountActivity");
+
+                    b.Property<bool>("EligibleForRebate");
+
+                    b.ToTable("SalesAccountUpdateRebateActivity");
+
+                    b.HasDiscriminator().HasValue("update-rebate");
                 });
 
             modelBuilder.Entity("Linn.SalesAccounts.Domain.Activities.SalesAccounts.SalesAccountUpdateTurnoverBandUriActivity", b =>

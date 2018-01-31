@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Linn.SalesAccounts.Persistence.Migrations
 {
-    public partial class salesaccount : Migration
+    public partial class salesaccounts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,8 +19,8 @@ namespace Linn.SalesAccounts.Persistence.Migrations
                     ClosedOn = table.Column<DateTime>(nullable: true),
                     DiscountSchemeUri = table.Column<string>(nullable: true),
                     EligibleForGoodCreditDiscount = table.Column<bool>(nullable: false),
+                    EligibleForRebate = table.Column<bool>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    OutletNumber = table.Column<int>(nullable: false),
                     TurnoverBandUri = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -41,9 +41,9 @@ namespace Linn.SalesAccounts.Persistence.Migrations
                     AccountId = table.Column<int>(nullable: true),
                     SalesAccountCreateActivity_ClosedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    OutletNumber = table.Column<int>(nullable: true),
                     DiscountSchemeUri = table.Column<string>(nullable: true),
                     EligibleForGoodCreditDiscount = table.Column<bool>(nullable: true),
+                    EligibleForRebate = table.Column<bool>(nullable: true),
                     TurnoverBandUri = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
