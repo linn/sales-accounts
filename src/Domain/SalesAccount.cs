@@ -1,8 +1,11 @@
 ﻿namespace Linn.SalesAccounts.Domain
 {
     using System;
+    using System.Linq;
 
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.Exceptions;
+    using Linn.SalesAccounts.Domain.External;
 
     public class SalesAccount : ActivityEntity<SalesAccountActivity>
     {
@@ -41,14 +44,16 @@
         }
 
         public void UpdateAccount(
-            string discountSchemeUri,
+            DiscountScheme discountScheme,
             string turnoverBandUri,
             bool eligibleForGoodCredit,
             bool eligibleForRebate)
         {
-            if (discountSchemeUri != this.DiscountSchemeUri)
+            this.CheckUpdate(discountScheme, turnoverBandUri);
+
+            if (discountScheme.DiscountSchemeUri != this.DiscountSchemeUri)
             {
-                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountSchemeUri));
+                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme.DiscountSchemeUri));
             }
 
             if (turnoverBandUri != this.TurnoverBandUri)
@@ -64,6 +69,14 @@
             if (eligibleForRebate != this.EligibleForRebate)
             {
                 this.UpdateRebate(new SalesAccountUpdateRebateActivity(eligibleForRebate));
+            }
+        }
+
+        private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
+        {
+            if (!discountScheme.TurnoverBandUris.Contains(turnoverBandUri))
+            {
+                throw new InvalidTurnoverBandException($"Discount scheme {discountScheme.Name} does not contain turnover band {turnoverBandUri}");
             }
         }
 

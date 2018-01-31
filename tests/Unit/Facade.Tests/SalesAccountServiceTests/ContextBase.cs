@@ -5,6 +5,7 @@
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Domain.Repositories;
+    using Linn.SalesAccounts.Domain.Services;
     using Linn.SalesAccounts.Facade.Services;
 
     using NSubstitute;
@@ -17,6 +18,8 @@
 
         protected ISalesAccountRepository SalesAccountRepository { get; private set; }
 
+        protected IDiscountSchemeService DiscountSchemeService { get; private set; }
+
         protected IResult<SalesAccount> Result { get; set; }
 
         protected ITransactionManager TransactionManager { get; private set; }
@@ -28,12 +31,14 @@
         {
             this.SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
             this.SalesAccountRepository = Substitute.For<ISalesAccountRepository>();
+            this.DiscountSchemeService = Substitute.For<IDiscountSchemeService>();
             this.SalesAccountRepository.GetById(1).Returns(this.SalesAccount);
             this.TransactionManager = Substitute.For<ITransactionManager>();
 
             this.Sut = new SalesAccountService(
                 this.TransactionManager,
-                this.SalesAccountRepository);
+                this.SalesAccountRepository,
+                this.DiscountSchemeService);
         }
     }
 }

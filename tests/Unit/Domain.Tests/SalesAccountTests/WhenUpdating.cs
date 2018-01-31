@@ -5,6 +5,7 @@
     using FluentAssertions;
 
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.External;
 
     using NUnit.Framework;
 
@@ -13,7 +14,8 @@
         [SetUp]
         public void SetUp()
         {
-            this.Sut.UpdateAccount("/ds/1", "/tb/1", true, true);
+            var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
+            this.Sut.UpdateAccount(discountScheme, "/tb/1", true, true);
         }
 
         [Test]
