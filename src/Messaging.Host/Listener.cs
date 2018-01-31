@@ -23,7 +23,19 @@
 
             this.logger.Info("Started pricing-listener");
 
-            this.consumer.For("sales-accounts.created")
+            this.consumer.For("linnapps.sales-account.created")
+                .OnConsumed(m =>
+                    {
+                        using (var handlerScope = scope.BeginLifetimeScope("messageHandler"))
+                        {
+                            //var handler = handlerScope.Resolve<DiscountCacheHandler>();
+                            //return handler.Execute(m);
+                            return true;
+                        }
+                    })
+                .OnRejected(this.LogRejection);
+
+            this.consumer.For("linnapps.sales-account.updated")
                 .OnConsumed(m =>
                     {
                         using (var handlerScope = scope.BeginLifetimeScope("messageHandler"))
