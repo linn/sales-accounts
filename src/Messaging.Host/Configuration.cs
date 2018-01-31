@@ -13,9 +13,9 @@
             builder.RegisterModule<AmazonCredentialsModule>();
             builder.RegisterModule<AmazonSqsModule>();
             builder.RegisterModule<LoggingModule>();
-            //builder.RegisterModule<MessagingModule>();
-            //builder.RegisterModule<PersistenceModule>();
-            //builder.RegisterModule<ServiceModule>();
+            builder.RegisterModule<MessagingModule>();
+            builder.RegisterModule<PersistenceModule>();
+            builder.RegisterModule<ServiceModule>();
             builder.RegisterReceiver("sales-accounts.q", "sales-accounts.dlx");
 
             builder.RegisterType<Listener>().AsSelf();
