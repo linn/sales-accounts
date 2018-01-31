@@ -41,8 +41,13 @@
             this.Activities.Add(closeAccountActivity);
         }
 
-        public void UpdateAccount(string discountSchemeUri, string turnoverBandUri, bool eligibleForGoodCredit)
+        public void UpdateAccount(string name, string discountSchemeUri, string turnoverBandUri, bool eligibleForGoodCredit)
         {
+            if (name != this.Name)
+            {
+                //this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountSchemeUri));
+            }
+
             if (discountSchemeUri != this.DiscountSchemeUri)
             {
                 this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountSchemeUri));

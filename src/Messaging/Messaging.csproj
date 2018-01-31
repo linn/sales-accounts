@@ -8,15 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Linn.Common.Messaging.RabbitMQ.Autofac" Version="1.1.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Facade\Facade.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Handlers\" />
   </ItemGroup>
 
 </Project>
