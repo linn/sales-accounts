@@ -9,7 +9,6 @@
         public SalesAccount(SalesAccountCreateActivity createActivity)
         {
             this.AccountId = createActivity.AccountId;
-            this.OutletNumber = createActivity.OutletNumber;
             this.Name = createActivity.Name;
             this.ClosedOn = createActivity.ClosedOn;
             this.Activities.Add(createActivity);
@@ -21,8 +20,6 @@
         }
 
         public int AccountId { get; private set; }
-
-        public int OutletNumber { get; private set; }
 
         public string Name { get; private set; }
 

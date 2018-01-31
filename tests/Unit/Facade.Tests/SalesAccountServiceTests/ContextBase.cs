@@ -26,7 +26,7 @@
         [SetUp]
         public void SetUpContext()
         {
-            this.SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, 1, "name"));
+            this.SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
             this.SalesAccountRepository = Substitute.For<ISalesAccountRepository>();
             this.SalesAccountRepository.GetById(1).Returns(this.SalesAccount);
             this.TransactionManager = Substitute.For<ITransactionManager>();

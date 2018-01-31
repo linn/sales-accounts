@@ -17,7 +17,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.createResource = new SalesAccountCreateResource { AccountId = 1, OutletNumber = 1, Name = "name" };
+            this.createResource = new SalesAccountCreateResource { AccountId = 1, Name = "name" };
             this.Result = this.Sut.AddSalesAccount(this.createResource);
         }
 
@@ -39,7 +39,6 @@
             this.Result.Should().BeOfType<CreatedResult<SalesAccount>>();
             var dataResult = ((CreatedResult<SalesAccount>)this.Result).Data;
             dataResult.AccountId.Should().Be(1);
-            dataResult.OutletNumber.Should().Be(1);
             dataResult.Name.Should().Be("name");
         }
     }

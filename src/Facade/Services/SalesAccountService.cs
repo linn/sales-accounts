@@ -38,7 +38,6 @@
         {
             var createActivity = new SalesAccountCreateActivity(
                 createResource.AccountId,
-                createResource.OutletNumber,
                 createResource.Name,
                 string.IsNullOrEmpty(createResource.ClosedOn) ? (DateTime?)null : DateTime.Parse(createResource.ClosedOn));
             var account = new SalesAccount(createActivity);

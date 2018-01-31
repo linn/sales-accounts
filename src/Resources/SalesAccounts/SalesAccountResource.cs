@@ -6,8 +6,6 @@
     {
         public int AccountId { get; set; }
 
-        public int OutletNumber { get; set; }
-
         public string Name { get; set; }
 
         public string TurnoverBandUri { get; set; }
