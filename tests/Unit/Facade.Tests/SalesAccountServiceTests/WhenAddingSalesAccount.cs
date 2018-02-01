@@ -38,7 +38,7 @@
         {
             this.Result.Should().BeOfType<CreatedResult<SalesAccount>>();
             var dataResult = ((CreatedResult<SalesAccount>)this.Result).Data;
-            dataResult.AccountId.Should().Be(1);
+            dataResult.Id.Should().Be(1);
             dataResult.Name.Should().Be("name");
         }
     }

@@ -12,7 +12,7 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<SalesAccount>().HasKey(s => s.Id);
+            builder.Entity<SalesAccount>().Property(s => s.Id).ValueGeneratedNever();
             builder.Entity<SalesAccount>().HasMany(s => s.Activities);
 
             builder.Entity<SalesAccountActivity>().HasKey(a => a.Id);
@@ -21,13 +21,15 @@
                 .HasValue<SalesAccountUpdateRebateActivity>("update-rebate")
                 .HasValue<SalesAccountUpdateGoodCreditActivity>("update-good-credit")
                 .HasValue<SalesAccountUpdateDiscountSchemeUriActivity>("update-discount-scheme")
-                .HasValue<SalesAccountUpdateTurnoverBandUriActivity>("update-turnover-band");
+                .HasValue<SalesAccountUpdateTurnoverBandUriActivity>("update-turnover-band")
+                .HasValue<SalesAccountUpdateNameActivity>("update-name");
 
             builder.Entity<SalesAccountCreateActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateGoodCreditActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateRebateActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateDiscountSchemeUriActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateTurnoverBandUriActivity>().HasBaseType<SalesAccountActivity>();
+            builder.Entity<SalesAccountUpdateNameActivity>().HasBaseType<SalesAccountActivity>();
 
             base.OnModelCreating(builder);
         }

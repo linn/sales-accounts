@@ -6,8 +6,6 @@
     {
         SalesAccount GetById(int id);
 
-        SalesAccount GetByAccountId(int accountId);
-
         IEnumerable<SalesAccount> GetAllOpenAccounts();
 
         IEnumerable<SalesAccount> Get(string searchTerm);

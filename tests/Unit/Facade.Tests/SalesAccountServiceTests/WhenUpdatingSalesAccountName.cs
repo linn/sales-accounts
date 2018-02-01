@@ -4,28 +4,29 @@
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
-    using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
 
     using NSubstitute;
 
     using NUnit.Framework;
 
-    public class WhenGettingSalesAccount : ContextBase
+    public class WhenUpdatingSalesAccountName : ContextBase
     {
-        private SalesAccount salesAccount;
-
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
-            this.SalesAccountRepository.GetById(1).Returns(this.salesAccount);
-            this.Result = this.Sut.GetById(1);
+            this.Result = this.Sut.UpdateSalesAccountName(1, "New Name");
         }
 
         [Test]
-        public void ShouldGetSalesAccount()
+        public void ShouldGetFromRepository()
         {
             this.SalesAccountRepository.Received().GetById(1);
+        }
+
+        [Test]
+        public void ShouldCommitTransaction()
+        {
+            this.TransactionManager.Received().Commit();
         }
 
         [Test]
@@ -33,8 +34,7 @@
         {
             this.Result.Should().BeOfType<SuccessResult<SalesAccount>>();
             var dataResult = ((SuccessResult<SalesAccount>)this.Result).Data;
-            dataResult.Name.Should().Be(this.salesAccount.Name);
-            dataResult.Id.Should().Be(1);
+            dataResult.Name.Should().Be("New Name");
         }
     }
 }

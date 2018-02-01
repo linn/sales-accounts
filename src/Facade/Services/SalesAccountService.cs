@@ -55,7 +55,7 @@
                 return new SuccessResult<IEnumerable<SalesAccount>>(accounts);
             }
 
-            var account = this.salesAccountRepository.GetByAccountId(accountIdSearch);
+            var account = this.salesAccountRepository.GetById(accountIdSearch);
             if (account != null)
             {
                 accounts.Add(account);
@@ -105,6 +105,20 @@
             {
                 return new BadRequestResult<SalesAccount>(exception.Message);
             }
+
+            return new SuccessResult<SalesAccount>(account);
+        }
+
+        public IResult<SalesAccount> UpdateSalesAccountName(int salesAccountId, string name)
+        {
+            var account = this.salesAccountRepository.GetById(salesAccountId);
+            if (account == null)
+            {
+                return new NotFoundResult<SalesAccount>();
+            }
+
+            account.UpdateName(name);
+            this.transactionManager.Commit();
 
             return new SuccessResult<SalesAccount>(account);
         }

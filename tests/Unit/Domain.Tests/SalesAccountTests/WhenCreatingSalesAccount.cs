@@ -24,7 +24,7 @@
         [Test]
         public void ShouldCreateAccount()
         {
-            this.result.AccountId.Should().Be(this.createActivity.AccountId);
+            this.result.Id.Should().Be(this.createActivity.AccountId);
             this.result.Name.Should().Be(this.createActivity.Name);
             this.result.ClosedOn.Should().Be(this.createActivity.ClosedOn);
         }

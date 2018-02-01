@@ -12,9 +12,10 @@ using System;
 namespace Linn.SalesAccounts.Persistence.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    partial class ServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180201115237_name-update")]
+    partial class nameupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,7 +45,10 @@ namespace Linn.SalesAccounts.Persistence.Migrations
 
             modelBuilder.Entity("Linn.SalesAccounts.Domain.SalesAccount", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccountId");
 
                     b.Property<DateTime?>("ClosedOn");
 

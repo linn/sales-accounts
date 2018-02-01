@@ -23,7 +23,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 111 };
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
             this.SalesAccountRepository.Get("search").Returns(new[] { this.salesAccount });
 
             this.Response = this.Browser.Get(
@@ -52,7 +52,7 @@
         {
             var resources = this.Response.Body.DeserializeJson<IEnumerable<SalesAccountResource>>().ToList();
             resources.Should().HaveCount(1);
-            resources.First().AccountId.Should().Be(1);
+            resources.First().Id.Should().Be(1);
         }
     }
 }

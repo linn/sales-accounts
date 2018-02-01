@@ -16,6 +16,8 @@
 
         IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource);
 
+        IResult<SalesAccount> UpdateSalesAccountName(int salesAccountId, string name);
+
         IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource);
     }
 }
