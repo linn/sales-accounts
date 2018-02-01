@@ -12,13 +12,8 @@ const receiveSalesAccounts = (searchTerm, salesAccounts) => ({
     payload: { searchTerm, salesAccounts }
 });
 
-export const showSalesAccountSearch = () => ({
-    type: actionTypes.SHOW_SALES_ACCOUNT_SEARCH,
-    payload: { }
-});
-
-export const hideSalesAccountSearch = () => ({
-    type: actionTypes.HIDE_SALES_ACCOUNT_SEARCH,
+export const clearSalesAccountSearch = () => ({
+    type: actionTypes.CLEAR_SALES_ACCOUNT_SEARCH,
     payload: {}
 });
 

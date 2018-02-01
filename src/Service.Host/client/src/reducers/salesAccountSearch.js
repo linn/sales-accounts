@@ -25,16 +25,10 @@ const salesAccountSearch = (state = defaultState, action) => {
             items: action.payload.salesAccounts
         }
 
-    case actionTypes.SHOW_SALES_ACCOUNT_SEARCH:
+    case actionTypes.CLEAR_SALES_ACCOUNT_SEARCH:
         return {
             ...defaultState,
             visible: true
-        }
-
-    case actionTypes.HIDE_SALES_ACCOUNT_SEARCH:
-        return {
-            ...defaultState,
-            visible: false
         }
 
     default:

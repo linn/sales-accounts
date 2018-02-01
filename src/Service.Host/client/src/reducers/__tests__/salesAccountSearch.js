@@ -89,7 +89,7 @@ describe('sales account search reducer', () => {
         };
 
         const action = {
-            type: actionTypes.SHOW_SALES_ACCOUNT_SEARCH
+            type: actionTypes.CLEAR_SALES_ACCOUNT_SEARCH
         };
 
         const expected = {
@@ -98,34 +98,6 @@ describe('sales account search reducer', () => {
             searchTerm: '',
             items: []
         }
-
-        deepFreeze(state);
-
-        expect(salesAccountSearch(state, action)).toEqual(expected);
-    });
-
-    test('when hiding search', () => {
-        const state = {
-            loading: false,
-            items: [
-                {
-                    name: '1'
-                }
-            ],
-            visible: false,
-            searchTerm: 'search'
-        };
-
-        const action = {
-            type: actionTypes.HIDE_SALES_ACCOUNT_SEARCH
-        };
-
-        const expected = {
-            visible: false,
-            loading: false,
-            searchTerm: '',
-            items: []
-        };
 
         deepFreeze(state);
 
