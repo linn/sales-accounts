@@ -1,5 +1,5 @@
 ﻿import { connect } from 'react-redux';
-import ViewSalesAccount from '../components/ViewSalesAccount';
+import SalesAccount from '../components/SalesAccount';
 import initialiseOnMount from './common/initialiseOnMount';
 import { fetchSalesAccount } from '../actions/salesAccounts';
 import { getSalesAccount, getSalesAccountsLoading } from '../selectors/salesAccountsSelectors';
@@ -18,4 +18,4 @@ const mapDispatchToProps = {
     initialise
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(ViewSalesAccount));
+export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(SalesAccount));

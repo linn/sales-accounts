@@ -2,7 +2,7 @@
 import { Loading } from './common';
 import { Link } from 'react-router-dom'
 
-class ViewSalesAccount extends Component {
+class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
@@ -22,4 +22,4 @@ class ViewSalesAccount extends Component {
     }
 }
 
-export default ViewSalesAccount;
+export default SalesAccount;
