@@ -1,6 +1,8 @@
 ﻿namespace Linn.SalesAccounts.Facade.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
@@ -29,7 +31,7 @@
             this.discountSchemeService = discountSchemeService;
         }
 
-        public IResult<SalesAccount> GetSalesAccount(int id)
+        public IResult<SalesAccount> GetById(int id)
         {
             var account = this.salesAccountRepository.GetById(id);
             if (account == null)
@@ -38,6 +40,28 @@
             }
 
             return new SuccessResult<SalesAccount>(account);
+        }
+
+        public IResult<IEnumerable<SalesAccount>> Get(string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                return new SuccessResult<IEnumerable<SalesAccount>>(this.salesAccountRepository.GetAllOpenAccounts());
+            }
+
+            var accounts = this.salesAccountRepository.Get(searchTerm).ToList();
+            if (!int.TryParse(searchTerm, out var accountIdSearch))
+            {
+                return new SuccessResult<IEnumerable<SalesAccount>>(accounts);
+            }
+
+            var account = this.salesAccountRepository.GetByAccountId(accountIdSearch);
+            if (account != null)
+            {
+                accounts.Add(account);
+            }
+
+            return new SuccessResult<IEnumerable<SalesAccount>>(accounts);
         }
 
         public IResult<SalesAccount> AddSalesAccount(SalesAccountCreateResource createResource)
