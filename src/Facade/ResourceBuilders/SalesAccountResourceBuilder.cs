@@ -13,15 +13,15 @@
         public SalesAccountResource Build(SalesAccount salesAccount)
         {
             return new SalesAccountResource
-                       {
-                           Name = salesAccount.Name,
-                           AccountId = salesAccount.AccountId,
-                           EligibleForGoodCreditDiscount = salesAccount.EligibleForGoodCreditDiscount,
-                           DiscountSchemeUri = salesAccount.DiscountSchemeUri,
-                           TurnoverBandUri = salesAccount.TurnoverBandUri,
-                           ClosedOn = salesAccount.ClosedOn == null ? string.Empty : salesAccount.ClosedOn.Value.ToString("o"),
-                           Links = this.BuildLinks(salesAccount).ToArray()
-                       };
+            {
+                Name = salesAccount.Name,
+                Id = salesAccount.Id,
+                EligibleForGoodCreditDiscount = salesAccount.EligibleForGoodCreditDiscount,
+                DiscountSchemeUri = salesAccount.DiscountSchemeUri,
+                TurnoverBandUri = salesAccount.TurnoverBandUri,
+                ClosedOn = salesAccount.ClosedOn == null ? string.Empty : salesAccount.ClosedOn.Value.ToString("o"),
+                Links = this.BuildLinks(salesAccount).ToArray()
+            };
         }
 
         object IResourceBuilder<SalesAccount>.Build(SalesAccount salesAccount) => this.Build(salesAccount);

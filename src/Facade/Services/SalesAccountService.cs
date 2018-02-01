@@ -55,7 +55,7 @@
                 return new SuccessResult<IEnumerable<SalesAccount>>(accounts);
             }
 
-            var account = this.salesAccountRepository.GetByAccountId(accountIdSearch);
+            var account = this.salesAccountRepository.GetById(accountIdSearch);
             if (account != null)
             {
                 accounts.Add(account);

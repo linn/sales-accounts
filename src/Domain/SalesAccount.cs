@@ -11,7 +11,7 @@
     {
         public SalesAccount(SalesAccountCreateActivity createActivity)
         {
-            this.AccountId = createActivity.AccountId;
+            this.Id = createActivity.AccountId;
             this.Name = createActivity.Name;
             this.ClosedOn = createActivity.ClosedOn;
             this.Activities.Add(createActivity);
@@ -21,9 +21,7 @@
         {
             // ef
         }
-
-        public int AccountId { get; private set; }
-
+        
         public string Name { get; private set; }
 
         public DateTime? ClosedOn { get; private set; }

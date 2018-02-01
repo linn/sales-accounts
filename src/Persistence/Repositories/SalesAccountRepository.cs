@@ -22,12 +22,6 @@
                 .SingleOrDefault(t => t.Id == id);
         }
 
-        public SalesAccount GetByAccountId(int accountId)
-        {
-            return this.serviceDbContext.SalesAccounts
-                .SingleOrDefault(t => t.AccountId == accountId);
-        }
-
         public IEnumerable<SalesAccount> GetAllOpenAccounts()
         {
             return this.serviceDbContext.SalesAccounts
