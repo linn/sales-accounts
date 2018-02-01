@@ -4,6 +4,7 @@
 
     using Linn.Common.Messaging.RabbitMQ.Autofac;
     using Linn.SalesAccounts.IoC;
+    using Linn.SalesAccounts.Messaging.Handlers;
 
     public static class Configuration
     {
@@ -13,12 +14,14 @@
             builder.RegisterModule<AmazonCredentialsModule>();
             builder.RegisterModule<AmazonSqsModule>();
             builder.RegisterModule<LoggingModule>();
-            //builder.RegisterModule<MessagingModule>();
-            //builder.RegisterModule<PersistenceModule>();
-            //builder.RegisterModule<ServiceModule>();
-            builder.RegisterReceiver("template.q", "template.dlx");
+            builder.RegisterModule<MessagingModule>();
+            builder.RegisterModule<PersistenceModule>();
+            builder.RegisterModule<ServiceModule>();
+            builder.RegisterReceiver("sales-accounts.q", "sales-accounts.dlx");
 
             builder.RegisterType<Listener>().AsSelf();
+            builder.RegisterType<SalesAccountCreatedHandler>().AsSelf();
+            builder.RegisterType<SalesAccountUpdatedHandler>().AsSelf();
 
             return builder.Build();
         }

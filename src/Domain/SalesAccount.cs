@@ -42,7 +42,7 @@
 
             this.Activities.Add(closeAccountActivity);
         }
-
+        
         public void UpdateAccount(
             DiscountScheme discountScheme,
             string turnoverBandUri,
@@ -72,12 +72,26 @@
             }
         }
 
+        public void UpdateName(string name)
+        {
+            if (name != this.Name)
+            {
+                this.UpdateName(new SalesAccountUpdateNameActivity(name));
+            }
+        }
+
         private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
         {
             if (!discountScheme.TurnoverBandUris.Contains(turnoverBandUri))
             {
                 throw new InvalidTurnoverBandException($"Discount scheme {discountScheme.Name} does not contain turnover band {turnoverBandUri}");
             }
+        }
+
+        private void UpdateName(SalesAccountUpdateNameActivity updateActivity)
+        {
+            this.Name = updateActivity.Name;
+            this.Activities.Add(updateActivity);
         }
 
         private void UpdateDiscountScheme(SalesAccountUpdateDiscountSchemeUriActivity updateActivity)

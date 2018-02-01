@@ -31,18 +31,18 @@
         public void ShouldAddActivities()
         {
             this.ActivitiesExcludingCreate().Should().HaveCount(4);
-            ((SalesAccountUpdateDiscountSchemeUriActivity)this.ActivitiesExcludingCreate()
-                .First(a => a.GetType() == typeof(SalesAccountUpdateDiscountSchemeUriActivity))).DiscountSchemeUri
-                .Should().Be("/ds/1");
-            ((SalesAccountUpdateTurnoverBandUriActivity)this.ActivitiesExcludingCreate()
-                .First(a => a.GetType() == typeof(SalesAccountUpdateTurnoverBandUriActivity))).TurnoverBandUri
-                .Should().Be("/tb/1");
-            ((SalesAccountUpdateGoodCreditActivity)this.ActivitiesExcludingCreate()
-                .First(a => a.GetType() == typeof(SalesAccountUpdateGoodCreditActivity))).EligibleForGoodCreditDiscount
-                .Should().BeTrue();
-            ((SalesAccountUpdateRebateActivity)this.ActivitiesExcludingCreate()
-                    .First(a => a.GetType() == typeof(SalesAccountUpdateRebateActivity))).EligibleForRebate
-                .Should().BeTrue();
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateDiscountSchemeUriActivity)
+                .As<SalesAccountUpdateDiscountSchemeUriActivity>().DiscountSchemeUri.Should().Be("/ds/1");
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateTurnoverBandUriActivity)
+                .As<SalesAccountUpdateTurnoverBandUriActivity>().TurnoverBandUri.Should().Be("/tb/1");
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateGoodCreditActivity)
+                .As<SalesAccountUpdateGoodCreditActivity>().EligibleForGoodCreditDiscount.Should().BeTrue();
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateRebateActivity)
+                .As<SalesAccountUpdateRebateActivity>().EligibleForRebate.Should().BeTrue();
         }
     }
 }
