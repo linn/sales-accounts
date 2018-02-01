@@ -52,7 +52,7 @@
         {
             var resources = this.Response.Body.DeserializeJson<IEnumerable<SalesAccountResource>>().ToList();
             resources.Should().HaveCount(1);
-            resources.First().AccountId.Should().Be(1);
+            resources.First().Id.Should().Be(1);
         }
     }
 }

@@ -15,7 +15,7 @@
             return new SalesAccountResource
             {
                 Name = salesAccount.Name,
-                AccountId = salesAccount.Id,
+                Id = salesAccount.Id,
                 EligibleForGoodCreditDiscount = salesAccount.EligibleForGoodCreditDiscount,
                 DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                 TurnoverBandUri = salesAccount.TurnoverBandUri,
