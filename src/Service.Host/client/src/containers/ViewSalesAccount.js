@@ -1,10 +1,21 @@
 ﻿import { connect } from 'react-redux';
 import ViewSalesAccount from '../components/ViewSalesAccount';
+import initialiseOnMount from './common/initialiseOnMount';
+import { fetchSalesAccount } from '../actions/salesAccounts';
+import { getSalesAccount, getSalesAccountsLoading } from '../selectors/salesAccountsSelectors';
 
-const mapStateToProps = () => ({
+const mapStateToProps = ({ salesAccounts }, { match }) => ({
+    salesAccountId: match.params.salesAccountId,
+    salesAccount: getSalesAccount(match.params.salesAccountId, salesAccounts),
+    loading: getSalesAccountsLoading(salesAccounts)
 });
 
-const mapDispatchToProps = {
+const initialise = ({ salesAccountId, salesAccount, loading }) => dispatch => {
+    dispatch(fetchSalesAccount(salesAccountId));
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewSalesAccount);
+const mapDispatchToProps = {
+    initialise
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(ViewSalesAccount));

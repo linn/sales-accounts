@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="client\src\components\__tests__\" />
-    <Folder Include="client\src\selectors\__tests__\" />
     <Folder Include="coverage\" />
     <Folder Include="Modules\" />
   </ItemGroup>

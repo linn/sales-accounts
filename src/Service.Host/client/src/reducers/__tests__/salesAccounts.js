@@ -9,13 +9,13 @@ describe('sales accounts reducer', () => {
         const action = {
             type: actionTypes.REQUEST_SALES_ACCOUNT,
             payload: {
-                salesAccountUri: '/s/a/1'
+                salesAccountId: 11
             }
         };
 
         const expected = [
             {
-                salesAccountUri: '/s/a/1',
+                salesAccountId: 11,
                 loading: true,
                 item: null
             }];
@@ -28,7 +28,7 @@ describe('sales accounts reducer', () => {
     test('when receiving a sales account', () => {
         const state = [
             {
-                salesAccountUri: '/s/a/1',
+                salesAccountId: 22,
                 loading: true,
                 item: null
             }];
@@ -36,7 +36,7 @@ describe('sales accounts reducer', () => {
         const action = {
             type: actionTypes.RECEIVE_SALES_ACCOUNT,
             payload: {
-                salesAccountUri: '/s/a/1',
+                salesAccountId: 22,
                 salesAccount: {
                     name: '1'
                 }
@@ -45,7 +45,7 @@ describe('sales accounts reducer', () => {
 
         const expected = [
             {
-                salesAccountUri: '/s/a/1',
+                salesAccountId: 22,
                 loading: false,
                 item: {
                     name: '1'

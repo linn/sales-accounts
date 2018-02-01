@@ -51,7 +51,7 @@ class SalesAccountSearch extends Component {
     handleSalesAccountClick(salesAccount) {
         const { showSalesAccountSearch, fetchSalesAccount, history } = this.props;
         showSalesAccountSearch();
-        fetchSalesAccount(salesAccount.links.find(a => a.rel === 'self').href);
+//        fetchSalesAccount(salesAccount.links.find(a => a.rel === 'self').href);
         history.push(salesAccount.links.find(a => a.rel === 'self').href);
     }
 }

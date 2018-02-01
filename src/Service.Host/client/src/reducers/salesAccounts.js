@@ -3,12 +3,12 @@
 const salesAccounts = (state = [], action) => {
     switch (action.type) {
     case actionTypes.REQUEST_SALES_ACCOUNT:
-        return state.find(p => p.salesAccountUri === action.payload.salesAccountUri)
+        return state.find(p => p.salesAccountId === action.payload.salesAccountId)
             ? state
             : [
                 ...state,
                 {
-                    salesAccountUri: action.payload.salesAccountUri,
+                    salesAccountId: action.payload.salesAccountId,
                     loading: true,
                     item: null
                 }
@@ -16,7 +16,7 @@ const salesAccounts = (state = [], action) => {
 
     case actionTypes.RECEIVE_SALES_ACCOUNT:
     {
-        const index = state.findIndex(p => p.salesAccountUri === action.payload.salesAccountUri);
+        const index = state.findIndex(p => p.salesAccountId === action.payload.salesAccountId);
 
         return (index > -1)
             ? [
@@ -31,7 +31,7 @@ const salesAccounts = (state = [], action) => {
             : [
                 ...state,
                 {
-                    salesAccountUri: action.payload.salesAccountUri,
+                    salesAccountId: action.payload.salesAccountId,
                     loading: false,
                     item: action.payload.salesAccount
                 }
