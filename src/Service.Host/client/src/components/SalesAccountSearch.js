@@ -23,7 +23,7 @@ class SalesAccountSearch extends Component {
                             ? (
                                 <ListGroup>
                                     {salesAccounts.map((salesAccount, i) => (
-                                        <ListGroupItem key={i} onClick={() => this.handleSalesAccountClick(salesAccount)}>{salesAccount.name} <Label className="pull-right" bsStyle="primary">{salesAccount.name}</Label></ListGroupItem>
+                                        <ListGroupItem key={i} onClick={() => this.handleSalesAccountClick(salesAccount)}>{salesAccount.name} <Label className="pull-right" bsStyle="primary">{salesAccount.accountId}</Label></ListGroupItem>
                                     ))}
                                 </ListGroup>
                             )

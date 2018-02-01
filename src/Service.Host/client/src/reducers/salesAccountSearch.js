@@ -32,7 +32,10 @@ const salesAccountSearch = (state = defaultState, action) => {
         }
 
     case actionTypes.HIDE_SALES_ACCOUNT_SEARCH:
-        return defaultState;
+        return {
+            ...defaultState,
+            visible: false
+        }
 
     default:
         return state;
