@@ -36,6 +36,10 @@ export const fetchJson = async (url, options = defaultFetchOptions) => {
         ...options.headers
     };
 
+    if (options.authenticated && options.accessToken) {
+        headers = { ...headers, 'Authorization': `Bearer ${options.accessToken}` };
+    }
+
     try {
         let response = await fetch(url,
             {
