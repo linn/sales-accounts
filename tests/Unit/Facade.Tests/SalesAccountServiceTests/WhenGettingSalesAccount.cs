@@ -17,7 +17,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name") { Id = 1 });
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
             this.SalesAccountRepository.GetById(1).Returns(this.salesAccount);
             this.Result = this.Sut.GetById(1);
         }
@@ -34,8 +34,7 @@
             this.Result.Should().BeOfType<SuccessResult<SalesAccount>>();
             var dataResult = ((SuccessResult<SalesAccount>)this.Result).Data;
             dataResult.Name.Should().Be(this.salesAccount.Name);
-            dataResult.Id.Should().Be(this.salesAccount.Id);
-            dataResult.AccountId.Should().Be(this.salesAccount.AccountId);
+            dataResult.Id.Should().Be(1);
         }
     }
 }

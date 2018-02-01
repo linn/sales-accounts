@@ -12,7 +12,7 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<SalesAccount>().HasKey(s => s.Id);
+            builder.Entity<SalesAccount>().Property(s => s.Id).ValueGeneratedNever();
             builder.Entity<SalesAccount>().HasMany(s => s.Activities);
 
             builder.Entity<SalesAccountActivity>().HasKey(a => a.Id);

@@ -21,14 +21,14 @@
         public void SetUp()
         {
             this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(123, "search something")) { Id = 1 };
-            this.SalesAccountRepository.GetByAccountId(123).Returns(this.salesAccount);
+            this.SalesAccountRepository.GetById(123).Returns(this.salesAccount);
             this.Results = this.Sut.Get("123");
         }
 
         [Test]
         public void ShouldGetSalesAccount()
         {
-            this.SalesAccountRepository.Received().GetByAccountId(123);
+            this.SalesAccountRepository.Received().GetById(123);
         }
 
         [Test]
