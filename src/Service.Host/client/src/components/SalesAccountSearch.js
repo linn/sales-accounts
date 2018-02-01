@@ -16,14 +16,14 @@ class SalesAccountSearch extends Component {
             <h2>Select Sales Account</h2 >
                     <div>
                         <FormGroup>
-                            <ControlLabel>Name or Account Id</ControlLabel>
+                            <ControlLabel>Search for account by name or account Id</ControlLabel>
                             <FormControl autoFocus value={this.state.searchTerm} onChange={e => this.handleSearchTermChange(e)} type="text" placeholder="Enter account name or account id" ></FormControl>
                         </FormGroup>
                         {salesAccounts.length > 0
                             ? (
                                 <ListGroup>
                                     {salesAccounts.map((salesAccount, i) => (
-                                        <ListGroupItem key={i} onClick={() => this.handleSalesAccountClick(salesAccount)}>{salesAccount.name} <Label className="pull-right" bsStyle="primary">{salesAccount.accountId}</Label></ListGroupItem>
+                                        <ListGroupItem key={i} onClick={() => this.handleSalesAccountClick(salesAccount)}>{salesAccount.name} <Label className="pull-right" bsStyle="primary">{salesAccount.id}</Label></ListGroupItem>
                                     ))}
                                 </ListGroup>
                             )
