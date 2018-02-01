@@ -2,6 +2,7 @@
 {
     using System.Text;
 
+    using Linn.Common.Messaging.RabbitMQ;
     using Linn.Common.Messaging.RabbitMQ.Unicast;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Facade.Services;
@@ -12,14 +13,17 @@
 
     public class SalesAccountUpdatedHandler
     {
-        private readonly SalesAccountService salesAccountService;
+        private readonly ISalesAccountService salesAccountService;
 
         private readonly ITransactionManager transactionManager;
 
-        public SalesAccountUpdatedHandler(SalesAccountService salesAccountService, ITransactionManager transactionManager)
+        private readonly IRabbitTerminator rabbitTerminator;
+
+        public SalesAccountUpdatedHandler(ISalesAccountService salesAccountService, ITransactionManager transactionManager, IRabbitTerminator rabbitTerminator)
         {
             this.salesAccountService = salesAccountService;
             this.transactionManager = transactionManager;
+            this.rabbitTerminator = rabbitTerminator;
         }
 
         public bool Execute(IReceivedMessage message)
@@ -33,6 +37,8 @@
             {
                 this.salesAccountService.CloseSalesAccount(resource.AccountId, new SalesAccountCloseResource { ClosedOn = resource.DateClosed });
             }
+
+            this.rabbitTerminator.Close();
 
             this.transactionManager.Commit();
 

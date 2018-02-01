@@ -4,6 +4,7 @@
 
     using Linn.Common.Messaging.RabbitMQ.Autofac;
     using Linn.SalesAccounts.IoC;
+    using Linn.SalesAccounts.Messaging.Handlers;
 
     public static class Configuration
     {
@@ -19,6 +20,8 @@
             builder.RegisterReceiver("sales-accounts.q", "sales-accounts.dlx");
 
             builder.RegisterType<Listener>().AsSelf();
+            builder.RegisterType<SalesAccountCreatedHandler>().AsSelf();
+            builder.RegisterType<SalesAccountUpdatedHandler>().AsSelf();
 
             return builder.Build();
         }

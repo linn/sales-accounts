@@ -8,6 +8,7 @@
     using Linn.Common.Logging;
     using Linn.Common.Messaging.RabbitMQ;
     using Linn.Common.Messaging.RabbitMQ.Unicast;
+    using Linn.SalesAccounts.Messaging.Handlers;
 
     public class Listener
     {
@@ -28,9 +29,8 @@
                     {
                         using (var handlerScope = scope.BeginLifetimeScope("messageHandler"))
                         {
-                            //var handler = handlerScope.Resolve<DiscountCacheHandler>();
-                            //return handler.Execute(m);
-                            return true;
+                            var handler = handlerScope.Resolve<SalesAccountCreatedHandler>();
+                            return handler.Execute(m);
                         }
                     })
                 .OnRejected(this.LogRejection);
@@ -40,9 +40,8 @@
                     {
                         using (var handlerScope = scope.BeginLifetimeScope("messageHandler"))
                         {
-                            //var handler = handlerScope.Resolve<DiscountCacheHandler>();
-                            //return handler.Execute(m);
-                            return true;
+                            var handler = handlerScope.Resolve<SalesAccountUpdatedHandler>();
+                            return handler.Execute(m);
                         }
                     })
                 .OnRejected(this.LogRejection);
