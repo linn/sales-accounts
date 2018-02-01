@@ -12,7 +12,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'client/build'),
         filename: 'app.js',
-        publicPath: '/template/build/'
+        publicPath: '/sales/accounts/build/'
     },
     module: {
         rules: [
@@ -86,7 +86,7 @@ module.exports = {
         new webpack.NoEmitOnErrorsPlugin(), // do not emit compiled assets that include errors
         new webpack.DefinePlugin({
             'PROCESS.ENV': {
-                'appRoot': JSON.stringify('http://localhost:61798')
+                'appRoot': JSON.stringify('http://localhost:51610')
             }
         })
     ]};

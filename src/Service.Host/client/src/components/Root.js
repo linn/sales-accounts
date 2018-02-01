@@ -15,9 +15,9 @@ class Root extends Component {
                 <Router history={history}>
                     <div>
                         <Navigation />
-
-                        <Route path="/" render={() => { document.title = 'Template'; return false; }} />
+                        <Route path="/" render={() => { document.title = 'Sales Accounts'; return false; }} />
                         <Route exact path="/" render={() => <Redirect to="/sales/accounts" />} />
+                        <Route exact path="/sales" render={() => <Redirect to="/sales/accounts" />} />
                         <Route exact path="/sales/accounts" component={App} />
                     </div>
                 </Router>
