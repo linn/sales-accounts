@@ -15,7 +15,7 @@
         public void SetUp()
         {
             this.SalesAccountRepository.GetById(2).Returns((SalesAccount)null);
-            this.Result = this.Sut.GetSalesAccount(2);
+            this.Result = this.Sut.GetById(2);
         }
 
         [Test]
