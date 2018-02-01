@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { FormGroup, FormControl, ControlLabel, Button, Modal, ListGroup, ListGroupItem, Label, OverlayTrigger, Popover } from 'react-bootstrap';
+import { FormGroup, FormControl, ControlLabel, ListGroup, ListGroupItem, Label } from 'react-bootstrap';
 import { Loading } from './common';
 import { debounce } from '../helpers/utilities';
 
@@ -49,10 +49,10 @@ class SalesAccountSearch extends Component {
     }
 
     handleSalesAccountClick(salesAccount) {
-        const { onSelect, fetchSalesAccount } = this.props;
-
-        // fetchSalesAccount(salesAccount.links.find(a => a.rel === 'self').href);
-        onSelect(salesAccount);
+        const { showSalesAccountSearch, fetchSalesAccount, history } = this.props;
+        showSalesAccountSearch();
+        fetchSalesAccount(salesAccount.links.find(a => a.rel === 'self').href);
+        history.push(salesAccount.links.find(a => a.rel === 'self').href);
     }
 }
 

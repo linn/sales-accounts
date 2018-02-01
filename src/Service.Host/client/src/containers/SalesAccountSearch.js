@@ -1,7 +1,8 @@
 ﻿import { connect } from 'react-redux';
 import SalesAccountSearch from '../components/SalesAccountSearch';
-import { searchSalesAccounts, hideSalesAccountSearch } from '../actions/salesAccountSearch';
+import { searchSalesAccounts, showSalesAccountSearch } from '../actions/salesAccountSearch';
 import { fetchSalesAccount } from '../actions/salesAccounts';
+import { withRouter } from 'react-router'
 
 const mapStateToProps = ({ salesAccountSearch }) => ({
     salesAccounts: salesAccountSearch.items,
@@ -10,9 +11,9 @@ const mapStateToProps = ({ salesAccountSearch }) => ({
 });
 
 const mapDispatchToProps = {
-    hideSalesAccountSearch,
+    showSalesAccountSearch,
     searchSalesAccounts,
     fetchSalesAccount
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SalesAccountSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SalesAccountSearch));
