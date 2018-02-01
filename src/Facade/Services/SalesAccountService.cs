@@ -85,6 +85,20 @@
             return new SuccessResult<SalesAccount>(account);
         }
 
+        public IResult<SalesAccount> UpdateSalesAccountName(int salesAccountId, string name)
+        {
+            var account = this.salesAccountRepository.GetById(salesAccountId);
+            if (account == null)
+            {
+                return new NotFoundResult<SalesAccount>();
+            }
+
+            account.UpdateName(name);
+            this.transactionManager.Commit();
+
+            return new SuccessResult<SalesAccount>(account);
+        }
+
         public IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);

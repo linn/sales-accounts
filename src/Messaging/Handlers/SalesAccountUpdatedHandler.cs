@@ -27,10 +27,12 @@
             var content = Encoding.UTF8.GetString(message.Body);
             var resource = JsonConvert.DeserializeObject<LinnappsSalesAccountResource>(content);
 
+            this.salesAccountService.UpdateSalesAccountName(resource.AccountId, resource.AccountName);
 
-            if(resource.AccountName != )
-
-            this.salesAccountService.UpdateSalesAccount(new SalesAccountCreateResource { AccountId = resource.AccountId, Name = resource.AccountName });
+            if (!string.IsNullOrEmpty(resource.DateClosed))
+            {
+                this.salesAccountService.CloseSalesAccount(resource.AccountId, new SalesAccountCloseResource { ClosedOn = resource.DateClosed });
+            }
 
             this.transactionManager.Commit();
 
