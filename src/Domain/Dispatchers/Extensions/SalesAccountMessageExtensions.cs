@@ -9,6 +9,7 @@
             return new SalesAccountMessage
                        {
                            Id = salesAccount.Id,
+                           Href = $"/sales/accounts/{salesAccount.Id}",
                            Name = salesAccount.Name,
                            DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                            EligibleForGoodCreditDiscount = salesAccount.EligibleForGoodCreditDiscount,

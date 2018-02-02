@@ -4,6 +4,7 @@
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Dispatchers.Messages;
     using Linn.SalesAccounts.Domain.External;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
@@ -39,6 +40,13 @@
         public void ShouldCommitTransaction()
         {
             this.TransactionManager.Received().Commit();
+        }
+
+        [Test]
+        public void ShouldSendUpdatedMessage()
+        {
+            this.SalesAccountUpdatedDispatcher.Received()
+                .SendSalesAccountUpdated(Arg.Is<SalesAccountMessage>(m => m.Id == 1));
         }
 
         [Test]

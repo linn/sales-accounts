@@ -1,8 +1,10 @@
 ﻿namespace Linn.SalesAccounts.Domain.Dispatchers.Messages
 {
-    public class SalesAccountMessage 
+    public class SalesAccountMessage
     {
         public int Id { get; set; }
+
+        public string Href { get; set; }
 
         public string Name { get; set; }
 
