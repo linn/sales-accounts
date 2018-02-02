@@ -98,7 +98,8 @@
                     discountScheme,
                     updateResource.TurnoverBandUri,
                     updateResource.EligibleForGoodCreditDiscount,
-                    updateResource.EligibleForRebate);
+                    updateResource.EligibleForRebate,
+                    updateResource.GrowthPartner);
                 this.transactionManager.Commit();
             }
             catch (InvalidTurnoverBandException exception)

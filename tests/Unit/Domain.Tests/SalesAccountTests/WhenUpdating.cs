@@ -15,7 +15,7 @@
         public void SetUp()
         {
             var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
-            this.Sut.UpdateAccount(discountScheme, "/tb/1", true, true);
+            this.Sut.UpdateAccount(discountScheme, "/tb/1", true, true, true);
         }
 
         [Test]
@@ -25,12 +25,13 @@
             this.Sut.TurnoverBandUri.Should().Be("/tb/1");
             this.Sut.EligibleForGoodCreditDiscount.Should().BeTrue();
             this.Sut.EligibleForRebate.Should().BeTrue();
+            this.Sut.GrowthPartner.Should().BeTrue();
         }
 
         [Test]
         public void ShouldAddActivities()
         {
-            this.ActivitiesExcludingCreate().Should().HaveCount(4);
+            this.ActivitiesExcludingCreate().Should().HaveCount(5);
             this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateDiscountSchemeUriActivity)
                 .As<SalesAccountUpdateDiscountSchemeUriActivity>().DiscountSchemeUri.Should().Be("/ds/1");
@@ -43,6 +44,9 @@
             this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateRebateActivity)
                 .As<SalesAccountUpdateRebateActivity>().EligibleForRebate.Should().BeTrue();
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountGrowthPartnerActivity)
+                .As<SalesAccountGrowthPartnerActivity>().GrowthPartner.Should().BeTrue();
         }
     }
 }

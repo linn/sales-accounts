@@ -17,6 +17,8 @@
                 Name = salesAccount.Name,
                 Id = salesAccount.Id,
                 EligibleForGoodCreditDiscount = salesAccount.EligibleForGoodCreditDiscount,
+                EligibleForRebate = salesAccount.EligibleForRebate,
+                GrowthPartner = salesAccount.GrowthPartner,
                 DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                 TurnoverBandUri = salesAccount.TurnoverBandUri,
                 ClosedOn = salesAccount.ClosedOn == null ? string.Empty : salesAccount.ClosedOn.Value.ToString("o"),
