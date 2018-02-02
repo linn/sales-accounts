@@ -1,6 +1,15 @@
 ﻿import React, { Component } from 'react';
 import { Loading } from './common';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
+import SalesAccountItem from './SalesAccountItem';
+
+const styles = {
+    item: {
+        textAlign: 'right',
+        marginBottom: '6px'
+    }
+}
 
 class SalesAccount extends Component {
     state = { searchTerm: '' }
@@ -14,9 +23,29 @@ class SalesAccount extends Component {
 
         return (
             <div>
-                <h1> Look at this sales acccount</h1>
-                <h2>{salesAccount.name}</h2>
-                <Link to="/sales/accounts">Back</Link>
+                <Grid fluid={false}>
+                    <Row>
+                        <Col xs={8}>
+                            <Row>
+                                <Col sm={2}>
+                                <h2>{salesAccount.name}</h2>
+                                </Col>
+                            </Row>
+                            <br />
+                            <SalesAccountItem title={'Discount Scheme:'} value={salesAccount.discountSchemeUri}/>
+                            <SalesAccountItem title={'Turnover Band:'} value={salesAccount.turnoverBandUri}/>
+                            <SalesAccountItem title={'Eligible For Good Credit:'} value={salesAccount.eligibleForGoodCreditDiscount.toString()}/>
+                            <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn}/>
+                            <br />
+                            <Row>
+                                <Col sm={2}>
+                                    <Link to="/sales/accounts">Back</Link>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row >
+                </Grid>
+                
             </div>
         );
     }
