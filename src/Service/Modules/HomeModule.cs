@@ -9,7 +9,6 @@
         {
             this.Get("/", args => new RedirectResponse("/sales/accounts"));
             this.Get("/sales", args => new RedirectResponse("/sales/accounts"));
-            this.Get("/sales/accounts", _ => this.GetApp());
             this.Get("/sales/accounts/(.*)", _ => this.GetApp());
         }
 

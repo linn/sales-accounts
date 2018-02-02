@@ -22,7 +22,7 @@ export const searchSalesAccounts = (searchTerm) => async dispatch => {
         dispatch(requestSalesAccounts(searchTerm));
         try
         {
-            const data = await fetchJson(`${config.appRoot}/sales/accounts/search?searchTerm=${searchTerm}`);
+            const data = await fetchJson(`${config.appRoot}/sales/accounts?searchTerm=${searchTerm}`);
             dispatch(receiveSalesAccounts(searchTerm, data));
         } catch (e) {
             alert(`Failed to search for sales accounts. Error: ${e.message}`);
