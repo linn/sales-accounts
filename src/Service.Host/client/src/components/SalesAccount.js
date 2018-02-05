@@ -3,6 +3,7 @@ import { Loading } from './common';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import SalesAccountItem from './SalesAccountItem';
+import SalesAccountEditModal from './SalesAccountEditModal';
 
 const styles = {
     item: {
@@ -15,12 +16,13 @@ class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, salesAccount } = this.props;
+        const { loading, salesAccount, discountSchemeName, turnoverBandName, salesAccountEditModal, ...props } = this.props;
 
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
         }
-
+        console.log(discountSchemeName);
+        console.log(turnoverBandName);
         return (
             <div>
                 <Grid fluid={false}>
@@ -32,10 +34,10 @@ class SalesAccount extends Component {
                                 </Col>
                             </Row>
                             <br />
-                            <SalesAccountItem title={'Discount Scheme:'} value={salesAccount.discountSchemeUri}/>
-                            <SalesAccountItem title={'Turnover Band:'} value={salesAccount.turnoverBandUri}/>
-                            <SalesAccountItem title={'Eligible For Good Credit:'} value={salesAccount.eligibleForGoodCreditDiscount.toString()}/>
-                            <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn}/>
+                            <SalesAccountItem title={'Discount Scheme:'} value={discountSchemeName} {...props}/>
+                            <SalesAccountItem title={'Turnover Band:'} value={turnoverBandName} {...props}/>
+                            <SalesAccountItem title={'Eligible For Good Credit:'} value={salesAccount.eligibleForGoodCreditDiscount.toString()} {...props}/>
+                            <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} {...props}/>
                             <br />
                             <Row>
                                 <Col sm={2}>
@@ -45,7 +47,7 @@ class SalesAccount extends Component {
                         </Col>
                     </Row >
                 </Grid>
-                
+                <SalesAccountEditModal visible={salesAccountEditModal.visible} {...props}/>
             </div>
         );
     }

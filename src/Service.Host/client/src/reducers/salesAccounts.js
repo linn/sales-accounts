@@ -1,5 +1,11 @@
 ﻿import * as actionTypes from '../actions';
 
+const defaultState = {
+    salesAccountId: null,
+    loading: false,
+    item: null,
+}
+
 const salesAccounts = (state = [], action) => {
     switch (action.type) {
     case actionTypes.REQUEST_SALES_ACCOUNT:
@@ -38,6 +44,12 @@ const salesAccounts = (state = [], action) => {
             ];
     }
 
+    case actionTypes.REQUEST_TURNOVER_BAND:
+        return state;
+
+    case actionTypes.RECEIVE_TURNOVER_BAND:
+        return action.payload.data;
+    
     default:
         return state;
     }

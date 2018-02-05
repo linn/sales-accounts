@@ -4,14 +4,14 @@ import { Modal } from 'react-bootstrap';
 export class SalesAccountEditModal extends Component {
     render() {
         return (
-            <Modal show={update.visible} bsSize="large" onHide={() => hideUpdateModal()}>
+            <Modal show={this.props.visible} bsSize="large" onHide={() => this.props.hideEditModal()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{Edit}</Modal.Title>
+                    <Modal.Title>Edit</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
                 </Modal.Body>
-                {children}
+   
                 <Modal.Footer>
 
                 </Modal.Footer>

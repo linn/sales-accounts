@@ -27,3 +27,13 @@ export const fetchSalesAccounts = (salesAccountUris = []) => async dispatch => {
         dispatch(fetchSalesAccount(salesAccountUri));
     });
 };
+
+export const showEditModal = () => ({
+    type: actionTypes.SHOW_EDIT_MODAL,
+    payload: {}
+});
+
+export const hideEditModal = () => ({
+    type: actionTypes.HIDE_EDIT_MODAL,
+    payload: {}
+});
