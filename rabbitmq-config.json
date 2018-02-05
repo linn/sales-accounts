@@ -21,6 +21,16 @@
         "x-ha-policy": "all",
         "x-dead-letter-exchange": "sales-accounts.dlx"
       }
+    },
+    {
+      "name": "sales-reporting.q",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-ha-policy": "all",
+        "x-dead-letter-exchange": "sales-reporting.dlx"
+      }
     }
   ],
   "exchanges": [
@@ -55,7 +65,7 @@
     {
       "source": "sales-accounts.x",
       "vhost": "/",
-      "destination": "sales-accounts.q",
+      "destination": "sales-reporting.q",
       "destination_type": "queue",
       "routing_key": "#",
       "arguments": {}
