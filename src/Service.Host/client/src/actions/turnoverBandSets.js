@@ -32,13 +32,17 @@ const receiveTurnoverBand = (data) => ({
     payload: { data }
 });
 
-export const fetchTurnoverBand = (turnoverBandUri) => async (dispatch) => {
-    dispatch(requestTurnoverBand());
-    try {
-        const data = await fetchJson(`${config.proxyRoot}${turnoverBandUri}`, { headers: { 'Accept': 'application/json' } });
-        dispatch(receiveTurnoverBand(data));
-    } catch (e) {
-        alert(`Failed to fetch turnover band. Error: ${e.message}`);
+export const fetchTurnoverBand = (salesAccount) => async (dispatch) => {
+    
+    const turnoverBandUri = salesAccount ? salesAccount.turnoverBandUri : null;
+    if (turnoverBandUri) {
+      
+        try {
+            const data = await fetchJson(`${config.proxyRoot}${turnoverBandUri}`, { headers: { 'Accept': 'application/json' } });
+            dispatch(receiveTurnoverBand(data));
+        } catch (e) {
+            alert(`Failed to fetch turnover band. Error: ${e.message}`);
+        }
     }
 };
 

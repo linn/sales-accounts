@@ -21,7 +21,6 @@ class SalesAccount extends Component {
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
         }
-        console.log(discountSchemeName);
         console.log(turnoverBandName);
         return (
             <div>

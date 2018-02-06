@@ -2,21 +2,22 @@
 import config from '../config';
 import * as actionTypes from './index';
 
-const requestSalesAccountDetail = (salesAccountId) => ({
+const requestSalesAccountDetail = (salesAccountUri) => ({
     type: actionTypes.REQUEST_SALES_ACCOUNT,
-    payload: { salesAccountId }
+    payload: { salesAccountUri }
 });
 
-const receiveSalesAccountDetail = (salesAccountId, data) => ({
+const receiveSalesAccountDetail = (data) => ({
     type: actionTypes.RECEIVE_SALES_ACCOUNT,
-    payload: { salesAccountId, salesAccount: data }
+    payload: { data }
 });
 
-export const fetchSalesAccount = salesAccountId => async (dispatch) => {
-    dispatch(requestSalesAccountDetail(salesAccountId));
+export const fetchSalesAccount = salesAccountUri => async (dispatch) => {
+    dispatch(requestSalesAccountDetail(salesAccountUri));
     try {
-        const data = await fetchJson(`${config.appRoot}/sales/accounts/${salesAccountId}`, { headers: { 'Accept': 'application/json' } });
-        dispatch(receiveSalesAccountDetail(salesAccountId, data));
+        const data = await fetchJson(`${config.appRoot}${salesAccountUri}`, { headers: { 'Accept': 'application/json' } });
+        console.log(data);
+        dispatch(receiveSalesAccountDetail(data));
     } catch (e) {
         alert(`Failed to fetch sales account. Error: ${e.message}`);
     }

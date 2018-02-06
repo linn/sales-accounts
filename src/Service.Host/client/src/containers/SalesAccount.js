@@ -3,24 +3,24 @@ import SalesAccount from '../components/SalesAccount';
 import initialiseOnMount from './common/initialiseOnMount';
 import { fetchSalesAccount, hideEditModal, showEditModal } from '../actions/salesAccounts';
 import { fetchDiscountSchemes } from '../actions/discountSchemes';
-import { fetchTurnoverBandSets } from '../actions/turnoverBandSets';
+import { fetchTurnoverBandSets, fetchTurnoverBand } from '../actions/turnoverBandSets';
 import { getSalesAccount, getSalesAccountsLoading, getDiscountSchemeName, getTurnoverBandName } from '../selectors/salesAccountsSelectors';
 
 
-const mapStateToProps = ({ salesAccounts, discountSchemes, turnoverBandSets, salesAccountEditModal }, { match }) => ({
-    salesAccountId: match.params.salesAccountId,
-    salesAccount: getSalesAccount(match.params.salesAccountId, salesAccounts),
-    discountSchemeName: getDiscountSchemeName(getSalesAccount(match.params.salesAccountId, salesAccounts), discountSchemes),
-    turnoverBandName: getTurnoverBandName(getSalesAccount(match.params.salesAccountId, salesAccounts), turnoverBandSets),
-    loading: getSalesAccountsLoading(salesAccounts),
+const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets, salesAccountEditModal }, { match }) => ({
+    salesAccountUri: match.url,
+    salesAccount: getSalesAccount(salesAccount),
+    discountSchemeName: getDiscountSchemeName(getSalesAccount(salesAccount), discountSchemes),
+    turnoverBandName: getTurnoverBandName(getSalesAccount(salesAccount), turnoverBandSets),
+    loading: salesAccount.loading,
     salesAccountEditModal: salesAccountEditModal
 });
 
-const initialise = ({ salesAccountId, salesAccount, loading }) => dispatch => {
-    dispatch(fetchSalesAccount(salesAccountId));
+const initialise = ({ salesAccountUri, salesAccount, loading }) => dispatch => {
+    dispatch(fetchSalesAccount(salesAccountUri));
     dispatch(fetchDiscountSchemes());
     dispatch(fetchTurnoverBandSets());
-    // dispatch(fetchTurnoverBand(salesAccount));
+    dispatch(fetchTurnoverBand(salesAccount));
 };
 
 const mapDispatchToProps = {
