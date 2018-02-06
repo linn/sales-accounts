@@ -5,10 +5,9 @@ import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets, fetchTurnoverBand } from '../actions/turnoverBandSets';
 
 const mapStateToProps = ({ salesAccountEdit, discountSchemes  }, ownProps ) => ({
-    visible: salesAccountEdit.visible,
+    visible: salesAccountEdit.editDiscountSchemeVisible,
     discountSchemes
 });
-
 
 const mapDispatchToProps = {
     hideEditModal,

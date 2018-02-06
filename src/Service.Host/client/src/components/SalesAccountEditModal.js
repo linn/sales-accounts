@@ -12,13 +12,7 @@ export class SalesAccountEditModal extends Component {
                     <Modal.Title>Edit</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* <ListGroup>
-                        {items.map((item, i) => (
-                            <ListGroupItem key={i} onClick={() => this.handleProductClick(item)}>
-                                {item ? item.name : null}
-                            </ListGroupItem>
-                        ))}
-                    </ListGroup> */}
+  
                 </Modal.Body>
 
                 <Modal.Footer>

@@ -33,7 +33,22 @@ const salesAccount = (state = defaultState, action) => {
         case actionTypes.SET_DISCOUNT_SCHEME:
         return {
             ...state,
-            item: {...state.item, discountSchemeUri: action.payload.discountSchemeUri}
+            item: {
+                ...state.item, 
+                discountSchemeUri: action.payload.discountSchemeUri,
+                turnoverBandUri: null,
+                turnoverBandName: null
+            }
+        }
+
+        case actionTypes.SET_TURNOVER_BAND:
+        return {
+            ...state,
+            item: {
+                ...state.item, 
+                turnoverBandUri: action.payload.turnoverBandUri,
+                turnoverBandName: action.payload.turnoverBandName
+            }
         }
     
     default:

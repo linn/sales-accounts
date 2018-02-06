@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Modal, ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import { hideEditModal } from '../actions/salesAccounts';
 
-export class DiscountSchemeEditModal extends Component {
+export class TurnoverBandEditModal extends Component {
     render() {
 
-        const {visible, hideEditModal, discountSchemes, discountSchemeUri} = this.props;
+        const {visible, hideEditModal, discountSchemes, discountSchemeUri, turnoverBandUri, turnoverBands} = this.props;
 
         return (
             <Modal show={visible} onHide={() => hideEditModal()}>
@@ -14,12 +14,11 @@ export class DiscountSchemeEditModal extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <ListGroup>
-                        {discountSchemes.map((ds, i) => (
+                        {turnoverBands && turnoverBands.map((tb, i) => (
                             <ListGroupItem 
-                                bsStyle={ds.links.find(l => l.rel === 'self').href === discountSchemeUri ? 'success' : null} 
                                 key={i} 
-                                onClick={() => this.handleClick(ds, discountSchemeUri)}>
-                                {ds ? ds.name : null}
+                                onClick={() => this.handleClick(tb, turnoverBandUri)}>
+                                {tb ? tb.name : null}
                             </ListGroupItem>
                         ))}
                     </ListGroup>
@@ -36,13 +35,13 @@ export class DiscountSchemeEditModal extends Component {
         this.props.hideEditModal();
     }
 
-    handleClick(ds, discountSchemeUri) {
-        const schemeUri = ds.links.find(l => l.rel === 'self').href;
-        if (schemeUri !== discountSchemeUri){
-            this.props.setDiscountScheme(schemeUri);
+    handleClick(tb, turnoverBandUri) {
+        const bandUri = tb.links.find(l => l.rel === 'self').href;
+        if (bandUri !== turnoverBandUri){
+            this.props.setTurnoverBand(bandUri, tb.name);
         }  
         this.props.hideEditModal();
     }
 }
 
-export default DiscountSchemeEditModal;
+export default TurnoverBandEditModal;

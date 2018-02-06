@@ -5,6 +5,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 import SalesAccountItem from './SalesAccountItem';
 import SalesAccountEditModal from './SalesAccountEditModal';
 import DiscountSchemeEditModal from '../containers/DiscountSchemeEditModal';
+import TurnoverBandEditModal from '../containers/TurnoverBandEditModal';
 import Controls from './Controls';
 
 const styles = {
@@ -18,7 +19,7 @@ class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, salesAccount, discountSchemeName, turnoverBandName, salesAccountEdit, showEditModal, editDiscountScheme, ...props } = this.props;
+        const { loading, salesAccount, discountSchemeName, turnoverBandName, salesAccountEdit, showTurnoverBandEditModal, showDiscountSchemeEditModal, ...props } = this.props;
 
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
@@ -34,18 +35,26 @@ class SalesAccount extends Component {
                                 </Col>
                             </Row>
                             <br />
-                            {/* <SalesAccountItem title={'Discount Scheme:'} value={discountSchemeName} {...props} /> */}
                             <Row>
                                 <Col sm={4} style={styles.item}>
                                     <b>{'Discount Scheme:'}</b>
                                 </Col>
                                 <Col sm={2}>
-                                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => showEditModal()}>
-                                        {discountSchemeName}
+                                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => showDiscountSchemeEditModal()}>
+                                        {discountSchemeName || 'select discount scheme'}
                                     </Button>
                                 </Col>
                             </Row>
-                            <SalesAccountItem title={'Turnover Band:'} value={salesAccount.turnoverBandName} {...props} />
+                            <Row>
+                                <Col sm={4} style={styles.item}>
+                                    <b>{'Turnover Band:'}</b>
+                                </Col>
+                                <Col sm={2}>
+                                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => showTurnoverBandEditModal()}>
+                                        {salesAccount.turnoverBandName || 'select turnover band'}
+                                    </Button>
+                                </Col>
+                            </Row>
                             <SalesAccountItem title={'Eligible For Good Credit:'} value={salesAccount.eligibleForGoodCreditDiscount.toString()} {...props} />
                             <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} {...props} />
                             <br />
@@ -55,6 +64,7 @@ class SalesAccount extends Component {
                 </Grid>
                 {/* <SalesAccountEditModal visible={salesAccountEdit.visible} {...props} /> */}
                 <DiscountSchemeEditModal discountSchemeUri={salesAccount.discountSchemeUri} />
+                <TurnoverBandEditModal discountSchemeUri={salesAccount.discountSchemeUri} turnoverBandUri={salesAccount.turnoverBandUri}/>
             </div>
         );
     }

@@ -1,7 +1,7 @@
 ﻿import { connect } from 'react-redux';
 import SalesAccount from '../components/SalesAccount';
 import initialiseOnMount from './common/initialiseOnMount';
-import { fetchSalesAccount, hideEditModal, showEditModal, editDiscountScheme } from '../actions/salesAccounts';
+import { fetchSalesAccount, hideEditModal, showEditModal, editDiscountScheme, showDiscountSchemeEditModal, showTurnoverBandEditModal } from '../actions/salesAccounts';
 import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets, fetchTurnoverBand } from '../actions/turnoverBandSets';
 import { getSalesAccount, getDiscountSchemeName } from '../selectors/salesAccountsSelectors';
@@ -25,7 +25,9 @@ const mapDispatchToProps = {
     initialise,
     hideEditModal,
     showEditModal,
-    editDiscountScheme
+    editDiscountScheme,
+    showTurnoverBandEditModal,
+    showDiscountSchemeEditModal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(SalesAccount));

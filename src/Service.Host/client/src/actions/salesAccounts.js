@@ -30,8 +30,13 @@ export const fetchSalesAccounts = (salesAccountUris = []) => async dispatch => {
     });
 };
 
-export const showEditModal = () => ({
-    type: actionTypes.SHOW_EDIT_MODAL,
+export const showDiscountSchemeEditModal = () => ({
+    type: actionTypes.SHOW_DISCOUNT_SCHEME_EDIT_MODAL,
+    payload: {}
+});
+
+export const showTurnoverBandEditModal = () => ({
+    type: actionTypes.SHOW_TURNOVER_BAND_EDIT_MODAL,
     payload: {}
 });
 
@@ -49,3 +54,9 @@ export const setDiscountScheme = (discountSchemeUri) => ({
     type: actionTypes.SET_DISCOUNT_SCHEME,
     payload: { discountSchemeUri }
 });
+
+export const setTurnoverBand = (turnoverBandUri, turnoverBandName) => ({
+    type: actionTypes.SET_TURNOVER_BAND,
+    payload: { turnoverBandUri, turnoverBandName }
+});
+
