@@ -15,18 +15,26 @@ const salesAccount = (state = defaultState, action) => {
             loading: true
         }
        
-
     case actionTypes.RECEIVE_SALES_ACCOUNT:
         return {
             ...state,
             loading: false,
             item: action.payload.data
         }
-    // case actionTypes.REQUEST_TURNOVER_BAND:
-    //     return state;
+    case actionTypes.REQUEST_TURNOVER_BAND:
+        return state;
 
-    // case actionTypes.RECEIVE_TURNOVER_BAND:
-    //     return action.payload.data;
+    case actionTypes.RECEIVE_TURNOVER_BAND:
+        return {
+            ...state,
+            item: {...state.item, turnoverBandName: action.payload.data.name}
+        }
+
+        case actionTypes.SET_DISCOUNT_SCHEME:
+        return {
+            ...state,
+            item: {...state.item, discountSchemeUri: action.payload.discountSchemeUri}
+        }
     
     default:
         return state;

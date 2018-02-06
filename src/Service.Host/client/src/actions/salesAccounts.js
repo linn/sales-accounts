@@ -1,6 +1,7 @@
 ﻿import { fetchJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
+import { fetchTurnoverBand } from './turnoverBands';
 
 const requestSalesAccountDetail = (salesAccountUri) => ({
     type: actionTypes.REQUEST_SALES_ACCOUNT,
@@ -16,8 +17,8 @@ export const fetchSalesAccount = salesAccountUri => async (dispatch) => {
     dispatch(requestSalesAccountDetail(salesAccountUri));
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}`, { headers: { 'Accept': 'application/json' } });
-        console.log(data);
         dispatch(receiveSalesAccountDetail(data));
+        dispatch(fetchTurnoverBand(data.turnoverBandUri));
     } catch (e) {
         alert(`Failed to fetch sales account. Error: ${e.message}`);
     }
@@ -37,4 +38,14 @@ export const showEditModal = () => ({
 export const hideEditModal = () => ({
     type: actionTypes.HIDE_EDIT_MODAL,
     payload: {}
+});
+
+export const editDiscountScheme = (discountSchemeUri) => ({
+    type: actionTypes.EDIT_DISCOUNT_SCHEME,
+    payload: { discountSchemeUri }
+});
+
+export const setDiscountScheme = (discountSchemeUri) => ({
+    type: actionTypes.SET_DISCOUNT_SCHEME,
+    payload: { discountSchemeUri }
 });

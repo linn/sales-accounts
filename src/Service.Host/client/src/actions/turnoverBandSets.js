@@ -21,28 +21,3 @@ export const fetchTurnoverBandSets = () => async (dispatch) => {
         alert(`Failed to fetch turnover band sets. Error: ${e.message}`);
     }
 };
-
-const requestTurnoverBand = () => ({
-    type: actionTypes.REQUEST_TURNOVER_BAND,
-    payload: { }
-});
-
-const receiveTurnoverBand = (data) => ({
-    type: actionTypes.RECEIVE_TURNOVER_BAND,
-    payload: { data }
-});
-
-export const fetchTurnoverBand = (salesAccount) => async (dispatch) => {
-    
-    const turnoverBandUri = salesAccount ? salesAccount.turnoverBandUri : null;
-    if (turnoverBandUri) {
-      
-        try {
-            const data = await fetchJson(`${config.proxyRoot}${turnoverBandUri}`, { headers: { 'Accept': 'application/json' } });
-            dispatch(receiveTurnoverBand(data));
-        } catch (e) {
-            alert(`Failed to fetch turnover band. Error: ${e.message}`);
-        }
-    }
-};
-

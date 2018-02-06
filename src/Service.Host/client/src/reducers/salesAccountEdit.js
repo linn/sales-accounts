@@ -4,7 +4,7 @@ const defaultState = {
     visible: false
 }
 
-const salesAccountEditModal = (state = defaultState, action) => {
+const salesAccountEdit = (state = defaultState, action) => {
     switch (action.type) {
     case actionTypes.HIDE_EDIT_MODAL:
         return defaultState;
@@ -19,4 +19,4 @@ const salesAccountEditModal = (state = defaultState, action) => {
     }
 }
 
-export default salesAccountEditModal;
+export default salesAccountEdit;
