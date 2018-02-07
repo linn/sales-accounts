@@ -5,7 +5,7 @@ import { hideEditModal } from '../actions/salesAccounts';
 export class TurnoverBandEditModal extends Component {
     render() {
 
-        const {visible, hideEditModal, discountSchemes, discountSchemeUri, turnoverBandUri, turnoverBands} = this.props;
+        const {visible, hideEditModal, turnoverBandUri, turnoverBands} = this.props;
 
         return (
             <Modal show={visible} onHide={() => hideEditModal()}>
@@ -17,8 +17,9 @@ export class TurnoverBandEditModal extends Component {
                         {turnoverBands && turnoverBands.map((tb, i) => (
                             <ListGroupItem 
                                 key={i} 
+                                bsStyle={tb.links.find(l => l.rel === 'self').href === turnoverBandUri ? 'success' : null} 
                                 onClick={() => this.handleClick(tb, turnoverBandUri)}>
-                                {tb ? tb.name : null}
+                                {tb.name}
                             </ListGroupItem>
                         ))}
                     </ListGroup>

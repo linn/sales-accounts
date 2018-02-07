@@ -1,4 +1,5 @@
 ﻿import SalesAccountSearch from "../containers/SalesAccountSearch";
+import { toUnicode } from "punycode";
 
 export const getSalesAccount = (salesAccount) => {
     if(!salesAccount || !salesAccount.item){
@@ -24,6 +25,12 @@ export const getDiscountScheme = (discountSchemes, discountSchemeUri) => {
     return discountSchemes.find(s => s.links.find(l => l.rel === 'self').href === discountSchemeUri) || null;
 }
 
+export const getDiscountSchemeUri = (salesAccount) => {
+    if (!salesAccount || !salesAccount.item) {
+        return null;
+    }
+    return salesAccount.item.discountSchemeUri;
+}
 
 export const getTurnoverBandSetUri = (discountScheme) => {
     if (!discountScheme) {
@@ -45,4 +52,31 @@ export const getTurnoverBands = (turnoverBandSet) => {
         return null;
     }
     return turnoverBandSet.turnoverBands;
+}
+
+export const getTurnoverBandName = (turnoverBandSets, turnoverBandUri) => {
+    
+    if (!turnoverBandUri || !turnoverBandSets) {
+        return null;
+    }
+
+    const allTurnoverBands = turnoverBandSets.reduce((soFar, tbs) => [...soFar, ...tbs.turnoverBands], []);     
+
+    const turnoverBand = allTurnoverBands.find(tb => tb.links.find(l => l.rel === 'self').href === turnoverBandUri);
+
+    return turnoverBand ? turnoverBand.name : null;
+}
+
+export const getTurnoverBandName2 = (salesAccount, turnoverBandSets) => {
+   
+    if (!turnoverBandSets || !salesAccount){
+        return null;
+    }
+
+    const allTurnoverBands = turnoverBandSets.reduce((soFar, tbs) => [...soFar, ...tbs.turnoverBands], []);     
+
+    const turnoverBand = allTurnoverBands.find(tb => tb.links.find(l => l.rel === 'self').href === salesAccount.turnoverBandUri);
+
+
+    return turnoverBand ? turnoverBand.name : null;
 }

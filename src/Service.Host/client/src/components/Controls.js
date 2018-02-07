@@ -6,7 +6,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 class Controls extends Component {
 
     render() {
-        const { } = this.props;
+        const { closedOn } = this.props;
 
         return (
             <div>
@@ -16,13 +16,16 @@ class Controls extends Component {
                             <LinkContainer to='/sales/accounts'>
                                 <Button bsStyle="link">Back</Button>
                             </LinkContainer>
+                            <Button  style={{marginLeft: '20px'}} bsStyle="primary" className=" muted pull-right" onClick={() => this.handleSave()}>Save</Button>
+                            {!closedOn &&  
+                                <Button bsStyle="danger" className=" muted pull-right" onClick={() => this.handleShowConfimClose()}>Close Account</Button>
+                             }
                         </Well>
                     </Col>
                 </Row>
             </div>
         );
     }
-
 }
 
 export default Controls;

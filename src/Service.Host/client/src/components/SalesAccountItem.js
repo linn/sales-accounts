@@ -10,14 +10,14 @@ const styles = {
 
 export class SalesAccountItem extends Component {
     render() {
-        const {title, value, showEditModal} = this.props;
+        const {title, value, handleClick} = this.props;
         return (
             <Row>
                 <Col sm={4} style={styles.item}>
                     <b>{title}</b>
                 </Col>
                 <Col sm={2}>
-                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => showEditModal()}>
+                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => handleClick()}>
                         {value}
                     </Button>  
                 </Col>

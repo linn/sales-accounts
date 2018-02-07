@@ -1,12 +1,12 @@
 ﻿import React, { Component } from 'react';
 import { Loading } from './common';
 import { Link } from 'react-router-dom';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Button, Label } from 'react-bootstrap';
 import SalesAccountItem from './SalesAccountItem';
-import SalesAccountEditModal from './SalesAccountEditModal';
-import DiscountSchemeEditModal from '../containers/DiscountSchemeEditModal';
-import TurnoverBandEditModal from '../containers/TurnoverBandEditModal';
+import SwitchModal from './SwitchModal';
+import ListSelectItemModal from './ListSelectItemModal';
 import Controls from './Controls';
+import discountSchemes from '../reducers/discountSchemes';
 
 const styles = {
     item: {
@@ -19,52 +19,51 @@ class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, salesAccount, discountSchemeName, turnoverBandName, salesAccountEdit, showTurnoverBandEditModal, showDiscountSchemeEditModal, ...props } = this.props;
+        const { loading, hideEditModal, salesAccount, discountSchemeName, turnoverBandName, 
+            showTurnoverBandEditModal, showDiscountSchemeEditModal, editGoodCredit,
+            setDiscountScheme, discountSchemes, turnoverBands, setTurnoverBand,
+            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, ...props } = this.props;
 
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
         }
+
         return (
             <div>
                 <Grid fluid={false}>
                     <Row>
                         <Col xs={8}>
-                            <Row>
+                        <Row>
                                 <Col sm={2}>
                                     <h2>{salesAccount.name}</h2>
                                 </Col>
                             </Row>
                             <br />
-                            <Row>
-                                <Col sm={4} style={styles.item}>
-                                    <b>{'Discount Scheme:'}</b>
-                                </Col>
-                                <Col sm={2}>
-                                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => showDiscountSchemeEditModal()}>
-                                        {discountSchemeName || 'select discount scheme'}
-                                    </Button>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm={4} style={styles.item}>
-                                    <b>{'Turnover Band:'}</b>
-                                </Col>
-                                <Col sm={2}>
-                                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => showTurnoverBandEditModal()}>
-                                        {salesAccount.turnoverBandName || 'select turnover band'}
-                                    </Button>
-                                </Col>
-                            </Row>
-                            <SalesAccountItem title={'Eligible For Good Credit:'} value={salesAccount.eligibleForGoodCreditDiscount.toString()} {...props} />
-                            <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} {...props} />
+                            <SalesAccountItem title={'Discount Scheme:'} value={discountSchemeName || 'select discount scheme'} handleClick={showDiscountSchemeEditModal} />
+                            <SalesAccountItem title={'Turnover Band:'} value={turnoverBandName || 'select turnover band'} handleClick={showTurnoverBandEditModal} />
+                            <SalesAccountItem 
+                                title={'Eligible For Good Credit:'} 
+                                value={salesAccount.eligibleForGoodCreditDiscount ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
+                                handleClick={editGoodCredit}
+                            />
+                            {!salesAccount.closedOn &&  <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} />}
                             <br />
                         </Col>
                     </Row >
-                    <Controls />
+                    <Controls closedOn={salesAccount.closedOn} />
                 </Grid>
-                {/* <SalesAccountEditModal visible={salesAccountEdit.visible} {...props} /> */}
-                <DiscountSchemeEditModal discountSchemeUri={salesAccount.discountSchemeUri} />
-                <TurnoverBandEditModal discountSchemeUri={salesAccount.discountSchemeUri} turnoverBandUri={salesAccount.turnoverBandUri}/>
+
+                <ListSelectItemModal 
+                    visible={editDiscountSchemeVisible} items={discountSchemes} 
+                    currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
+                />
+                <ListSelectItemModal 
+                    visible={editTurnoverBandVisible} items={turnoverBands || []} 
+                    currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
+                />
+     
+                {/* <TurnoverBandEditModal discountSchemeUri={salesAccount.discountSchemeUri} turnoverBandUri={salesAccount.turnoverBandUri}/> */}
+                <SwitchModal visible={editGoodCreditVisible} hideModal={hideEditModal}/>
             </div>
         );
     }

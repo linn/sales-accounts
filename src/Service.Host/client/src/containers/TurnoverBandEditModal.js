@@ -5,8 +5,8 @@ import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets, fetchTurnoverBand } from '../actions/turnoverBandSets';
 import { getTurnoverBands, getTurnoverBandSet, getTurnoverBandSetUri, getDiscountScheme } from '../selectors/salesAccountsSelectors';
 
-const mapStateToProps = ({ salesAccountEdit, discountSchemes, turnoverBandSets }, ownProps ) => ({
-    visible: salesAccountEdit.editTurnoverBandVisible,
+const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, ownProps ) => ({
+    visible: salesAccount.editTurnoverBandVisible,
     turnoverBands: getTurnoverBands(getTurnoverBandSet(turnoverBandSets, getTurnoverBandSetUri(getDiscountScheme(discountSchemes, ownProps.discountSchemeUri))))
 });
 

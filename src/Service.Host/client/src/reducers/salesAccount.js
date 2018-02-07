@@ -3,6 +3,9 @@
 const defaultState = {
     salesAccountUri: null,
     loading: false,
+    editDiscountSchemeVisible: false,
+    editTurnoverBandVisible: false,
+    editGoodCreditVisible: false,
     item: null,
 }
 
@@ -21,14 +24,6 @@ const salesAccount = (state = defaultState, action) => {
             loading: false,
             item: action.payload.data
         }
-    case actionTypes.REQUEST_TURNOVER_BAND:
-        return state;
-
-    case actionTypes.RECEIVE_TURNOVER_BAND:
-        return {
-            ...state,
-            item: {...state.item, turnoverBandName: action.payload.data.name}
-        }
 
         case actionTypes.SET_DISCOUNT_SCHEME:
         return {
@@ -37,18 +32,42 @@ const salesAccount = (state = defaultState, action) => {
                 ...state.item, 
                 discountSchemeUri: action.payload.discountSchemeUri,
                 turnoverBandUri: null,
-                turnoverBandName: null
             }
         }
 
-        case actionTypes.SET_TURNOVER_BAND:
+    case actionTypes.SET_TURNOVER_BAND:
         return {
             ...state,
             item: {
                 ...state.item, 
                 turnoverBandUri: action.payload.turnoverBandUri,
-                turnoverBandName: action.payload.turnoverBandName
             }
+        }
+
+    case actionTypes.HIDE_EDIT_MODAL:
+        return {
+            ...state,
+            editDiscountSchemeVisible: false,
+            editTurnoverBandVisible: false,
+            editGoodCreditVisible: false,
+        }
+    
+    case actionTypes.SHOW_DISCOUNT_SCHEME_EDIT_MODAL:
+        return {
+            ...state,
+            editDiscountSchemeVisible: true
+        }
+
+    case actionTypes.SHOW_TURNOVER_BAND_EDIT_MODAL:
+        return {
+            ...state,
+            editTurnoverBandVisible: true
+        }
+
+    case actionTypes.EDIT_GOOD_CREDIT:
+        return {
+            ...state,
+            editGoodCreditVisible: true
         }
     
     default:

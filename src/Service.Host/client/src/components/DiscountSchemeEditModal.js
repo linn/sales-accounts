@@ -19,7 +19,7 @@ export class DiscountSchemeEditModal extends Component {
                                 bsStyle={ds.links.find(l => l.rel === 'self').href === discountSchemeUri ? 'success' : null} 
                                 key={i} 
                                 onClick={() => this.handleClick(ds, discountSchemeUri)}>
-                                {ds ? ds.name : null}
+                                {ds.name}
                             </ListGroupItem>
                         ))}
                     </ListGroup>

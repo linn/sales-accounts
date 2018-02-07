@@ -1,7 +1,7 @@
 ﻿import { fetchJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
-import { fetchTurnoverBand } from './turnoverBands';
+import { getTurnoverBandName } from '../selectors/salesAccountsSelectors';
 
 const requestSalesAccountDetail = (salesAccountUri) => ({
     type: actionTypes.REQUEST_SALES_ACCOUNT,
@@ -18,7 +18,6 @@ export const fetchSalesAccount = salesAccountUri => async (dispatch) => {
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}`, { headers: { 'Accept': 'application/json' } });
         dispatch(receiveSalesAccountDetail(data));
-        dispatch(fetchTurnoverBand(data.turnoverBandUri));
     } catch (e) {
         alert(`Failed to fetch sales account. Error: ${e.message}`);
     }
@@ -55,8 +54,12 @@ export const setDiscountScheme = (discountSchemeUri) => ({
     payload: { discountSchemeUri }
 });
 
-export const setTurnoverBand = (turnoverBandUri, turnoverBandName) => ({
+export const setTurnoverBand = (turnoverBandUri) => ({
     type: actionTypes.SET_TURNOVER_BAND,
-    payload: { turnoverBandUri, turnoverBandName }
+    payload: { turnoverBandUri }
 });
 
+export const editGoodCredit = () => ({
+    type: actionTypes.EDIT_GOOD_CREDIT,
+    payload: {}
+});
