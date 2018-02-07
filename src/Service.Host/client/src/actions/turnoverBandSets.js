@@ -7,12 +7,12 @@ const requestTurnoverBandSets = () => ({
     payload: { }
 });
 
-const receiveTurnoverBandSets = (data) => ({
+const receiveTurnoverBandSets = data => ({
     type: actionTypes.RECEIVE_TURNOVER_BAND_SETS,
     payload: { data }
 });
 
-export const fetchTurnoverBandSets = () => async (dispatch) => {
+export const fetchTurnoverBandSets = () => async dispatch => {
     dispatch(requestTurnoverBandSets());
     try {
         const data = await fetchJson(`${config.proxyRoot}/sales/discounting/turnover-band-sets`, { headers: { 'Accept': 'application/json' } });

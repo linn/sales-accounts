@@ -12,10 +12,15 @@ class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, hideEditModal, 
+        const { loading, hideEditModal,
             salesAccount, discountSchemeName, turnoverBandName, discountSchemes, turnoverBands,
-            editDiscountScheme, setDiscountScheme, editTurnoverBand, setTurnoverBand, editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
-            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible } = this.props;
+            editDiscountScheme, setDiscountScheme, 
+            editTurnoverBand, setTurnoverBand, 
+            editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
+            editGrowthPartner, setGrowthPartner,
+            editEligibleForRebate, setEligibleForRebate,
+            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, editGrowthPartnerVisible, editEligibleForRebateVisible 
+        } = this.props;
 
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
@@ -39,7 +44,17 @@ class SalesAccount extends Component {
                                 value={salesAccount.eligibleForGoodCreditDiscount ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
                                 handleClick={editEligibleForGoodCreditDiscount}
                             />
-                            {!salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} />}
+                            <SalesAccountItem
+                                title={'Growth Partner:'}
+                                value={salesAccount.growthPartner ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
+                                handleClick={editGrowthPartner}
+                            />
+                            <SalesAccountItem
+                                title={'Eligible for Rebate:'}
+                                value={salesAccount.eligibleForRebate ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
+                                handleClick={editEligibleForRebate}
+                            />
+                            {salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} />}
                             <br />
                         </Col>
                     </Row >
@@ -51,11 +66,20 @@ class SalesAccount extends Component {
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
                 <ListSelectItemModal
-                    visible={editTurnoverBandVisible} title={'select Turnover Band'} items={turnoverBands || []}
+                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands}
                     currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
                 />
-                <SwitchModal visible={editGoodCreditVisible} title={'Eligible for Good Credit?'} 
-                    value1={'Yes'} value2={'No'} current={salesAccount.eligibleForGoodCreditDiscount} hideModal={hideEditModal} setValue={setEligibleForGoodCreditDiscount} 
+                <SwitchModal 
+                    visible={editGoodCreditVisible} title={'Eligible for Good Credit?'}value1={'Yes'} value2={'No'} 
+                    current={salesAccount.eligibleForGoodCreditDiscount} hideModal={hideEditModal} setValue={setEligibleForGoodCreditDiscount}
+                />
+                <SwitchModal 
+                    visible={editGrowthPartnerVisible} title={'Growth Partner?'} value1={'Yes'} value2={'No'} 
+                    current={salesAccount.growthPartner} hideModal={hideEditModal} setValue={setGrowthPartner}
+                />
+                <SwitchModal 
+                    visible={editEligibleForRebateVisible} title={'Eligible for Rebate?'} value1={'Yes'} value2={'No'} 
+                    current={salesAccount.eligibleForRebate} hideModal={hideEditModal} setValue={setEligibleForRebate}
                 />
             </div>
         );
