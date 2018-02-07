@@ -15,17 +15,14 @@
 
         protected ISalesAccountService SalesAccountService { get; set; }
 
-        protected ITransactionManager TransactionManager { get; set; }
-
         protected IRabbitTerminator RabbitTerminator { get; set; }
 
         [SetUp]
         public void EstablishContext()
         {
             this.SalesAccountService = Substitute.For<ISalesAccountService>();
-            this.TransactionManager = Substitute.For<ITransactionManager>();
             this.RabbitTerminator = Substitute.For<IRabbitTerminator>();
-            this.Sut = new SalesAccountCreatedHandler(this.SalesAccountService, this.TransactionManager, this.RabbitTerminator);
+            this.Sut = new SalesAccountCreatedHandler(this.SalesAccountService, this.RabbitTerminator);
         }
     }
 }

@@ -8,7 +8,13 @@
     using Linn.Common.Logging;
     using Linn.Common.Messaging.RabbitMQ;
     using Linn.Common.Messaging.RabbitMQ.Unicast;
+    using Linn.Common.Persistence.EntityFramework;
+    using Linn.SalesAccounts.Domain.Dispatchers;
+    using Linn.SalesAccounts.Domain.Services;
+    using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Messaging.Handlers;
+    using Linn.SalesAccounts.Persistence;
+    using Linn.SalesAccounts.Persistence.Repositories;
 
     public class Listener
     {
@@ -29,7 +35,18 @@
                     {
                         using (var handlerScope = scope.BeginLifetimeScope("messageHandler"))
                         {
-                            var handler = handlerScope.Resolve<SalesAccountCreatedHandler>();
+                            this.logger.Info($"Processing {m.MessageId}");
+                            var dbContext = new ServiceDbContext();
+                            var transactionManager = new TransactionManager(dbContext);
+                            var salesAccountRepository = new SalesAccountRepository(dbContext);
+                            var salesAccountService = new SalesAccountService(
+                                transactionManager,
+                                salesAccountRepository,
+                                handlerScope.Resolve<IDiscountSchemeService>(),
+                                handlerScope.Resolve<ISalesAccountUpdatedDispatcher>());
+                            var handler = new SalesAccountCreatedHandler(
+                                salesAccountService,
+                                handlerScope.Resolve<IRabbitTerminator>());
                             return handler.Execute(m);
                         }
                     })

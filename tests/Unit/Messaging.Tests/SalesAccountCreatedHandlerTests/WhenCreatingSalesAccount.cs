@@ -55,12 +55,6 @@
         }
 
         [Test]
-        public void ShouldCommitTransaction()
-        {
-            this.TransactionManager.Received(1).Commit();
-        }
-
-        [Test]
         public void ShouldReturnTrue()
         {
             this.result.Should().BeTrue();
