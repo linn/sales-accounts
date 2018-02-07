@@ -61,6 +61,7 @@
                     builder.RegisterModule<LoggingModule>();
                     builder.RegisterModule<ServiceModule>();
                     builder.RegisterModule<PersistenceModule>();
+                    builder.RegisterModule<MessagingModule>();
                 });
 
             base.ConfigureApplicationContainer(existingContainer);
@@ -76,6 +77,7 @@
                     builder.RegisterModule<LoggingModule>();
                     builder.RegisterModule<ServiceModule>();
                     builder.RegisterModule<PersistenceModule>();
+                    builder.RegisterModule<MessagingModule>();
                 });
 
             base.ConfigureRequestContainer(lifetimeScope, context);

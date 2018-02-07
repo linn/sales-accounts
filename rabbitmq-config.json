@@ -1,0 +1,74 @@
+{
+  "users": [],
+  "vhosts": [],
+  "permissions": [],
+  "parameters": [],
+  "policies": [],
+  "queues": [
+    {
+      "name": "sales-accounts.dlq",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "sales-accounts.q",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-ha-policy": "all",
+        "x-dead-letter-exchange": "sales-accounts.dlx"
+      }
+    },
+    {
+      "name": "sales-reporting.q",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-ha-policy": "all",
+        "x-dead-letter-exchange": "sales-reporting.dlx"
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "sales-accounts.dlx",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "sales-accounts.x",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "sales-accounts.dlx",
+      "vhost": "/",
+      "destination": "sales-accounts.dlq",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    },
+    {
+      "source": "sales-accounts.x",
+      "vhost": "/",
+      "destination": "sales-reporting.q",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    }
+  ]
+}

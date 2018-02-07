@@ -22,6 +22,7 @@
                 .HasValue<SalesAccountUpdateGoodCreditActivity>("update-good-credit")
                 .HasValue<SalesAccountUpdateDiscountSchemeUriActivity>("update-discount-scheme")
                 .HasValue<SalesAccountUpdateTurnoverBandUriActivity>("update-turnover-band")
+                .HasValue<SalesAccountGrowthPartnerActivity>("update-growth-partner")
                 .HasValue<SalesAccountUpdateNameActivity>("update-name");
 
             builder.Entity<SalesAccountCreateActivity>().HasBaseType<SalesAccountActivity>();
@@ -30,6 +31,7 @@
             builder.Entity<SalesAccountUpdateDiscountSchemeUriActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateTurnoverBandUriActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateNameActivity>().HasBaseType<SalesAccountActivity>();
+            builder.Entity<SalesAccountGrowthPartnerActivity>().HasBaseType<SalesAccountActivity>();
 
             base.OnModelCreating(builder);
         }

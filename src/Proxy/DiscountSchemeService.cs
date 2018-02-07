@@ -46,7 +46,7 @@
 
             var turnoverBandSetUri = Relation.First(discountScheme.Links, "turnover-band-set");
 
-            var turnoverBandResource = this.GeTurnoverBandSet(turnoverBandSetUri.ToString());
+            var turnoverBandResource = this.GetTurnoverBandSet(turnoverBandSetUri.ToString());
 
             return new DiscountScheme
                        {
@@ -57,7 +57,7 @@
                        };
         }
 
-        private TurnoverBandSetResource GeTurnoverBandSet(string turnoverBandSetUri)
+        private TurnoverBandSetResource GetTurnoverBandSet(string turnoverBandSetUri)
         {
             var uri = new Uri($"{this.proxyRoot}{turnoverBandSetUri}", UriKind.RelativeOrAbsolute);
 

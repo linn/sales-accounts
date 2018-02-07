@@ -21,7 +21,7 @@
         {
             // ef
         }
-        
+
         public string Name { get; private set; }
 
         public DateTime? ClosedOn { get; private set; }
@@ -29,6 +29,8 @@
         public bool EligibleForGoodCreditDiscount { get; set; }
 
         public bool EligibleForRebate { get; set; }
+
+        public bool GrowthPartner { get; set; }
 
         public string TurnoverBandUri { get; set; }
 
@@ -40,12 +42,13 @@
 
             this.Activities.Add(closeAccountActivity);
         }
-        
+
         public void UpdateAccount(
             DiscountScheme discountScheme,
             string turnoverBandUri,
             bool eligibleForGoodCredit,
-            bool eligibleForRebate)
+            bool eligibleForRebate,
+            bool growthPartner)
         {
             this.CheckUpdate(discountScheme, turnoverBandUri);
 
@@ -68,6 +71,11 @@
             {
                 this.UpdateRebate(new SalesAccountUpdateRebateActivity(eligibleForRebate));
             }
+
+            if (growthPartner != this.GrowthPartner)
+            {
+                this.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(growthPartner));
+            }
         }
 
         public void UpdateName(string name)
@@ -76,6 +84,12 @@
             {
                 this.UpdateName(new SalesAccountUpdateNameActivity(name));
             }
+        }
+
+        public void UpdateGrowthPartner(SalesAccountGrowthPartnerActivity growthPartnerActivity)
+        {
+            this.GrowthPartner = growthPartnerActivity.GrowthPartner;
+            this.Activities.Add(growthPartnerActivity);
         }
 
         private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)

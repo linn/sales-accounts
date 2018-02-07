@@ -1,10 +1,10 @@
-﻿namespace Linn.SalesAccounts.Resources.SalesAccounts
+﻿namespace Linn.SalesAccounts.Domain.Dispatchers.Messages
 {
-    using Linn.Common.Resources;
-
-    public class SalesAccountResource : HypermediaResource
+    public class SalesAccountMessage
     {
         public int Id { get; set; }
+
+        public string Href { get; set; }
 
         public string Name { get; set; }
 

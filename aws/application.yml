@@ -176,7 +176,7 @@ Resources:
         TargetGroupArn:
           Fn::ImportValue:
             !Sub "sales-accounts-target-group-arn${environmentSuffix}"
-   salesAccountsMessagingService:
+  salesAccountsMessagingService:
     Type: AWS::ECS::Service
     Properties:
       Cluster: !Ref targetCluster

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>SalesReportingLoader</AssemblyName>
+    <RootNamespace>Linn.SalesAccounts.SalesReportingLoader</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="linn.common.configuration" Version="1.1.0" />
+    <PackageReference Include="linn.common.persistence" Version="1.0.0" />
+    <PackageReference Include="linn.common.persistence.entityframework" Version="1.0.0" />
+    <PackageReference Include="linn.common.proxy" Version="2.0.1" />
+    <PackageReference Include="Linn.Common.Serialization.Json" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\src\Persistence\Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

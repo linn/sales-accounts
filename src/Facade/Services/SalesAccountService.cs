@@ -8,6 +8,8 @@
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.Dispatchers;
+    using Linn.SalesAccounts.Domain.Dispatchers.Extensions;
     using Linn.SalesAccounts.Domain.Exceptions;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
@@ -21,14 +23,18 @@
 
         private readonly IDiscountSchemeService discountSchemeService;
 
+        private readonly ISalesAccountUpdatedDispatcher salesAccountUpdatedDispatcher;
+
         public SalesAccountService(
             ITransactionManager transactionManager,
             ISalesAccountRepository salesAccountRepository,
-            IDiscountSchemeService discountSchemeService)
+            IDiscountSchemeService discountSchemeService,
+            ISalesAccountUpdatedDispatcher salesAccountUpdatedDispatcher)
         {
             this.transactionManager = transactionManager;
             this.salesAccountRepository = salesAccountRepository;
             this.discountSchemeService = discountSchemeService;
+            this.salesAccountUpdatedDispatcher = salesAccountUpdatedDispatcher;
         }
 
         public IResult<SalesAccount> GetById(int id)
@@ -98,8 +104,11 @@
                     discountScheme,
                     updateResource.TurnoverBandUri,
                     updateResource.EligibleForGoodCreditDiscount,
-                    updateResource.EligibleForRebate);
+                    updateResource.EligibleForRebate,
+                    updateResource.GrowthPartner);
+
                 this.transactionManager.Commit();
+                this.salesAccountUpdatedDispatcher.SendSalesAccountUpdated(account.ToMessage());
             }
             catch (InvalidTurnoverBandException exception)
             {
@@ -118,7 +127,9 @@
             }
 
             account.UpdateName(name);
+
             this.transactionManager.Commit();
+            this.salesAccountUpdatedDispatcher.SendSalesAccountUpdated(account.ToMessage());
 
             return new SuccessResult<SalesAccount>(account);
         }
