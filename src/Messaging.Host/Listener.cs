@@ -22,7 +22,7 @@
             this.receiver = scope.Resolve<IReceiver>();
             this.consumer = new DedupingMessageConsumer(new MessageConsumer(this.receiver), this.receiver);
 
-            this.logger.Info("Started pricing-listener");
+            this.logger.Info("Started sales accounts listener");
 
             this.consumer.For("linnapps.sales-account.created")
                 .OnConsumed(m =>

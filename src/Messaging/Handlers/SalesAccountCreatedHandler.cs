@@ -30,7 +30,13 @@
         {
             var content = Encoding.UTF8.GetString(message.Body);
             var resource = JsonConvert.DeserializeObject<LinnappsSalesAccountResource>(content);
-            this.salesAccountService.AddSalesAccount(new SalesAccountCreateResource { AccountId = resource.AccountId, Name = resource.AccountName });
+            this.salesAccountService.AddSalesAccount(
+                new SalesAccountCreateResource
+                    {
+                        AccountId = resource.AccountId,
+                        Name = resource.AccountName,
+                        ClosedOn = resource.DateClosed
+                    });
 
             this.rabbitTerminator.Close();
 
