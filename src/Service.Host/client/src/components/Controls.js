@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { Button, Row, Col, Well } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
+import  ConfirmClose from './ConfirmClose';
 
 class Controls extends Component {
 
+    state = {
+        showConfirmClose: false
+    }
     render() {
-        const { closedOn } = this.props;
+        const { closedOn, salesAccountId, closeAccount } = this.props;
 
         return (
             <div>
@@ -23,8 +26,17 @@ class Controls extends Component {
                         </Well>
                     </Col>
                 </Row>
+                <ConfirmClose id={salesAccountId} closeAccount={closeAccount} cancelClose={() => this.cancelClose()} visible={this.state.showConfirmClose}/>
             </div>
         );
+    }
+
+    handleShowConfimClose() {
+        this.setState({ showConfirmClose: true });
+    }
+
+    cancelClose() {
+        this.setState({ showConfirmClose: false });
     }
 }
 

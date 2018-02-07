@@ -12,7 +12,7 @@ class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, hideEditModal,
+        const { loading, hideEditModal, closeAccount,
             salesAccount, discountSchemeName, turnoverBandName, discountSchemes, turnoverBands,
             editDiscountScheme, setDiscountScheme, 
             editTurnoverBand, setTurnoverBand, 
@@ -58,7 +58,7 @@ class SalesAccount extends Component {
                             <br />
                         </Col>
                     </Row >
-                    <Controls closedOn={salesAccount.closedOn} />
+                    <Controls closedOn={salesAccount.closedOn} salesAccountId={salesAccount.id} closeAccount={closeAccount}/>
                 </Grid>
 
                 <ListSelectItemModal

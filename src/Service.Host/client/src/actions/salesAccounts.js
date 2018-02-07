@@ -34,6 +34,14 @@ export const hideEditModal = () => ({
     payload: {}
 });
 
+export const closeAccount = id => async (dispatch) => {
+    try {
+        const data = await deleteJson(`${config.appRoot}${'sales/accounts/'}${id}`, { headers: { 'Accept': 'application/json' } });
+        //reset page here?
+    } catch (e) {
+        alert(`Failed to delete sales account. Error: ${e.message}`);
+    }
+};
 
 export const editDiscountScheme = discountSchemeUri => ({
     type: actionTypes.EDIT_DISCOUNT_SCHEME,

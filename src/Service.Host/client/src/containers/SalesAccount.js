@@ -1,7 +1,7 @@
 ﻿import { connect } from 'react-redux';
 import SalesAccount from '../components/SalesAccount';
 import initialiseOnMount from './common/initialiseOnMount';
-import { fetchSalesAccount, hideEditModal, 
+import { fetchSalesAccount, hideEditModal, closeAccount,
     editDiscountScheme, setDiscountScheme,
     editTurnoverBand, setTurnoverBand, 
     editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
@@ -36,6 +36,7 @@ const initialise = ({ salesAccountUri, salesAccount, loading }) => dispatch => {
 const mapDispatchToProps = {
     initialise,
     hideEditModal,
+    closeAccount,
     editDiscountScheme,
     setDiscountScheme,
     editTurnoverBand,
