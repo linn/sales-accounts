@@ -1,44 +1,44 @@
 import React, { Component } from 'react'
-import { Modal, ListGroup, ListGroupItem, Button,ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Modal, ListGroup, ListGroupItem, Button, ButtonGroup, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { combineReducers } from 'redux';
 
 export class SwitchModal extends Component {
+
+    constructor(props, context) {
+        super(props, context);
+
+        this.handleChange = this.handleChange.bind(this);
+
+    }
     render() {
-
-        const { visible, title, hideModal, items, currentItemUri } = this.props;
-
+        const { visible, title, hideModal, value1, value2, current } = this.props;
+   
         return (
-            <Modal show={visible} onHide={() => hideModal()}>
+            <Modal bsSize={'sm'} show={visible} onHide={() => hideModal()}>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <ListGroup>
-                        <ToggleButtonGroup type="radio" name="options">
-                            <ToggleButton value={2}>Yes</ToggleButton>
-                            <ToggleButton value={3}>No</ToggleButton>
-                        </ToggleButtonGroup>
-                    </ListGroup>
+                <Modal.Body style={{ textAlign: 'center' }}>
+                    <ToggleButtonGroup type="radio" name="options" value={current} onChange={this.handleChange}>
+                        <ToggleButton value={true} onClick={() => this.handleClick(true)} >{value1}</ToggleButton>
+                        <ToggleButton value={false} onClick={() => this.handleClick(false)} >{value2}</ToggleButton>
+                    </ToggleButtonGroup>
                 </Modal.Body>
-
                 <Modal.Footer>
-                    <Button onClick={() => this.handleClose()}>Close</Button>
+                    <Button onClick={() => hideModal()}>Close</Button>
                 </Modal.Footer>
             </Modal>
         )
     }
 
-    handleClose() {
-        this.props.hideModal();
+    handleChange() {
+        //ToggleButtonGroup onChange doesn't work when using radio and boolena values, but need to present to avoid a warning
     }
 
-    // handleClick(item, currentItemUri) {
-    //     const { hideEditModal, setItem } = this.props;
-    //     const itemUri = item.links.find(l => l.rel === 'self').href;
-    //     if (itemUri !== currentItemUri) {
-    //         setItem(itemUri);
-    //     }
-    //     hideEditModal();
-    // }
+    handleClick(value) {
+        this.props.setValue(value);
+        this.props.hideModal();
+    }
 }
 
 export default SwitchModal;

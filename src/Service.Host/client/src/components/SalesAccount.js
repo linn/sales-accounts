@@ -8,21 +8,14 @@ import ListSelectItemModal from './ListSelectItemModal';
 import Controls from './Controls';
 import discountSchemes from '../reducers/discountSchemes';
 
-const styles = {
-    item: {
-        textAlign: 'right',
-        marginBottom: '6px'
-    }
-}
-
 class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, hideEditModal, salesAccount, discountSchemeName, turnoverBandName, 
-            showTurnoverBandEditModal, showDiscountSchemeEditModal, editGoodCredit,
-            setDiscountScheme, discountSchemes, turnoverBands, setTurnoverBand,
-            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, ...props } = this.props;
+        const { loading, hideEditModal, 
+            salesAccount, discountSchemeName, turnoverBandName, discountSchemes, turnoverBands,
+            editDiscountScheme, setDiscountScheme, editTurnoverBand, setTurnoverBand, editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
+            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible } = this.props;
 
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
@@ -33,37 +26,37 @@ class SalesAccount extends Component {
                 <Grid fluid={false}>
                     <Row>
                         <Col xs={8}>
-                        <Row>
+                            <Row>
                                 <Col sm={2}>
                                     <h2>{salesAccount.name}</h2>
                                 </Col>
                             </Row>
                             <br />
-                            <SalesAccountItem title={'Discount Scheme:'} value={discountSchemeName || 'select discount scheme'} handleClick={showDiscountSchemeEditModal} />
-                            <SalesAccountItem title={'Turnover Band:'} value={turnoverBandName || 'select turnover band'} handleClick={showTurnoverBandEditModal} />
-                            <SalesAccountItem 
-                                title={'Eligible For Good Credit:'} 
+                            <SalesAccountItem title={'Discount Scheme:'} value={discountSchemeName || 'select discount scheme'} handleClick={editDiscountScheme} />
+                            <SalesAccountItem title={'Turnover Band:'} value={turnoverBandName || 'select turnover band'} handleClick={editTurnoverBand} />
+                            <SalesAccountItem
+                                title={'Eligible For Good Credit:'}
                                 value={salesAccount.eligibleForGoodCreditDiscount ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
-                                handleClick={editGoodCredit}
+                                handleClick={editEligibleForGoodCreditDiscount}
                             />
-                            {!salesAccount.closedOn &&  <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} />}
+                            {!salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} />}
                             <br />
                         </Col>
                     </Row >
                     <Controls closedOn={salesAccount.closedOn} />
                 </Grid>
 
-                <ListSelectItemModal 
-                    visible={editDiscountSchemeVisible} items={discountSchemes} 
+                <ListSelectItemModal
+                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'} items={discountSchemes}
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
-                <ListSelectItemModal 
-                    visible={editTurnoverBandVisible} items={turnoverBands || []} 
+                <ListSelectItemModal
+                    visible={editTurnoverBandVisible} title={'select Turnover Band'} items={turnoverBands || []}
                     currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
                 />
-     
-                {/* <TurnoverBandEditModal discountSchemeUri={salesAccount.discountSchemeUri} turnoverBandUri={salesAccount.turnoverBandUri}/> */}
-                <SwitchModal visible={editGoodCreditVisible} hideModal={hideEditModal}/>
+                <SwitchModal visible={editGoodCreditVisible} title={'Eligible for Good Credit?'} 
+                    value1={'Yes'} value2={'No'} current={salesAccount.eligibleForGoodCreditDiscount} hideModal={hideEditModal} setValue={setEligibleForGoodCreditDiscount} 
+                />
             </div>
         );
     }

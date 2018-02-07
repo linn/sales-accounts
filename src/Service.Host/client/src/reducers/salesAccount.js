@@ -44,6 +44,15 @@ const salesAccount = (state = defaultState, action) => {
             }
         }
 
+    case actionTypes.SET_ELIGIBLE_FOR_GOOD_CREDIT_DISCOUNT:
+        return {
+            ...state,
+            item: {
+                ...state.item, 
+                eligibleForGoodCreditDiscount: action.payload.eligible,
+            }
+        }
+
     case actionTypes.HIDE_EDIT_MODAL:
         return {
             ...state,
@@ -52,19 +61,19 @@ const salesAccount = (state = defaultState, action) => {
             editGoodCreditVisible: false,
         }
     
-    case actionTypes.SHOW_DISCOUNT_SCHEME_EDIT_MODAL:
+    case actionTypes.EDIT_DISCOUNT_SCHEME:
         return {
             ...state,
             editDiscountSchemeVisible: true
         }
 
-    case actionTypes.SHOW_TURNOVER_BAND_EDIT_MODAL:
+    case actionTypes.EDIT_TURNOVER_BAND:
         return {
             ...state,
             editTurnoverBandVisible: true
         }
 
-    case actionTypes.EDIT_GOOD_CREDIT:
+    case actionTypes.EDIT_ELIGIBLE_FOR_GOOD_CREDIT_DISCOUNT:
         return {
             ...state,
             editGoodCreditVisible: true

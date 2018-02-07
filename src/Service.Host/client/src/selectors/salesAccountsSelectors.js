@@ -77,6 +77,5 @@ export const getTurnoverBandName2 = (salesAccount, turnoverBandSets) => {
 
     const turnoverBand = allTurnoverBands.find(tb => tb.links.find(l => l.rel === 'self').href === salesAccount.turnoverBandUri);
 
-
     return turnoverBand ? turnoverBand.name : null;
 }

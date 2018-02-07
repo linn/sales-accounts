@@ -29,18 +29,13 @@ export const fetchSalesAccounts = (salesAccountUris = []) => async dispatch => {
     });
 };
 
-export const showDiscountSchemeEditModal = () => ({
-    type: actionTypes.SHOW_DISCOUNT_SCHEME_EDIT_MODAL,
-    payload: {}
-});
-
-export const showTurnoverBandEditModal = () => ({
-    type: actionTypes.SHOW_TURNOVER_BAND_EDIT_MODAL,
-    payload: {}
-});
-
 export const hideEditModal = () => ({
     type: actionTypes.HIDE_EDIT_MODAL,
+    payload: {}
+});
+
+export const editTurnoverBand = () => ({
+    type: actionTypes.EDIT_TURNOVER_BAND,
     payload: {}
 });
 
@@ -48,6 +43,7 @@ export const editDiscountScheme = (discountSchemeUri) => ({
     type: actionTypes.EDIT_DISCOUNT_SCHEME,
     payload: { discountSchemeUri }
 });
+
 
 export const setDiscountScheme = (discountSchemeUri) => ({
     type: actionTypes.SET_DISCOUNT_SCHEME,
@@ -59,7 +55,12 @@ export const setTurnoverBand = (turnoverBandUri) => ({
     payload: { turnoverBandUri }
 });
 
-export const editGoodCredit = () => ({
-    type: actionTypes.EDIT_GOOD_CREDIT,
+export const setEligibleForGoodCreditDiscount = (eligible) => ({
+    type: actionTypes.SET_ELIGIBLE_FOR_GOOD_CREDIT_DISCOUNT,
+    payload: { eligible }
+});
+
+export const editEligibleForGoodCreditDiscount = () => ({
+    type: actionTypes.EDIT_ELIGIBLE_FOR_GOOD_CREDIT_DISCOUNT,
     payload: {}
 });

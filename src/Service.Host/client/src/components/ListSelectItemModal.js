@@ -7,7 +7,7 @@ export class ListSelectItemModal extends Component {
         const { visible, title, hideModal, items = [], currentItemUri } = this.props;
 
         return (
-            <Modal show={visible} onHide={() => hideModal()}>
+            <Modal bsSize={'sm'} show={visible} onHide={() => hideModal()}>
                 <Modal.Header closeButton>
                     <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
@@ -25,14 +25,10 @@ export class ListSelectItemModal extends Component {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button onClick={() => this.handleClose()}>Close</Button>
+                    <Button onClick={() => hideModal()}>Close</Button>
                 </Modal.Footer>
             </Modal>
         )
-    }
-
-    handleClose() {
-        this.props.hideModal();
     }
 
     handleClick(item, currentItemUri) {
