@@ -4,7 +4,6 @@
 
     using Linn.Common.Messaging.RabbitMQ;
     using Linn.Common.Messaging.RabbitMQ.Unicast;
-    using Linn.Common.Persistence;
     using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Resources.Messaging;
     using Linn.SalesAccounts.Resources.SalesAccounts;
@@ -15,14 +14,11 @@
     {
         private readonly ISalesAccountService salesAccountService;
 
-        private readonly ITransactionManager transactionManager;
-
         private readonly IRabbitTerminator rabbitTerminator;
 
-        public SalesAccountCreatedHandler(ISalesAccountService salesAccountService, ITransactionManager transactionManager, IRabbitTerminator rabbitTerminator)
+        public SalesAccountCreatedHandler(ISalesAccountService salesAccountService, IRabbitTerminator rabbitTerminator)
         {
             this.salesAccountService = salesAccountService;
-            this.transactionManager = transactionManager;
             this.rabbitTerminator = rabbitTerminator;
         }
 
@@ -39,8 +35,6 @@
                     });
 
             this.rabbitTerminator.Close();
-
-            this.transactionManager.Commit();
 
             return true;
         }
