@@ -15,6 +15,7 @@
             builder.RegisterModule<AmazonSqsModule>();
             builder.RegisterModule<LoggingModule>();
             builder.RegisterModule<MessagingModule>();
+            builder.RegisterModule<MessagingDatabaseModule>();
             builder.RegisterModule<PersistenceModule>();
             builder.RegisterModule<ServiceModule>();
             builder.RegisterReceiver("sales-accounts.q", "sales-accounts.dlx");

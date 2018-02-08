@@ -60,6 +60,7 @@
                     builder.RegisterModule<AmazonSqsModule>();
                     builder.RegisterModule<LoggingModule>();
                     builder.RegisterModule<ServiceModule>();
+                    builder.RegisterModule<DatabaseModule>();
                     builder.RegisterModule<PersistenceModule>();
                     builder.RegisterModule<MessagingModule>();
                 });
@@ -76,6 +77,7 @@
                     builder.RegisterModule<AmazonSqsModule>();
                     builder.RegisterModule<LoggingModule>();
                     builder.RegisterModule<ServiceModule>();
+                    builder.RegisterModule<DatabaseModule>();
                     builder.RegisterModule<PersistenceModule>();
                     builder.RegisterModule<MessagingModule>();
                 });

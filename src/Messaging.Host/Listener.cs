@@ -29,6 +29,7 @@
                     {
                         using (var handlerScope = scope.BeginLifetimeScope("messageHandler"))
                         {
+                            this.logger.Info($"Processing message {m.MessageId}");
                             var handler = handlerScope.Resolve<SalesAccountCreatedHandler>();
                             return handler.Execute(m);
                         }
