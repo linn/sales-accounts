@@ -78,6 +78,7 @@
                     builder.RegisterModule<LoggingModule>();
                     builder.RegisterModule<ServiceModule>();
                     builder.RegisterModule<DatabaseModule>();
+                    builder.RegisterModule<PersistenceModule>();
                     builder.RegisterModule<MessagingModule>();
                 });
 
