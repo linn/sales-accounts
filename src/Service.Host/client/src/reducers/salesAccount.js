@@ -8,6 +8,8 @@ const defaultState = {
     editGoodCreditVisible: false,
     editGrowthPartnerVisible: false,
     editEligibleForRebateVisible: false,
+    dirty: false,
+    saving: false,
     item: null,
 }
 
@@ -47,6 +49,7 @@ const salesAccount = (state = defaultState, action) => {
         case actionTypes.SET_DISCOUNT_SCHEME:
             return {
                 ...state,
+                dirty: true,
                 item: {
                     ...state.item,
                     discountSchemeUri: action.payload.discountSchemeUri,
@@ -63,6 +66,7 @@ const salesAccount = (state = defaultState, action) => {
         case actionTypes.SET_TURNOVER_BAND:
             return {
                 ...state,
+                dirty: true,
                 item: {
                     ...state.item,
                     turnoverBandUri: action.payload.turnoverBandUri,
@@ -78,6 +82,7 @@ const salesAccount = (state = defaultState, action) => {
         case actionTypes.SET_ELIGIBLE_FOR_GOOD_CREDIT_DISCOUNT:
             return {
                 ...state,
+                dirty: true,
                 item: {
                     ...state.item,
                     eligibleForGoodCreditDiscount: action.payload.eligible,
@@ -93,6 +98,7 @@ const salesAccount = (state = defaultState, action) => {
         case actionTypes.SET_GROWTH_PARTNER:
             return {
                 ...state,
+                dirty: true,
                 item: {
                     ...state.item,
                     growthPartner: action.payload.eligible,
@@ -108,10 +114,24 @@ const salesAccount = (state = defaultState, action) => {
         case actionTypes.SET_ELIGIBLE_FOR_REBATE:
             return {
                 ...state,
+                dirty: true,
                 item: {
                     ...state.item,
                     eligibleForRebate: action.payload.eligible,
                 }
+            }
+
+        case actionTypes.START_SAVE:
+            return {
+                ...state,
+                saving: true
+            }
+
+        case actionTypes.SAVE_COMPLETE:
+            return {
+                ...state,
+                saving: false,
+                dirty: false
             }
 
         default:

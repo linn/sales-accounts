@@ -14,9 +14,7 @@ class ConfirmClose extends Component {
                 </Modal.Body>  
                <Modal.Footer>
                     <Button bsStyle="link" onClick={() => cancelClose()}>Cancel</Button>
-                    <LinkContainer to={`/sales/accounts`}>
-                        <Button bsStyle="danger" onClick={() => closeAccount(id)}>Confirm Close</Button>
-                   </LinkContainer>
+                    <Button bsStyle="danger" onClick={() => closeAccount()}>Confirm Close</Button>
                 </Modal.Footer>
             </Modal>
         );

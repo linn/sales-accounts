@@ -1,4 +1,4 @@
-﻿import { fetchJson } from '../helpers/fetchJson';
+﻿import { fetchJson, putJson, deleteJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
 import { getTurnoverBandName } from '../selectors/salesAccountsSelectors';
@@ -35,13 +35,44 @@ export const hideEditModal = () => ({
 });
 
 export const closeAccount = id => async (dispatch) => {
+    const body = { closedOn: new Date() };
     try {
-        const data = await deleteJson(`${config.appRoot}${'sales/accounts/'}${id}`, { headers: { 'Accept': 'application/json' } });
-        //reset page here?
+        const data = await deleteJson(`${config.appRoot}${'/sales/accounts/'}${id}`, body,  { headers: { 'Accept': 'application/json' } });
+        window.location.reload();
     } catch (e) {
         alert(`Failed to delete sales account. Error: ${e.message}`);
     }
 };
+
+export const saveAccountUpdate = (salesAccount) => async (dispatch) => {
+    dispatch(startSave());
+    const body = {
+        TurnoverBandUri : salesAccount.turnoverBandUri,
+        DiscountSchemeUri : salesAccount.discountSchemeUri,
+        EligibleForGoodCreditDiscount : salesAccount.eligibleForGoodCreditDiscount,
+        EligibleForRebate : salesAccount.eligibleForRebate,
+        GrowthPartner : salesAccount.growthPartner
+    }
+    try {
+        await putJson(`${config.appRoot}/sales/accounts/${salesAccount.id}`, body, { headers: { 'Accept': 'application/json' }});
+    console.log(body);
+    dispatch(saveComplete());
+    } catch (e) {
+        alert(`Failed to update sales account. Error: ${e.message}`);
+    }
+};
+
+export const startSave = () => ({
+    type: actionTypes.START_SAVE,
+    payload: {}
+});
+
+export const saveComplete = () => ({
+    type: actionTypes.SAVE_COMPLETE,
+    payload: {}
+});
+
+
 
 export const editDiscountScheme = discountSchemeUri => ({
     type: actionTypes.EDIT_DISCOUNT_SCHEME,

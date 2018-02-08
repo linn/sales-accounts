@@ -3,29 +3,32 @@ import { Loading } from './common';
 import { Link } from 'react-router-dom';
 import { Grid, Row, Col, Button, Label } from 'react-bootstrap';
 import SalesAccountItem from './SalesAccountItem';
-import SwitchModal from './SwitchModal';
+import BooleanSwitchModal from './BooleanSwitchModal';
 import ListSelectItemModal from './ListSelectItemModal';
 import Controls from './Controls';
 import discountSchemes from '../reducers/discountSchemes';
+import { formatDate } from '../helpers/dates';
 
 class SalesAccount extends Component {
     state = { searchTerm: '' }
 
     render() {
-        const { loading, hideEditModal, closeAccount,
+        const { loading,  dirty, saving, 
+            hideEditModal, closeAccount, saveAccountUpdate,
             salesAccount, discountSchemeName, turnoverBandName, discountSchemes, turnoverBands,
             editDiscountScheme, setDiscountScheme, 
             editTurnoverBand, setTurnoverBand, 
             editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
             editGrowthPartner, setGrowthPartner,
             editEligibleForRebate, setEligibleForRebate,
-            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, editGrowthPartnerVisible, editEligibleForRebateVisible 
+            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, editGrowthPartnerVisible, editEligibleForRebateVisible,
+            showConfirmCloseModal, hideConfirmCloseModal
         } = this.props;
 
         if (loading || !salesAccount) {
             return (<div>Loading</div>);
         }
-
+  
         return (
             <div>
                 <Grid fluid={false}>
@@ -54,31 +57,34 @@ class SalesAccount extends Component {
                                 value={salesAccount.eligibleForRebate ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
                                 handleClick={editEligibleForRebate}
                             />
-                            {salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={salesAccount.closedOn} />}
+                            {salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={formatDate(salesAccount.closedOn)} displayOnly />}
                             <br />
                         </Col>
                     </Row >
-                    <Controls closedOn={salesAccount.closedOn} salesAccountId={salesAccount.id} closeAccount={closeAccount}/>
+                    <Controls 
+                        closedOn={salesAccount.closedOn} dirty={dirty} saving={saving} salesAccount={salesAccount} 
+                        closeAccount={closeAccount} saveAccountUpdate={saveAccountUpdate} 
+                    />
                 </Grid>
 
                 <ListSelectItemModal
-                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'} items={discountSchemes}
+                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'} items={discountSchemes || []}
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
                 <ListSelectItemModal
-                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands}
+                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands || []}
                     currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
                 />
-                <SwitchModal 
-                    visible={editGoodCreditVisible} title={'Eligible for Good Credit?'}value1={'Yes'} value2={'No'} 
+                <BooleanSwitchModal 
+                    visible={editGoodCreditVisible} title={'Eligible for Good Credit?'} trueText={'Yes'} falseText={'No'} 
                     current={salesAccount.eligibleForGoodCreditDiscount} hideModal={hideEditModal} setValue={setEligibleForGoodCreditDiscount}
                 />
-                <SwitchModal 
-                    visible={editGrowthPartnerVisible} title={'Growth Partner?'} value1={'Yes'} value2={'No'} 
+                <BooleanSwitchModal 
+                    visible={editGrowthPartnerVisible} title={'Growth Partner?'} trueText={'Yes'} falseText={'No'} 
                     current={salesAccount.growthPartner} hideModal={hideEditModal} setValue={setGrowthPartner}
                 />
-                <SwitchModal 
-                    visible={editEligibleForRebateVisible} title={'Eligible for Rebate?'} value1={'Yes'} value2={'No'} 
+                <BooleanSwitchModal 
+                    visible={editEligibleForRebateVisible} title={'Eligible for Rebate?'} trueText={'Yes'} falseText={'No'} 
                     current={salesAccount.eligibleForRebate} hideModal={hideEditModal} setValue={setEligibleForRebate}
                 />
             </div>

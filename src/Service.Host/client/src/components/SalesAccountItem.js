@@ -10,16 +10,17 @@ const styles = {
 
 export class SalesAccountItem extends Component {
     render() {
-        const {title, value, handleClick} = this.props;
+        const {title, value, handleClick, displayOnly} = this.props;
         return (
             <Row>
                 <Col sm={4} style={styles.item}>
                     <b>{title}</b>
                 </Col>
                 <Col sm={2}>
-                    <Button bsStyle="link" style={{ padding: '0' }} onClick={() => handleClick()}>
-                        {value}
-                    </Button>  
+                    {displayOnly 
+                        ? value 
+                        : <Button bsStyle="link" style={{ padding: '0' }} onClick={() => handleClick()}>{value}</Button> 
+                    }
                 </Col>
             </Row>
         )

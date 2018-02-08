@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Well } from 'react-bootstrap';
+import { Button, Row, Col, Well, Glyphicon, Alert } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import  ConfirmClose from './ConfirmClose';
+import { combineReducers } from 'redux';
 
 class Controls extends Component {
 
@@ -9,7 +10,7 @@ class Controls extends Component {
         showConfirmClose: false
     }
     render() {
-        const { closedOn, salesAccountId, closeAccount } = this.props;
+        const { closedOn, dirty, saving, salesAccount, closeAccount, saveAccountUpdate } = this.props;
 
         return (
             <div>
@@ -19,14 +20,24 @@ class Controls extends Component {
                             <LinkContainer to='/sales/accounts'>
                                 <Button bsStyle="link">Back</Button>
                             </LinkContainer>
-                            <Button  style={{marginLeft: '20px'}} bsStyle="primary" className=" muted pull-right" onClick={() => this.handleSave()}>Save</Button>
+                          
+                            <Button 
+                                disabled={!salesAccount.discountSchemeUri || !salesAccount.turnoverBandUri || !dirty} 
+                                style={{marginLeft: '20px'}} bsStyle="primary" className=" muted pull-right" 
+                                onClick={() => saveAccountUpdate(salesAccount)}>
+                                {saving 
+                                    ? <span>Saving <Glyphicon glyph="glyphicon glyphicon-repeat gly-spin" style={{marginLeft: '4px'}} /> </span> 
+                                    : <span>Save</span>
+                                }
+                            </Button>
                             {!closedOn &&  
-                                <Button bsStyle="danger" className=" muted pull-right" onClick={() => this.handleShowConfimClose()}>Close Account</Button>
-                             }
+                                <Button bsStyle="danger" className="muted pull-right" onClick={() => this.handleShowConfimClose()}>Close Account</Button>
+                            }
+                     
                         </Well>
                     </Col>
                 </Row>
-                <ConfirmClose id={salesAccountId} closeAccount={closeAccount} cancelClose={() => this.cancelClose()} visible={this.state.showConfirmClose}/>
+                <ConfirmClose id={salesAccount.id} closeAccount={() => this.handleCloseAccount()} cancelClose={() => this.cancelClose()} visible={this.state.showConfirmClose}/>
             </div>
         );
     }
@@ -37,6 +48,11 @@ class Controls extends Component {
 
     cancelClose() {
         this.setState({ showConfirmClose: false });
+    }
+
+    handleCloseAccount() {
+        this.setState({showConfirmClose: false});
+        this.props.closeAccount(this.props.salesAccount.id);
     }
 }
 

@@ -8,5 +8,10 @@
         {
             return new Dictionary<string, string[]> { { "Accept", new[] { "application/json" } }, { "Content-Type", new[] { "application/json" } } };
         }
+
+        public static IDictionary<string, string[]> JsonGetHeaders()
+        {
+            return new Dictionary<string, string[]> { { "Accept", new[] { "application/json" } } };
+        }
     }
 }

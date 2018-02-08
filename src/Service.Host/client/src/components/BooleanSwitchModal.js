@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Modal, ListGroup, ListGroupItem, Button, ButtonGroup, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { combineReducers } from 'redux';
 
-export class SwitchModal extends Component {
+export class BooleanSwitchModal extends Component {
 
     constructor(props, context) {
         super(props, context);
@@ -11,7 +11,7 @@ export class SwitchModal extends Component {
 
     }
     render() {
-        const { visible, title, hideModal, value1, value2, current } = this.props;
+        const { visible, title, hideModal, trueText, falseText, current } = this.props;
    
         return (
             <Modal bsSize={'sm'} show={visible} onHide={() => hideModal()}>
@@ -20,8 +20,8 @@ export class SwitchModal extends Component {
                 </Modal.Header>
                 <Modal.Body style={{ textAlign: 'center' }}>
                     <ToggleButtonGroup type="radio" name="options" value={current} onChange={this.handleChange}>
-                        <ToggleButton value={true} onClick={() => this.handleClick(true)} >{value1}</ToggleButton>
-                        <ToggleButton value={false} onClick={() => this.handleClick(false)} >{value2}</ToggleButton>
+                        <ToggleButton value={true} onClick={() => this.handleClick(true)} >{trueText}</ToggleButton>
+                        <ToggleButton value={false} onClick={() => this.handleClick(false)} >{falseText}</ToggleButton>
                     </ToggleButtonGroup>
                 </Modal.Body>
                 <Modal.Footer>
@@ -32,7 +32,7 @@ export class SwitchModal extends Component {
     }
 
     handleChange() {
-        //ToggleButtonGroup onChange doesn't work when using radio and boolena values, but need to present to avoid a warning
+        //ToggleButtonGroup onChange doesn't work when using radio and boolean values, but needs to be present to avoid a console warning
     }
 
     handleClick(value) {
@@ -41,4 +41,4 @@ export class SwitchModal extends Component {
     }
 }
 
-export default SwitchModal;
+export default BooleanSwitchModal;
