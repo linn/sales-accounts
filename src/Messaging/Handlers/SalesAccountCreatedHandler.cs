@@ -19,7 +19,10 @@
 
         private readonly IRabbitTerminator rabbitTerminator;
 
-        public SalesAccountCreatedHandler(ISalesAccountService salesAccountService, ITransactionManager transactionManager, IRabbitTerminator rabbitTerminator)
+        public SalesAccountCreatedHandler(
+            ISalesAccountService salesAccountService,
+            ITransactionManager transactionManager,
+            IRabbitTerminator rabbitTerminator)
         {
             this.salesAccountService = salesAccountService;
             this.transactionManager = transactionManager;
