@@ -12,7 +12,7 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ServiceDbContext>().AsSelf().As<DbContext>();
+            builder.RegisterType<ServiceDbContext>().AsSelf().As<DbContext>().InstancePerMatchingLifetimeScope("messageHandler");
             builder.RegisterType<TransactionManager>().As<ITransactionManager>();
         }
     }
