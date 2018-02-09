@@ -1,12 +1,10 @@
 ﻿import React, { Component } from 'react';
 import { Loading } from './common';
-import { Link } from 'react-router-dom';
 import { Grid, Row, Col, Button, Label } from 'react-bootstrap';
 import SalesAccountItem from './SalesAccountItem';
 import BooleanSwitchModal from './BooleanSwitchModal';
 import ListSelectItemModal from './ListSelectItemModal';
 import Controls from './Controls';
-import discountSchemes from '../reducers/discountSchemes';
 import { formatDate } from '../helpers/dates';
 
 class SalesAccount extends Component {
@@ -26,7 +24,7 @@ class SalesAccount extends Component {
         } = this.props;
 
         if (loading || !salesAccount) {
-            return (<div>Loading</div>);
+            return (<Loading/>);
         }
   
         return (
@@ -68,11 +66,11 @@ class SalesAccount extends Component {
                 </Grid>
 
                 <ListSelectItemModal
-                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'} items={discountSchemes || []}
+                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'} items={discountSchemes}
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
                 <ListSelectItemModal
-                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands || []}
+                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands}
                     currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
                 />
                 <BooleanSwitchModal 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Well, Glyphicon, Alert } from 'react-bootstrap';
+import { Button, Row, Col, Well, Glyphicon } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import  ConfirmClose from './ConfirmClose';
 import { combineReducers } from 'redux';
@@ -30,7 +30,8 @@ class Controls extends Component {
                                     : <span>Save</span>
                                 }
                             </Button>
-                            {/* {!closedOn &&  
+                            {/* uncomment this when we wish to turn on ability to close account from the app
+                            {!closedOn &&  
                                 <Button bsStyle="danger" className="muted pull-right" onClick={() => this.handleShowConfimClose()}>Close Account</Button>
                             } */}
                         </Well>

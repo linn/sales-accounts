@@ -12,7 +12,7 @@ const receiveSalesAccountDetail = data => ({
     payload: { data }
 });
 
-export const fetchSalesAccount = salesAccountUri => async (dispatch) => {
+export const fetchSalesAccount = salesAccountUri => async dispatch => {
     dispatch(requestSalesAccountDetail(salesAccountUri));
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}`, { headers: { 'Accept': 'application/json' } });
@@ -33,7 +33,7 @@ export const hideEditModal = () => ({
     payload: {}
 });
 
-export const closeAccount = id => async (dispatch) => {
+export const closeAccount = id => async dispatch => {
     const body = { closedOn: new Date() };
     try {
         const data = await deleteJson(`${config.appRoot}${'/sales/accounts/'}${id}`, body,  { headers: { 'Accept': 'application/json' } });
@@ -43,7 +43,7 @@ export const closeAccount = id => async (dispatch) => {
     }
 };
 
-export const saveAccountUpdate = (salesAccount) => async (dispatch) => {
+export const saveAccountUpdate = salesAccount => async dispatch => {
     dispatch(startSave());
     const body = {
         TurnoverBandUri : salesAccount.turnoverBandUri,

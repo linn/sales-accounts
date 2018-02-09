@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import { Modal, ListGroup, ListGroupItem, Button, ButtonGroup, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Modal, Button, ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
 import { combineReducers } from 'redux';
 
 export class BooleanSwitchModal extends Component {
 
-    constructor(props, context) {
-        super(props, context);
-
-        this.handleChange = this.handleChange.bind(this);
-
-    }
     render() {
         const { visible, title, hideModal, trueText, falseText, current } = this.props;
    
@@ -32,7 +26,8 @@ export class BooleanSwitchModal extends Component {
     }
 
     handleChange() {
-        //ToggleButtonGroup onChange doesn't work when using radio and boolean values, but needs to be present to avoid a console warning
+        //ToggleButtonGroup onChange doesn't work when using radio and boolean values.
+        // onChange needs to be present to avoid a console warning
     }
 
     handleClick(value) {

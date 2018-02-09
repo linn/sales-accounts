@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
 
 class ConfirmClose extends Component {
 

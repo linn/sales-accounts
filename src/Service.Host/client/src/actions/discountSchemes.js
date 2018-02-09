@@ -7,12 +7,12 @@ const requestDiscountScheme = () => ({
     payload: { }
 });
 
-const receiveDiscountScheme = (data) => ({
+const receiveDiscountScheme = data => ({
     type: actionTypes.RECEIVE_DISCOUNT_SCHEMES,
     payload: { data }
 });
 
-export const fetchDiscountSchemes = () => async (dispatch) => {
+export const fetchDiscountSchemes = () => async dispatch => {
     dispatch(requestDiscountScheme());
     try {
         const data = await fetchJson(`${config.proxyRoot}/sales/discounting/schemes`, { headers: { 'Accept': 'application/json' } });
