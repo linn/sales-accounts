@@ -10,7 +10,7 @@ class Controls extends Component {
         showConfirmClose: false
     }
     render() {
-        const { closedOn, dirty, saving, salesAccount, closeAccount, saveAccountUpdate } = this.props;
+        const { closedOn, dirty, saving, salesAccount, saveAccountUpdate } = this.props;
 
         return (
             <div>
@@ -30,10 +30,9 @@ class Controls extends Component {
                                     : <span>Save</span>
                                 }
                             </Button>
-                            {!closedOn &&  
+                            {/* {!closedOn &&  
                                 <Button bsStyle="danger" className="muted pull-right" onClick={() => this.handleShowConfimClose()}>Close Account</Button>
-                            }
-                     
+                            } */}
                         </Well>
                     </Col>
                 </Row>

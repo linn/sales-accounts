@@ -1,7 +1,6 @@
 ﻿import { fetchJson, putJson, deleteJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
-import { getTurnoverBandName } from '../selectors/salesAccountsSelectors';
 
 const requestSalesAccountDetail = salesAccountUri => ({
     type: actionTypes.REQUEST_SALES_ACCOUNT,
@@ -55,8 +54,7 @@ export const saveAccountUpdate = (salesAccount) => async (dispatch) => {
     }
     try {
         await putJson(`${config.appRoot}/sales/accounts/${salesAccount.id}`, body, { headers: { 'Accept': 'application/json' }});
-    console.log(body);
-    dispatch(saveComplete());
+        dispatch(saveComplete());
     } catch (e) {
         alert(`Failed to update sales account. Error: ${e.message}`);
     }
