@@ -15,7 +15,7 @@ const receiveTurnoverBandSets = data => ({
 export const fetchTurnoverBandSets = () => async dispatch => {
     dispatch(requestTurnoverBandSets());
     try {
-        const data = await fetchJson(`${config.proxyRoot}/sales/discounting/turnover-band-sets`, { headers: { 'Accept': 'application/json' } });
+        const data = await fetchJson(`${config.proxyRoot}/sales/discounting/turnover-band-sets`);
         dispatch(receiveTurnoverBandSets(data));
     } catch (e) {
         alert(`Failed to fetch turnover band sets. Error: ${e.message}`);

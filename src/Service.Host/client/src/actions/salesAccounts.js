@@ -15,7 +15,7 @@ const receiveSalesAccountDetail = data => ({
 export const fetchSalesAccount = salesAccountUri => async dispatch => {
     dispatch(requestSalesAccountDetail(salesAccountUri));
     try {
-        const data = await fetchJson(`${config.appRoot}${salesAccountUri}`, { headers: { 'Accept': 'application/json' } });
+        const data = await fetchJson(`${config.appRoot}${salesAccountUri}`);
         dispatch(receiveSalesAccountDetail(data));
     } catch (e) {
         alert(`Failed to fetch sales account. Error: ${e.message}`);
@@ -36,7 +36,7 @@ export const hideEditModal = () => ({
 export const closeAccount = id => async dispatch => {
     const body = { closedOn: new Date() };
     try {
-        const data = await deleteJson(`${config.appRoot}${'/sales/accounts/'}${id}`, body,  { headers: { 'Accept': 'application/json' } });
+        const data = await deleteJson(`${config.appRoot}${'/sales/accounts/'}${id}`, body);
         window.location.reload();
     } catch (e) {
         alert(`Failed to delete sales account. Error: ${e.message}`);
@@ -53,7 +53,7 @@ export const saveAccountUpdate = salesAccount => async dispatch => {
         GrowthPartner : salesAccount.growthPartner
     }
     try {
-        await putJson(`${config.appRoot}/sales/accounts/${salesAccount.id}`, body, { headers: { 'Accept': 'application/json' }});
+        await putJson(`${config.appRoot}/sales/accounts/${salesAccount.id}`, body);
         dispatch(saveComplete());
     } catch (e) {
         alert(`Failed to update sales account. Error: ${e.message}`);
@@ -69,8 +69,6 @@ export const saveComplete = () => ({
     type: actionTypes.SAVE_COMPLETE,
     payload: {}
 });
-
-
 
 export const editDiscountScheme = discountSchemeUri => ({
     type: actionTypes.EDIT_DISCOUNT_SCHEME,
