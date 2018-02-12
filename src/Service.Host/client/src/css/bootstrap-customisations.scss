@@ -1,0 +1,50 @@
+﻿$brand-primary: darken(#428bca, 6.5%); // #337ab7
+$brand-success: #5cb85c;
+$brand-info: #5bc0de;
+$brand-warning: #f0ad4e;
+$brand-danger: #d9534f;
+
+@mixin button-variant($colour) {
+    color: $colour;
+    background-color: #fff;
+    border-color: lighten($colour, 15%);
+
+    &:focus,
+    &.focus {
+        color: #333;
+        background-color: lighten($colour, 40%);
+    }
+
+    &:hover {
+        color: darken($colour, 12%);
+        background-color: lighten($colour, 35%);
+    }
+
+    &:disabled {
+        color: lighten($colour, 12%);
+    }
+}
+
+.btn.btn-primary.muted {
+    @include button-variant($brand-primary);
+}
+
+.btn.btn-success.muted {
+    @include button-variant($brand-success);
+}
+
+.btn.btn-info.muted {
+    @include button-variant($brand-info);
+}
+
+.btn.btn-warning.muted {
+    @include button-variant($brand-warning);
+}
+
+.btn.btn-danger.muted {
+    @include button-variant($brand-danger);
+}
+
+.radio label, .checkbox label {
+    min-height: 16px !important;
+}

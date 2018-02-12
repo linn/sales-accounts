@@ -34,7 +34,7 @@
                 CancellationToken.None,
                 uri,
                 new Dictionary<string, string>(),
-                DefaultHeaders.JsonHeaders()).Result;
+                DefaultHeaders.JsonGetHeaders()).Result;
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -65,7 +65,7 @@
                 CancellationToken.None,
                 uri,
                 new Dictionary<string, string>(),
-                DefaultHeaders.JsonHeaders()).Result;
+                DefaultHeaders.JsonGetHeaders()).Result;
 
             if (response.StatusCode != HttpStatusCode.OK)
             {

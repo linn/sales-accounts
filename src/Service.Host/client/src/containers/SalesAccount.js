@@ -1,21 +1,59 @@
 ﻿import { connect } from 'react-redux';
 import SalesAccount from '../components/SalesAccount';
 import initialiseOnMount from './common/initialiseOnMount';
-import { fetchSalesAccount } from '../actions/salesAccounts';
-import { getSalesAccount, getSalesAccountsLoading } from '../selectors/salesAccountsSelectors';
+import { fetchDiscountSchemes } from '../actions/discountSchemes';
+import { fetchTurnoverBandSets, fetchTurnoverBand } from '../actions/turnoverBandSets';
+import { 
+    fetchSalesAccount, saveAccountUpdate, hideEditModal,
+    closeAccount, showConfirmCloseModal, hideConfirmCloseModal,
+    editDiscountScheme, setDiscountScheme,
+    editTurnoverBand, setTurnoverBand, 
+    editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
+    editGrowthPartner, setGrowthPartner,
+    editEligibleForRebate, setEligibleForRebate
+} from '../actions/salesAccounts';
+import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands } from '../selectors/salesAccountSelectors';
 
-const mapStateToProps = ({ salesAccounts }, { match }) => ({
-    salesAccountId: match.params.salesAccountId,
-    salesAccount: getSalesAccount(match.params.salesAccountId, salesAccounts),
-    loading: getSalesAccountsLoading(salesAccounts)
+const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { match }) => ({
+    salesAccountUri: match.url,
+    salesAccount: getSalesAccount(salesAccount),
+    discountSchemeName: getDiscountSchemeName(getSalesAccount(salesAccount), discountSchemes),
+    turnoverBandName: getTurnoverBandName(getSalesAccount(salesAccount),turnoverBandSets),
+    discountSchemes: discountSchemes,
+    turnoverBands: getTurnoverBands(salesAccount, turnoverBandSets, discountSchemes),
+    editGoodCreditVisible: salesAccount.editGoodCreditVisible,
+    editDiscountSchemeVisible: salesAccount.editDiscountSchemeVisible,
+    editTurnoverBandVisible: salesAccount.editTurnoverBandVisible,
+    editGrowthPartnerVisible: salesAccount.editGrowthPartnerVisible,
+    editEligibleForRebateVisible: salesAccount.editEligibleForRebateVisible,
+    loading: salesAccount.loading || !discountSchemes.length || !turnoverBandSets.length,
+    dirty: salesAccount.dirty,
+    saving: salesAccount.saving
 });
 
-const initialise = ({ salesAccountId, salesAccount, loading }) => dispatch => {
-    dispatch(fetchSalesAccount(salesAccountId));
+const initialise = ({ salesAccountUri, salesAccount }) => dispatch => {
+    dispatch(fetchSalesAccount(salesAccountUri));
+    dispatch(fetchDiscountSchemes());
+    dispatch(fetchTurnoverBandSets());
 };
 
 const mapDispatchToProps = {
-    initialise
+    initialise,
+    hideEditModal,
+    closeAccount,
+    saveAccountUpdate,
+    editDiscountScheme,
+    setDiscountScheme,
+    editTurnoverBand,
+    setTurnoverBand,
+    editEligibleForGoodCreditDiscount,
+    setEligibleForGoodCreditDiscount,
+    editGrowthPartner,
+    setGrowthPartner,
+    editEligibleForRebate,
+    setEligibleForRebate,
+    showConfirmCloseModal,
+    hideConfirmCloseModal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(SalesAccount));

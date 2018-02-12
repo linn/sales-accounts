@@ -25,7 +25,6 @@ class Root extends Component {
                 </Router>
             </Provider>      
         );
-
     }
 }
 

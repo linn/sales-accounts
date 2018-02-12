@@ -17,7 +17,7 @@ export const clearSalesAccountSearch = () => ({
     payload: {}
 });
 
-export const searchSalesAccounts = (searchTerm) => async dispatch => {
+export const searchSalesAccounts = searchTerm => async dispatch => {
     if (searchTerm) {
         dispatch(requestSalesAccounts(searchTerm));
         try

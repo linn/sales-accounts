@@ -135,10 +135,11 @@ export const putJson = async (url, body, options = defaultFetchOptions) => {
     }
 }
 
-export const deleteJson = async (url, options = defaultFetchOptions) => {
+export const deleteJson = async (url, body, options = defaultFetchOptions) => {
 
     let headers = {
         'Accept': 'application/json',
+        'Content-Type': 'application/json',
         ...options.headers
     };
 
@@ -150,12 +151,14 @@ export const deleteJson = async (url, options = defaultFetchOptions) => {
             {
                 method: 'DELETE',
                 headers: headers,
+                body: body && typeof body !== 'string' ? JSON.stringify(body) : '',
                 credentials: 'same-origin'
             });
 
         response = await checkStatus(response);
-
-        return await response.json();
+        if (!options.dontExpectResponse) {
+            return await response.json();
+        }
 
     } catch (e) {
         const er = new Error(e.message);
