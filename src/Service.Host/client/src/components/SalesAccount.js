@@ -70,7 +70,7 @@ class SalesAccount extends Component {
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
                 <ListSelectItemModal
-                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands}
+                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands || []}
                     currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
                 />
                 <BooleanSwitchModal 

@@ -5,9 +5,9 @@ Make Migration
 dotnet ef migrations add first-thing -o Migrations
 
 export DATABASE_HOST='localhost'
-export DATABASE_NAME='discounting'
-export DATABASE_USER_ID='discounting'
-export DATABASE_PASSWORD='discounting'
+export DATABASE_NAME='sales-accounts'
+export DATABASE_USER_ID='sales-accounts'
+export DATABASE_PASSWORD='sales-accounts'
 
 (or in Powershell $env:DATABASE_HOST = 'localhost' etc...)
 
