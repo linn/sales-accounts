@@ -31,9 +31,9 @@ class SalesAccount extends Component {
             <div>
                 <Grid fluid={false}>
                     <Row>
-                        <Col xs={8}>
+                        <Col xs={10}>
                             <Row>
-                                <Col sm={2}>
+                                <Col sm={10}>
                                     <h2>{salesAccount.name}</h2>
                                 </Col>
                             </Row>
