@@ -22,7 +22,7 @@ class Controls extends Component {
                             </LinkContainer>
                           
                             <Button 
-                                disabled={!salesAccount.discountSchemeUri || !salesAccount.turnoverBandUri || !dirty} 
+                                disabled={!dirty} 
                                 style={{marginLeft: '20px'}} bsStyle="primary" className=" muted pull-right" 
                                 onClick={() => saveAccountUpdate(salesAccount)}>
                                 {saving 
