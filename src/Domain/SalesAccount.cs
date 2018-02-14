@@ -52,9 +52,9 @@
         {
             this.CheckUpdate(discountScheme, turnoverBandUri);
 
-            if (discountScheme.DiscountSchemeUri != this.DiscountSchemeUri)
+            if (discountScheme?.DiscountSchemeUri != this.DiscountSchemeUri)
             {
-                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme.DiscountSchemeUri));
+                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme?.DiscountSchemeUri));
             }
 
             if (turnoverBandUri != this.TurnoverBandUri)
@@ -94,6 +94,16 @@
 
         private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
         {
+            if (string.IsNullOrEmpty(turnoverBandUri))
+            {
+                return;
+            }
+
+            if (discountScheme == null)
+            {
+                throw new InvalidTurnoverBandException($"Cannot use turnover band {turnoverBandUri} as no discount scheme specified");
+            }
+
             if (!discountScheme.TurnoverBandUris.Contains(turnoverBandUri))
             {
                 throw new InvalidTurnoverBandException($"Discount scheme {discountScheme.Name} does not contain turnover band {turnoverBandUri}");

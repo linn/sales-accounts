@@ -93,7 +93,7 @@
             }
 
             var discountScheme = this.discountSchemeService.GetDiscountScheme(updateResource.DiscountSchemeUri);
-            if (discountScheme == null)
+            if (!string.IsNullOrEmpty(updateResource.DiscountSchemeUri) && discountScheme == null)
             {
                 return new BadRequestResult<SalesAccount>($"Could not find discount scheme {updateResource.DiscountSchemeUri}");
             }
