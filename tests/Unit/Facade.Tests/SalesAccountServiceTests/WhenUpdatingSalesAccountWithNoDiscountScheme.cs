@@ -19,7 +19,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.DiscountSchemeService.GetDiscountScheme("/ds/1")
+            this.DiscountSchemeService.GetDiscountScheme(null)
                 .Returns((DiscountScheme)null);
             this.updateResource = new SalesAccountUpdateResource
                                       {
