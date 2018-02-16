@@ -12,7 +12,7 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ServiceDbContext>().AsSelf().As<DbContext>().SingleInstance();
+            builder.RegisterType<ServiceDbContext>().AsSelf().As<DbContext>().InstancePerRequest();
             builder.RegisterType<TransactionManager>().As<ITransactionManager>();
         }
     }
