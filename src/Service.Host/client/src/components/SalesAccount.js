@@ -26,7 +26,7 @@ class SalesAccount extends Component {
         if (loading || !salesAccount) {
             return (<Loading/>);
         }
-  
+
         return (
             <div>
                 <Grid fluid={false}>
@@ -54,6 +54,10 @@ class SalesAccount extends Component {
                                 title={'Eligible for Rebate:'}
                                 value={salesAccount.eligibleForRebate ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
                                 handleClick={editEligibleForRebate}
+                            />
+                            <SalesAccountItem
+                                title={'Address:'}
+                                value={'Address'}                                
                             />
                             {salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={formatDate(salesAccount.closedOn)} displayOnly />}
                             <br />

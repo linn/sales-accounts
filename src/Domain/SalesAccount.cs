@@ -36,6 +36,8 @@
 
         public string DiscountSchemeUri { get; set; }
 
+        public string Address { get; set; }
+
         public void CloseAccount(SalesAccountCloseActivity closeAccountActivity)
         {
             this.ClosedOn = closeAccountActivity.ClosedOn;
@@ -48,7 +50,8 @@
             string turnoverBandUri,
             bool eligibleForGoodCredit,
             bool eligibleForRebate,
-            bool growthPartner)
+            bool growthPartner,
+            string address)
         {
             this.CheckUpdate(discountScheme, turnoverBandUri);
 
@@ -75,6 +78,11 @@
             if (growthPartner != this.GrowthPartner)
             {
                 this.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(growthPartner));
+            }
+
+            if (address != this.Address)
+            {
+                this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
             }
         }
 
@@ -137,6 +145,12 @@
         private void UpdateTurnoverBand(SalesAccountUpdateTurnoverBandUriActivity updateActivity)
         {
             this.TurnoverBandUri = updateActivity.TurnoverBandUri;
+            this.Activities.Add(updateActivity);
+        }
+
+        private void UpdateAddress(SalesAccountUpdateAddressActivity updateActivity)
+        {
+            this.Address = updateActivity.Address;
             this.Activities.Add(updateActivity);
         }
     }

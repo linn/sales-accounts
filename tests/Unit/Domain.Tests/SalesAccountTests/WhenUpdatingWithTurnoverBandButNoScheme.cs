@@ -15,7 +15,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.action = () => this.Sut.UpdateAccount(null, "/tb/1", true, true, true);
+            this.action = () => this.Sut.UpdateAccount(null, "/tb/1", true, true, true, "Street, Town");
         }
 
         [Test]
