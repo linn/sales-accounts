@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Resources.SalesAccounts
+﻿using Linn.SalesAccounts.Resources.Messaging;
+
+namespace Linn.SalesAccounts.Resources.SalesAccounts
 {
     using Linn.Common.Resources;
 
@@ -19,5 +21,7 @@
         public bool GrowthPartner { get; set; }
 
         public string ClosedOn { get; set; }
+
+        public AddressResource Address { get; set; }
     }
 }
