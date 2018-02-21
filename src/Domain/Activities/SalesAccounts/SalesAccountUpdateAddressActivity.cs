@@ -2,7 +2,7 @@
 {
     public class SalesAccountUpdateAddressActivity : SalesAccountActivity
     {
-        public SalesAccountUpdateAddressActivity(string address)
+        public SalesAccountUpdateAddressActivity(SalesAccountAddress address)
         {
             this.Address = address;
         }
@@ -12,6 +12,6 @@
             // ef
         }
 
-        public string Address { get; private set; }
+        public SalesAccountAddress Address { get; private set; }
     }
 }

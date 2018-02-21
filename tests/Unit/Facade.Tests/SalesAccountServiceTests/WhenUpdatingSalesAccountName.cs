@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
+﻿using Linn.SalesAccounts.Resources.Messaging;
+
+namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
 {
     using FluentAssertions;
 
@@ -15,7 +17,13 @@
         [SetUp]
         public void SetUp()
         {
-            this.Result = this.Sut.UpdateSalesAccountName(1, "New Name");
+            var addressResource = new AddressResource
+            {
+                Line1 = "Address line 1",
+                CountryUri = "/countries/1"
+            };
+
+            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(1, "New Name", addressResource);
         }
 
         [Test]
@@ -43,6 +51,7 @@
             this.Result.Should().BeOfType<SuccessResult<SalesAccount>>();
             var dataResult = ((SuccessResult<SalesAccount>)this.Result).Data;
             dataResult.Name.Should().Be("New Name");
+            dataResult.Address.Line1.Should().Be("Address line 1");
         }
     }
 }

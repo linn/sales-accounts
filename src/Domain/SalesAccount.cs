@@ -36,7 +36,7 @@
 
         public string DiscountSchemeUri { get; set; }
 
-        public string Address { get; set; }
+        public SalesAccountAddress Address { get; set; }
 
         public void CloseAccount(SalesAccountCloseActivity closeAccountActivity)
         {
@@ -50,8 +50,7 @@
             string turnoverBandUri,
             bool eligibleForGoodCredit,
             bool eligibleForRebate,
-            bool growthPartner,
-            string address)
+            bool growthPartner)
         {
             this.CheckUpdate(discountScheme, turnoverBandUri);
 
@@ -79,18 +78,18 @@
             {
                 this.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(growthPartner));
             }
-
-            if (address != this.Address)
-            {
-                this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
-            }
         }
 
-        public void UpdateName(string name)
+        public void UpdateNameAndAddress(string name, SalesAccountAddress address)
         {
             if (name != this.Name)
             {
                 this.UpdateName(new SalesAccountUpdateNameActivity(name));
+            }
+
+            if (address != this.Address)
+            {
+                this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
             }
         }
 
@@ -124,6 +123,12 @@
             this.Activities.Add(updateActivity);
         }
 
+        private void UpdateAddress(SalesAccountUpdateAddressActivity updateActivity)
+        {
+            this.Address = updateActivity.Address;
+            this.Activities.Add(updateActivity);
+        }
+
         private void UpdateDiscountScheme(SalesAccountUpdateDiscountSchemeUriActivity updateActivity)
         {
             this.DiscountSchemeUri = updateActivity.DiscountSchemeUri;
@@ -145,12 +150,6 @@
         private void UpdateTurnoverBand(SalesAccountUpdateTurnoverBandUriActivity updateActivity)
         {
             this.TurnoverBandUri = updateActivity.TurnoverBandUri;
-            this.Activities.Add(updateActivity);
-        }
-
-        private void UpdateAddress(SalesAccountUpdateAddressActivity updateActivity)
-        {
-            this.Address = updateActivity.Address;
             this.Activities.Add(updateActivity);
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Facade.Services
+﻿using Linn.SalesAccounts.Facade.Extensions;
+
+namespace Linn.SalesAccounts.Facade.Services
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +15,7 @@
     using Linn.SalesAccounts.Domain.Exceptions;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
+    using Linn.SalesAccounts.Resources.Messaging;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public class SalesAccountService : ISalesAccountService
@@ -118,7 +121,7 @@
             return new SuccessResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> UpdateSalesAccountName(int salesAccountId, string name)
+        public IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -126,7 +129,7 @@
                 return new NotFoundResult<SalesAccount>();
             }
 
-            account.UpdateName(name);
+            account.UpdateNameAndAddress(name, address.ToDomain());
 
             this.transactionManager.Commit();
             this.salesAccountUpdatedDispatcher.SendSalesAccountUpdated(account.ToMessage());

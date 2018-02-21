@@ -21,16 +21,24 @@
         private bool result;
 
         private LinnappsSalesAccountResource resource;
+        private AddressResource addressResource;
 
         [SetUp]
         public void SetUp()
         {
+            this.addressResource = new AddressResource
+            {
+                Line1 = "Address line 1",
+                CountryUri = "/countries/1",
+            };
+
             this.resource = new LinnappsSalesAccountResource
             {
                 AccountId = 1,
                 AccountName = "Name",
-                DateClosed = DateTime.UtcNow.ToShortDateString()
-            };
+                DateClosed = DateTime.UtcNow.ToShortDateString(),
+                AccountAddress = this.addressResource
+            };            
 
             var json = JsonConvert.SerializeObject(
                 this.resource,
@@ -49,7 +57,7 @@
         [Test]
         public void ShouldCallFacadeToUpdateName()
         {
-            this.SalesAccountService.Received(1).UpdateSalesAccountName(1, "Name");
+            this.SalesAccountService.Received(1).UpdateSalesAccountNameAndAddress(1, "Name", Arg.Is<AddressResource>(a => a.Line1 == "Address line 1"));
         }
 
         [Test]

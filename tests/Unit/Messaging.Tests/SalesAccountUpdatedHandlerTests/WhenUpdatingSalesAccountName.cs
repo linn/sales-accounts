@@ -18,14 +18,22 @@
     public class WhenUpdatingSalesAccountName : ContextBase
     {
         private bool result;
+        private AddressResource addressResource;
 
         [SetUp]
         public void SetUp()
         {
+            this.addressResource = new AddressResource
+            {
+                Line1 = "Address line 1",
+                CountryUri = "/countries/1"
+            };
+
             var resource = new LinnappsSalesAccountResource
-                               {
-                                   AccountId = 1,
-                                   AccountName = "New Name"
+            {
+                AccountId = 1,
+                AccountName = "New Name",
+                AccountAddress = this.addressResource
             };
 
             var json = JsonConvert.SerializeObject(
@@ -45,7 +53,7 @@
         [Test]
         public void ShouldCallFacadeToUpdateName()
         {
-            this.SalesAccountService.Received(1).UpdateSalesAccountName(1, "New Name");
+            this.SalesAccountService.Received(1).UpdateSalesAccountNameAndAddress(1, "New Name", Arg.Is<AddressResource>(a => a.Line1 == "Address line 1"));
         }
 
         [Test]

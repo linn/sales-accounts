@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Facade.Services
+﻿using Linn.SalesAccounts.Resources.Messaging;
+
+namespace Linn.SalesAccounts.Facade.Services
 {
     using System.Collections.Generic;
 
@@ -16,7 +18,7 @@
 
         IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource);
 
-        IResult<SalesAccount> UpdateSalesAccountName(int salesAccountId, string name);
+        IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address);
 
         IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource);
     }
