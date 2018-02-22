@@ -120,6 +120,32 @@ const salesAccount = (state = defaultState, action) => {
                     eligibleForRebate: action.payload.eligible,
                 }
             }
+    
+        case actionTypes.REQUEST_COUNTRY:
+            return {
+                ...state,
+                loading: true,
+                item: {
+                    ...state.item,
+                    address: {
+                        ...state.item.address,
+                        countryName: null
+                    }
+                }
+            }
+    
+        case actionTypes.RECEIVE_COUNTRY:
+            return {
+                ...state,
+                loading: false,
+                item: {
+                    ...state.item,
+                    address: {
+                        ...state.item.address,
+                        countryName: action.payload.data.countryName
+                    }
+                }
+            }
 
         case actionTypes.START_SAVE:
             return {

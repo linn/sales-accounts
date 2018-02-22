@@ -1,4 +1,5 @@
-﻿using Linn.SalesAccounts.Facade.Extensions;
+﻿using System.Data;
+using Linn.SalesAccounts.Facade.Extensions;
 
 namespace Linn.SalesAccounts.Facade.Services
 {
@@ -129,6 +130,11 @@ namespace Linn.SalesAccounts.Facade.Services
                 return new NotFoundResult<SalesAccount>();
             }
 
+            if (address == null)
+            {
+                return new BadRequestResult<SalesAccount>("Address cannot be empty.");
+            }
+           
             account.UpdateNameAndAddress(name, address.ToDomain());
 
             this.transactionManager.Commit();
