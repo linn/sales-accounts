@@ -1,6 +1,4 @@
-﻿using Linn.SalesAccounts.Facade.Extensions;
-
-namespace Linn.SalesAccounts.Facade.ResourceBuilders
+﻿namespace Linn.SalesAccounts.Facade.ResourceBuilders
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -9,6 +7,7 @@ namespace Linn.SalesAccounts.Facade.ResourceBuilders
     using Linn.Common.Resources;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Resources.SalesAccounts;
+    using Linn.SalesAccounts.Facade.Extensions;
 
     public class SalesAccountResourceBuilder : IResourceBuilder<SalesAccount>
     {

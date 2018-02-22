@@ -9,7 +9,7 @@ import { formatDate } from '../helpers/dates';
 import SalesAccountAddress from './SalesAccountAddress';
 
 class SalesAccount extends Component {
-    state = { searchTerm: '' }    
+    state = { searchTerm: '' }
 
     render() {
         const { loading,  dirty, saving, 

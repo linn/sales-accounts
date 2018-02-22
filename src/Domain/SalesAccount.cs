@@ -1,6 +1,4 @@
-﻿using System.Data;
-
-namespace Linn.SalesAccounts.Domain
+﻿namespace Linn.SalesAccounts.Domain
 {
     using System;
     using System.Linq;

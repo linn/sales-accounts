@@ -1,7 +1,4 @@
-﻿using System.Data;
-using Linn.SalesAccounts.Facade.Extensions;
-
-namespace Linn.SalesAccounts.Facade.Services
+﻿namespace Linn.SalesAccounts.Facade.Services
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +15,7 @@ namespace Linn.SalesAccounts.Facade.Services
     using Linn.SalesAccounts.Domain.Services;
     using Linn.SalesAccounts.Resources.Messaging;
     using Linn.SalesAccounts.Resources.SalesAccounts;
+    using Linn.SalesAccounts.Facade.Extensions;
 
     public class SalesAccountService : ISalesAccountService
     {

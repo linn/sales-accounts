@@ -1,8 +1,7 @@
-﻿using Linn.SalesAccounts.Resources.Messaging;
-
-namespace Linn.SalesAccounts.Resources.SalesAccounts
+﻿namespace Linn.SalesAccounts.Resources.SalesAccounts
 {
     using Linn.Common.Resources;
+    using Linn.SalesAccounts.Resources.Messaging;
 
     public class SalesAccountResource : HypermediaResource
     {

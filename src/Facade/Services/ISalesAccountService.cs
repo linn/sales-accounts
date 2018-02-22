@@ -1,12 +1,11 @@
-﻿using Linn.SalesAccounts.Resources.Messaging;
-
-namespace Linn.SalesAccounts.Facade.Services
+﻿namespace Linn.SalesAccounts.Facade.Services
 {
     using System.Collections.Generic;
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Resources.SalesAccounts;
+    using Linn.SalesAccounts.Resources.Messaging;
 
     public interface ISalesAccountService
     {

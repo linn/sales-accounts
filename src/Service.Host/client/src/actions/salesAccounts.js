@@ -136,7 +136,6 @@ export const fetchCountry = (countryUri) => async dispatch => {
         dispatch(requestCountry());
     try {
         const data = await fetchJson(`${config.countryRoot}${countryUri}`, { headers: { 'Accept': 'application/json' } });
-        console.log(data);
         dispatch(receiveCountry(data));
     } catch (e) {
         alert(`Failed to fetch country. Error: ${e.message}`);

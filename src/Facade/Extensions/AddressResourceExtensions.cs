@@ -1,8 +1,8 @@
-﻿using Linn.SalesAccounts.Domain;
-using Linn.SalesAccounts.Resources.Messaging;
-
-namespace Linn.SalesAccounts.Facade.Extensions
+﻿namespace Linn.SalesAccounts.Facade.Extensions
 {
+    using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Resources.Messaging;
+
     public static class AddressResourceExtensions
     {
         public static SalesAccountAddress ToDomain(this AddressResource address)

@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace Linn.SalesAccounts.Persistence.Repositories
+﻿namespace Linn.SalesAccounts.Persistence.Repositories
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.EntityFrameworkCore;
 
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Repositories;

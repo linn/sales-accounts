@@ -120,7 +120,7 @@ const salesAccount = (state = defaultState, action) => {
                     eligibleForRebate: action.payload.eligible,
                 }
             }
-    
+
         case actionTypes.REQUEST_COUNTRY:
             return {
                 ...state,
@@ -133,7 +133,7 @@ const salesAccount = (state = defaultState, action) => {
                     }
                 }
             }
-    
+
         case actionTypes.RECEIVE_COUNTRY:
             return {
                 ...state,
