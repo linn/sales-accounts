@@ -15,7 +15,7 @@
             this.Postcode = postcode;
         }
        
-        public SalesAccountAddress()
+        private SalesAccountAddress()
         {
             //ef
         }

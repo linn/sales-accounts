@@ -23,7 +23,7 @@ namespace Linn.SalesAccounts.Facade.ResourceBuilders
                 GrowthPartner = salesAccount.GrowthPartner,
                 DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                 TurnoverBandUri = salesAccount.TurnoverBandUri,
-                Address = salesAccount.Address.ToResource(),
+                Address = salesAccount.Address?.ToResource(),
                 ClosedOn = salesAccount.ClosedOn == null ? string.Empty : salesAccount.ClosedOn.Value.ToString("o"),
                 Links = this.BuildLinks(salesAccount).ToArray()
             };

@@ -36,7 +36,7 @@
 
         public string DiscountSchemeUri { get; set; }
 
-        public SalesAccountAddress Address { get; set; } = new SalesAccountAddress();
+        public SalesAccountAddress Address { get; set; }
 
         public void CloseAccount(SalesAccountCloseActivity closeAccountActivity)
         {
