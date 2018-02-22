@@ -3,7 +3,7 @@
     using Linn.SalesAccounts.Domain.Exceptions;
     using System;
 
-    public class SalesAccountAddress
+    public class SalesAccountAddress : Entity
     {
         public SalesAccountAddress(string line1, string line2, string line3, string line4, string countryUri, string postcode)
         {
