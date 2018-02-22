@@ -14,6 +14,9 @@
         {
             builder.Entity<SalesAccount>().Property(s => s.Id).ValueGeneratedNever();
             builder.Entity<SalesAccount>().HasMany(s => s.Activities);
+            builder.Entity<SalesAccount>().HasOne(s => s.Address);
+
+            builder.Entity<SalesAccountAddress>().Property(s => s.Id);
 
             builder.Entity<SalesAccountActivity>().HasKey(a => a.Id);
             builder.Entity<SalesAccountActivity>().HasDiscriminator<string>("ActivityType")
