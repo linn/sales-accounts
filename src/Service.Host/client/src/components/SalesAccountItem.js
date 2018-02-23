@@ -4,7 +4,7 @@ import { Grid, Row, Col, Button } from 'react-bootstrap';
 const styles = {
     title: {
         textAlign: 'right',
-        marginBottom: '6px',
+        marginBottom: '6px'
     },
    button: {
         padding: '0', 
@@ -20,7 +20,7 @@ export class SalesAccountItem extends Component {
                 <Col sm={4} style={styles.title}>
                     <b>{title}</b>
                 </Col>
-                <Col sm={2}>
+                <Col sm={4}>
                     {displayOnly 
                         ? value 
                         : <Button bsStyle="link" style={styles.button} onClick={() => handleClick()}>{value}</Button> 

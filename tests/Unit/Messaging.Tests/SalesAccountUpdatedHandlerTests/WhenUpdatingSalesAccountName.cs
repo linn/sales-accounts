@@ -5,6 +5,7 @@
     using FluentAssertions;
 
     using Linn.Common.Messaging.RabbitMQ.Unicast;
+    using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.Messaging;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
