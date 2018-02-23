@@ -87,14 +87,17 @@
                 this.UpdateName(new SalesAccountUpdateNameActivity(name));
             }
 
-            if (address == null) return;
+            if (address == null)
+            {
+                return;
+            }
 
-            if (!address.Line1.Equals(Address?.Line1)
-                || !address.Line2.Equals(Address?.Line2)
-                || !address.Line3.Equals(Address?.Line3)
-                || !address.Line4.Equals(Address?.Line4)
-                || !address.CountryUri.Equals(Address?.CountryUri)
-                || !address.Postcode.Equals(Address?.Postcode))
+            if (!address.Line1.Equals(this.Address?.Line1)
+                || !address.Line2.Equals(this.Address?.Line2)
+                || !address.Line3.Equals(this.Address?.Line3)
+                || !address.Line4.Equals(this.Address?.Line4)
+                || !address.CountryUri.Equals(this.Address?.CountryUri)
+                || !address.Postcode.Equals(this.Address?.Postcode))
             {
                 this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
             }
