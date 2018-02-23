@@ -1,7 +1,7 @@
-﻿using Linn.SalesAccounts.Resources.SalesAccounts;
-
-namespace Linn.SalesAccounts.Resources.Messaging
+﻿namespace Linn.SalesAccounts.Resources.Messaging
 {
+    using Linn.SalesAccounts.Resources.SalesAccounts;
+
     public class LinnappsSalesAccountResource
     {
         public int AccountId { get; set; }

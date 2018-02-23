@@ -19,7 +19,10 @@
 
         private readonly IRabbitTerminator rabbitTerminator;
 
-        public SalesAccountUpdatedHandler(ISalesAccountService salesAccountService, ITransactionManager transactionManager, IRabbitTerminator rabbitTerminator)
+        public SalesAccountUpdatedHandler(
+            ISalesAccountService salesAccountService,
+            ITransactionManager transactionManager,
+            IRabbitTerminator rabbitTerminator)
         {
             this.salesAccountService = salesAccountService;
             this.transactionManager = transactionManager;
@@ -31,11 +34,16 @@
             var content = Encoding.UTF8.GetString(message.Body);
             var resource = JsonConvert.DeserializeObject<LinnappsSalesAccountResource>(content);
 
-            this.salesAccountService.UpdateSalesAccountNameAndAddress(resource.AccountId, resource.AccountName, resource.AccountAddress);
+            this.salesAccountService.UpdateSalesAccountNameAndAddress(
+                resource.AccountId,
+                resource.AccountName,
+                resource.AccountAddress);
 
             if (!string.IsNullOrEmpty(resource.DateClosed))
             {
-                this.salesAccountService.CloseSalesAccount(resource.AccountId, new SalesAccountCloseResource { ClosedOn = resource.DateClosed });
+                this.salesAccountService.CloseSalesAccount(
+                    resource.AccountId,
+                    new SalesAccountCloseResource { ClosedOn = resource.DateClosed });
             }
 
             this.rabbitTerminator.Close();

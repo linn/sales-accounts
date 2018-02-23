@@ -17,7 +17,9 @@ export const fetchSalesAccount = salesAccountUri => async dispatch => {
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}`);
         dispatch(receiveSalesAccountDetail(data));
-        dispatch(fetchCountry(data.address.countryUri));
+        if (data.address) {
+            dispatch(fetchCountry(data.address.countryUri));
+        }
     } catch (e) {
         alert(`Failed to fetch sales account. Error: ${e.message}`);
     }

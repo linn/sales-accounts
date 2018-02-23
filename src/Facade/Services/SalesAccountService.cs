@@ -13,9 +13,8 @@
     using Linn.SalesAccounts.Domain.Exceptions;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
-    using Linn.SalesAccounts.Resources.Messaging;
-    using Linn.SalesAccounts.Resources.SalesAccounts;
     using Linn.SalesAccounts.Facade.Extensions;
+    using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public class SalesAccountService : ISalesAccountService
     {
@@ -132,7 +131,7 @@
             {
                 return new BadRequestResult<SalesAccount>("Address cannot be empty.");
             }
-           
+
             account.UpdateNameAndAddress(name, address.ToDomain());
 
             this.transactionManager.Commit();
