@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Microsoft.EntityFrameworkCore;
 
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Persistence;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class SalesAccountRepository : ISalesAccountRepository
     {
