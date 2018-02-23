@@ -6,8 +6,8 @@
     using Linn.Common.Facade;
     using Linn.Common.Resources;
     using Linn.SalesAccounts.Domain;
-    using Linn.SalesAccounts.Resources.SalesAccounts;
     using Linn.SalesAccounts.Facade.Extensions;
+    using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public class SalesAccountResourceBuilder : IResourceBuilder<SalesAccount>
     {
