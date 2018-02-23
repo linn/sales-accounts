@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Resources.Messaging
+﻿using Linn.SalesAccounts.Resources.SalesAccounts;
+
+namespace Linn.SalesAccounts.Resources.Messaging
 {
     public class LinnappsSalesAccountResource
     {

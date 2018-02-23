@@ -1,4 +1,4 @@
-﻿namespace Linn.SalesAccounts.Resources.Messaging
+﻿namespace Linn.SalesAccounts.Resources.SalesAccounts
 {
     public class AddressResource
     {

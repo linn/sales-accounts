@@ -87,6 +87,8 @@
                 this.UpdateName(new SalesAccountUpdateNameActivity(name));
             }
 
+            if (address == null) return;
+
             if (!address.Line1.Equals(Address?.Line1)
                 || !address.Line2.Equals(Address?.Line2)
                 || !address.Line3.Equals(Address?.Line3)

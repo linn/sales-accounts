@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
+﻿using Linn.SalesAccounts.Resources.SalesAccounts;
+
+namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
 {
     using FluentAssertions;
 
