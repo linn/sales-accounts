@@ -36,6 +36,8 @@
 
         public string DiscountSchemeUri { get; set; }
 
+        public SalesAccountAddress Address { get; set; }
+
         public void CloseAccount(SalesAccountCloseActivity closeAccountActivity)
         {
             this.ClosedOn = closeAccountActivity.ClosedOn;
@@ -78,11 +80,23 @@
             }
         }
 
-        public void UpdateName(string name)
+        public void UpdateNameAndAddress(string name, SalesAccountAddress address)
         {
             if (name != this.Name)
             {
                 this.UpdateName(new SalesAccountUpdateNameActivity(name));
+            }
+
+            if (address == null) return;
+
+            if (!address.Line1.Equals(Address?.Line1)
+                || !address.Line2.Equals(Address?.Line2)
+                || !address.Line3.Equals(Address?.Line3)
+                || !address.Line4.Equals(Address?.Line4)
+                || !address.CountryUri.Equals(Address?.CountryUri)
+                || !address.Postcode.Equals(Address?.Postcode))
+            {
+                this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
             }
         }
 
@@ -113,6 +127,12 @@
         private void UpdateName(SalesAccountUpdateNameActivity updateActivity)
         {
             this.Name = updateActivity.Name;
+            this.Activities.Add(updateActivity);
+        }
+
+        private void UpdateAddress(SalesAccountUpdateAddressActivity updateActivity)
+        {
+            this.Address = updateActivity.Address;
             this.Activities.Add(updateActivity);
         }
 

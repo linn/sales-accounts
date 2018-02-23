@@ -31,7 +31,7 @@
             var content = Encoding.UTF8.GetString(message.Body);
             var resource = JsonConvert.DeserializeObject<LinnappsSalesAccountResource>(content);
 
-            this.salesAccountService.UpdateSalesAccountName(resource.AccountId, resource.AccountName);
+            this.salesAccountService.UpdateSalesAccountNameAndAddress(resource.AccountId, resource.AccountName, resource.AccountAddress);
 
             if (!string.IsNullOrEmpty(resource.DateClosed))
             {

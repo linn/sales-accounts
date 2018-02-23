@@ -19,5 +19,7 @@
         public bool GrowthPartner { get; set; }
 
         public string ClosedOn { get; set; }
+
+        public AddressResource Address { get; set; }
     }
 }

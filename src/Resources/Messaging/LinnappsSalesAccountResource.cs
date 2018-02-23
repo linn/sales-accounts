@@ -1,4 +1,6 @@
-﻿namespace Linn.SalesAccounts.Resources.Messaging
+﻿using Linn.SalesAccounts.Resources.SalesAccounts;
+
+namespace Linn.SalesAccounts.Resources.Messaging
 {
     public class LinnappsSalesAccountResource
     {
@@ -21,5 +23,7 @@
         public string OrderComments { get; set; }
 
         public string PaymentType { get; set; }
+
+        public AddressResource AccountAddress { get; set; }
     }
 }

@@ -33,3 +33,6 @@ export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL';
 
 export const START_SAVE = 'START_SAVE';
 export const SAVE_COMPLETE = 'SAVE_COMPLETE';
+
+export const REQUEST_COUNTRY = 'REQUEST_COUNTRY';
+export const RECEIVE_COUNTRY = 'RECEIVE_COUNTRY';
