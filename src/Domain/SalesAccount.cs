@@ -92,12 +92,12 @@
                 return;
             }
 
-            if (!address.Line1.Equals(this.Address?.Line1)
-                || !address.Line2.Equals(this.Address?.Line2)
-                || !address.Line3.Equals(this.Address?.Line3)
-                || !address.Line4.Equals(this.Address?.Line4)
-                || !address.CountryUri.Equals(this.Address?.CountryUri)
-                || !address.Postcode.Equals(this.Address?.Postcode))
+            if (address.Line1 != this.Address?.Line1
+                || address.Line2 != this.Address?.Line2
+                || address.Line3 != this.Address?.Line3
+                || address.Line4 != this.Address?.Line4
+                || address.CountryUri != this.Address?.CountryUri
+                || address.Postcode != this.Address?.Postcode)
             {
                 this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
             }

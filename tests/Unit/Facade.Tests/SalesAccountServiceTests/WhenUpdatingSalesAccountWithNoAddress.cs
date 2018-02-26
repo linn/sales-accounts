@@ -11,7 +11,6 @@
 
     public class WhenUpdatingSalesAccountWithNoAddress : ContextBase
     {
-
         [SetUp]
         public void SetUp()
         {

@@ -1,8 +1,7 @@
-﻿using Linn.SalesAccounts.Resources.SalesAccounts;
-
-namespace Linn.SalesAccounts.Facade.Extensions
+﻿namespace Linn.SalesAccounts.Facade.Extensions
 {
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Resources;
 
     public static class AddressExtensions
     {

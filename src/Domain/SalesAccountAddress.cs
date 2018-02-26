@@ -1,11 +1,14 @@
 ﻿namespace Linn.SalesAccounts.Domain
 {
-    using Linn.SalesAccounts.Domain.Exceptions;
-    using System;
-
     public class SalesAccountAddress : Entity
     {
-        public SalesAccountAddress(string line1, string line2, string line3, string line4, string countryUri, string postcode)
+        public SalesAccountAddress(
+            string line1,
+            string line2,
+            string line3,
+            string line4,
+            string countryUri,
+            string postcode)
         {
             this.Line1 = line1;
             this.Line2 = line2;
@@ -14,10 +17,10 @@
             this.CountryUri = countryUri;
             this.Postcode = postcode;
         }
-       
+
         private SalesAccountAddress()
         {
-            //ef
+            // ef
         }
 
         public string Line1 { get; private set; }

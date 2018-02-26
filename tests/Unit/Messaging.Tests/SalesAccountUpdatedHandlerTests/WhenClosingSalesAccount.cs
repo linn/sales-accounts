@@ -6,6 +6,7 @@
     using FluentAssertions;
 
     using Linn.Common.Messaging.RabbitMQ.Unicast;
+    using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.Messaging;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
@@ -38,7 +39,7 @@
                 AccountName = "Name",
                 DateClosed = DateTime.UtcNow.ToShortDateString(),
                 AccountAddress = this.addressResource
-            };            
+            };
 
             var json = JsonConvert.SerializeObject(
                 this.resource,

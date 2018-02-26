@@ -1,13 +1,11 @@
-﻿using Linn.SalesAccounts.Resources.SalesAccounts;
-
-namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
+﻿namespace Linn.SalesAccounts.Facade.Tests.SalesAccountServiceTests
 {
     using FluentAssertions;
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Dispatchers.Messages;
-    using Linn.SalesAccounts.Resources.Messaging;
+    using Linn.SalesAccounts.Resources;
 
     using NSubstitute;
 
