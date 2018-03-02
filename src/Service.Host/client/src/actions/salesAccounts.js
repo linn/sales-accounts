@@ -17,6 +17,9 @@ export const fetchSalesAccount = salesAccountUri => async dispatch => {
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}`);
         dispatch(receiveSalesAccountDetail(data));
+        if (data.address) {
+            dispatch(fetchCountry(data.address.countryUri));
+        }
     } catch (e) {
         alert(`Failed to fetch sales account. Error: ${e.message}`);
     }
@@ -120,3 +123,23 @@ export const setEligibleForRebate = eligible => ({
     type: actionTypes.SET_ELIGIBLE_FOR_REBATE,
     payload: { eligible }
 });
+
+const requestCountry = () => ({
+    type: actionTypes.REQUEST_COUNTRY,
+    payload: { }
+});
+
+const receiveCountry = data => ({
+    type: actionTypes.RECEIVE_COUNTRY,
+    payload: { data }
+});
+
+export const fetchCountry = (countryUri) => async dispatch => {
+        dispatch(requestCountry());
+    try {
+        const data = await fetchJson(`${config.countryRoot}${countryUri}`, { headers: { 'Accept': 'application/json' } });
+        dispatch(receiveCountry(data));
+    } catch (e) {
+        alert(`Failed to fetch country. Error: ${e.message}`);
+    }
+};

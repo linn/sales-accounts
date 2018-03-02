@@ -4,6 +4,7 @@
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public interface ISalesAccountService
@@ -16,7 +17,7 @@
 
         IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource);
 
-        IResult<SalesAccount> UpdateSalesAccountName(int salesAccountId, string name);
+        IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address);
 
         IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource);
     }

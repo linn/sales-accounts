@@ -27,7 +27,7 @@
             this.SalesAccountRepository.Get("search").Returns(new[] { this.salesAccount });
 
             this.Response = this.Browser.Get(
-                "/sales/accounts/search",
+                "/sales/accounts",
                 with =>
                     {
                         with.Header("Accept", "application/json");

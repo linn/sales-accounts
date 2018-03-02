@@ -16,7 +16,7 @@ export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
 }
 
 export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
-   
+
     if (!turnoverBandSets || !salesAccount){
         return null;
     }

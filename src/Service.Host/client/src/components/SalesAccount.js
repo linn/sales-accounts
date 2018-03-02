@@ -6,6 +6,7 @@ import BooleanSwitchModal from './BooleanSwitchModal';
 import ListSelectItemModal from './ListSelectItemModal';
 import Controls from './Controls';
 import { formatDate } from '../helpers/dates';
+import SalesAccountAddress from './SalesAccountAddress';
 
 class SalesAccount extends Component {
     state = { searchTerm: '' }
@@ -26,14 +27,14 @@ class SalesAccount extends Component {
         if (loading || !salesAccount) {
             return (<Loading/>);
         }
-  
+
         return (
             <div>
                 <Grid fluid={false}>
                     <Row>
-                        <Col xs={8}>
+                        <Col xs={10}>
                             <Row>
-                                <Col sm={2}>
+                                <Col sm={10}>
                                     <h2>{salesAccount.name}</h2>
                                 </Col>
                             </Row>
@@ -54,6 +55,11 @@ class SalesAccount extends Component {
                                 title={'Eligible for Rebate:'}
                                 value={salesAccount.eligibleForRebate ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
                                 handleClick={editEligibleForRebate}
+                            />                            
+                            <SalesAccountItem
+                                title={'Address:'}
+                                value={<SalesAccountAddress address={salesAccount.address}/>}
+                                displayOnly
                             />
                             {salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={formatDate(salesAccount.closedOn)} displayOnly />}
                             <br />
@@ -70,7 +76,7 @@ class SalesAccount extends Component {
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
                 <ListSelectItemModal
-                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands}
+                    visible={editTurnoverBandVisible} title={'Select Turnover Band'} items={turnoverBands || []}
                     currentItemUri={salesAccount.turnoverBandUri} hideModal={hideEditModal} setItem={setTurnoverBand}
                 />
                 <BooleanSwitchModal 

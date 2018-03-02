@@ -21,5 +21,7 @@
         public string OrderComments { get; set; }
 
         public string PaymentType { get; set; }
+
+        public AddressResource AccountAddress { get; set; }
     }
 }

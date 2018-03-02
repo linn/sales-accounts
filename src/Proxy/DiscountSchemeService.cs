@@ -28,6 +28,11 @@
 
         public DiscountScheme GetDiscountScheme(string discountSchemeUri)
         {
+            if (string.IsNullOrEmpty(discountSchemeUri))
+            {
+                return null;
+            }
+
             var uri = new Uri($"{this.proxyRoot}{discountSchemeUri}", UriKind.RelativeOrAbsolute);
 
             var response = this.restClient.Get(

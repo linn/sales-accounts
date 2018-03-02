@@ -5,24 +5,29 @@
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Dispatchers.Messages;
-    using Linn.SalesAccounts.Resources;
+    using Linn.SalesAccounts.Domain.External;
+    using Linn.SalesAccounts.Resources.SalesAccounts;
 
     using NSubstitute;
 
     using NUnit.Framework;
 
-    public class WhenUpdatingSalesAccountName : ContextBase
+    public class WhenUpdatingSalesAccountWithNoDiscountScheme : ContextBase
     {
+        private SalesAccountUpdateResource updateResource;
+
         [SetUp]
         public void SetUp()
         {
-            var addressResource = new AddressResource
-            {
-                Line1 = "Address line 1",
-                CountryUri = "/countries/1"
-            };
-
-            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(1, "New Name", addressResource);
+            this.DiscountSchemeService.GetDiscountScheme(null)
+                .Returns((DiscountScheme)null);
+            this.updateResource = new SalesAccountUpdateResource
+                                      {
+                                          DiscountSchemeUri = null,
+                                          TurnoverBandUri = null,
+                                          EligibleForGoodCreditDiscount = true
+                                      };
+            this.Result = this.Sut.UpdateSalesAccount(1, this.updateResource);
         }
 
         [Test]
@@ -49,8 +54,9 @@
         {
             this.Result.Should().BeOfType<SuccessResult<SalesAccount>>();
             var dataResult = ((SuccessResult<SalesAccount>)this.Result).Data;
-            dataResult.Name.Should().Be("New Name");
-            dataResult.Address.Line1.Should().Be("Address line 1");
+            dataResult.DiscountSchemeUri.Should().BeNull();
+            dataResult.TurnoverBandUri.Should().BeNull();
+            dataResult.EligibleForGoodCreditDiscount.Should().BeTrue();
         }
     }
 }

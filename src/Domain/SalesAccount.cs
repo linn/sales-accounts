@@ -36,6 +36,8 @@
 
         public string DiscountSchemeUri { get; set; }
 
+        public SalesAccountAddress Address { get; set; }
+
         public void CloseAccount(SalesAccountCloseActivity closeAccountActivity)
         {
             this.ClosedOn = closeAccountActivity.ClosedOn;
@@ -52,9 +54,9 @@
         {
             this.CheckUpdate(discountScheme, turnoverBandUri);
 
-            if (discountScheme.DiscountSchemeUri != this.DiscountSchemeUri)
+            if (discountScheme?.DiscountSchemeUri != this.DiscountSchemeUri)
             {
-                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme.DiscountSchemeUri));
+                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme?.DiscountSchemeUri));
             }
 
             if (turnoverBandUri != this.TurnoverBandUri)
@@ -78,11 +80,26 @@
             }
         }
 
-        public void UpdateName(string name)
+        public void UpdateNameAndAddress(string name, SalesAccountAddress address)
         {
             if (name != this.Name)
             {
                 this.UpdateName(new SalesAccountUpdateNameActivity(name));
+            }
+
+            if (address == null)
+            {
+                return;
+            }
+
+            if (address.Line1 != this.Address?.Line1
+                || address.Line2 != this.Address?.Line2
+                || address.Line3 != this.Address?.Line3
+                || address.Line4 != this.Address?.Line4
+                || address.CountryUri != this.Address?.CountryUri
+                || address.Postcode != this.Address?.Postcode)
+            {
+                this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
             }
         }
 
@@ -94,9 +111,14 @@
 
         private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
         {
-            if (discountScheme.TurnoverBandUris == null)
+            if (string.IsNullOrEmpty(turnoverBandUri))
             {
                 return;
+            }
+			
+            if (discountScheme == null)
+            {
+                throw new InvalidTurnoverBandException($"Cannot use turnover band {turnoverBandUri} as no discount scheme specified");
             }
 
             if (!discountScheme.TurnoverBandUris.Contains(turnoverBandUri))
@@ -108,6 +130,12 @@
         private void UpdateName(SalesAccountUpdateNameActivity updateActivity)
         {
             this.Name = updateActivity.Name;
+            this.Activities.Add(updateActivity);
+        }
+
+        private void UpdateAddress(SalesAccountUpdateAddressActivity updateActivity)
+        {
+            this.Address = updateActivity.Address;
             this.Activities.Add(updateActivity);
         }
 

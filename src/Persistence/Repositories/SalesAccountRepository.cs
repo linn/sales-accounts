@@ -7,6 +7,8 @@
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Persistence;
 
+    using Microsoft.EntityFrameworkCore;
+
     public class SalesAccountRepository : ISalesAccountRepository
     {
         private readonly ServiceDbContext serviceDbContext;
@@ -19,7 +21,8 @@
         public SalesAccount GetById(int id)
         {
             return this.serviceDbContext.SalesAccounts
-                .SingleOrDefault(t => t.Id == id);
+                .Include(s => s.Address)
+                .SingleOrDefault(s => s.Id == id);
         }
 
         public IEnumerable<SalesAccount> GetAllOpenAccounts()

@@ -67,7 +67,13 @@ describe('sales accounts reducer', () => {
                     eligibleForGoodCreditDiscount: false,
                     eligibleForRebate: false,
                     growthPartner: false,
-                    closedOn: ""            
+                    closedOn: "",
+                    address: {
+                        line1: '34',
+                        line2: 'Street',
+                        countryUri: '/countries/1',
+                        postcode: 'KY128ES'
+                    }            
                 }
             }
         };
@@ -90,7 +96,13 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {
+                    line1: '34',
+                    line2: 'Street',
+                    countryUri: '/countries/1',
+                    postcode: 'KY128ES'
+                }                       
             }
         };
 
@@ -118,7 +130,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -145,7 +158,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -173,7 +187,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}           
             }
         };
 
@@ -200,7 +215,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}           
             }
         };
 
@@ -228,7 +244,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -255,7 +272,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -283,7 +301,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -310,7 +329,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -338,7 +358,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -365,7 +386,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -393,7 +415,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -420,7 +443,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -448,7 +472,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -475,7 +500,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: true,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -503,7 +529,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -530,7 +557,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -558,7 +586,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -585,7 +614,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: true,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -613,7 +643,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -640,7 +671,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ""            
+                closedOn: "",
+                address: {}            
             }
         };
 
@@ -668,7 +700,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -695,7 +728,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: true,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -723,7 +757,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -750,7 +785,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -778,7 +814,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -805,7 +842,8 @@ describe('sales accounts reducer', () => {
                 eligibleForGoodCreditDiscount: false,
                 eligibleForRebate: false,
                 growthPartner: false,
-                closedOn: ''            
+                closedOn: '',
+                address: {}            
             }
         };
 
@@ -813,4 +851,153 @@ describe('sales accounts reducer', () => {
 
         expect(salesAccount(state, action)).toEqual(expected);
     });
+
+    test('when requesting a country name', () => {
+        const state = {
+            salesAccountUri: '/sales/accounts/1',
+            loading: false,
+            editDiscountSchemeVisible: false,
+            editTurnoverBandVisible: false,
+            editGoodCreditVisible: false,
+            editGrowthPartnerVisible: false,
+            editEligibleForRebateVisible: false,
+            dirty: false,
+            saving: false,
+            item:  {
+                id: 1,
+                name: 'TeddyBartons',
+                turnoverBandUri: '/sales/discounting/turnover-band-sets/1/turnover-bands/1',
+                discountSchemeUri: '/sales/discounting/schemes/1',
+                eligibleForGoodCreditDiscount: false,
+                eligibleForRebate: false,
+                growthPartner: false,
+                closedOn: "",
+                address: {
+                    line1: '34',
+                    line2: 'Street',
+                    countryUri: '/countries/1',
+                    postcode: 'KY128ES'
+                }            
+            }
+        };
+
+        const action = {
+            type: actionTypes.REQUEST_COUNTRY,
+            payload: { }
+        };
+
+        const expected = {
+            salesAccountUri: '/sales/accounts/1',
+            loading: true,
+            editDiscountSchemeVisible: false,
+            editTurnoverBandVisible: false,
+            editGoodCreditVisible: false,
+            editGrowthPartnerVisible: false,
+            editEligibleForRebateVisible: false,
+            dirty: false,
+            saving: false,
+            item: {
+                id: 1,
+                name: 'TeddyBartons',
+                turnoverBandUri: '/sales/discounting/turnover-band-sets/1/turnover-bands/1',
+                discountSchemeUri: '/sales/discounting/schemes/1',
+                eligibleForGoodCreditDiscount: false,
+                eligibleForRebate: false,
+                growthPartner: false,
+                closedOn: "",
+                address: {
+                    line1: '34',
+                    line2: 'Street',
+                    countryUri: '/countries/1',
+                    postcode: 'KY128ES',
+                    countryName: null
+                }                       
+            }
+        };
+
+        deepFreeze(state);
+
+        expect(salesAccount(state, action)).toEqual(expected);
+    });
+
+    test('when receiving a country name', () => {
+        const state = {
+            salesAccountUri: '/sales/accounts/1',
+            loading: true,
+            editDiscountSchemeVisible: false,
+            editTurnoverBandVisible: false,
+            editGoodCreditVisible: false,
+            editGrowthPartnerVisible: false,
+            editEligibleForRebateVisible: false,
+            dirty: false,
+            saving: false,
+            item:  {
+                id: 1,
+                name: 'TeddyBartons',
+                turnoverBandUri: '/sales/discounting/turnover-band-sets/1/turnover-bands/1',
+                discountSchemeUri: '/sales/discounting/schemes/1',
+                eligibleForGoodCreditDiscount: false,
+                eligibleForRebate: false,
+                growthPartner: false,
+                closedOn: "",
+                address: {
+                    line1: '34',
+                    line2: 'Street',
+                    countryUri: '/countries/1',
+                    postcode: 'KY128ES',
+                    countryName: null
+                }            
+            }
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_COUNTRY,
+            payload: {
+                data : {
+                    "countryCode": "MA",
+                    "countryName": "Morocco",
+                    "links": [
+                        {
+                            "href": "/countries/MA",
+                            "rel": "self"
+                        }
+                    ]
+                },
+            }
+        };
+
+        const expected = {
+            salesAccountUri: '/sales/accounts/1',
+            loading: false,
+            editDiscountSchemeVisible: false,
+            editTurnoverBandVisible: false,
+            editGoodCreditVisible: false,
+            editGrowthPartnerVisible: false,
+            editEligibleForRebateVisible: false,
+            dirty: false,
+            saving: false,
+            item: {
+                id: 1,
+                name: 'TeddyBartons',
+                turnoverBandUri: '/sales/discounting/turnover-band-sets/1/turnover-bands/1',
+                discountSchemeUri: '/sales/discounting/schemes/1',
+                eligibleForGoodCreditDiscount: false,
+                eligibleForRebate: false,
+                growthPartner: false,
+                closedOn: "",
+                address: {
+                    line1: '34',
+                    line2: 'Street',
+                    countryUri: '/countries/1',
+                    postcode: 'KY128ES',
+                    countryName: 'Morocco'
+                }                       
+            }
+        };
+
+        deepFreeze(state);
+
+        expect(salesAccount(state, action)).toEqual(expected);
+    });
+
 });

@@ -6,6 +6,7 @@
     using Linn.Common.Facade;
     using Linn.Common.Resources;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Facade.Extensions;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
     public class SalesAccountResourceBuilder : IResourceBuilder<SalesAccount>
@@ -21,6 +22,7 @@
                 GrowthPartner = salesAccount.GrowthPartner,
                 DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                 TurnoverBandUri = salesAccount.TurnoverBandUri,
+                Address = salesAccount.Address?.ToResource(),
                 ClosedOn = salesAccount.ClosedOn == null ? string.Empty : salesAccount.ClosedOn.Value.ToString("o"),
                 Links = this.BuildLinks(salesAccount).ToArray()
             };

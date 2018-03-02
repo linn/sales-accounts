@@ -10,7 +10,8 @@ import {
     editTurnoverBand, setTurnoverBand, 
     editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
     editGrowthPartner, setGrowthPartner,
-    editEligibleForRebate, setEligibleForRebate
+    editEligibleForRebate, setEligibleForRebate,
+    fetchCountry
 } from '../actions/salesAccounts';
 import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands } from '../selectors/salesAccountSelectors';
 
@@ -26,7 +27,7 @@ const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { 
     editTurnoverBandVisible: salesAccount.editTurnoverBandVisible,
     editGrowthPartnerVisible: salesAccount.editGrowthPartnerVisible,
     editEligibleForRebateVisible: salesAccount.editEligibleForRebateVisible,
-    loading: salesAccount.loading || !discountSchemes.length || !turnoverBandSets.length,
+    loading: salesAccount.loading || !discountSchemes || !turnoverBandSets,
     dirty: salesAccount.dirty,
     saving: salesAccount.saving
 });
