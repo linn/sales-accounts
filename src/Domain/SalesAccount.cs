@@ -94,6 +94,11 @@
 
         private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
         {
+            if (discountScheme.TurnoverBandUris == null)
+            {
+                return;
+            }
+
             if (!discountScheme.TurnoverBandUris.Contains(turnoverBandUri))
             {
                 throw new InvalidTurnoverBandException($"Discount scheme {discountScheme.Name} does not contain turnover band {turnoverBandUri}");
