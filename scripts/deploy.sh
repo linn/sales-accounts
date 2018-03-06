@@ -30,7 +30,7 @@ if [ "${TRAVIS_BRANCH}" = "master" ]; then
     STACK_NAME=sales-accounts-sys
     TARGET_CLUSTER=internal-colony-test
     APP_ROOT=http://app-sys.linn.co.uk
-    PROXY_ROOT=http://app.linn.co.uk
+    PROXY_ROOT=http://app-sys.linn.co.uk
     ENV_SUFFIX=-sys
     DESIRED_COUNT=1
   fi
@@ -43,7 +43,7 @@ else
     STACK_NAME=sales-accounts-int
     TARGET_CLUSTER=internal-colony-test
     APP_ROOT=http://app-int.linn.co.uk
-    PROXY_ROOT=http://app.linn.co.uk
+    PROXY_ROOT=http://app-int.linn.co.uk
     ENV_SUFFIX=-int
     DESIRED_COUNT=1
 fi
