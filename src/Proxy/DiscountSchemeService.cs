@@ -51,14 +51,14 @@
 
             var turnoverBandSetUri = Relation.First(discountScheme.Links, "turnover-band-set");
 
-            var turnoverBandResource = this.GetTurnoverBandSet(turnoverBandSetUri.ToString());
+            var turnoverBandResource = turnoverBandSetUri == null ? null : this.GetTurnoverBandSet(turnoverBandSetUri.ToString());
 
             return new DiscountScheme
                        {
                            DiscountSchemeUri = discountSchemeUri,
                            Name = discountScheme.Name,
-                           TurnoverBandSetUri = turnoverBandSetUri.ToString(),
-                           TurnoverBandUris = turnoverBandResource.TurnoverBands.Select(a => Relation.First(a.Links, "self").ToString())
+                           TurnoverBandSetUri = turnoverBandSetUri == null ? string.Empty : turnoverBandSetUri.ToString(),
+                           TurnoverBandUris = turnoverBandResource?.TurnoverBands.Select(a => Relation.First(a.Links, "self").ToString())
                        };
         }
 
