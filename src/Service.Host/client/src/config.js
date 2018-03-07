@@ -1,6 +1,6 @@
 ﻿const config = {
     appRoot: PROCESS.ENV.appRoot ? PROCESS.ENV.appRoot : '',
-    proxyRoot: 'http://app.linn.co.uk',
+    proxyRoot: PROCESS.ENV.proxyRoot ? PROCESS.ENV.proxyRoot : '',
     countryRoot: 'http://app.linn.co.uk'
 }
 
