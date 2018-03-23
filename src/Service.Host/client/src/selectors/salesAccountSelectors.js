@@ -42,7 +42,7 @@ const getTurnoverBandSetUri = (discountScheme) => {
 
     const bandSet = discountScheme.links.find(l => l.rel === 'turnover-band-set');
 
-    typeof bandSet != 'undefined' ? result.href : null;
+    return  bandSet ? bandSet.href : null;
 }
 
 const getDiscountScheme = (discountSchemes, discountSchemeUri) => {
