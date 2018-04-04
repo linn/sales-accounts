@@ -43,7 +43,7 @@ class SalesAccount extends Component {
                                 title={'Discount Scheme:'} 
                                 value={discountSchemeName || 'select discount scheme'} 
                                 handleClick={editDiscountScheme} 
-                                label={discountSchemeStatus && 'Closed'} 
+                                label={discountSchemeStatus && 'Scheme Closed'} 
                             />
                             { turnoverBands && <SalesAccountItem title={'Turnover Band:'} value={turnoverBandName || 'select turnover band'} handleClick={editTurnoverBand} />}
                             <SalesAccountItem
