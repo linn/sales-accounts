@@ -14,7 +14,7 @@ class SalesAccount extends Component {
     render() {
         const { loading,  dirty, saving, 
             hideEditModal, closeAccount, saveAccountUpdate,
-            salesAccount, discountSchemeName, turnoverBandName, discountSchemes, turnoverBands,
+            salesAccount, discountSchemeName, discountSchemeStatus, turnoverBandName, discountSchemes, turnoverBands,
             editDiscountScheme, setDiscountScheme, 
             editTurnoverBand, setTurnoverBand, 
             editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
@@ -39,7 +39,12 @@ class SalesAccount extends Component {
                                 </Col>
                             </Row>
                             <br />
-                            <SalesAccountItem title={'Discount Scheme:'} value={discountSchemeName || 'select discount scheme'} handleClick={editDiscountScheme} />
+                            <SalesAccountItem 
+                                title={'Discount Scheme:'} 
+                                value={discountSchemeName || 'select discount scheme'} 
+                                handleClick={editDiscountScheme} 
+                                label={discountSchemeStatus && 'Scheme Closed'} 
+                            />
                             { turnoverBands && <SalesAccountItem title={'Turnover Band:'} value={turnoverBandName || 'select turnover band'} handleClick={editTurnoverBand} />}
                             <SalesAccountItem
                                 title={'Eligible For Good Credit:'}

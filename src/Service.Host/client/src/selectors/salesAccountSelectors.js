@@ -15,6 +15,16 @@ export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
     return discountScheme ? discountScheme.name : null;
 }
 
+export const getDiscountSchemeClosedOn = (salesAccount, discountSchemes) => {
+    if (!salesAccount || !discountSchemes) {
+        return null;
+    }
+
+    const discountScheme = discountSchemes.find(s => s.links.find(l => l.href === salesAccount.discountSchemeUri));
+    
+    return discountScheme ? discountScheme.closedOn : null;
+}
+
 export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
 
     if (!turnoverBandSets || !salesAccount){
@@ -26,6 +36,14 @@ export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
     const turnoverBand = allTurnoverBands.find(tb => tb.links.find(l => l.rel === 'self').href === salesAccount.turnoverBandUri);
 
     return turnoverBand ? turnoverBand.name : null;
+}
+
+export const getDiscountSchemes = (discountSchemes) => {
+    if (!discountSchemes){
+        return null;
+    }
+
+    return discountSchemes.filter(s => s.closedOn == '');
 }
 
 const getDiscountSchemeUri = (salesAccount) => {
