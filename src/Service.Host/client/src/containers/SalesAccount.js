@@ -13,12 +13,13 @@ import {
     editEligibleForRebate, setEligibleForRebate,
     fetchCountry
 } from '../actions/salesAccounts';
-import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands, getDiscountSchemes } from '../selectors/salesAccountSelectors';
+import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands, getDiscountSchemes, getDiscountSchemeStatus } from '../selectors/salesAccountSelectors';
 
 const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { match }) => ({
     salesAccountUri: match.url,
     salesAccount: getSalesAccount(salesAccount),
     discountSchemeName: getDiscountSchemeName(getSalesAccount(salesAccount), discountSchemes),
+    discountSchemeStatus: getDiscountSchemeStatus(getSalesAccount(salesAccount), discountSchemes),
     turnoverBandName: getTurnoverBandName(getSalesAccount(salesAccount),turnoverBandSets),
     discountSchemes: getDiscountSchemes(discountSchemes),
     turnoverBands: getTurnoverBands(salesAccount, turnoverBandSets, discountSchemes),

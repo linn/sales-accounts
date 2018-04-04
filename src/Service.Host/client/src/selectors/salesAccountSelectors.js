@@ -15,6 +15,16 @@ export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
     return discountScheme ? discountScheme.name : null;
 }
 
+export const getDiscountSchemeStatus = (salesAccount, discountSchemes) => {
+    if (!salesAccount || !discountSchemes) {
+        return null;
+    }
+
+    const discountScheme = discountSchemes.find(s => s.links.find(l => l.href === salesAccount.discountSchemeUri));
+    
+    return discountScheme ? discountScheme.closedOn : null;
+}
+
 export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
 
     if (!turnoverBandSets || !salesAccount){

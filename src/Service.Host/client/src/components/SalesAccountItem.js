@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Button, Label } from 'react-bootstrap';
 
 const styles = {
     title: {
@@ -14,7 +14,7 @@ const styles = {
 
 export class SalesAccountItem extends Component {
     render() {
-        const {title, value, handleClick, displayOnly} = this.props;
+        const {title, value, handleClick, displayOnly, label} = this.props;
         return (
             <Row>
                 <Col sm={4} style={styles.title}>
@@ -23,8 +23,9 @@ export class SalesAccountItem extends Component {
                 <Col sm={4}>
                     {displayOnly 
                         ? value 
-                        : <Button bsStyle="link" style={styles.button} onClick={() => handleClick()}>{value}</Button> 
+                        : <Button bsStyle="link" style={styles.button} onClick={() => handleClick()}>{value}</Button>
                     }
+                    {label && <Label bsStyle="danger" style={{ marginLeft: 10 }}>{label}</Label>}
                 </Col>
             </Row>
         )
