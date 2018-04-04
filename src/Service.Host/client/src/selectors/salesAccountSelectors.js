@@ -15,7 +15,7 @@ export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
     return discountScheme ? discountScheme.name : null;
 }
 
-export const getDiscountSchemeStatus = (salesAccount, discountSchemes) => {
+export const getDiscountSchemeClosedOn = (salesAccount, discountSchemes) => {
     if (!salesAccount || !discountSchemes) {
         return null;
     }
