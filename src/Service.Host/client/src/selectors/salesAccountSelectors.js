@@ -28,6 +28,14 @@ export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
     return turnoverBand ? turnoverBand.name : null;
 }
 
+export const getDiscountSchemes = (discountSchemes) => {
+    if (!discountSchemes){
+        return null;
+    }
+
+    return discountSchemes.filter(s => s.closedOn == '');
+}
+
 const getDiscountSchemeUri = (salesAccount) => {
     if (!salesAccount) {
         return null;
