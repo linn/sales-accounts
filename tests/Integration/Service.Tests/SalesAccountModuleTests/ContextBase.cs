@@ -5,6 +5,7 @@
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Domain.Dispatchers;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
@@ -48,9 +49,11 @@
                         with.Dependency<SalesAccountService>();
                         with.Dependency<IResourceBuilder<SalesAccount>>(new SalesAccountResourceBuilder());
                         with.Dependency<IResourceBuilder<IEnumerable<SalesAccount>>>(new SalesAccountsResourceBuilder());
+                        with.Dependency<IResourceBuilder<IEnumerable<SalesAccountActivity>>>(new SalesAccountActivitiesResourceBuilder());
                         with.Module<SalesAccountModule>();
                         with.ResponseProcessor<SalesAccountJsonResponseProcessor>();
                         with.ResponseProcessor<SalesAccountsJsonResponseProcessor>();
+                        with.ResponseProcessor<SalesAcountActivitiesJsonResponseProcessor>();
                     });
 
             this.Browser = new Browser(bootstrapper);

@@ -4,6 +4,7 @@
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
@@ -20,5 +21,7 @@
         IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address);
 
         IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource);
+
+        IResult<IEnumerable<SalesAccountActivity>> GetActivitiesById(int id);
     }
 }

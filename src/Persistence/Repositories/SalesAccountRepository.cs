@@ -22,6 +22,7 @@
         {
             return this.serviceDbContext.SalesAccounts
                 .Include(s => s.Address)
+                .Include(s => s.Activities)
                 .SingleOrDefault(s => s.Id == id);
         }
 

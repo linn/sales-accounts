@@ -154,5 +154,18 @@
 
             return new SuccessResult<SalesAccount>(account);
         }
+
+        public IResult<IEnumerable<SalesAccountActivity>> GetActivitiesById(int id)
+        {
+            var account = this.salesAccountRepository.GetById(id);
+            if (account == null)
+            {
+                return new NotFoundResult<IEnumerable<SalesAccountActivity>>();
+            }
+
+            var activities = account.Activities;
+
+            return new SuccessResult<IEnumerable<SalesAccountActivity>>(activities);
+        }
     }
 }

@@ -33,7 +33,7 @@
                 return null;
             }
 
-            var uri = new Uri($"{this.proxyRoot}{discountSchemeUri}", UriKind.RelativeOrAbsolute);
+            var uri = new Uri($"http://localhost:60395{discountSchemeUri}", UriKind.RelativeOrAbsolute);
 
             var response = this.restClient.Get(
                 CancellationToken.None,
@@ -64,7 +64,7 @@
 
         private TurnoverBandSetResource GetTurnoverBandSet(string turnoverBandSetUri)
         {
-            var uri = new Uri($"{this.proxyRoot}{turnoverBandSetUri}", UriKind.RelativeOrAbsolute);
+            var uri = new Uri($"http://localhost:60395{turnoverBandSetUri}", UriKind.RelativeOrAbsolute);
 
             var response = this.restClient.Get(
                 CancellationToken.None,

@@ -13,5 +13,10 @@
         }
 
         public SalesAccountAddress Address { get; private set; }
+
+        public override T Accept<T>(ISalesAccountActivityVisitor<T> visitor)
+        {
+            return visitor.Visit(this);
+        }
     }
 }
