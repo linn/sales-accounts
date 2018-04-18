@@ -5,11 +5,11 @@ import { getTurnoverBandName, getDiscountSchemeName, getTurnoverBandSet } from '
 
 class ActivityItem extends Component {
 
-    formatSingleValueActivity(type, value, changedOn) {
+    formatActivity(type, value, changedOn) {
         return (
             <span>
                 <strong>{type} </strong>
-                {value ? <span>updated to <strong>{value}</strong></span> : <span>Removed</span>}
+                {value ? <span>updated <strong>{value}</strong></span> : <span>removed</span>}
                 <span className="small pull-right text-muted">{moment(changedOn).startOf('hour').fromNow()}</span>
             </span>
         );
@@ -27,15 +27,14 @@ class ActivityItem extends Component {
         );
     }
 
-    formatActivity(activity, discountSchemes, turnoverBandSets) {
+    selectActivity(activity, discountSchemes, turnoverBandSets) {
         switch (activity.activityType) {
             case 'SalesAccountCloseActivity':
                 return (
-                    this.formatSingleValueActivity('Account Closed On', moment(activity.closedOn).format('DD MMM YYYY '), activity.changedOn)
+                    this.formatActivity('Account Closed On', moment(activity.closedOn).format('DD MMM YYYY '), activity.changedOn)
                 );
 
             case 'SalesAccountCreateActivity':
-            console.log(activity);
                 return (
                     this.formatCreateActivity('Account Created ', activity.changedOn, activity.name, activity.closedOn, activity.changedOn)
                 );
@@ -43,51 +42,41 @@ class ActivityItem extends Component {
             case 'SalesAccountGrowthPartnerActivity':
                 const growthPartner = activity.growthPartner ? 'Yes' : 'No';
                 return (
-                    this.formatSingleValueActivity('Growth Partner', growthPartner, activity.changedOn)
+                    this.formatActivity('Growth Partner', growthPartner, activity.changedOn)
                 );
             
-            case 'SalesAccountUpdateAddressActivity':
-                console.log(activity);
-                const address = `
-                    ${activity.line1 && `${activity.line1}, `}
-                    ${activity.line2 && `${activity.line2}, `}
-                    ${activity.line3 && `${activity.line3}, `}
-                    ${activity.line4 && `${activity.line4}, `}
-                    ${activity.postcode && `${activity.postcode}, `}
-                    ${activity.countryUri && `${activity.countryUri}`}
-                    `;
-                console.log(address);
+            case 'SalesAccountUpdateAddressActivity':                
                 return (
-                    this.formatSingleValueActivity('Address', address, activity.changedOn)
+                    this.formatActivity('Address', ' ', activity.changedOn)
                 );
 
             case 'SalesAccountUpdateDiscountSchemeUriActivity':
                 const discountScheme = getDiscountSchemeName(activity, discountSchemes);
                 return (
-                    this.formatSingleValueActivity('Discount Scheme', discountScheme, activity.changedOn)
+                    this.formatActivity('Discount Scheme', discountScheme, activity.changedOn)
                 );
 
             case 'SalesAccountUpdateGoodCreditActivity':
                 const eligibleForGoodCreditDiscount = activity.eligibleForGoodCreditDiscount ? 'Yes' : 'No';
                 return (
-                    this.formatSingleValueActivity('Eligible For Good Credit', eligibleForGoodCreditDiscount, activity.changedOn)
+                    this.formatActivity('Eligible For Good Credit', eligibleForGoodCreditDiscount, activity.changedOn)
                 );
 
             case 'SalesAccountUpdateNameActivity':
                 return (
-                    this.formatSingleValueActivity('Account Name', activity.name, activity.changedOn)
+                    this.formatActivity('Account Name', activity.name, activity.changedOn)
                 );
 
             case 'SalesAccountUpdateRebateActivity':
                 const eligibleForRebate = activity.eligibleForRebate ? 'Yes' : 'No';
                 return (
-                    this.formatSingleValueActivity('Eligible For Rebate', eligibleForRebate, activity.changedOn)
+                    this.formatActivity('Eligible For Rebate', eligibleForRebate, activity.changedOn)
                 );
 
             case 'SalesAccountUpdateTurnoverBandUriActivity':
                 const turnoverBand = getTurnoverBandName(activity, turnoverBandSets);                
                 return (
-                    this.formatSingleValueActivity('Turnover Band', turnoverBand, activity.changedOn)
+                    this.formatActivity('Turnover Band', turnoverBand, activity.changedOn)
                 );
 
             default:
@@ -98,7 +87,7 @@ class ActivityItem extends Component {
     render() {
         const { activity, discountSchemes, turnoverBandSets } = this.props;
         return (
-            <ListGroupItem>{this.formatActivity(activity, discountSchemes, turnoverBandSets)}</ListGroupItem>
+            <ListGroupItem>{this.selectActivity(activity, discountSchemes, turnoverBandSets)}</ListGroupItem>
         );
     }
 }
