@@ -26,7 +26,6 @@ export const getDiscountSchemeClosedOn = (salesAccount, discountSchemes) => {
 }
 
 export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
-
     if (!turnoverBandSets || !salesAccount){
         return null;
     }
@@ -88,4 +87,10 @@ export const getTurnoverBands = (salesAccount, turnoverBandSets, discountSchemes
     return turnoverBandSet ? turnoverBandSet.turnoverBands : null;
 }
 
+export const getActivities = (salesAccount) => {
+    if (!salesAccount || !salesAccount.activities) {
+        return null;
+    }
+    return salesAccount.activities;
+}
 

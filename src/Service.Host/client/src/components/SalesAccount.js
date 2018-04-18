@@ -7,6 +7,7 @@ import ListSelectItemModal from './ListSelectItemModal';
 import Controls from './Controls';
 import { formatDate } from '../helpers/dates';
 import SalesAccountAddress from './SalesAccountAddress';
+import Activities from './Activities';
 
 class SalesAccount extends Component {
     state = { searchTerm: '' }
@@ -21,7 +22,7 @@ class SalesAccount extends Component {
             editGrowthPartner, setGrowthPartner,
             editEligibleForRebate, setEligibleForRebate,
             editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, editGrowthPartnerVisible, editEligibleForRebateVisible,
-            showConfirmCloseModal, hideConfirmCloseModal
+            activities, turnoverBandSets
         } = this.props;
 
         if (loading || !salesAccount) {
@@ -60,7 +61,7 @@ class SalesAccount extends Component {
                                 title={'Eligible for Rebate:'}
                                 value={salesAccount.eligibleForRebate ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
                                 handleClick={editEligibleForRebate}
-                            />                            
+                            />
                             <SalesAccountItem
                                 title={'Address:'}
                                 value={<SalesAccountAddress address={salesAccount.address}/>}
@@ -74,6 +75,7 @@ class SalesAccount extends Component {
                         closedOn={salesAccount.closedOn} dirty={dirty} saving={saving} salesAccount={salesAccount} 
                         closeAccount={closeAccount} saveAccountUpdate={saveAccountUpdate} 
                     />
+                    <Activities activities={activities} discountSchemes={discountSchemes} turnoverBandSets={turnoverBandSets} />
                 </Grid>
 
                 <ListSelectItemModal

@@ -23,7 +23,7 @@
                            AccountId = activity.AccountId,
                            ActivityType = activity.GetType().Name,
                            ChangedOn = activity.ChangedOn.ToString("o"),
-                           ClosedOn = activity.ChangedOn.ToString("o"),
+                           ClosedOn = activity.ClosedOn?.ToString("o"),
                            Name = activity.Name
                        };
         }
@@ -44,12 +44,12 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = activity.ChangedOn.ToString("o"),
-                           Line1 = activity.Address.Line1,
-                           Line2 = activity.Address.Line2,
-                           Line3 = activity.Address.Line3,
-                           Line4 = activity.Address.Line4,
-                           CountryUri = activity.Address.CountryUri,
-                           Postcode = activity.Address.Postcode
+                           Line1 = activity.Address?.Line1,
+                           Line2 = activity.Address?.Line2,
+                           Line3 = activity.Address?.Line3,
+                           Line4 = activity.Address?.Line4,
+                           CountryUri = activity.Address?.CountryUri,
+                           Postcode = activity.Address?.Postcode
                        };
         }
 

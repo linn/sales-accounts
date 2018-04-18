@@ -45,6 +45,7 @@
         {
             var resource = this.Response.Body.DeserializeJson<SalesAccountResource>();
             resource.Name.Should().Be(this.salesAccountCreateResource.Name);
+            resource.ClosedOn.Should().BeNullOrEmpty();
         }
     }
 }

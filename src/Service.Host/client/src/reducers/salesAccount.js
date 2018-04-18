@@ -160,6 +160,17 @@ const salesAccount = (state = defaultState, action) => {
                 dirty: false
             }
 
+        case actionTypes.REQUEST_ACTIVITIES:
+            return {
+                ...state
+            }
+
+        case actionTypes.RECEIVE_ACTIVITIES:
+            return {
+                ...state,
+                activities: action.payload.data.activities
+            }
+
         default:
             return state;
     }
