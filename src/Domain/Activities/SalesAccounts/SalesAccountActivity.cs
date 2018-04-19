@@ -4,5 +4,6 @@
 
     public abstract class SalesAccountActivity : Activity
     {
+        public abstract T Accept<T>(ISalesAccountActivityVisitor<T> visitor);
     }
 }

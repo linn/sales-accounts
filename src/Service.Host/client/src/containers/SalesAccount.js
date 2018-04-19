@@ -11,9 +11,9 @@ import {
     editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
     editGrowthPartner, setGrowthPartner,
     editEligibleForRebate, setEligibleForRebate,
-    fetchCountry
+    fetchCountry, fetchActivities
 } from '../actions/salesAccounts';
-import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands, getDiscountSchemes, getDiscountSchemeClosedOn } from '../selectors/salesAccountSelectors';
+import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands, getDiscountSchemes, getDiscountSchemeClosedOn, getActivities } from '../selectors/salesAccountSelectors';
 
 const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { match }) => ({
     salesAccountUri: match.url,
@@ -30,13 +30,16 @@ const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { 
     editEligibleForRebateVisible: salesAccount.editEligibleForRebateVisible,
     loading: salesAccount.loading || !discountSchemes || !turnoverBandSets,
     dirty: salesAccount.dirty,
-    saving: salesAccount.saving
+    saving: salesAccount.saving,
+    activities: getActivities(salesAccount),
+    turnoverBandSets: turnoverBandSets
 });
 
 const initialise = ({ salesAccountUri, salesAccount }) => dispatch => {
     dispatch(fetchSalesAccount(salesAccountUri));
     dispatch(fetchDiscountSchemes());
     dispatch(fetchTurnoverBandSets());
+    dispatch(fetchActivities(salesAccountUri));
 };
 
 const mapDispatchToProps = {

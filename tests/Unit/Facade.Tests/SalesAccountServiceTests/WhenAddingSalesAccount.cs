@@ -40,6 +40,7 @@
             var dataResult = ((CreatedResult<SalesAccount>)this.Result).Data;
             dataResult.Id.Should().Be(1);
             dataResult.Name.Should().Be("name");
+            dataResult.ClosedOn.Should().BeNull();
         }
     }
 }

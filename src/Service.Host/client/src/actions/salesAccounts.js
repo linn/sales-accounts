@@ -143,3 +143,23 @@ export const fetchCountry = (countryUri) => async dispatch => {
         alert(`Failed to fetch country. Error: ${e.message}`);
     }
 };
+
+const requestActivities = salesAccountUri => ({
+    type: actionTypes.REQUEST_ACTIVITIES,
+    payload: { salesAccountUri }
+});
+
+const receiveActivities = data => ({
+    type: actionTypes.RECEIVE_ACTIVITIES,
+    payload: { data }
+});
+
+export const fetchActivities = salesAccountUri => async dispatch => {
+    dispatch(requestActivities(salesAccountUri));
+    try {
+        const data = await fetchJson(`${config.appRoot}${salesAccountUri}/activities`);
+        dispatch(receiveActivities(data));
+    } catch (e) {
+        alert(`Failed to fetch activities. Error: ${e.message}`);
+    }
+};
