@@ -3,8 +3,7 @@
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
-    public class
-        ResourceBuildingSalesAccountActivityVisitor : ISalesAccountActivityVisitor<SalesAccountActivityResource>
+    public class ResourceBuildingSalesAccountActivityVisitor : ISalesAccountActivityVisitor<SalesAccountActivityResource>
     {
         public SalesAccountActivityResource Visit(SalesAccountCloseActivity activity)
         {
