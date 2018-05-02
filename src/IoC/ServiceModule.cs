@@ -18,6 +18,7 @@
             // proxies
             builder.RegisterType<RestClient>().As<IRestClient>();
             builder.RegisterType<DiscountSchemeService>().As<IDiscountSchemeService>().WithParameter("proxyRoot", ConfigurationManager.Configuration["PROXY_ROOT"]);
+            builder.RegisterType<SalesReportingService>().As<ISalesReportingService>().WithParameter("proxyRoot", ConfigurationManager.Configuration["PROXY_ROOT"]);
         }
     }
 }
