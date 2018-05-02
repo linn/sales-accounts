@@ -18,7 +18,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.DiscountSchemeService.GetDiscountScheme("/ds/1").Returns((DiscountScheme)null);
+            this.DiscountingService.GetDiscountScheme("/ds/1").Returns((DiscountScheme)null);
             this.updateResource = new SalesAccountUpdateResource
                                       {
                                           DiscountSchemeUri = "/ds/1",

@@ -21,7 +21,7 @@
 
         protected ISalesAccountRepository SalesAccountRepository { get; private set; }
 
-        protected IDiscountSchemeService DiscountSchemeService { get; private set; }
+        protected IDiscountingService DiscountingService { get; private set; }
 
         protected IResult<SalesAccount> Result { get; set; }
 
@@ -39,14 +39,14 @@
             this.SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
             this.SalesAccountRepository = Substitute.For<ISalesAccountRepository>();
             this.SalesAccountUpdatedDispatcher = Substitute.For<ISalesAccountUpdatedDispatcher>();
-            this.DiscountSchemeService = Substitute.For<IDiscountSchemeService>();
+            this.DiscountingService = Substitute.For<IDiscountingService>();
             this.SalesAccountRepository.GetById(1).Returns(this.SalesAccount);
             this.TransactionManager = Substitute.For<ITransactionManager>();
 
             this.Sut = new SalesAccountService(
                 this.TransactionManager,
                 this.SalesAccountRepository,
-                this.DiscountSchemeService,
+                this.DiscountingService,
                 this.SalesAccountUpdatedDispatcher);
         }
     }

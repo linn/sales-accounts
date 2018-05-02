@@ -1,4 +1,4 @@
-namespace Linn.SalesAccounts.Proxy.Tests.DiscountSchemeServiceTests
+namespace Linn.SalesAccounts.Proxy.Tests.DiscountingServiceTests
 {
     using System;
     using System.Collections.Generic;

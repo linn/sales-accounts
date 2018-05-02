@@ -2,8 +2,10 @@
 {
     using Linn.SalesAccounts.Domain.External;
 
-    public interface IDiscountSchemeService
+    public interface IDiscountingService
     {
         DiscountScheme GetDiscountScheme(string discountSchemeUri);
+
+        string GetTurnoverBandForTurnoverValue(string turnoverBandSetUri, string currencyCode, decimal turnoverValue);
     }
 }
