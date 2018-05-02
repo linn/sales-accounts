@@ -10,6 +10,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SalesAccountRepository>().As<ISalesAccountRepository>();
+            builder.RegisterType<ProposedTurnoverBandRepository>().As<IProposedTurnoverBandRepository>();
         }
     }
 }

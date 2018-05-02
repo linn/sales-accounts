@@ -16,6 +16,7 @@
             // resource builders
             builder.RegisterType<SalesAccountResourceBuilder>().As<IResourceBuilder<SalesAccount>>();
             builder.RegisterType<SalesAccountsResourceBuilder>().As<IResourceBuilder<IEnumerable<SalesAccount>>>();
+            builder.RegisterType<ProposedTurnoverBandsResourceBuilder>().As<IResourceBuilder<IEnumerable<ProposedTurnoverBand>>>();
             builder.RegisterType<SalesAccountActivitiesResourceBuilder>().As<IResourceBuilder<IEnumerable<SalesAccountActivity>>>();
         }
     }
