@@ -1,10 +1,13 @@
 ﻿namespace Linn.SalesAccounts.Persistence.Repositories
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Persistence;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class ProposedTurnoverBandRepository : IProposedTurnoverBandRepository
     {
@@ -17,17 +20,20 @@
 
         public ProposedTurnoverBand GetById(int id)
         {
-            throw new System.NotImplementedException();
+            return this.serviceDbContext.ProposedTurnoverBands
+                .Include(s => s.SalesAccount)
+                .SingleOrDefault(s => s.Id == id);
         }
 
         public IEnumerable<ProposedTurnoverBand> GetAllForFinancialYear(string financialYear)
         {
-            throw new System.NotImplementedException();
+            return this.serviceDbContext.ProposedTurnoverBands
+                .Where(s => s.FinancialYear == financialYear);
         }
 
         public void Add(ProposedTurnoverBand proposedTurnoverBand)
         {
-            throw new System.NotImplementedException();
+            this.serviceDbContext.ProposedTurnoverBands.Add(proposedTurnoverBand);
         }
     }
 }

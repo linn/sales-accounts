@@ -1,6 +1,6 @@
 ﻿namespace Linn.SalesAccounts.Domain
 {
-    public class ProposedTurnoverBand
+    public class ProposedTurnoverBand : Entity
     {
         public SalesAccount SalesAccount { get; set; }
 

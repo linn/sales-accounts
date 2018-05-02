@@ -10,6 +10,8 @@
     {
         public DbSet<SalesAccount> SalesAccounts { get; set; }
 
+        public DbSet<ProposedTurnoverBand> ProposedTurnoverBands { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<SalesAccount>().Property(s => s.Id).ValueGeneratedNever();
@@ -37,6 +39,9 @@
             builder.Entity<SalesAccountUpdateNameActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountGrowthPartnerActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateAddressActivity>().HasBaseType<SalesAccountActivity>();
+
+            builder.Entity<ProposedTurnoverBand>().Property(t => t.Id).ValueGeneratedNever();
+            builder.Entity<ProposedTurnoverBand>().HasOne(t => t.SalesAccount);
 
             base.OnModelCreating(builder);
         }
