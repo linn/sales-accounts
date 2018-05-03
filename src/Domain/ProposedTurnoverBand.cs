@@ -15,5 +15,10 @@
         public string ProposedTurnoverBandUri { get; set; }
 
         public bool IncludeInUpdate { get; set; }
+
+        public void OverrideProposedTurnoverBand(string turnoverBandUri)
+        {
+            this.ProposedTurnoverBandUri = turnoverBandUri;
+        }
     }
 }

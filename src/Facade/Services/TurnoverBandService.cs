@@ -50,5 +50,19 @@
             return new SuccessResult<IEnumerable<ProposedTurnoverBand>>(
                 this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear));
         }
+
+        public IResult<ProposedTurnoverBand> OverrideTurnoverBand(int id, string turnoverBandUri)
+        {
+            var proposedTurnoverBand = this.proposedTurnoverBandRepository.GetById(id);
+            if (proposedTurnoverBand == null)
+            {
+                return new NotFoundResult<ProposedTurnoverBand>();
+            }
+
+            proposedTurnoverBand.OverrideProposedTurnoverBand(turnoverBandUri);
+            this.transactionManager.Commit();
+
+            return new SuccessResult<ProposedTurnoverBand>(proposedTurnoverBand);
+        }
     }
 }
