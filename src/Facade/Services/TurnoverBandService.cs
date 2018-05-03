@@ -5,6 +5,7 @@
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
 
     public class TurnoverBandService : ITurnoverBandService
@@ -13,12 +14,16 @@
 
         private readonly IProposedTurnoverBandService proposedTurnoverBandService;
 
+        private readonly IProposedTurnoverBandRepository proposedTurnoverBandRepository;
+
         public TurnoverBandService(
             ITransactionManager transactionManager,
-            IProposedTurnoverBandService proposedTurnoverBandService)
+            IProposedTurnoverBandService proposedTurnoverBandService,
+            IProposedTurnoverBandRepository proposedTurnoverBandRepository)
         {
             this.transactionManager = transactionManager;
             this.proposedTurnoverBandService = proposedTurnoverBandService;
+            this.proposedTurnoverBandRepository = proposedTurnoverBandRepository;
         }
 
         public IResult<IEnumerable<ProposedTurnoverBand>> ProposeTurnoverBands(string financialYear)
@@ -27,6 +32,17 @@
             this.transactionManager.Commit();
 
             return new SuccessResult<IEnumerable<ProposedTurnoverBand>>(results);
+        }
+
+        public IResult<ProposedTurnoverBand> GetProposedTurnoverBand(int id)
+        {
+            var proposedBand = this.proposedTurnoverBandRepository.GetById(id);
+            if (proposedBand == null)
+            {
+                return new NotFoundResult<ProposedTurnoverBand>();
+            }
+
+            return new SuccessResult<ProposedTurnoverBand>(proposedBand);
         }
     }
 }

@@ -28,7 +28,7 @@
 
         object IResourceBuilder<ProposedTurnoverBand>.Build(ProposedTurnoverBand proposedTurnoverBand) => this.Build(proposedTurnoverBand);
 
-        public string GetLocation(ProposedTurnoverBand proposedTurnoverBand) => throw new NotImplementedException();
+        public string GetLocation(ProposedTurnoverBand proposedTurnoverBand) => $"/sales/accounts/proposed-turnover-bands/{proposedTurnoverBand.Id}";
 
         private IEnumerable<LinkResource> BuildLinks(ProposedTurnoverBand proposedTurnoverBand)
         {

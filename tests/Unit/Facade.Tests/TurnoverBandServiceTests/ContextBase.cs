@@ -5,6 +5,7 @@
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
     using Linn.SalesAccounts.Facade.Services;
 
@@ -18,7 +19,11 @@
 
         protected IProposedTurnoverBandService ProposedTurnoverBandService { get; private set; }
 
+        protected IProposedTurnoverBandRepository ProposedTurnoverBandRepository { get; private set; }
+
         protected IResult<IEnumerable<ProposedTurnoverBand>> Results { get; set; }
+
+        protected IResult<ProposedTurnoverBand> Result { get; set; }
 
         protected ITransactionManager TransactionManager { get; private set; }
 
@@ -27,8 +32,12 @@
         {
             this.TransactionManager = Substitute.For<ITransactionManager>();
             this.ProposedTurnoverBandService = Substitute.For<IProposedTurnoverBandService>();
+            this.ProposedTurnoverBandRepository = Substitute.For<IProposedTurnoverBandRepository>();
 
-            this.Sut = new TurnoverBandService(this.TransactionManager, this.ProposedTurnoverBandService);
+            this.Sut = new TurnoverBandService(
+                this.TransactionManager,
+                this.ProposedTurnoverBandService,
+                this.ProposedTurnoverBandRepository);
         }
     }
 }

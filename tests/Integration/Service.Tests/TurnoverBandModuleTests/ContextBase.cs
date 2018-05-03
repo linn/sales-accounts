@@ -32,6 +32,7 @@
                         with.Dependency<IResourceBuilder<ProposedTurnoverBand>>(new ProposedTurnoverBandResourceBuilder());
                         with.Dependency<IResourceBuilder<IEnumerable<ProposedTurnoverBand>>>(new ProposedTurnoverBandsResourceBuilder());
                         with.Module<TurnoverBandModule>();
+                        with.ResponseProcessor<ProposedTurnoverBandJsonResponseProcessor>();
                         with.ResponseProcessor<ProposedTurnoverBandsJsonResponseProcessor>();
                     });
 

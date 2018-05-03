@@ -15,7 +15,13 @@
             this.turnoverBandService = turnoverBandService;
 
             this.Get("/sales/accounts/proposed-turnover-bands", _ => this.GetProposedTurnoverBands());
+            this.Get("/sales/accounts/proposed-turnover-bands/{id:int}", parameters => this.GetProposedTurnoverBand(parameters.id));
             this.Post("/sales/accounts/proposed-turnover-bands", _ => this.SetProposedTurnoverBands());
+        }
+
+        private object GetProposedTurnoverBand(int id)
+        {
+            return this.Negotiate.WithModel(this.turnoverBandService.GetProposedTurnoverBand(id));
         }
 
         private object SetProposedTurnoverBands()
