@@ -1,5 +1,6 @@
 ﻿namespace Linn.SalesAccounts.Domain.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -30,6 +31,12 @@
 
         public IEnumerable<ProposedTurnoverBand> CalculateProposedTurnoverBands(string financialYear)
         {
+            if (string.IsNullOrEmpty(financialYear))
+            {
+                var date = new DateTime(DateTime.Now.Year, 1, 1);
+                financialYear = $"{date.AddYears(-1).Year}/{date:yy}";
+            }
+
             var salesAccounts = this.salesAccountRepository.GetAllOpenAccounts();
             var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear).ToList();
             foreach (var proposedTurnoverBand in proposedTurnoverBands)
