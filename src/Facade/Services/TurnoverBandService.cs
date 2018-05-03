@@ -47,6 +47,11 @@
 
         public IResult<IEnumerable<ProposedTurnoverBand>> GetProposedTurnoverBands(string financialYear)
         {
+            if (string.IsNullOrEmpty(financialYear))
+            {
+                financialYear = this.proposedTurnoverBandService.DefaultFinancialYear();
+            }
+
             return new SuccessResult<IEnumerable<ProposedTurnoverBand>>(
                 this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear));
         }

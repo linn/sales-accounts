@@ -33,8 +33,7 @@
         {
             if (string.IsNullOrEmpty(financialYear))
             {
-                var date = new DateTime(DateTime.Now.Year, 1, 1);
-                financialYear = $"{date.AddYears(-1).Year}/{date:yy}";
+                financialYear = this.DefaultFinancialYear();
             }
 
             var salesAccounts = this.salesAccountRepository.GetAllOpenAccounts();
@@ -60,6 +59,12 @@
             }
 
             return proposedTurnoverBands;
+        }
+
+        public string DefaultFinancialYear()
+        {
+            var date = new DateTime(DateTime.Now.Year, 1, 1);
+            return $"{date.AddYears(-1).Year}/{date:yy}";
         }
 
         private SalesDataDetail GetSalesForSalesAccount(

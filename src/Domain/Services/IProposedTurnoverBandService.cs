@@ -5,5 +5,7 @@
     public interface IProposedTurnoverBandService
     {
         IEnumerable<ProposedTurnoverBand> CalculateProposedTurnoverBands(string financialYear);
+
+        string DefaultFinancialYear();
     }
 }
