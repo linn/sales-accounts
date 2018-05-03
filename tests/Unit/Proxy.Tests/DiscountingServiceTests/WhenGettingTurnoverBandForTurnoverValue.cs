@@ -16,7 +16,7 @@ namespace Linn.SalesAccounts.Proxy.Tests.DiscountingServiceTests
 
     using NUnit.Framework;
 
-    public class WhenTurnoverBandForTurnoverValue : ContextBase
+    public class WhenGettingTurnoverBandForTurnoverValue : ContextBase
     {
         private RestResponse<string> turnoverBandResponse;
 
