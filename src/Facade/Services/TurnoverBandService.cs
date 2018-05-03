@@ -44,5 +44,11 @@
 
             return new SuccessResult<ProposedTurnoverBand>(proposedBand);
         }
+
+        public IResult<IEnumerable<ProposedTurnoverBand>> GetProposedTurnoverBands(string financialYear)
+        {
+            return new SuccessResult<IEnumerable<ProposedTurnoverBand>>(
+                this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear));
+        }
     }
 }

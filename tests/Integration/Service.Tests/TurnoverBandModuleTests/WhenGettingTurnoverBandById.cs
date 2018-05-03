@@ -26,13 +26,13 @@
                                                 SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")),
                                                 CalculatedTurnoverBandUri = "/tb/1"
                                             };
-            this.TurnoverBandService.GetProposedTurnoverBand(88).Returns(new SuccessResult<ProposedTurnoverBand>(this.proposedTurnoverBand));
+            this.TurnoverBandService.GetProposedTurnoverBand(88)
+                .Returns(new SuccessResult<ProposedTurnoverBand>(this.proposedTurnoverBand));
             this.Response = this.Browser.Get(
                 "/sales/accounts/proposed-turnover-bands/88",
                 with =>
                 {
                     with.Header("Accept", "application/json");
-                    with.Header("Content-Type", "application/json");
                 }).Result;
         }
 

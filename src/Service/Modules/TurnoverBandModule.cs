@@ -34,7 +34,8 @@
         private object GetProposedTurnoverBands()
         {
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
-            throw new System.NotImplementedException();
+            var proposedTurnoverBands = this.turnoverBandService.GetProposedTurnoverBands(resource.FinancialYear);
+            return this.Negotiate.WithModel(proposedTurnoverBands);
         }
     }
 }

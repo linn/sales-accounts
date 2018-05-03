@@ -23,8 +23,8 @@
         [SetUp]
         public void SetUp()
         {
-            var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };            
-            var address = new SalesAccountAddress("ln1", "ln2", "", "", "/countries/UK", "post");
+            var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
+            var address = new SalesAccountAddress("ln1", "ln2", string.Empty, string.Empty, "/countries/UK", "post");
 
             this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 1 };
             this.salesAccount.UpdateAccount(discountScheme, "/tb/1", true, true, true);
@@ -56,14 +56,14 @@
             var resource = this.Response.Body.DeserializeJson<SalesAccountActivitiesResource>();
             resource.Activities.Count().Should().Be(9);
             resource.Activities.First().ActivityType.Should().Be("SalesAccountCreateActivity");
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountGrowthPartnerActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateDiscountSchemeUriActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateTurnoverBandUriActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateGoodCreditActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateRebateActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateAddressActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateNameActivity").Should().Be(true);
-            resource.Activities.Any(a => a.ActivityType == "SalesAccountCloseActivity").Should().Be(true);
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountGrowthPartnerActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateDiscountSchemeUriActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateTurnoverBandUriActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateGoodCreditActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateRebateActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateAddressActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountUpdateNameActivity").Should().BeTrue();
+            resource.Activities.Any(a => a.ActivityType == "SalesAccountCloseActivity").Should().BeTrue();
         }
     }
 }

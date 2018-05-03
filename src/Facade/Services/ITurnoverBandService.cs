@@ -10,5 +10,7 @@
         IResult<IEnumerable<ProposedTurnoverBand>> ProposeTurnoverBands(string financialYear);
 
         IResult<ProposedTurnoverBand> GetProposedTurnoverBand(int id);
+
+        IResult<IEnumerable<ProposedTurnoverBand>> GetProposedTurnoverBands(string financialYear);
     }
 }
