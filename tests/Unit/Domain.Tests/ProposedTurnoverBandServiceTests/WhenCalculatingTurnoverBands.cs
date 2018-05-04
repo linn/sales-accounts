@@ -7,6 +7,7 @@
 
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Domain.External;
+    using Linn.SalesAccounts.Domain.Models;
 
     using NSubstitute;
 
@@ -14,7 +15,7 @@
 
     public class WhenCalculatingTurnoverBands : ContextBase
     {
-        private IEnumerable<ProposedTurnoverBand> results;
+        private TurnoverBandProposal result;
 
         private string financialYear;
 
@@ -46,7 +47,7 @@
                                 new SalesDataDetail { Id = "4", CurrencyValue = 333, CurrencyCode = "NEW", BaseValue = 333 }
                              });
             this.SalesAccountRepository.GetAllOpenAccounts().Returns(new[] { this.account1, this.account2, this.account3, this.account4 });
-            this.results = this.Sut.CalculateProposedTurnoverBands(this.financialYear);
+            this.result = this.Sut.CalculateProposedTurnoverBands(this.financialYear);
         }
 
         [Test]
@@ -68,24 +69,31 @@
         }
 
         [Test]
+        public void ShouldReturnYear()
+        {
+            this.result.FinancialYear.Should().Be(this.financialYear);
+        }
+
+        [Test]
         public void ShouldReturnTwoTurnoverBandProposals()
         {
-            this.results.Should().HaveCount(3);
-            var firstProposal = this.results.First(r => r.SalesAccount.Id == 1);
+            var results = this.result.ProposedTurnoverBands.ToList();
+            results.Should().HaveCount(3);
+            var firstProposal = results.First(r => r.SalesAccount.Id == 1);
             firstProposal.ProposedTurnoverBandUri.Should().Be("/tb/1");
             firstProposal.CalculatedTurnoverBandUri.Should().Be("/tb/1");
             firstProposal.SalesValueCurrency.Should().Be(111);
             firstProposal.IncludeInUpdate.Should().BeTrue();
             firstProposal.FinancialYear.Should().Be(this.financialYear);
             firstProposal.SalesValueBase.Should().Be(111);
-            var secondProposal = this.results.First(r => r.SalesAccount.Id == 3);
+            var secondProposal = results.First(r => r.SalesAccount.Id == 3);
             secondProposal.ProposedTurnoverBandUri.Should().Be("/tb/2");
             secondProposal.CalculatedTurnoverBandUri.Should().Be("/tb/2");
             secondProposal.SalesValueCurrency.Should().Be(333);
             secondProposal.IncludeInUpdate.Should().BeTrue();
             secondProposal.FinancialYear.Should().Be(this.financialYear);
             secondProposal.SalesValueBase.Should().Be(333);
-            var thirdProposal = this.results.First(r => r.SalesAccount.Id == 4);
+            var thirdProposal = results.First(r => r.SalesAccount.Id == 4);
             thirdProposal.ProposedTurnoverBandUri.Should().Be(string.Empty);
             thirdProposal.CalculatedTurnoverBandUri.Should().Be(string.Empty);
             thirdProposal.SalesValueCurrency.Should().Be(333);

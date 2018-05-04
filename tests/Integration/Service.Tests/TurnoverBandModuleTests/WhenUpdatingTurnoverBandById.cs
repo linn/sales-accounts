@@ -33,7 +33,7 @@
             this.TurnoverBandService.OverrideTurnoverBand(88, "/tb/12")
                 .Returns(new SuccessResult<ProposedTurnoverBand>(this.proposedTurnoverBand));
             this.Response = this.Browser.Put(
-                "/sales/accounts/proposed-turnover-bands/88",
+                "/sales/accounts/turnover-band-proposals/details/88",
                 with =>
                 {
                     with.Header("Accept", "application/json");

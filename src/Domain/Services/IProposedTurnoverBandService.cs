@@ -1,10 +1,10 @@
 ﻿namespace Linn.SalesAccounts.Domain.Services
 {
-    using System.Collections.Generic;
+    using Linn.SalesAccounts.Domain.Models;
 
     public interface IProposedTurnoverBandService
     {
-        IEnumerable<ProposedTurnoverBand> CalculateProposedTurnoverBands(string financialYear);
+        TurnoverBandProposal CalculateProposedTurnoverBands(string financialYear);
 
         string DefaultFinancialYear();
     }

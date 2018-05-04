@@ -7,6 +7,7 @@
 
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Models;
 
     using NSubstitute;
 
@@ -37,8 +38,10 @@
         [Test]
         public void ShouldReturnSuccessResult()
         {
-            this.Results.Should().BeOfType<SuccessResult<IEnumerable<ProposedTurnoverBand>>>();
-            var results = ((SuccessResult<IEnumerable<ProposedTurnoverBand>>)this.Results).Data.ToList();
+            this.Results.Should().BeOfType<SuccessResult<TurnoverBandProposal>>();
+            var result = ((SuccessResult<TurnoverBandProposal>)this.Results).Data;
+            result.FinancialYear.Should().Be(this.financialYear);
+            var results = result.ProposedTurnoverBands.ToList();
             results.Count.Should().Be(1);
             results.First().Id.Should().Be(808);
         }

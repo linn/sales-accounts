@@ -1,9 +1,8 @@
 ﻿namespace Linn.SalesAccounts.Service.Tests.TurnoverBandModuleTests
 {
-    using System.Collections.Generic;
-
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Facade.ResourceBuilders;
     using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Service.Modules;
@@ -30,10 +29,10 @@
                     {
                         with.Dependency(this.TurnoverBandService);
                         with.Dependency<IResourceBuilder<ProposedTurnoverBand>>(new ProposedTurnoverBandResourceBuilder());
-                        with.Dependency<IResourceBuilder<IEnumerable<ProposedTurnoverBand>>>(new ProposedTurnoverBandsResourceBuilder());
+                        with.Dependency<IResourceBuilder<TurnoverBandProposal>>(new TurnoverBandProposalResourceBuilder());
                         with.Module<TurnoverBandModule>();
                         with.ResponseProcessor<ProposedTurnoverBandJsonResponseProcessor>();
-                        with.ResponseProcessor<ProposedTurnoverBandsJsonResponseProcessor>();
+                        with.ResponseProcessor<TurnoverBandProposalJsonResponseProcessor>();
                     });
 
             this.Browser = new Browser(bootstrapper);

@@ -8,6 +8,7 @@
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Resources;
     using Linn.SalesAccounts.Resources.RequestResources;
 
@@ -33,10 +34,11 @@
                                                  new ProposedTurnoverBand { SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")) },
                                                  new ProposedTurnoverBand { SalesAccount = new SalesAccount(new SalesAccountCreateActivity(2, "two")) }
                                              };
+            var proposal = new TurnoverBandProposal(this.requestResource.FinancialYear, this.proposedTurnoverBands);
             this.TurnoverBandService.GetProposedTurnoverBands(this.requestResource.FinancialYear)
-                .Returns(new SuccessResult<IEnumerable<ProposedTurnoverBand>>(this.proposedTurnoverBands));
+                .Returns(new SuccessResult<TurnoverBandProposal>(proposal));
             this.Response = this.Browser.Get(
-                "/sales/accounts/proposed-turnover-bands",
+                "/sales/accounts/turnover-band-proposals",
                 with =>
                 {
                     with.Header("Accept", "application/json");
@@ -53,13 +55,13 @@
         [Test]
         public void ShouldReturnCorrectContentType()
         {
-            this.Response.ContentType.Should().Be("application/vnd.linn.sales.account-proposed-turnover-bands+json;version=1");
+            this.Response.ContentType.Should().Be("application/vnd.linn.sales.accounts-turnover-band-proposal+json;version=1");
         }
 
         [Test]
         public void ShouldReturnResource()
         {
-            var resources = this.Response.Body.DeserializeJson<IEnumerable<ProposedTurnoverBandResource>>().ToList();
+            var resources = this.Response.Body.DeserializeJson<TurnoverBandProposalResource>().ProposedTurnoverBands.ToList();
             resources.Should().HaveCount(2);
             resources.Should().Contain(a => a.SalesAccountId == 1);
             resources.Should().Contain(a => a.SalesAccountId == 2);

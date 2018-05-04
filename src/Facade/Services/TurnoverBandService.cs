@@ -1,10 +1,9 @@
 ﻿namespace Linn.SalesAccounts.Facade.Services
 {
-    using System.Collections.Generic;
-
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
 
@@ -26,12 +25,12 @@
             this.proposedTurnoverBandRepository = proposedTurnoverBandRepository;
         }
 
-        public IResult<IEnumerable<ProposedTurnoverBand>> ProposeTurnoverBands(string financialYear)
+        public IResult<TurnoverBandProposal> ProposeTurnoverBands(string financialYear)
         {
-            var results = this.proposedTurnoverBandService.CalculateProposedTurnoverBands(financialYear);
+            var result = this.proposedTurnoverBandService.CalculateProposedTurnoverBands(financialYear);
             this.transactionManager.Commit();
 
-            return new SuccessResult<IEnumerable<ProposedTurnoverBand>>(results);
+            return new SuccessResult<TurnoverBandProposal>(result);
         }
 
         public IResult<ProposedTurnoverBand> GetProposedTurnoverBand(int id)
@@ -45,15 +44,16 @@
             return new SuccessResult<ProposedTurnoverBand>(proposedBand);
         }
 
-        public IResult<IEnumerable<ProposedTurnoverBand>> GetProposedTurnoverBands(string financialYear)
+        public IResult<TurnoverBandProposal> GetProposedTurnoverBands(string financialYear)
         {
             if (string.IsNullOrEmpty(financialYear))
             {
                 financialYear = this.proposedTurnoverBandService.DefaultFinancialYear();
             }
 
-            return new SuccessResult<IEnumerable<ProposedTurnoverBand>>(
-                this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear));
+            var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear);
+
+            return new SuccessResult<TurnoverBandProposal>(new TurnoverBandProposal(financialYear, proposedTurnoverBands));
         }
 
         public IResult<ProposedTurnoverBand> OverrideTurnoverBand(int id, string turnoverBandUri)
