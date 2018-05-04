@@ -115,7 +115,7 @@
             {
                 return;
             }
-			
+
             if (discountScheme == null)
             {
                 throw new InvalidTurnoverBandException($"Cannot use turnover band {turnoverBandUri} as no discount scheme specified");

@@ -33,7 +33,7 @@
             this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 111 };
 
             this.discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/10", TurnoverBandUris = new[] { "/tb/10" } };
-            this.DiscountSchemeService.GetDiscountScheme(this.salesAccountUpdateResource.DiscountSchemeUri)
+            this.DiscountingService.GetDiscountScheme(this.salesAccountUpdateResource.DiscountSchemeUri)
                 .Returns(this.discountScheme);
             this.SalesAccountRepository.GetById(111).Returns(this.salesAccount);
 

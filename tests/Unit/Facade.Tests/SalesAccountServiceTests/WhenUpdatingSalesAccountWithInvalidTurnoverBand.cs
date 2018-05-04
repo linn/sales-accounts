@@ -18,7 +18,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.DiscountSchemeService.GetDiscountScheme("/ds/1")
+            this.DiscountingService.GetDiscountScheme("/ds/1")
                 .Returns(new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/2" } });
             this.updateResource = new SalesAccountUpdateResource
                                       {

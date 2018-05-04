@@ -12,12 +12,17 @@
     {
         protected override void Load(ContainerBuilder builder)
         {
+            // domain services
+            builder.RegisterType<ProposedTurnoverBandService>().As<IProposedTurnoverBandService>();
+
             // facade services
             builder.RegisterType<SalesAccountService>().As<ISalesAccountService>();
+            builder.RegisterType<TurnoverBandService>().As<ITurnoverBandService>();
 
             // proxies
             builder.RegisterType<RestClient>().As<IRestClient>();
-            builder.RegisterType<DiscountSchemeService>().As<IDiscountSchemeService>().WithParameter("proxyRoot", ConfigurationManager.Configuration["PROXY_ROOT"]);
+            builder.RegisterType<DiscountingService>().As<IDiscountingService>().WithParameter("proxyRoot", ConfigurationManager.Configuration["PROXY_ROOT"]);
+            builder.RegisterType<SalesReportingService>().As<ISalesReportingService>().WithParameter("proxyRoot", ConfigurationManager.Configuration["PROXY_ROOT"]);
         }
     }
 }

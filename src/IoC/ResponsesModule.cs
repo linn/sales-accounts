@@ -7,6 +7,7 @@
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Facade.ResourceBuilders;
 
     public class ResponsesModule : Module
@@ -16,6 +17,8 @@
             // resource builders
             builder.RegisterType<SalesAccountResourceBuilder>().As<IResourceBuilder<SalesAccount>>();
             builder.RegisterType<SalesAccountsResourceBuilder>().As<IResourceBuilder<IEnumerable<SalesAccount>>>();
+            builder.RegisterType<ProposedTurnoverBandResourceBuilder>().As<IResourceBuilder<ProposedTurnoverBand>>();
+            builder.RegisterType<TurnoverBandProposalResourceBuilder>().As<IResourceBuilder<TurnoverBandProposal>>();
             builder.RegisterType<SalesAccountActivitiesResourceBuilder>().As<IResourceBuilder<IEnumerable<SalesAccountActivity>>>();
         }
     }

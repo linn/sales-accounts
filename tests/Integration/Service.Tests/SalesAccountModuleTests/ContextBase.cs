@@ -27,7 +27,7 @@
 
         protected ISalesAccountUpdatedDispatcher SalesAccountUpdatedDispatcher { get; private set; }
 
-        protected IDiscountSchemeService DiscountSchemeService { get; private set; }
+        protected IDiscountingService DiscountingService { get; private set; }
 
         protected ITransactionManager TransactionManager { get; private set; }
 
@@ -35,7 +35,7 @@
         public void EstablishContext()
         {
             this.SalesAccountRepository = Substitute.For<ISalesAccountRepository>();
-            this.DiscountSchemeService = Substitute.For<IDiscountSchemeService>();
+            this.DiscountingService = Substitute.For<IDiscountingService>();
             this.SalesAccountUpdatedDispatcher = Substitute.For<ISalesAccountUpdatedDispatcher>();
             this.TransactionManager = Substitute.For<ITransactionManager>();
 
@@ -44,7 +44,7 @@
                     {
                         with.Dependency(this.SalesAccountRepository);
                         with.Dependency(this.SalesAccountUpdatedDispatcher);
-                        with.Dependency(this.DiscountSchemeService);
+                        with.Dependency(this.DiscountingService);
                         with.Dependency(this.TransactionManager);
                         with.Dependency<SalesAccountService>();
                         with.Dependency<IResourceBuilder<SalesAccount>>(new SalesAccountResourceBuilder());

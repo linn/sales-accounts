@@ -1,4 +1,4 @@
-﻿namespace Linn.SalesAccounts.Proxy.Tests.DiscountSchemeServiceTests
+﻿namespace Linn.SalesAccounts.Proxy.Tests.DiscountingServiceTests
 {
     using Linn.Common.Proxy;
     using Linn.SalesAccounts.Domain.External;
@@ -9,7 +9,7 @@
 
     public class ContextBase
     {
-        protected DiscountSchemeService Sut { get; private set; }
+        protected DiscountingService Sut { get; private set; }
 
         protected DiscountScheme Result { get; set; }
 
@@ -22,7 +22,7 @@
         {
             this.ProxyRoot = "http://app.linn.co.uk";
             this.RestClient = Substitute.For<IRestClient>();
-            this.Sut = new DiscountSchemeService(this.RestClient, this.ProxyRoot);
+            this.Sut = new DiscountingService(this.RestClient, this.ProxyRoot);
         }
     }
 }

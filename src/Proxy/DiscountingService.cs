@@ -14,13 +14,13 @@
     using Linn.SalesAccounts.Proxy.Exceptions;
     using Linn.SalesAccounts.Resources.External;
 
-    public class DiscountSchemeService : IDiscountSchemeService
+    public class DiscountingService : IDiscountingService
     {
         private readonly IRestClient restClient;
 
         private readonly string proxyRoot;
 
-        public DiscountSchemeService(IRestClient restClient, string proxyRoot)
+        public DiscountingService(IRestClient restClient, string proxyRoot)
         {
             this.restClient = restClient;
             this.proxyRoot = proxyRoot;
@@ -60,6 +60,35 @@
                            TurnoverBandSetUri = turnoverBandSetUri == null ? string.Empty : turnoverBandSetUri.ToString(),
                            TurnoverBandUris = turnoverBandResource?.TurnoverBands.Select(a => Relation.First(a.Links, "self").ToString())
                        };
+        }
+
+        public string GetTurnoverBandForTurnoverValue(string turnoverBandSetUri, string currencyCode, decimal turnoverValue)
+        {
+            if (string.IsNullOrEmpty(turnoverBandSetUri))
+            {
+                return null;
+            }
+
+            var uri = new Uri(
+                $"{this.proxyRoot}{turnoverBandSetUri}/turnover-bands?currencyUri=/currencies/{currencyCode}&turnoverValue={turnoverValue}",
+                UriKind.RelativeOrAbsolute);
+
+            var response = this.restClient.Get(
+                CancellationToken.None,
+                uri,
+                new Dictionary<string, string>(),
+                DefaultHeaders.JsonGetHeaders()).Result;
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new ProxyException("Error retrieving turnover band.");
+            }
+
+            var json = new JsonSerializer();
+            var turnoverBand = json.Deserialize<TurnoverBandResource>(response.Value);
+
+
+            return Relation.First(turnoverBand.Links, "self").ToString();
         }
 
         private TurnoverBandSetResource GetTurnoverBandSet(string turnoverBandSetUri)

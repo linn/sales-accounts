@@ -23,19 +23,19 @@
 
         private readonly ISalesAccountRepository salesAccountRepository;
 
-        private readonly IDiscountSchemeService discountSchemeService;
+        private readonly IDiscountingService discountingService;
 
         private readonly ISalesAccountUpdatedDispatcher salesAccountUpdatedDispatcher;
 
         public SalesAccountService(
             ITransactionManager transactionManager,
             ISalesAccountRepository salesAccountRepository,
-            IDiscountSchemeService discountSchemeService,
+            IDiscountingService discountingService,
             ISalesAccountUpdatedDispatcher salesAccountUpdatedDispatcher)
         {
             this.transactionManager = transactionManager;
             this.salesAccountRepository = salesAccountRepository;
-            this.discountSchemeService = discountSchemeService;
+            this.discountingService = discountingService;
             this.salesAccountUpdatedDispatcher = salesAccountUpdatedDispatcher;
         }
 
@@ -94,7 +94,7 @@
                 return new NotFoundResult<SalesAccount>();
             }
 
-            var discountScheme = this.discountSchemeService.GetDiscountScheme(updateResource.DiscountSchemeUri);
+            var discountScheme = this.discountingService.GetDiscountScheme(updateResource.DiscountSchemeUri);
             if (!string.IsNullOrEmpty(updateResource.DiscountSchemeUri) && discountScheme == null)
             {
                 return new BadRequestResult<SalesAccount>($"Could not find discount scheme {updateResource.DiscountSchemeUri}");
