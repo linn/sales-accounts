@@ -6,4 +6,10 @@
     <RootNamespace>Linn.SalesAccounts.Domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="NSubstitute">
+      <HintPath>..\..\..\..\Users\RichardP\.nuget\packages\nsubstitute\3.1.0\lib\netstandard1.3\NSubstitute.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

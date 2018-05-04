@@ -1,5 +1,7 @@
 ﻿namespace Linn.SalesAccounts.Facade.ResourceBuilders
 {
+    using System;
+
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
@@ -98,6 +100,16 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = activity.ChangedOn.ToString("o"),
+                           TurnoverBandUri = activity.TurnoverBandUri
+                       };
+        }
+
+        public SalesAccountActivityResource Visit(SalesAccountApplyTurnoverBandProposalActivity activity)
+        {
+            return new SalesAccountApplyTurnoverBandProposalActivityResource
+                       {
+                           ActivityType = activity.GetType().Name,
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            TurnoverBandUri = activity.TurnoverBandUri
                        };
         }

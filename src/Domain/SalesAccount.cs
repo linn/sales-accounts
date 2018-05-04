@@ -109,6 +109,15 @@
             this.Activities.Add(growthPartnerActivity);
         }
 
+        public void ApplyTurnoverBandProposal(ProposedTurnoverBand proposedTurnoverBand)
+        {
+            var activity = new SalesAccountApplyTurnoverBandProposalActivity(
+                proposedTurnoverBand.ProposedTurnoverBandUri,
+                proposedTurnoverBand.FinancialYear);
+            this.Activities.Add(activity);
+            this.TurnoverBandUri = activity.TurnoverBandUri;
+        }
+
         private void CheckUpdate(DiscountScheme discountScheme, string turnoverBandUri)
         {
             if (string.IsNullOrEmpty(turnoverBandUri))

@@ -23,7 +23,9 @@
 
         private object AcceptProposedTurnoverBands()
         {
-            throw new System.NotImplementedException();
+            var resource = this.Bind<ProposedTurnoverBandRequestResource>();
+            var turnoverBandProposal = this.turnoverBandService.ApplyTurnoverBandProposal(resource.FinancialYear);
+            return this.Negotiate.WithModel(turnoverBandProposal);
         }
 
         private object GetProposedTurnoverBand(int id)

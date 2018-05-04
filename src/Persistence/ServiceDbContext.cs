@@ -29,7 +29,8 @@
                 .HasValue<SalesAccountUpdateTurnoverBandUriActivity>("update-turnover-band")
                 .HasValue<SalesAccountGrowthPartnerActivity>("update-growth-partner")
                 .HasValue<SalesAccountUpdateNameActivity>("update-name")
-                .HasValue<SalesAccountUpdateAddressActivity>("update-address");
+                .HasValue<SalesAccountUpdateAddressActivity>("update-address")
+                .HasValue<SalesAccountApplyTurnoverBandProposalActivity>("apply-turnover-band");
 
             builder.Entity<SalesAccountCreateActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateGoodCreditActivity>().HasBaseType<SalesAccountActivity>();
@@ -39,6 +40,7 @@
             builder.Entity<SalesAccountUpdateNameActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountGrowthPartnerActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountUpdateAddressActivity>().HasBaseType<SalesAccountActivity>();
+            builder.Entity<SalesAccountApplyTurnoverBandProposalActivity>().HasBaseType<SalesAccountUpdateTurnoverBandUriActivity>();
 
             builder.Entity<ProposedTurnoverBand>().Property(t => t.Id).ValueGeneratedNever();
             builder.Entity<ProposedTurnoverBand>().HasOne(t => t.SalesAccount);

@@ -13,5 +13,7 @@
         IResult<TurnoverBandProposal> GetProposedTurnoverBands(string financialYear);
 
         IResult<ProposedTurnoverBand> OverrideTurnoverBand(int id, string turnoverBandUri);
+
+        IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear);
     }
 }

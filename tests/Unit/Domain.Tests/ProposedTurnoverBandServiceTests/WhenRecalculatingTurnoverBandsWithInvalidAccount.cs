@@ -89,7 +89,7 @@
         }
 
         [Test]
-        public void ShouldReturnTwoTurnoverBandProposals()
+        public void ShouldReturnTurnoverBandProposals()
         {
             this.results.Should().HaveCount(4);
             var firstProposal = this.results.First(r => r.SalesAccount.Id == 1);

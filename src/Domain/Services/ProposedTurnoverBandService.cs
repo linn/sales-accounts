@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using Linn.SalesAccounts.Domain.Exceptions;
     using Linn.SalesAccounts.Domain.External;
     using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Domain.Repositories;
@@ -39,7 +40,7 @@
 
             var salesAccounts = this.salesAccountRepository.GetAllOpenAccounts();
             var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear).ToList();
-            foreach (var proposedTurnoverBand in proposedTurnoverBands)
+            foreach (var proposedTurnoverBand in proposedTurnoverBands.Where(b => !b.AppliedToAccount))
             {
                 proposedTurnoverBand.IncludeInUpdate = false;
             }
@@ -60,6 +61,23 @@
             }
 
             return new TurnoverBandProposal(financialYear, proposedTurnoverBands);
+        }
+
+        public TurnoverBandProposal ApplyTurnoverBandProposal(string financialYear)
+        {
+            if (string.IsNullOrEmpty(financialYear))
+            {
+                throw new NoFinancialYearSpecifiedException("You must specify the financial year calculations to be applied.");
+            }
+
+            var turnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear).ToList();
+
+            foreach (var proposedTurnoverBand in turnoverBands.Where(t => t.IncludeInUpdate && !t.AppliedToAccount))
+            {
+                proposedTurnoverBand.ApplyTurnoverBandToAccount();
+            }
+
+            return new TurnoverBandProposal(financialYear, turnoverBands);
         }
 
         public string DefaultFinancialYear()
@@ -123,6 +141,7 @@
                                                CalculatedTurnoverBandUri = turnoverBandUri,
                                                ProposedTurnoverBandUri = turnoverBandUri,
                                                IncludeInUpdate = true,
+                                               AppliedToAccount = false,
                                                SalesValueBase = salesForAccount.BaseValue,
                                                SalesValueCurrency = salesForAccount.CurrencyValue
                                            };
@@ -131,11 +150,14 @@
             }
             else
             {
-                proposedTurnoverBand.CalculatedTurnoverBandUri = turnoverBandUri;
-                proposedTurnoverBand.ProposedTurnoverBandUri = turnoverBandUri;
-                proposedTurnoverBand.SalesValueBase = salesForAccount.BaseValue;
-                proposedTurnoverBand.SalesValueCurrency = salesForAccount.CurrencyValue;
-                proposedTurnoverBand.IncludeInUpdate = true;
+                if (!proposedTurnoverBand.AppliedToAccount)
+                {
+                    proposedTurnoverBand.CalculatedTurnoverBandUri = turnoverBandUri;
+                    proposedTurnoverBand.ProposedTurnoverBandUri = turnoverBandUri;
+                    proposedTurnoverBand.SalesValueBase = salesForAccount.BaseValue;
+                    proposedTurnoverBand.SalesValueCurrency = salesForAccount.CurrencyValue;
+                    proposedTurnoverBand.IncludeInUpdate = true;
+                }
             }
         }
     }
