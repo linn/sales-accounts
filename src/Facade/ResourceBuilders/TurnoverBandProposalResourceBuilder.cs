@@ -24,12 +24,13 @@
 
         object IResourceBuilder<TurnoverBandProposal>.Build(TurnoverBandProposal turnoverBandProposal) => this.Build(turnoverBandProposal);
 
-        public string GetLocation(TurnoverBandProposal turnoverBandProposal) => $"/sales/accounts/turnover-band-proposal?financialYear={turnoverBandProposal.FinancialYear}";
+        public string GetLocation(TurnoverBandProposal turnoverBandProposal) => $"/sales/accounts/turnover-band-proposals?financialYear={turnoverBandProposal.FinancialYear}";
 
         private IEnumerable<LinkResource> BuildLinks(TurnoverBandProposal turnoverBandProposal)
         {
             yield return new LinkResource("self", this.GetLocation(turnoverBandProposal));
-            yield return new LinkResource("apply-proposal", $"/sales/accounts/apply-turnover-band-proposal?financialYear={turnoverBandProposal.FinancialYear}");
+
+            yield return new LinkResource("apply-proposal", $"{this.GetLocation(turnoverBandProposal)}/apply?financialYear={turnoverBandProposal.FinancialYear}");
         }
     }
 }

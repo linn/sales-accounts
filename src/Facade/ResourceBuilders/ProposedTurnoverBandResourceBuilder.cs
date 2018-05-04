@@ -1,6 +1,5 @@
 ﻿namespace Linn.SalesAccounts.Facade.ResourceBuilders
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -33,6 +32,8 @@
         private IEnumerable<LinkResource> BuildLinks(ProposedTurnoverBand proposedTurnoverBand)
         {
             yield return new LinkResource("sales-account", $"/sales/accounts/{proposedTurnoverBand.SalesAccount.Id}");
+
+            yield return new LinkResource("self", $"/sales/accounts/turnover-band-proposals/details/{proposedTurnoverBand.Id}");
         }
     }
 }
