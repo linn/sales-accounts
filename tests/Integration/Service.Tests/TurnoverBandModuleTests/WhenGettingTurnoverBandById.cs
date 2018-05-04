@@ -29,7 +29,7 @@
             this.TurnoverBandService.GetProposedTurnoverBand(88)
                 .Returns(new SuccessResult<ProposedTurnoverBand>(this.proposedTurnoverBand));
             this.Response = this.Browser.Get(
-                "/sales/accounts/proposed-turnover-bands/88",
+                "/sales/accounts/turnover-band-proposals/details/88",
                 with =>
                 {
                     with.Header("Accept", "application/json");

@@ -13,26 +13,24 @@
 
     using NUnit.Framework;
 
-    public class WhenGettingTurnoverBands : ContextBase
+    public class WhenGettingTurnoverBandsWithNoYearSpecified : ContextBase
     {
         private IEnumerable<ProposedTurnoverBand> proposedTurnoverBands;
-
-        private string financialYear;
 
         [SetUp]
         public void SetUp()
         {
-            this.financialYear = "2018/19";
             this.proposedTurnoverBands = new List<ProposedTurnoverBand> { new ProposedTurnoverBand { Id = 808 } };
-            this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)
+            this.ProposedTurnoverBandService.DefaultFinancialYear().Returns("2018/19");
+            this.ProposedTurnoverBandRepository.GetAllForFinancialYear("2018/19")
                 .Returns(this.proposedTurnoverBands);
-            this.Results = this.Sut.GetProposedTurnoverBands(this.financialYear);
+            this.Results = this.Sut.GetProposedTurnoverBands(null);
         }
 
         [Test]
-        public void ShouldGetFromRepository()
+        public void ShouldGetFromRepositoryUsingDefaultYear()
         {
-            this.ProposedTurnoverBandRepository.Received().GetAllForFinancialYear(this.financialYear);
+            this.ProposedTurnoverBandRepository.Received().GetAllForFinancialYear("2018/19");
         }
 
         [Test]
@@ -40,10 +38,10 @@
         {
             this.Results.Should().BeOfType<SuccessResult<TurnoverBandProposal>>();
             var result = ((SuccessResult<TurnoverBandProposal>)this.Results).Data;
-            result.FinancialYear.Should().Be(this.financialYear);
-            var results = result.ProposedTurnoverBands.ToList();
-            results.Count.Should().Be(1);
-            results.First().Id.Should().Be(808);
+            result.FinancialYear.Should().Be("2018/19");
+            var proposedBands = result.ProposedTurnoverBands.ToList();
+            proposedBands.Count.Should().Be(1);
+            proposedBands.First().Id.Should().Be(808);
         }
     }
 }

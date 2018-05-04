@@ -5,6 +5,7 @@
     using System.Linq;
 
     using Linn.SalesAccounts.Domain.External;
+    using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Domain.Repositories;
 
     public class ProposedTurnoverBandService : IProposedTurnoverBandService
@@ -29,12 +30,11 @@
             this.discountingService = discountingService;
         }
 
-        public IEnumerable<ProposedTurnoverBand> CalculateProposedTurnoverBands(string financialYear)
+        public TurnoverBandProposal CalculateProposedTurnoverBands(string financialYear)
         {
             if (string.IsNullOrEmpty(financialYear))
             {
-                var date = new DateTime(DateTime.Now.Year, 1, 1);
-                financialYear = $"{date.AddYears(-1).Year}/{date:yy}";
+                financialYear = this.DefaultFinancialYear();
             }
 
             var salesAccounts = this.salesAccountRepository.GetAllOpenAccounts();
@@ -59,7 +59,13 @@
                     financialYear);
             }
 
-            return proposedTurnoverBands;
+            return new TurnoverBandProposal(financialYear, proposedTurnoverBands);
+        }
+
+        public string DefaultFinancialYear()
+        {
+            var date = new DateTime(DateTime.Now.Year, 1, 1);
+            return $"{date.AddYears(-1).Year}/{date:yy}";
         }
 
         private SalesDataDetail GetSalesForSalesAccount(

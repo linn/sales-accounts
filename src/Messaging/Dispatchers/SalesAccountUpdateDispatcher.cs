@@ -13,7 +13,7 @@
     {
         private const string ContentType = "application/json";
 
-        private readonly string routingKey = "sales.account.updated";
+        private const string RoutingKey = "sales.account.updated";
 
         private readonly IMessageDispatcher messageDispatcher;
 
@@ -33,7 +33,7 @@
 
             var body = Encoding.UTF8.GetBytes(json);
 
-            this.messageDispatcher.Dispatch(this.routingKey, body, ContentType);
+            this.messageDispatcher.Dispatch(RoutingKey, body, ContentType);
         }
     }
 }

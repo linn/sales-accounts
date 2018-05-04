@@ -14,10 +14,16 @@
         {
             this.turnoverBandService = turnoverBandService;
 
-            this.Get("/sales/accounts/proposed-turnover-bands", _ => this.GetProposedTurnoverBands());
-            this.Get("/sales/accounts/proposed-turnover-bands/{id:int}", parameters => this.GetProposedTurnoverBand(parameters.id));
-            this.Put("/sales/accounts/proposed-turnover-bands/{id:int}", parameters => this.UpdateProposedTurnoverBand(parameters.id));
-            this.Post("/sales/accounts/proposed-turnover-bands", _ => this.SetProposedTurnoverBands());
+            this.Get("/sales/accounts/turnover-band-proposals", _ => this.GetProposedTurnoverBands());
+            this.Get("/sales/accounts/turnover-band-proposals/details/{id:int}", parameters => this.GetProposedTurnoverBand(parameters.id));
+            this.Put("/sales/accounts/turnover-band-proposals/details/{id:int}", parameters => this.UpdateProposedTurnoverBand(parameters.id));
+            this.Post("/sales/accounts/turnover-band-proposals", _ => this.SetProposedTurnoverBands());
+            this.Post("/sales/accounts/turnover-band-proposals/apply", _ => this.AcceptProposedTurnoverBands());
+        }
+
+        private object AcceptProposedTurnoverBands()
+        {
+            throw new System.NotImplementedException();
         }
 
         private object GetProposedTurnoverBand(int id)
@@ -28,15 +34,15 @@
         private object SetProposedTurnoverBands()
         {
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
-            var proposedTurnoverBands = this.turnoverBandService.ProposeTurnoverBands(resource.FinancialYear);
-            return this.Negotiate.WithModel(proposedTurnoverBands);
+            var turnoverBandProposal = this.turnoverBandService.ProposeTurnoverBands(resource.FinancialYear);
+            return this.Negotiate.WithModel(turnoverBandProposal);
         }
 
         private object GetProposedTurnoverBands()
         {
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
-            var proposedTurnoverBands = this.turnoverBandService.GetProposedTurnoverBands(resource.FinancialYear);
-            return this.Negotiate.WithModel(proposedTurnoverBands);
+            var turnoverBandProposal = this.turnoverBandService.GetProposedTurnoverBands(resource.FinancialYear);
+            return this.Negotiate.WithModel(turnoverBandProposal);
         }
 
         private object UpdateProposedTurnoverBand(int id)

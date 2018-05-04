@@ -67,7 +67,7 @@
                                 new SalesDataDetail { Id = "4", CurrencyValue = 444, CurrencyCode = "GBP", BaseValue = 444 }
                              });
             this.SalesAccountRepository.GetAllOpenAccounts().Returns(new[] { this.account1, this.account2, this.account3, this.account4 });
-            this.results = this.Sut.CalculateProposedTurnoverBands(this.financialYear);
+            this.results = this.Sut.CalculateProposedTurnoverBands(this.financialYear).ProposedTurnoverBands;
         }
 
         [Test]
