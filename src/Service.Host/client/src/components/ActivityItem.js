@@ -10,19 +10,19 @@ class ActivityItem extends Component {
             <span>
                 <strong>{type} </strong>
                 {value ? <span>updated <strong>{value}</strong></span> : <span>removed</span>}
-                <span className="small pull-right text-muted">{moment(changedOn).startOf('hour').fromNow()}</span>
+                <span className="small pull-right text-muted">{moment(changedOn).fromNow()}</span>
             </span>
         );
     }
 
-    formatCreateActivity(type, createdDate, name, closedOn, changedOn) {
+    formatCreateActivity(type, createdDate, name, closedOn, changedOn) {        
         return (
             <span>
                 <strong>{type} </strong>
                 <span>on <strong>{moment(createdDate).format('DD MMM YYYY ')}</strong></span>
                 {name && <span> with name <strong>{name}</strong></span>}
-                {closedOn && <span> with closed on date <strong>{moment(closedOn).format('DD MMM YYYY ')}</strong></span>}
-                <span className="small pull-right text-muted">{moment(changedOn).startOf('hour').fromNow()}</span>
+                {closedOn && <span> with closed on date <strong>{moment(closedOn).format('DD MMM YYYY ')}</strong></span>}                
+                <span className="small pull-right text-muted">{moment(changedOn).fromNow()}</span>
             </span>
         );
     }
