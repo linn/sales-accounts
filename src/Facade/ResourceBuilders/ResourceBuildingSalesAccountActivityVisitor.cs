@@ -1,7 +1,6 @@
 ﻿namespace Linn.SalesAccounts.Facade.ResourceBuilders
 {
     using System;
-    using System.Diagnostics;
 
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Resources.SalesAccounts;
