@@ -26,7 +26,7 @@
             var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
             var address = new SalesAccountAddress("ln1", "ln2", string.Empty, string.Empty, "/countries/UK", "post");
 
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 1 };
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name", 4.May(2018))) { Id = 1 };
             this.salesAccount.UpdateAccount(discountScheme, "/tb/1", true, true, true);
             this.salesAccount.UpdateNameAndAddress("new name", address);
             this.salesAccount.CloseAccount(new SalesAccountCloseActivity(17.April(2018)));

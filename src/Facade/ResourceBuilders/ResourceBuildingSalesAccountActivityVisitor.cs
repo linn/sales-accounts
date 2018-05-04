@@ -1,5 +1,7 @@
 ﻿namespace Linn.SalesAccounts.Facade.ResourceBuilders
 {
+    using System;
+
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
     using Linn.SalesAccounts.Resources.SalesAccounts;
 
@@ -10,18 +12,30 @@
             return new SalesAccountCloseActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
-                           ClosedOn = activity.ClosedOn.ToString("o")
-                       };
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
+                           ClosedOn = DateTime.SpecifyKind(activity.ClosedOn, DateTimeKind.Utc).ToString("o"),
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountCreateActivity activity)
         {
+            if (activity.ClosedOn != null)
+            {
+                return new SalesAccountCreateActivityResource
+                           {
+                               AccountId = activity.AccountId,
+                               ActivityType = activity.GetType().Name,
+                               ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
+                               ClosedOn = DateTime.SpecifyKind((DateTime)activity.ClosedOn, DateTimeKind.Utc).ToString("o"),
+                               Name = activity.Name
+                           };
+            }
+
             return new SalesAccountCreateActivityResource
                        {
                            AccountId = activity.AccountId,
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            ClosedOn = activity.ClosedOn?.ToString("o"),
                            Name = activity.Name
                        };
@@ -32,7 +46,7 @@
             return new SalesAccountGrowthPartnerActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            GrowthPartner = activity.GrowthPartner
                        };
         }
@@ -42,7 +56,7 @@
             return new SalesAccountUpdateAddressActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            Line1 = activity.Address?.Line1,
                            Line2 = activity.Address?.Line2,
                            Line3 = activity.Address?.Line3,
@@ -57,7 +71,7 @@
             return new SalesAccountUpdateDiscountSchemeUriActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            DiscountSchemeUri = activity.DiscountSchemeUri
                        };
         }
@@ -67,7 +81,7 @@
             return new SalesAccountUpdateGoodCreditActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            EligibleForGoodCreditDiscount = activity.EligibleForGoodCreditDiscount
                        };
         }
@@ -77,7 +91,7 @@
             return new SalesAccountUpdateNameActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            Name = activity.Name
                        };
         }
@@ -87,7 +101,7 @@
             return new SalesAccountUpdateRebateActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            EligibleForRebate = activity.EligibleForRebate
                        };
         }
@@ -97,7 +111,7 @@
             return new SalesAccountUpdateTurnoverBandUriActivityResource
                        {
                            ActivityType = activity.GetType().Name,
-                           ChangedOn = activity.ChangedOn.ToString("o"),
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            TurnoverBandUri = activity.TurnoverBandUri
                        };
         }
