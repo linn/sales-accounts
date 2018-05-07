@@ -62,7 +62,10 @@
                        };
         }
 
-        public string GetTurnoverBandForTurnoverValue(string turnoverBandSetUri, string currencyCode, decimal turnoverValue)
+        public string GetTurnoverBandForTurnoverValue(
+            string turnoverBandSetUri,
+            string currencyCode,
+            decimal turnoverValue)
         {
             if (string.IsNullOrEmpty(turnoverBandSetUri))
             {
@@ -81,7 +84,7 @@
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                throw new ProxyException("Error retrieving turnover band.");
+                throw new ProxyException($"Error retrieving turnover band at {uri}. Status code {response.StatusCode}.");
             }
 
             var json = new JsonSerializer();
