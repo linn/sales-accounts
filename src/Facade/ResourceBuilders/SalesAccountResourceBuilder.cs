@@ -1,5 +1,6 @@
 ﻿namespace Linn.SalesAccounts.Facade.ResourceBuilders
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -23,7 +24,7 @@
                 DiscountSchemeUri = salesAccount.DiscountSchemeUri,
                 TurnoverBandUri = salesAccount.TurnoverBandUri,
                 Address = salesAccount.Address?.ToResource(),
-                ClosedOn = salesAccount.ClosedOn == null ? string.Empty : salesAccount.ClosedOn.Value.ToString("o"),
+                ClosedOn = salesAccount.ClosedOn == null ? string.Empty : DateTime.SpecifyKind(salesAccount.ClosedOn.Value, DateTimeKind.Utc).ToString("o"),
                 Links = this.BuildLinks(salesAccount).ToArray()
             };
         }
