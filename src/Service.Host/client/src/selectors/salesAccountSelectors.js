@@ -10,11 +10,11 @@ export const getSalesAccount = (salesAccount) => {
 }
 
 export const getSalesAccountName = (salesAccount) => {
-    if (!salesAccount || !salesAccount.item) {
+    if (!salesAccount) {
         return null;
     }
 
-    return salesAccount.item.name;
+    return salesAccount.name;
 }
 
 export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
@@ -37,7 +37,7 @@ export const getDiscountSchemeClosedOn = (salesAccount, discountSchemes) => {
     return discountScheme ? discountScheme.closedOn : null;
 }
 
-export const getTurnoverBandName = (salesAccount, turnoverBandSets) => {
+export const getSalesAccountTurnoverBandName = (salesAccount, turnoverBandSets) => {
     if (!turnoverBandSets || !salesAccount){
         return null;
     }

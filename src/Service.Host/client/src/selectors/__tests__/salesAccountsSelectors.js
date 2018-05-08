@@ -11,7 +11,7 @@ describe('when getting sales account', () => {
         };
 
 
-        const expectedResult = { item: { id: 1, uri: '/1' }  };
+        const expectedResult =  { id: 1, uri: '/1' };
 
         expect(getSalesAccount(salesAccounts, '/1')).toEqual(expectedResult);
     });

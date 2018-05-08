@@ -1,4 +1,4 @@
-import { getSalesAccount, getSalesAccountName, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands } from '../salesAccountSelectors';
+import { getSalesAccount, getSalesAccountName, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands } from '../salesAccountSelectors';
 
 describe('when selecting sales account', () => {
     test('should return sales account', () => {
@@ -51,11 +51,8 @@ describe('when selecting sales account name', () => {
     test('should return name', () => {
 
         const salesAccount = {
-            loading: false,
-            item: {
                 id: 1,
                 name: 'Name'
-            }
         };
 
         const expectedResult = 'Name';
@@ -192,7 +189,7 @@ describe('when selecting turnover band name', () => {
         
         const expectedResult = 'Retailer Low'
 
-        expect(getTurnoverBandName(salesAccount, turnoverBandSets)).toEqual(expectedResult);
+        expect(getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)).toEqual(expectedResult);
     });
 });
 

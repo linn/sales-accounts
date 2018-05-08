@@ -7,12 +7,13 @@ import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets } from '../actions/turnoverBandSets';
 import { getLoading, getProposedTurnoverBands, getFinancialYear } from '../selectors/turnoverBandProposalSelectors';
 
-const mapStateToProps = ({ turnoverBandProposal, salesAccounts, discountSchemes }) => ({
+const mapStateToProps = ({ turnoverBandProposal, salesAccounts, discountSchemes, turnoverBandSets }) => ({
     loading: getLoading(turnoverBandProposal),
     proposedTurnoverBands: getProposedTurnoverBands(turnoverBandProposal),
     financialYear: getFinancialYear(turnoverBandProposal),
     salesAccounts,
-    discountSchemes
+    discountSchemes,
+    turnoverBandSets
 });
 
 const initialise = () => dispatch => {
