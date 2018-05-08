@@ -28,7 +28,8 @@
         public IEnumerable<ProposedTurnoverBand> GetAllForFinancialYear(string financialYear)
         {
             return this.serviceDbContext.ProposedTurnoverBands
-                .Where(s => s.FinancialYear == financialYear);
+                .Where(s => s.FinancialYear == financialYear)
+                .Include(s => s.SalesAccount);
         }
 
         public void Add(ProposedTurnoverBand proposedTurnoverBand)

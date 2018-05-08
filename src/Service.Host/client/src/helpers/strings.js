@@ -1,5 +1,5 @@
 ﻿export const toTitleCase = str => {
-    return str.replace('-', ' ').replace(/([^\W_]+[^\s-]*) */g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    return str.replace(/-/g, ' ').replace(/([^\W_]+[^\s-]*) */g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
 export const isUpperCase = str => {

@@ -9,7 +9,7 @@ const defaultState = {
 
 const salesAccountSearch = (state = defaultState, action) => {
     switch (action.type) {
-    case actionTypes.REQUEST_SALES_ACCOUNTS:
+    case actionTypes.REQUEST_SALES_ACCOUNTS_SEARCH:
         return {
             ...state,
             loading: true,
@@ -17,7 +17,7 @@ const salesAccountSearch = (state = defaultState, action) => {
             items: []
         }
 
-    case actionTypes.RECEIVE_SALES_ACCOUNTS:
+    case actionTypes.RECEIVE_SALES_ACCOUNTS_SEARCH:
         return {
             ...state,
             loading: false,

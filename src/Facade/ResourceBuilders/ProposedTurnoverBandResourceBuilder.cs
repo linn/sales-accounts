@@ -14,13 +14,13 @@
         {
             return new ProposedTurnoverBandResource
             {
-                SalesAccountId = proposedTurnoverBand.SalesAccount.Id,
                 SalesValueBase = proposedTurnoverBand.SalesValueBase,
                 SalesValueCurrency = proposedTurnoverBand.SalesValueCurrency,
                 FinancialYear = proposedTurnoverBand.FinancialYear,
                 CalculatedTurnoverBandUri = proposedTurnoverBand.CalculatedTurnoverBandUri,
                 ProposedTurnoverBandUri = proposedTurnoverBand.ProposedTurnoverBandUri,
                 IncludeInUpdate = proposedTurnoverBand.IncludeInUpdate,
+                AppliedToAccount = proposedTurnoverBand.AppliedToAccount,
                 Links = this.BuildLinks(proposedTurnoverBand).ToArray()
             };
         }

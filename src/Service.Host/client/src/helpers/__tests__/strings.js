@@ -9,6 +9,23 @@ describe('when converting string to title case', () => {
     });
 });
 
+describe('when converting hyphen string to title case', () => {
+    test('should convert correctly', () => {
+        const notTitleCase = 'the-thing';
+        const titleCase = 'The Thing';
+
+        expect(toTitleCase(notTitleCase)).toEqual(titleCase);
+    });
+});
+
+describe('when converting long hyphen string to title case', () => {
+    test('should convert correctly', () => {
+        const notTitleCase = 'the-thing-is-this';
+        const titleCase = 'The Thing Is This';
+
+        expect(toTitleCase(notTitleCase)).toEqual(titleCase);
+    });
+});
 
 describe('when checking if uppercase', () => {
     test('should return true for uppercase', () => {
