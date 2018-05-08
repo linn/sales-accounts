@@ -2,7 +2,7 @@
 import TurnoverBandProposal from '../components/TurnoverBandProposal';
 import initialiseOnMount from './common/initialiseOnMount';
 import { fetchAllSalesAccounts } from '../actions/salesAccounts';
-import { fetchTurnoverBandProposal } from '../actions/turnoverBandProposal';
+import { fetchTurnoverBandProposal, calculateTurnoverBandProposal } from '../actions/turnoverBandProposal';
 import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets } from '../actions/turnoverBandSets';
 import { getLoading, getProposedTurnoverBands, getFinancialYear } from '../selectors/turnoverBandProposalSelectors';
@@ -24,7 +24,8 @@ const initialise = () => dispatch => {
 };
 
 const mapDispatchToProps = {
-    initialise
+    initialise,
+    calculateTurnoverBandProposal
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(initialiseOnMount(TurnoverBandProposal));

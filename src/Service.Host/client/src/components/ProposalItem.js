@@ -10,7 +10,7 @@ class ProposalItem extends Component {
         return (
                 <ListGroupItem>
                     <Row>
-                        <Col xs={2}>{getSalesAccountId(salesAccount)} {getSalesAccountName(salesAccount)}</Col>
+                        <Col xs={3}>{getSalesAccountId(salesAccount)} {getSalesAccountName(salesAccount)}</Col>
                         <Col xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
                         <Col xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
                         <Col xs={2}>{proposalItem.salesValueCurrency}</Col>
