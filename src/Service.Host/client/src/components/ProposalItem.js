@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { ListGroupItem, Button, Row, Col } from 'react-bootstrap';
-import { getSalesAccountName, getDiscountSchemeName, getSalesAccountTurnoverBandName } from '../selectors/salesAccountSelectors';
+import { getSalesAccountName, getSalesAccountId, getDiscountSchemeName, getSalesAccountTurnoverBandName } from '../selectors/salesAccountSelectors';
+import { getTurnoverBandName } from '../selectors/turnoverBandSetSelectors';
 
 class ProposalItem extends Component {
     render() {
@@ -9,11 +10,11 @@ class ProposalItem extends Component {
         return (
                 <ListGroupItem>
                     <Row>
-                        <Col xs={2}>{getSalesAccountName(salesAccount)}</Col>
+                        <Col xs={2}>{getSalesAccountId(salesAccount)} {getSalesAccountName(salesAccount)}</Col>
                         <Col xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
                         <Col xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
                         <Col xs={2}>{proposalItem.salesValueCurrency}</Col>
-                        <Col xs={2}>{proposalItem.proposedTurnoverBandUri}</Col>
+                        <Col xs={2}>{getTurnoverBandName(turnoverBandSets, proposalItem.proposedTurnoverBandUri)}</Col>
                     </Row>
                 </ListGroupItem>
         );

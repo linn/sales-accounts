@@ -13,7 +13,8 @@ import {
     editEligibleForRebate, setEligibleForRebate,
     fetchCountry, fetchActivities
 } from '../actions/salesAccounts';
-import { getSalesAccount, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemes, getDiscountSchemeClosedOn, getActivities } from '../selectors/salesAccountSelectors';
+import { getSalesAccount, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemeClosedOn, getActivities } from '../selectors/salesAccountSelectors';
+import { getDiscountSchemes } from '../selectors/discountSchemesSelectors';
 
 const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { match }) => ({
     salesAccountUri: match.url,

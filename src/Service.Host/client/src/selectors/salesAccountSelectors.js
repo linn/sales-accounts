@@ -17,6 +17,14 @@ export const getSalesAccountName = (salesAccount) => {
     return salesAccount.name;
 }
 
+export const getSalesAccountId = (salesAccount) => {
+    if (!salesAccount) {
+        return null;
+    }
+
+    return salesAccount.id;
+}
+
 export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
     if (!salesAccount || !discountSchemes) {
         return null;
