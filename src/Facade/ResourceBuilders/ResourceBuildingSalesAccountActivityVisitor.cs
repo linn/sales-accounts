@@ -19,24 +19,14 @@
 
         public SalesAccountActivityResource Visit(SalesAccountCreateActivity activity)
         {
-            if (activity.ClosedOn != null)
-            {
-                return new SalesAccountCreateActivityResource
-                           {
-                               AccountId = activity.AccountId,
-                               ActivityType = activity.GetType().Name,
-                               ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                               ClosedOn = DateTime.SpecifyKind((DateTime)activity.ClosedOn, DateTimeKind.Utc).ToString("o"),
-                               Name = activity.Name
-                           };
-            }
-
             return new SalesAccountCreateActivityResource
                        {
                            AccountId = activity.AccountId,
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           ClosedOn = activity.ClosedOn?.ToString("o"),
+                           ClosedOn = activity.ClosedOn.HasValue
+                                          ? DateTime.SpecifyKind(activity.ClosedOn.Value, DateTimeKind.Utc).ToString("o")
+                                          : null,
                            Name = activity.Name
                        };
         }

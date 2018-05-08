@@ -54,7 +54,7 @@
         {
             var resource = this.Response.Body.DeserializeJson<SalesAccountResource>();
             resource.Name.Should().Be("name");
-            resource.ClosedOn.Should().Be("2018-01-30T11:41:53.0000000+00:00");
+            resource.ClosedOn.Should().Be("2018-01-30T11:41:53.0000000Z");
         }
     }
 }
