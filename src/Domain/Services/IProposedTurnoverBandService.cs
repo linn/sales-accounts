@@ -6,6 +6,8 @@
     {
         TurnoverBandProposal CalculateProposedTurnoverBands(string financialYear);
 
+        TurnoverBandProposal ApplyTurnoverBandProposal(string financialYear);
+
         string DefaultFinancialYear();
     }
 }

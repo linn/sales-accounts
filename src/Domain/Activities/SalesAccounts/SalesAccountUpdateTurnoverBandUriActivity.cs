@@ -7,7 +7,7 @@
             this.TurnoverBandUri = turnoverBandUri;
         }
 
-        private SalesAccountUpdateTurnoverBandUriActivity()
+        protected SalesAccountUpdateTurnoverBandUriActivity()
         {
             // ef
         }

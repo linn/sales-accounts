@@ -16,9 +16,17 @@
 
         public bool IncludeInUpdate { get; set; }
 
+        public bool AppliedToAccount { get; set; }
+
         public void OverrideProposedTurnoverBand(string turnoverBandUri)
         {
             this.ProposedTurnoverBandUri = turnoverBandUri;
+        }
+
+        public void ApplyTurnoverBandToAccount()
+        {
+            this.SalesAccount.ApplyTurnoverBandProposal(this);
+            this.AppliedToAccount = true;
         }
     }
 }

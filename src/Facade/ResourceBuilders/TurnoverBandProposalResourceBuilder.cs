@@ -19,7 +19,7 @@
                            FinancialYear = turnoverBandProposal.FinancialYear,
                            ProposedTurnoverBands = turnoverBandProposal.ProposedTurnoverBands.Select(s => this.proposedTurnoverBandResourceBuilder.Build(s)),
                            Links = this.BuildLinks(turnoverBandProposal).ToArray()
-            };
+                       };
         }
 
         object IResourceBuilder<TurnoverBandProposal>.Build(TurnoverBandProposal turnoverBandProposal) => this.Build(turnoverBandProposal);

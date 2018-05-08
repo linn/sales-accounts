@@ -69,5 +69,12 @@
 
             return new SuccessResult<ProposedTurnoverBand>(proposedTurnoverBand);
         }
+
+        public IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear)
+        {
+            var proposal = this.proposedTurnoverBandService.ApplyTurnoverBandProposal(financialYear);
+            this.transactionManager.Commit();
+            return new SuccessResult<TurnoverBandProposal>(proposal);
+        }
     }
 }

@@ -19,5 +19,7 @@
         T Visit(SalesAccountUpdateRebateActivity activity);
 
         T Visit(SalesAccountUpdateTurnoverBandUriActivity activity);
+
+        T Visit(SalesAccountApplyTurnoverBandProposalActivity activity);
     }
 }

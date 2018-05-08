@@ -105,5 +105,15 @@
                            TurnoverBandUri = activity.TurnoverBandUri
                        };
         }
+
+        public SalesAccountActivityResource Visit(SalesAccountApplyTurnoverBandProposalActivity activity)
+        {
+            return new SalesAccountApplyTurnoverBandProposalActivityResource
+                       {
+                           ActivityType = activity.GetType().Name,
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
+                           TurnoverBandUri = activity.TurnoverBandUri
+                       };
+        }
     }
 }
