@@ -12,6 +12,26 @@ const receiveSalesAccountDetail = data => ({
     payload: { data }
 });
 
+const requestSalesAccounts = ()=> ({
+    type: actionTypes.REQUEST_SALES_ACCOUNTS,
+    payload: {}
+});
+
+const receiveSalesAccounts = data => ({
+    type: actionTypes.RECEIVE_SALES_ACCOUNTS,
+    payload: { data }
+});
+
+export const fetchAllSalesAccounts = () => async dispatch => {
+    dispatch(requestSalesAccounts());
+    try {
+        const data = await fetchJson(`${config.appRoot}/sales/accounts`);
+        dispatch(receiveSalesAccounts(data));
+    } catch (e) {
+        alert(`Failed to fetch open sales accounts. Error: ${e.message}`);
+    }
+};
+
 export const fetchSalesAccount = salesAccountUri => async dispatch => {
     dispatch(requestSalesAccountDetail(salesAccountUri));
     try {

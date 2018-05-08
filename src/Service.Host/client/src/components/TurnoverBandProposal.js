@@ -3,10 +3,11 @@ import { Loading } from './common';
 import { Grid, Row, Col, Button, ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
 import { formatDate } from '../helpers/dates';
 import ProposalItem from './ProposalItem';
+import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 
 class TurnoverBandProposal extends Component {
     render() {
-        const { financialYear, loading, proposedTurnoverBands } = this.props;
+        const { financialYear, loading, proposedTurnoverBands, salesAccounts } = this.props;
 
         if (loading) {
             return (<Loading />);
@@ -34,7 +35,7 @@ class TurnoverBandProposal extends Component {
                                     </Row>
                                 </ListGroupItem>
                                 <ListGroup>
-                                    {proposedTurnoverBands.map((item) => (<ProposalItem item={item} key={item.uri} />))}
+                                    {proposedTurnoverBands.map((item) => (<ProposalItem item={item} key={item.uri} salesAccount={getSalesAccount(salesAccounts, item.salesAccountUri)}/>))}
                                 </ListGroup>
                                 </div>
                                 : <Alert bsStyle="warning">No turnover band proposals created</Alert>
