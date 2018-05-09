@@ -20,15 +20,16 @@ class ProposalItem extends Component {
         this.setState({ editBand: false });
     }
 
-    handleSetItem(uri) {
-        let a = uri;
+    handleSetItem() {
+        const { proposalItem, updateProposedTurnoverBand } = this.props;
+        return (turnoverBandUri) => updateProposedTurnoverBand(proposalItem.uri, turnoverBandUri);
     }
 
     render() {
         const { proposalItem, salesAccount, discountSchemes, turnoverBandSets } = this.props;
         const turnoverBands = getTurnoverBands(salesAccount, turnoverBandSets, discountSchemes);
         const displayOnly = false;
-        const currentTurnover = getTurnoverBandName(turnoverBandSets, proposalItem.proposedTurnoverBandUri);
+        const currentTurnoverBandName = getTurnoverBandName(turnoverBandSets, proposalItem.proposedTurnoverBandUri);
         const styles = {
             title: {
                 textAlign: 'right',
@@ -50,14 +51,14 @@ class ProposalItem extends Component {
                         <Col xs={2}>{proposalItem.salesValueCurrency}</Col>
                         <Col onClick={() => this.handleShowModal()} xs={2}>{
                             displayOnly
-                                ? currentTurnover 
-                                : <Button bsStyle="link" style={styles.button} onClick={() => this.handleShowModal()}>{currentTurnover}</Button>
+                                ? currentTurnoverBandName 
+                                : <Button bsStyle="link" style={styles.button} onClick={() => this.handleShowModal()}>{currentTurnoverBandName}</Button>
                        }</Col>
                     </Row>
                 </ListGroupItem>
                 <ListSelectItemModal
                     visible={this.state.editBand} title={'Select Turnover Band'} items={turnoverBands || []}
-                    currentItemUri={proposalItem.proposedTurnoverBandUri} hideModal={() => this.handleCloseModal()} setItem={this.handleSetItem}
+                    currentItemUri={proposalItem.proposedTurnoverBandUri} hideModal={() => this.handleCloseModal()} setItem={this.handleSetItem()}
                 />
             </React.Fragment>
         );

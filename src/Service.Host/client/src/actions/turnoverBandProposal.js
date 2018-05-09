@@ -1,4 +1,4 @@
-﻿import { fetchJson, postJson } from '../helpers/fetchJson';
+﻿import { fetchJson, postJson, putJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
 
@@ -11,6 +11,16 @@ const requestTurnoverBandProposal = (financialYear) => ({
 
 const receiveTurnoverBandProposal = data => ({
     type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
+    payload: { data }
+});
+
+const requestUpdateProposedTurnoverBand = (uri, turnoverBandUri) => ({
+    type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
+    payload: { uri, turnoverBandUri }
+});
+
+const receiveUpdateProposedTurnoverBand = data => ({
+    type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
     payload: { data }
 });
 
@@ -31,5 +41,15 @@ export const calculateTurnoverBandProposal = (financialYear) => async dispatch =
         dispatch(receiveTurnoverBandProposal(data));
     } catch (e) {
         alert(`Failed to calculate turnover band proposal. Error: ${e.message}`);
+    }
+};
+
+export const updateProposedTurnoverBand = (uri, turnoverBandUri) => async dispatch => {
+    dispatch(requestUpdateProposedTurnoverBand(uri, turnoverBandUri));
+    try {
+        const data = await putJson(`${config.appRoot}${uri}`, { turnoverBandUri });
+        dispatch(receiveUpdateProposedTurnoverBand(data));
+    } catch (e) {
+        alert(`Failed to update proposed turnover band. Error: ${e.message}`);
     }
 };

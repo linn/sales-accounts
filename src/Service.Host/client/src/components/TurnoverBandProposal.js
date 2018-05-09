@@ -7,7 +7,16 @@ import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 
 class TurnoverBandProposal extends Component {
     render() {
-        const { financialYear, loading, proposedTurnoverBands, salesAccounts, discountSchemes, turnoverBandSets, calculateTurnoverBandProposal } = this.props;
+        const {
+            financialYear,
+            loading,
+            proposedTurnoverBands,
+            salesAccounts,
+            discountSchemes,
+            turnoverBandSets,
+            calculateTurnoverBandProposal,
+            updateProposedTurnoverBand
+        } = this.props;
 
         if (loading) {
             return (<Loading />);
@@ -46,6 +55,7 @@ class TurnoverBandProposal extends Component {
                                                 salesAccount={getSalesAccount(salesAccounts, proposalItem.salesAccountUri)}
                                                 discountSchemes={discountSchemes}
                                                 turnoverBandSets={turnoverBandSets}
+                                                updateProposedTurnoverBand={updateProposedTurnoverBand}
                                             />))}
                                 </ListGroup>
                                 </div>
