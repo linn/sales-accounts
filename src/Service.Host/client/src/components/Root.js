@@ -1,11 +1,12 @@
 ﻿import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect, Switch } from 'react-router';
 import { ConnectedRouter as Router } from 'react-router-redux';
 import history from '../history';
 import Navigation from './Navigation';
 import App from './App';
 import SalesAccount from '../containers/SalesAccount';
+import TurnoverBandProposal from '../containers/TurnoverBandProposal';
 
 class Root extends Component {
     render() {
@@ -20,7 +21,10 @@ class Root extends Component {
                         <Route exact path="/" render={() => <Redirect to="/sales/accounts" />} />
                         <Route exact path="/sales" render={() => <Redirect to="/sales/accounts" />} />
                         <Route exact path="/sales/accounts" component={App} />
-                        <Route exact path="/sales/accounts/:salesAccountId" component={SalesAccount} />
+                        <Switch>
+                            <Route exact path="/sales/accounts/turnover-band-proposals" component={TurnoverBandProposal} />
+                            <Route exact path="/sales/accounts/:salesAccountId" component={SalesAccount} />
+                        </Switch>
                     </div>
                 </Router>
             </Provider>      

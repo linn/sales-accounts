@@ -2,7 +2,7 @@
 import deepFreeze from 'deep-freeze';
 import * as actionTypes from '../../actions';
 
-describe('sales accounts reducer', () => {
+describe('sales account reducer', () => {
     test('when requesting an account', () => {
         const state =  {
             salesAccountUri: null,

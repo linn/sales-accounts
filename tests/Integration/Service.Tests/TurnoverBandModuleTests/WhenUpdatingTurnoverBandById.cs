@@ -64,7 +64,6 @@
         public void ShouldReturnResource()
         {
             var resource = this.Response.Body.DeserializeJson<ProposedTurnoverBandResource>();
-            resource.SalesAccountId.Should().Be(1);
             resource.ProposedTurnoverBandUri.Should().Be("/tb/12");
         }
     }

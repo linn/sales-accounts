@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
-import { getTurnoverBandName, getDiscountSchemeName, getTurnoverBandSet } from '../selectors/salesAccountSelectors';
+import { getSalesAccountTurnoverBandName, getDiscountSchemeName, getTurnoverBandSet } from '../selectors/salesAccountSelectors';
 
 class ActivityItem extends Component {
 
@@ -74,7 +74,7 @@ class ActivityItem extends Component {
                 );
 
             case 'SalesAccountUpdateTurnoverBandUriActivity':
-                const turnoverBand = getTurnoverBandName(activity, turnoverBandSets);                
+                const turnoverBand = getSalesAccountTurnoverBandName(activity, turnoverBandSets);                
                 return (
                     this.formatActivity('Turnover Band', turnoverBand, activity.changedOn)
                 );

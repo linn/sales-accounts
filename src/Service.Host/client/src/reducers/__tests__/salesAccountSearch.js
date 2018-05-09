@@ -16,7 +16,7 @@ describe('sales account search reducer', () => {
         };
 
         const action = {
-            type: actionTypes.REQUEST_SALES_ACCOUNTS,
+            type: actionTypes.REQUEST_SALES_ACCOUNTS_SEARCH,
             payload: {
                 searchTerm: 'new search'
             }
@@ -43,7 +43,7 @@ describe('sales account search reducer', () => {
         }
 
         const action = {
-            type: actionTypes.RECEIVE_SALES_ACCOUNTS,
+            type: actionTypes.RECEIVE_SALES_ACCOUNTS_SEARCH,
             payload: {
                 searchTerm: 'new search',
                 salesAccounts: [

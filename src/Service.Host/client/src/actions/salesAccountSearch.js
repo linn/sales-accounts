@@ -3,12 +3,12 @@ import config from '../config';
 import * as actionTypes from './index';
 
 const requestSalesAccounts = searchTerm => ({
-    type: actionTypes.REQUEST_SALES_ACCOUNTS,
+    type: actionTypes.REQUEST_SALES_ACCOUNTS_SEARCH,
     payload: { searchTerm }
 });
 
 const receiveSalesAccounts = (searchTerm, salesAccounts) => ({
-    type: actionTypes.RECEIVE_SALES_ACCOUNTS,
+    type: actionTypes.RECEIVE_SALES_ACCOUNTS_SEARCH,
     payload: { searchTerm, salesAccounts }
 });
 

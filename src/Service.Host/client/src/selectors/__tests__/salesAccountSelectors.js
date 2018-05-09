@@ -1,4 +1,4 @@
-import { getSalesAccount, getDiscountSchemeName, getTurnoverBandName, getTurnoverBands, getDiscountSchemes } from '../salesAccountSelectors';
+import { getSalesAccount, getSalesAccountName, getSalesAccountId, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands } from '../salesAccountSelectors';
 
 describe('when selecting sales account', () => {
     test('should return sales account', () => {
@@ -47,6 +47,34 @@ describe('when selecting sales account but not found', () => {
     });
 });
 
+describe('when selecting sales account name', () => {
+    test('should return name', () => {
+
+        const salesAccount = {
+                id: 1,
+                name: 'Name'
+        };
+
+        const expectedResult = 'Name';
+
+        expect(getSalesAccountName(salesAccount)).toEqual(expectedResult);
+    });
+});
+
+describe('when selecting sales account id', () => {
+    test('should return id', () => {
+
+        const salesAccount = {
+            id: 1,
+            name: 'Name'
+        };
+
+        const expectedResult = 1;
+
+        expect(getSalesAccountId(salesAccount)).toEqual(expectedResult);
+    });
+});
+
 describe('when selecting discount scheme name', () => {
     test('should return name', () => {
        
@@ -61,7 +89,7 @@ describe('when selecting discount scheme name', () => {
             closedOn: ''            
         }
 
-        const discountSchemes =  [
+        const discountSchemes = [
             {
                 name: 'Retailer',
                 rules: [],
@@ -85,14 +113,14 @@ describe('when selecting discount scheme name', () => {
                         href: '/sales/discounting/schemes/2'
                     },
                     {
-                      rel: 'turnover-band-set',
-                     href: '/sales/discounting/turnover-band-sets/2'
+                        rel: 'turnover-band-set',
+                        href: '/sales/discounting/turnover-band-sets/2'
                     }
                 ]
-            },
-        ]
-        
-        const expectedResult = 'Retailer'
+            }
+        ];
+
+        const expectedResult = 'Retailer';
 
         expect(getDiscountSchemeName(salesAccount, discountSchemes)).toEqual(expectedResult);
     });
@@ -112,7 +140,7 @@ describe('when selecting turnover band name', () => {
             closedOn: ''            
         }
 
-        const turnoverBandSets =  [
+        const turnoverBandSets = [
             {
                 name: 'Retailer',
                 turnoverBands: [
@@ -170,12 +198,12 @@ describe('when selecting turnover band name', () => {
                         href: '/sales/discounting/turnover-band-sets/2'
                     }
                 ]
-            },           
-        ]
+            }
+        ];
         
         const expectedResult = 'Retailer Low'
 
-        expect(getTurnoverBandName(salesAccount, turnoverBandSets)).toEqual(expectedResult);
+        expect(getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)).toEqual(expectedResult);
     });
 });
 
@@ -204,7 +232,7 @@ describe('when selecting turnover bands', () => {
             }
         };
 
-        const discountSchemes =  [
+        const discountSchemes = [
             {
                 name: 'Retailer',
                 rules: [],
@@ -228,14 +256,14 @@ describe('when selecting turnover bands', () => {
                         href: '/sales/discounting/schemes/2'
                     },
                     {
-                      rel: 'turnover-band-set',
-                     href: '/sales/discounting/turnover-band-sets/2'
+                        rel: 'turnover-band-set',
+                        href: '/sales/discounting/turnover-band-sets/2'
                     }
                 ]
-            },
-        ]
+            }
+        ];
 
-        const turnoverBandSets =  [
+        const turnoverBandSets = [
             {
                 name: 'Retailer',
                 turnoverBands: [
@@ -293,9 +321,9 @@ describe('when selecting turnover bands', () => {
                         href: '/sales/discounting/turnover-band-sets/2'
                     }
                 ]
-            },           
-        ]
-        
+            }
+        ];
+
         const expectedResult = [
             {
                 name: 'Retailer Low',
@@ -315,66 +343,8 @@ describe('when selecting turnover bands', () => {
                     }
                 ]
             }
-        ]
+        ];
         
         expect(getTurnoverBands(salesAccount, turnoverBandSets, discountSchemes)).toEqual(expectedResult);
-    });
-});
-
-describe('when selecting discount schemes', () => {
-    test('should return only open discount schemes', () => {
-        
-        const discountSchemes =  [
-            {
-                name: 'Retailer',
-                rules: [],
-                closedOn: '',
-                links: [
-                    {
-                        rel: 'self',
-                        href: '/sales/discounting/schemes/1'
-                    },
-                    {
-                        rel: 'turnover-band-set',
-                        href: '/sales/discounting/turnover-band-sets/1'
-                    }
-                ]
-            },
-            {
-                name: 'CI',
-                rules: [],
-                closedOn: '2008-09-15T15:53:00.0000000',
-                links: [
-                    {
-                        rel: 'self',
-                        href: '/sales/discounting/schemes/2'
-                    },
-                    {
-                      rel: 'turnover-band-set',
-                     href: '/sales/discounting/turnover-band-sets/2'
-                    }
-                ]
-            },
-        ]
-
-        const expectedResult = [
-            {
-                name: 'Retailer',
-                rules: [],
-                closedOn: '',
-                links: [
-                    {
-                        rel: 'self',
-                        href: '/sales/discounting/schemes/1'
-                    },
-                    {
-                        rel: 'turnover-band-set',
-                        href: '/sales/discounting/turnover-band-sets/1'
-                    }
-                ]
-            }
-        ]
-        
-        expect(getDiscountSchemes(discountSchemes)).toEqual(expectedResult);
     });
 });

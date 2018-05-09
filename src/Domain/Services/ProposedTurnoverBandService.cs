@@ -96,7 +96,8 @@
                                     CurrencyValue = 0m,
                                     BaseValue = 0m,
                                     Id = salesAccount.Id.ToString(),
-                                    Name = salesAccount.Name
+                                    Name = salesAccount.Name,
+                                    CurrencyCode = "GBP"
                                 };
         }
 

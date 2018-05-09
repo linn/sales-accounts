@@ -31,8 +31,16 @@
             this.requestResource = new ProposedTurnoverBandRequestResource { FinancialYear = "2018/19" };
             this.proposedTurnoverBands = new List<ProposedTurnoverBand>
                                              {
-                                                 new ProposedTurnoverBand { SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")) },
-                                                 new ProposedTurnoverBand { SalesAccount = new SalesAccount(new SalesAccountCreateActivity(2, "two")) }
+                                                 new ProposedTurnoverBand
+                                                     {
+                                                         CalculatedTurnoverBandUri = "/1",
+                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one"))
+                                                     },
+                                                 new ProposedTurnoverBand
+                                                     {
+                                                         CalculatedTurnoverBandUri = "/2",
+                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity(2, "two"))
+                                                     }
                                              };
             var proposal = new TurnoverBandProposal(this.requestResource.FinancialYear, this.proposedTurnoverBands);
             this.TurnoverBandService.GetProposedTurnoverBands(this.requestResource.FinancialYear)
@@ -63,8 +71,8 @@
         {
             var resources = this.Response.Body.DeserializeJson<TurnoverBandProposalResource>().ProposedTurnoverBands.ToList();
             resources.Should().HaveCount(2);
-            resources.Should().Contain(a => a.SalesAccountId == 1);
-            resources.Should().Contain(a => a.SalesAccountId == 2);
+            resources.Should().Contain(a => a.CalculatedTurnoverBandUri == "/1");
+            resources.Should().Contain(a => a.CalculatedTurnoverBandUri == "/2");
         }
     }
 }
