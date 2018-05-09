@@ -23,7 +23,7 @@ const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { 
     discountSchemeStatus: getDiscountSchemeClosedOn(getSalesAccount(salesAccount), discountSchemes),
     turnoverBandName: getSalesAccountTurnoverBandName(getSalesAccount(salesAccount),turnoverBandSets),
     discountSchemes: getDiscountSchemes(discountSchemes),
-    turnoverBands: getTurnoverBands(salesAccount, turnoverBandSets, discountSchemes),
+    turnoverBands: getTurnoverBands(getSalesAccount(salesAccount), turnoverBandSets, discountSchemes),
     editGoodCreditVisible: salesAccount.editGoodCreditVisible,
     editDiscountSchemeVisible: salesAccount.editDiscountSchemeVisible,
     editTurnoverBandVisible: salesAccount.editTurnoverBandVisible,

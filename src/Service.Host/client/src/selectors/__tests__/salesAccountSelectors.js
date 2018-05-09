@@ -211,16 +211,6 @@ describe('when selecting turnover bands', () => {
     test('should return band for the sales account\'s current discount scheme', () => {
         
         const salesAccount = {
-            salesAccountUri: '/sales/accounts/1',
-            loading: false,
-            editDiscountSchemeVisible: false,
-            editTurnoverBandVisible: false,
-            editGoodCreditVisible: false,
-            editGrowthPartnerVisible: false,
-            editEligibleForRebateVisible: false,
-            dirty: false,
-            saving: false,
-            item: {
                 id: 1,
                 name: 'TeddyBartons',
                 turnoverBandUri: '/sales/discounting/turnover-band-sets/1/turnover-bands/1',
@@ -229,7 +219,6 @@ describe('when selecting turnover bands', () => {
                 eligibleForRebate: false,
                 growthPartner: false,
                 closedOn: ''            
-            }
         };
 
         const discountSchemes = [

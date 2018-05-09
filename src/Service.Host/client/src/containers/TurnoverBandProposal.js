@@ -1,7 +1,7 @@
 ﻿import { connect } from 'react-redux';
 import TurnoverBandProposal from '../components/TurnoverBandProposal';
 import initialiseOnMount from './common/initialiseOnMount';
-import { fetchAllSalesAccounts } from '../actions/salesAccounts';
+import { fetchAllOpenSalesAccounts } from '../actions/salesAccounts';
 import { fetchTurnoverBandProposal, calculateTurnoverBandProposal } from '../actions/turnoverBandProposal';
 import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets } from '../actions/turnoverBandSets';
@@ -18,7 +18,7 @@ const mapStateToProps = ({ turnoverBandProposal, salesAccounts, discountSchemes,
 
 const initialise = () => dispatch => {
     dispatch(fetchTurnoverBandProposal());
-    dispatch(fetchAllSalesAccounts());
+    dispatch(fetchAllOpenSalesAccounts());
     dispatch(fetchDiscountSchemes());
     dispatch(fetchTurnoverBandSets());
 };

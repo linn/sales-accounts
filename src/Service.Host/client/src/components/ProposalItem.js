@@ -26,7 +26,7 @@ class ProposalItem extends Component {
 
     render() {
         const { proposalItem, salesAccount, discountSchemes, turnoverBandSets } = this.props;
-        const turnoverBands = getTurnoverBands({ item: salesAccount }, turnoverBandSets, discountSchemes);
+        const turnoverBands = getTurnoverBands(salesAccount, turnoverBandSets, discountSchemes);
         const displayOnly = false;
         const currentTurnover = getTurnoverBandName(turnoverBandSets, proposalItem.proposedTurnoverBandUri);
         const styles = {
