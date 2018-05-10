@@ -1,4 +1,4 @@
-﻿import { fetchJson, postJson, putJson } from '../helpers/fetchJson';
+﻿import { fetchJson, postJson, putJson, deleteJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
 
@@ -51,6 +51,16 @@ export const updateProposedTurnoverBand = (uri, turnoverBandUri) => async dispat
         dispatch(receiveUpdateProposedTurnoverBand(uri, data));
     } catch (e) {
         alert(`Failed to update proposed turnover band. Error: ${e.message}`);
+    }
+};
+
+export const excludeProposedTurnoverBand = (uri) => async dispatch => {
+    dispatch(requestUpdateProposedTurnoverBand(uri));
+    try {
+        const data = await deleteJson(`${config.appRoot}${uri}`, {});
+        dispatch(receiveUpdateProposedTurnoverBand(uri, data));
+    } catch (e) {
+        alert(`Failed to exclude proposed turnover band ${uri}. Error: ${e.message}`);
     }
 };
 

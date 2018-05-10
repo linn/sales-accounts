@@ -17,7 +17,8 @@ class TurnoverBandProposal extends Component {
             turnoverBandSets,
             calculateTurnoverBandProposal,
             updateProposedTurnoverBand,
-            applyTurnoverBandProposal
+            applyTurnoverBandProposal,
+            excludeProposedTurnoverBand
         } = this.props;
 
         if (loading) {
@@ -59,6 +60,7 @@ class TurnoverBandProposal extends Component {
                                                 discountSchemes={discountSchemes}
                                                 turnoverBandSets={turnoverBandSets}
                                                 updateProposedTurnoverBand={updateProposedTurnoverBand}
+                                                excludeProposedTurnoverBand={excludeProposedTurnoverBand}
                                             />))}
                                 </ListGroup>
                                 </div>

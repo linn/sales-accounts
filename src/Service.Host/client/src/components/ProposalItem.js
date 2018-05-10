@@ -20,6 +20,21 @@ class ProposalItem extends Component {
         this.setState({ editBand: false });
     }
 
+    handleExclude() {
+        const { proposalItem, excludeProposedTurnoverBand } = this.props;
+        excludeProposedTurnoverBand(proposalItem.uri);
+    }
+
+    handleInclude() {
+        const { proposalItem, updateProposedTurnoverBand } = this.props;
+        updateProposedTurnoverBand(proposalItem.uri, proposalItem.proposedTurnoverBandUri);
+    }
+
+    handleRevert() {
+        const { proposalItem, updateProposedTurnoverBand } = this.props;
+        updateProposedTurnoverBand(proposalItem.uri, proposalItem.calculatedTurnoverBandUri);
+    }
+
     makeSetItemHandler() {
         const { proposalItem, updateProposedTurnoverBand } = this.props;
         return (turnoverBandUri) => updateProposedTurnoverBand(proposalItem.uri, turnoverBandUri);
@@ -59,7 +74,7 @@ class ProposalItem extends Component {
                         <Col xs={1}>{
                             proposalItem.calculatedTurnoverBandUri !== proposalItem.proposedTurnoverBandUri && !displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip2">{`Revert back to calulated turnover band of ${getTurnoverBandName(turnoverBandSets, proposalItem.calculatedTurnoverBandUri)}`}</Tooltip>}>
-                                    <Button bsSize="small">
+                                    <Button bsSize="small" onClick={() => this.handleRevert()}>
                                         <Glyphicon glyph="refresh" />
                                     </Button>
                                 </OverlayTrigger>
@@ -68,14 +83,14 @@ class ProposalItem extends Component {
                         <Col xs={1}>{  
                             !proposalItem.includeInUpdate
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip3">Reinclude in proposal</Tooltip>}>
-                                      <Button bsSize="small">
+                                    <Button bsSize="small" onClick={() => this.handleInclude()}>
                                           <Glyphicon glyph="plus" />
                                       </Button>
                                   </OverlayTrigger>
                                 : '' }
                             {!displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip4">Remove from proposal</Tooltip>}>
-                                      <Button bsSize="small">
+                                    <Button bsSize="small" onClick={() => this.handleExclude()}>
                                           <Glyphicon glyph="remove" />
                                       </Button>
                                   </OverlayTrigger> : ''}
