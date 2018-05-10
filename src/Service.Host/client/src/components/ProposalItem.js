@@ -83,14 +83,14 @@ class ProposalItem extends Component {
                         <Col xs={1}>{  
                             !proposalItem.includeInUpdate
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip3">Reinclude in proposal</Tooltip>}>
-                                    <Button bsSize="small" onClick={() => this.handleInclude()}>
+                                    <Button className="muted" bsStyle="success" bsSize="small" onClick={() => this.handleInclude()}>
                                           <Glyphicon glyph="plus" />
                                       </Button>
                                   </OverlayTrigger>
                                 : '' }
                             {!displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip4">Remove from proposal</Tooltip>}>
-                                    <Button bsSize="small" onClick={() => this.handleExclude()}>
+                                    <Button className="muted" bsStyle="danger" bsSize="small" onClick={() => this.handleExclude()}>
                                           <Glyphicon glyph="remove" />
                                       </Button>
                                   </OverlayTrigger> : ''}
