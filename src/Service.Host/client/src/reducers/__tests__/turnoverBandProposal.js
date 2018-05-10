@@ -89,6 +89,70 @@ describe('turnover band proposal reducer tests', () => {
 
         expect(turnoverBandProposal(state, action)).toEqual(expected);
     });
+
+    test('when requesting update to proposed turnover band', () => {
+        const state = [];
+
+        const action = {
+            type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
+            payload: { uri : '/1', turnoverBandUri: '/2' }
+        };
+
+        const expected = {
+            loading: true
+        }
+
+        deepFreeze(state);
+
+        expect(turnoverBandProposal(state, action)).toEqual(expected);
+    });
+
+    test('when receiving update to proposed turnover band', () => {
+        const state = {
+            financialYear: '2030',
+            loading: true,
+            uri: '/sales/accounts/turnover-band-proposals?financialYear=2030',
+            proposedTurnoverBands: [{ uri: '/tbp/1' }, { uri: '/tbp/2' }, { uri: '/tbp/3' }]
+        };
+
+        const action = {
+            type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
+            payload: {
+                uri: '/tbp/2',
+                data: {
+                        proposedTurnoverBandUri: '/1',
+                        calculatedTurnoverBandUri: '/1',
+                        includeInUpdate: true,
+                        appliedToAccount: false,
+                        salesValueCurrency: 12,
+                        links: [{ rel: 'sales-account', href: '/sales/accounts/1' }, { rel: 'self', href: '/tbp/2' }]
+                }
+            }
+        };
+
+        const expected = {
+            financialYear: '2030',
+            loading: false,
+            uri: '/sales/accounts/turnover-band-proposals?financialYear=2030',
+            proposedTurnoverBands: [
+                { uri: '/tbp/1' },
+                {
+                    salesAccountUri: '/sales/accounts/1',
+                    proposedTurnoverBandUri: '/1',
+                    calculatedTurnoverBandUri: '/1',
+                    includeInUpdate: true,
+                    appliedToAccount: false,
+                    salesValueCurrency: 12,
+                    uri: '/tbp/2'
+                },
+                { uri: '/tbp/3' }]
+        }
+
+        deepFreeze(state);
+
+        expect(turnoverBandProposal(state, action)).toEqual(expected);
+    });
+
 });
 
     

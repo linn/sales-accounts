@@ -19,9 +19,9 @@ const requestUpdateProposedTurnoverBand = (uri, turnoverBandUri) => ({
     payload: { uri, turnoverBandUri }
 });
 
-const receiveUpdateProposedTurnoverBand = data => ({
+const receiveUpdateProposedTurnoverBand = (uri, data) => ({
     type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
-    payload: { data }
+    payload: { uri, data }
 });
 
 export const fetchTurnoverBandProposal = (financialYear) => async dispatch => {
@@ -48,7 +48,7 @@ export const updateProposedTurnoverBand = (uri, turnoverBandUri) => async dispat
     dispatch(requestUpdateProposedTurnoverBand(uri, turnoverBandUri));
     try {
         const data = await putJson(`${config.appRoot}${uri}`, { turnoverBandUri });
-        dispatch(receiveUpdateProposedTurnoverBand(data));
+        dispatch(receiveUpdateProposedTurnoverBand(uri, data));
     } catch (e) {
         alert(`Failed to update proposed turnover band. Error: ${e.message}`);
     }

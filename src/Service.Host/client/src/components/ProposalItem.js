@@ -20,7 +20,7 @@ class ProposalItem extends Component {
         this.setState({ editBand: false });
     }
 
-    handleSetItem() {
+    makeSetItemHandler() {
         const { proposalItem, updateProposedTurnoverBand } = this.props;
         return (turnoverBandUri) => updateProposedTurnoverBand(proposalItem.uri, turnoverBandUri);
     }
@@ -31,10 +31,6 @@ class ProposalItem extends Component {
         const displayOnly = false;
         const currentTurnoverBandName = getTurnoverBandName(turnoverBandSets, proposalItem.proposedTurnoverBandUri);
         const styles = {
-            title: {
-                textAlign: 'right',
-                marginBottom: '6px'
-            },
             button: {
                 padding: '0',
                 outline: 0
@@ -58,7 +54,7 @@ class ProposalItem extends Component {
                 </ListGroupItem>
                 <ListSelectItemModal
                     visible={this.state.editBand} title={'Select Turnover Band'} items={turnoverBands || []}
-                    currentItemUri={proposalItem.proposedTurnoverBandUri} hideModal={() => this.handleCloseModal()} setItem={this.handleSetItem()}
+                    currentItemUri={proposalItem.proposedTurnoverBandUri} hideModal={() => this.handleCloseModal()} setItem={this.makeSetItemHandler()}
                 />
             </React.Fragment>
         );
