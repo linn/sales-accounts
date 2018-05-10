@@ -20,7 +20,11 @@
 
         public void OverrideProposedTurnoverBand(string turnoverBandUri)
         {
-            this.ProposedTurnoverBandUri = turnoverBandUri;
+            if (!this.AppliedToAccount)
+            {
+                this.ProposedTurnoverBandUri = turnoverBandUri;
+                this.IncludeInUpdate = true;
+            }
         }
 
         public void ApplyTurnoverBandToAccount()

@@ -17,6 +17,7 @@
             this.Get("/sales/accounts/turnover-band-proposals", _ => this.GetProposedTurnoverBands());
             this.Get("/sales/accounts/turnover-band-proposals/details/{id:int}", parameters => this.GetProposedTurnoverBand(parameters.id));
             this.Put("/sales/accounts/turnover-band-proposals/details/{id:int}", parameters => this.UpdateProposedTurnoverBand(parameters.id));
+            this.Delete("/sales/accounts/turnover-band-proposals/details/{id:int}", parameters => this.ExcludeProposedTurnoverBand(parameters.id));
             this.Post("/sales/accounts/turnover-band-proposals", _ => this.SetProposedTurnoverBands());
             this.Post("/sales/accounts/turnover-band-proposals/apply", _ => this.AcceptProposedTurnoverBands());
         }
@@ -51,6 +52,12 @@
         {
             var resource = this.Bind<ProposedTurnoverBandUpdateResource>();
             var turnoverBand = this.turnoverBandService.OverrideTurnoverBand(id, resource.TurnoverBandUri);
+            return this.Negotiate.WithModel(turnoverBand);
+        }
+
+        private object ExcludeProposedTurnoverBand(int id)
+        {
+            var turnoverBand = this.turnoverBandService.ExcludeFromTurnoverBandProposal(id);
             return this.Negotiate.WithModel(turnoverBand);
         }
     }
