@@ -40,7 +40,6 @@
                                                         SalesValueCurrency = 1,
                                                         CalculatedTurnoverBandUri = "/tb/2",
                                                         ProposedTurnoverBandUri = "/tb/2",
-                                                        IncludeInUpdate = true,
                                                         AppliedToAccount = true
                                                     }
                                             };

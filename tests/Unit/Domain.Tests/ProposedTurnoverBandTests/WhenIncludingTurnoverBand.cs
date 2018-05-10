@@ -4,17 +4,17 @@
 
     using NUnit.Framework;
 
-    public class WhenOverridingExcludedBand : ContextBase
+    public class WhenIncludingTurnoverBand : ContextBase
     {
         [SetUp]
         public void SetUp()
         {
             this.Sut.ExcludeFromUpdate();
-            this.Sut.OverrideProposedTurnoverBand("/tb/100");
+            this.Sut.IncludeProposalInUpdate();
         }
 
         [Test]
-        public void ShouldReincludeProposal()
+        public void ShouldIncludeProposedBand()
         {
             this.Sut.IncludeInUpdate.Should().BeTrue();
         }

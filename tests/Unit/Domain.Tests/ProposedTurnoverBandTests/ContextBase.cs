@@ -6,7 +6,7 @@
 
     public abstract class ContextBase
     {
-        protected ProposedTurnoverBand Sut { get; private set; }
+        protected ProposedTurnoverBand Sut { get; set; }
 
         [SetUp]
         public void SetUpContext()
@@ -18,7 +18,6 @@
                                FinancialYear = "2018/19",
                                Id = 1,
                                SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")),
-                               IncludeInUpdate = true,
                                SalesValueCurrency = 1m,
                                SalesValueBase = 1m
             };

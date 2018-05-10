@@ -28,8 +28,7 @@
             this.proposedTurnoverBand = new ProposedTurnoverBand
                                             {
                                                 SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")),
-                                                ProposedTurnoverBandUri = "/tb/12",
-                                                IncludeInUpdate = false
+                                                ProposedTurnoverBandUri = "/tb/12"
                                             };
             this.TurnoverBandService.ExcludeFromTurnoverBandProposal(88)
                 .Returns(new SuccessResult<ProposedTurnoverBand>(this.proposedTurnoverBand));

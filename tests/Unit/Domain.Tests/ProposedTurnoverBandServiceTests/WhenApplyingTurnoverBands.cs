@@ -39,7 +39,6 @@
                                                         SalesValueCurrency = 1,
                                                         CalculatedTurnoverBandUri = "/tb/1",
                                                         ProposedTurnoverBandUri = "/tb/1",
-                                                        IncludeInUpdate = true
                                                     },
                                                 new ProposedTurnoverBand
                                                     {
@@ -48,7 +47,6 @@
                                                         SalesValueCurrency = 2,
                                                         CalculatedTurnoverBandUri = "/tb/2",
                                                         ProposedTurnoverBandUri = "/tb/2",
-                                                        IncludeInUpdate = true
                                                     },
                                                 new ProposedTurnoverBand
                                                     {
@@ -57,7 +55,6 @@
                                                         SalesValueCurrency = 3,
                                                         CalculatedTurnoverBandUri = "/tb/3",
                                                         ProposedTurnoverBandUri = "/tb/3",
-                                                        IncludeInUpdate = true
                                                     }
                                             };
             this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)

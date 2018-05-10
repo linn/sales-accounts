@@ -2,6 +2,11 @@
 {
     public class ProposedTurnoverBand : Entity
     {
+        public ProposedTurnoverBand()
+        {
+            this.IncludeInUpdate = true;
+        }
+
         public SalesAccount SalesAccount { get; set; }
 
         public string FinancialYear { get; set; }
@@ -14,16 +19,31 @@
 
         public string ProposedTurnoverBandUri { get; set; }
 
-        public bool IncludeInUpdate { get; set; }
+        public bool IncludeInUpdate { get; private set; }
 
         public bool AppliedToAccount { get; set; }
 
         public void OverrideProposedTurnoverBand(string turnoverBandUri)
         {
+            if (this.AppliedToAccount)
+            {
+                return;
+            }
+
+            this.ProposedTurnoverBandUri = turnoverBandUri;
+            this.IncludeProposalInUpdate();
+        }
+
+        public void IncludeProposalInUpdate()
+        {
+            this.IncludeInUpdate = true;
+        }
+
+        public void ExcludeFromUpdate()
+        {
             if (!this.AppliedToAccount)
             {
-                this.ProposedTurnoverBandUri = turnoverBandUri;
-                this.IncludeInUpdate = true;
+                this.IncludeInUpdate = false;
             }
         }
 

@@ -78,7 +78,7 @@
                 return new NotFoundResult<ProposedTurnoverBand>();
             }
 
-            proposedTurnoverBand.IncludeInUpdate = false;
+            proposedTurnoverBand.ExcludeFromUpdate();
             this.transactionManager.Commit();
 
             return new SuccessResult<ProposedTurnoverBand>(proposedTurnoverBand);
