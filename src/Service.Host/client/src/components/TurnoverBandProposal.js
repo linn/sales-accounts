@@ -45,9 +45,10 @@ class TurnoverBandProposal extends Component {
                                         <Col xs={3}>Sales Account</Col>
                                         <Col xs={2}>Discount Scheme</Col>
                                         <Col xs={2}>Current</Col>
-                                        <Col xs={2}>Sales Value</Col>
+                                        <Col xs={1}>Sales</Col>
                                         <Col xs={2}>Proposed</Col>
-                                    </b></Row>
+                                        <Col xs={2}></Col>
+                                        </b></Row>
                                 </ListGroupItem>
                                 <ListGroup>
                                         {proposedTurnoverBands.map((proposalItem) => (

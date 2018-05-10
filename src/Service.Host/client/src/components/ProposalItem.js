@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { ListGroupItem, Button, Row, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { ListGroupItem, Button, Row, Col, OverlayTrigger, Tooltip, Glyphicon } from 'react-bootstrap';
 import { getSalesAccountName, getSalesAccountId, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands } from '../selectors/salesAccountSelectors';
 import { getTurnoverBandName } from '../selectors/turnoverBandSetSelectors';
 import ListSelectItemModal from './ListSelectItemModal';
@@ -48,14 +48,38 @@ class ProposalItem extends Component {
                         </Col>
                         <Col xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
                         <Col xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
-                        <Col xs={2}>{proposalItem.salesValueCurrency}</Col>
+                        <Col xs={1}>{proposalItem.salesValueCurrency}</Col>
                         <Col xs={2}>{
                             displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip1">{proposalItem.appliedToAccount ? `${currentTurnoverBandName} has been applied to ${getSalesAccountName(salesAccount)}.` : `${getSalesAccountName(salesAccount)} has been excluded from proposal`}</Tooltip>}>
-                                        <span>{currentTurnoverBandName}</span>
-                                  </OverlayTrigger>
+                                    <span>{currentTurnoverBandName}</span>
+                                </OverlayTrigger>
                                 : <Button bsStyle="link" style={styles.button} onClick={() => this.handleShowModal()}>{currentTurnoverBandName}</Button>
-                       }</Col>
+                        }</Col>
+                        <Col xs={1}>{
+                            proposalItem.calculatedTurnoverBandUri !== proposalItem.proposedTurnoverBandUri && !displayOnly
+                                ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip2">{`Revert back to calulated turnover band of ${getTurnoverBandName(turnoverBandSets, proposalItem.calculatedTurnoverBandUri)}`}</Tooltip>}>
+                                    <Button bsSize="small">
+                                        <Glyphicon glyph="refresh" />
+                                    </Button>
+                                </OverlayTrigger>
+                                : '' }   
+                        </Col>
+                        <Col xs={1}>{  
+                            !proposalItem.includeInUpdate
+                                ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip3">Reinclude in proposal</Tooltip>}>
+                                      <Button bsSize="small">
+                                          <Glyphicon glyph="plus" />
+                                      </Button>
+                                  </OverlayTrigger>
+                                : '' }
+                            {!displayOnly
+                                ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip4">Remove from proposal</Tooltip>}>
+                                      <Button bsSize="small">
+                                          <Glyphicon glyph="remove" />
+                                      </Button>
+                                  </OverlayTrigger> : ''}
+                        </Col>
                     </Row>
                 </ListGroupItem>
                 <ListSelectItemModal

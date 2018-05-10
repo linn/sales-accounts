@@ -87,7 +87,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'PROCESS.ENV': {
                 'appRoot': JSON.stringify('http://localhost:51610'),
-                'proxyRoot': JSON.stringify('http://app.linn.co.uk')
+                'proxyRoot': JSON.stringify('http://localhost:60395')
             }
         })
     ]};
