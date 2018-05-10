@@ -30,7 +30,7 @@
         {
             yield return new LinkResource("self", this.GetLocation(turnoverBandProposal));
 
-            yield return new LinkResource("apply-proposal", $"{this.GetLocation(turnoverBandProposal)}/apply?financialYear={turnoverBandProposal.FinancialYear}");
+            yield return new LinkResource("apply-proposal", $"/sales/accounts/turnover-band-proposals/apply?financialYear={turnoverBandProposal.FinancialYear}");
         }
     }
 }

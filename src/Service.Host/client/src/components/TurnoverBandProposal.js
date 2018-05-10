@@ -8,6 +8,7 @@ import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 class TurnoverBandProposal extends Component {
     render() {
         const {
+            turnoverBandProposal,
             financialYear,
             loading,
             proposedTurnoverBands,
@@ -15,7 +16,8 @@ class TurnoverBandProposal extends Component {
             discountSchemes,
             turnoverBandSets,
             calculateTurnoverBandProposal,
-            updateProposedTurnoverBand
+            updateProposedTurnoverBand,
+            applyTurnoverBandProposal
         } = this.props;
 
         if (loading) {
@@ -61,6 +63,13 @@ class TurnoverBandProposal extends Component {
                                 </div>
                                 : <Alert bsStyle="warning">No turnover band proposals created</Alert>
                             }
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={8}>
+                        </Col>
+                        <Col xs={4}>
+                            <Button className="pull-right" onClick={() => applyTurnoverBandProposal(turnoverBandProposal.applyUri, financialYear)} >Apply Proposal To Accounts</Button>
                         </Col>
                     </Row>
                 </Grid>

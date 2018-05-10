@@ -74,5 +74,21 @@
             resources.Should().Contain(a => a.CalculatedTurnoverBandUri == "/1");
             resources.Should().Contain(a => a.CalculatedTurnoverBandUri == "/2");
         }
+
+        [Test]
+        public void ShoudlHaveSelfRef()
+        {
+            var result = this.Response.Body.DeserializeJson<TurnoverBandProposalResource>();
+            result.Links.First(a => a.Rel == "self").Href
+                .Should().Be("/sales/accounts/turnover-band-proposals?financialYear=2018/19");
+        }
+
+        [Test]
+        public void ShoudlHaveApplyRef()
+        {
+            var result = this.Response.Body.DeserializeJson<TurnoverBandProposalResource>();
+            result.Links.First(a => a.Rel == "apply-proposal").Href
+                .Should().Be("/sales/accounts/turnover-band-proposals/apply?financialYear=2018/19");
+        }
     }
 }

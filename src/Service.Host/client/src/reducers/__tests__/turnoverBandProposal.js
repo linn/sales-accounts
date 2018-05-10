@@ -24,7 +24,9 @@ describe('turnover band proposal reducer tests', () => {
     });
 
     test('when receiving turnover band proposal', () => {
-        const state = {};
+        const state = {
+            financialYear: '2030'
+        };
 
         const action = {
             type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
@@ -39,7 +41,9 @@ describe('turnover band proposal reducer tests', () => {
                         salesValueCurrency: 12,
                         links: [{ rel: 'sales-account', href: '/sales/accounts/1' }, { rel: 'self', href: '/tbp/1' }]
                     }],
-                    links: [{ rel: 'self', href: '/sales/accounts/turnover-band-proposals?financialYear=2030' }]
+                    links: [
+                        { rel: 'self', href: '/sales/accounts/turnover-band-proposals?financialYear=2030' },
+                        { rel: 'apply-proposal', href: '/sales/accounts/turnover-band-proposals/apply?financialYear=2030' }]
                 }
             }
         };
@@ -56,7 +60,8 @@ describe('turnover band proposal reducer tests', () => {
                     salesValueCurrency: 12,
                     uri: '/tbp/1'
                 }],
-            uri : '/sales/accounts/turnover-band-proposals?financialYear=2030',
+            uri: '/sales/accounts/turnover-band-proposals?financialYear=2030',
+            applyUri: '/sales/accounts/turnover-band-proposals/apply?financialYear=2030',
             loading : false
         }
 

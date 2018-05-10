@@ -23,12 +23,13 @@ const turnoverBandProposal = (state = {}, action) => {
             };
 
         case actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL:
-            if (!state.financialYear || state.financialYear === action.payload.financialYear) {
+            if (!state.financialYear || state.financialYear === action.payload.data.financialYear) {
                 return {
                     financialYear: action.payload.data.financialYear,
                     loading: false,
                     proposedTurnoverBands: action.payload.data.proposedTurnoverBands.map(t => getProposedTurnoverBand(t)),
-                    uri: getSelfHref(action.payload.data)
+                    uri: getSelfHref(action.payload.data),
+                    applyUri: getHref(action.payload.data, 'apply-proposal')
                 }
             }
 

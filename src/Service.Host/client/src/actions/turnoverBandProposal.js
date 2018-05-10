@@ -53,3 +53,13 @@ export const updateProposedTurnoverBand = (uri, turnoverBandUri) => async dispat
         alert(`Failed to update proposed turnover band. Error: ${e.message}`);
     }
 };
+
+export const applyTurnoverBandProposal = (uri, financialYear) => async dispatch => {
+    dispatch(requestTurnoverBandProposal(financialYear));
+    try {
+        const data = await postJson(`${config.appRoot}${uri}`, {});
+        dispatch(receiveTurnoverBandProposal(data));
+    } catch (e) {
+        alert(`Failed to apply turnover band proposal. Error: ${e.message}`);
+    }
+};
