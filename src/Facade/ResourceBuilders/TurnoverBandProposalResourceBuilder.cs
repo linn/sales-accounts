@@ -17,7 +17,9 @@
             return new TurnoverBandProposalResource
                        {
                            FinancialYear = turnoverBandProposal.FinancialYear,
-                           ProposedTurnoverBands = turnoverBandProposal.ProposedTurnoverBands.Select(s => this.proposedTurnoverBandResourceBuilder.Build(s)),
+                           ProposedTurnoverBands = turnoverBandProposal.ProposedTurnoverBands
+                               .OrderBy(a => a.SalesAccount.Name)
+                               .Select(s => this.proposedTurnoverBandResourceBuilder.Build(s)),
                            Links = this.BuildLinks(turnoverBandProposal).ToArray()
                        };
         }
