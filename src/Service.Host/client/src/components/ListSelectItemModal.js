@@ -15,7 +15,9 @@ export class ListSelectItemModal extends Component {
                     <ListGroup>
                         {items.map((item, i) => (
                             <ListGroupItem 
-                                bsStyle={item.links.find(l => l.rel === 'self').href === currentItemUri ? 'success' : null} 
+                                bsStyle={item.links.find(l => l.rel === 'self').href === currentItemUri
+                                    ? 'success'
+                                    : null} 
                                 key={i} 
                                 onClick={() => this.handleClick(item, currentItemUri)}>
                                 {item.name}
@@ -28,7 +30,7 @@ export class ListSelectItemModal extends Component {
                     <Button onClick={() => hideModal()}>Close</Button>
                 </Modal.Footer>
             </Modal>
-        )
+        );
     }
 
     handleClick(item, currentItemUri) {

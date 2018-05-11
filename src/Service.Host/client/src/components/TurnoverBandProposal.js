@@ -4,11 +4,40 @@ import { Grid, Row, Col, Button, ListGroup, ListGroupItem, Alert } from 'react-b
 import { formatDate } from '../helpers/dates';
 import ProposalItem from './ProposalItem';
 import { getSalesAccount } from '../selectors/salesAccountsSelectors';
+import YesNoModal from './YesNoModal';
 
 class TurnoverBandProposal extends Component {
+    constructor() {
+        super();
+        this.state = {
+            showRecalculateYesNoModal: false,
+            showApplyYesNoModal: false
+        }
+    }
+
+    handleShowRecalculateYesNoModal() {
+        this.setState({ showRecalculateYesNoModal: true });
+    }
+
+    handleCloseRecalculateYesNoModal() {
+        this.setState({ showRecalculateYesNoModal: false });
+    }
+
+    handleShowApplyYesNoModal() {
+        this.setState({ showApplyYesNoModal: true });
+    }
+
+    handleCloseApplyYesNoModal() {
+        this.setState({ showApplyYesNoModal: false });
+    }
+
+    makeApplyHandler() {
+        const { turnoverBandProposal, financialYear, applyTurnoverBandProposal } = this.props;
+        return () => applyTurnoverBandProposal(turnoverBandProposal.applyUri, financialYear);
+    }
+
     render() {
         const {
-            turnoverBandProposal,
             financialYear,
             loading,
             proposedTurnoverBands,
@@ -17,7 +46,6 @@ class TurnoverBandProposal extends Component {
             turnoverBandSets,
             calculateTurnoverBandProposal,
             updateProposedTurnoverBand,
-            applyTurnoverBandProposal,
             excludeProposedTurnoverBand
         } = this.props;
 
@@ -26,14 +54,14 @@ class TurnoverBandProposal extends Component {
         }
 
         return (
-            <div>
+            <React.Fragment >
                 <Grid>
                     <Row>
                         <Col xs={8}>
                             <h4>Turnover band proposal using sales for {financialYear}</h4>
                         </Col>
                         <Col xs={4}>
-                            <Button className="pull-right" onClick={() => calculateTurnoverBandProposal()} >Recalculate Proposals</Button>
+                            <Button className="pull-right" onClick={() => this.handleShowRecalculateYesNoModal()} >Recalculate Proposals</Button>
                         </Col>
                     </Row>
                     <Row>
@@ -72,11 +100,27 @@ class TurnoverBandProposal extends Component {
                         <Col xs={8}>
                         </Col>
                         <Col xs={4}>
-                            <Button className="pull-right" onClick={() => applyTurnoverBandProposal(turnoverBandProposal.applyUri, financialYear)} >Apply Proposal To Accounts</Button>
+                            <Button className="pull-right" onClick={() => this.handleShowApplyYesNoModal()}>Apply Proposal To Accounts</Button>
                         </Col>
                     </Row>
                 </Grid>
-            </div>
+                <YesNoModal
+                    visible={this.state.showRecalculateYesNoModal} title={'Are you sure?'}
+                    yesButtonText={'Ok'} noButtonText={'Cancel'}
+                    text={'Recalculating proposals will lose ALL unapplied changes.'}
+                    instructionText={'Click OK only if you are sure you want to do this.'}
+                    performYesAction={calculateTurnoverBandProposal}
+                    hideModal={() => this.handleCloseRecalculateYesNoModal()}
+                />
+                <YesNoModal
+                    visible={this.state.showApplyYesNoModal} title={'Are you sure?'}
+                    yesButtonText={'Ok'} noButtonText={'Cancel'}
+                    text={'Applying these proposals will update the turnover band for all selected accounts.'}
+                    instructionText={'Click OK only if you are ready to go ahead with this.'}
+                    performYesAction={this.makeApplyHandler()}
+                    hideModal={() => this.handleCloseApplyYesNoModal()}
+                />
+            </React.Fragment>
         );
     }
 }

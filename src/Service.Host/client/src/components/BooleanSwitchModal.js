@@ -6,7 +6,7 @@ export class BooleanSwitchModal extends Component {
 
     render() {
         const { visible, title, hideModal, trueText, falseText, current } = this.props;
-   
+
         return (
             <Modal bsSize={'sm'} show={visible} onHide={() => hideModal()}>
                 <Modal.Header closeButton>
@@ -22,11 +22,11 @@ export class BooleanSwitchModal extends Component {
                     <Button onClick={() => hideModal()}>Close</Button>
                 </Modal.Footer>
             </Modal>
-        )
+        );
     }
 
     handleChange() {
-        //ToggleButtonGroup onChange doesn't work when using radio and boolean values.
+        // ToggleButtonGroup onChange doesn't work when using radio and boolean values.
         // onChange needs to be present to avoid a console warning
     }
 
