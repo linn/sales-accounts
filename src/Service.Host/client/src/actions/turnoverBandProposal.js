@@ -1,4 +1,4 @@
-﻿import { fetchJson, postJson } from '../helpers/fetchJson';
+﻿import { fetchJson, postJson, putJson, deleteJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
 
@@ -12,6 +12,16 @@ const requestTurnoverBandProposal = (financialYear) => ({
 const receiveTurnoverBandProposal = data => ({
     type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
     payload: { data }
+});
+
+const requestUpdateProposedTurnoverBand = (uri, turnoverBandUri) => ({
+    type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
+    payload: { uri, turnoverBandUri }
+});
+
+const receiveUpdateProposedTurnoverBand = (uri, data) => ({
+    type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
+    payload: { uri, data }
 });
 
 export const fetchTurnoverBandProposal = (financialYear) => async dispatch => {
@@ -31,5 +41,35 @@ export const calculateTurnoverBandProposal = (financialYear) => async dispatch =
         dispatch(receiveTurnoverBandProposal(data));
     } catch (e) {
         alert(`Failed to calculate turnover band proposal. Error: ${e.message}`);
+    }
+};
+
+export const updateProposedTurnoverBand = (uri, turnoverBandUri) => async dispatch => {
+    dispatch(requestUpdateProposedTurnoverBand(uri, turnoverBandUri));
+    try {
+        const data = await putJson(`${config.appRoot}${uri}`, { turnoverBandUri });
+        dispatch(receiveUpdateProposedTurnoverBand(uri, data));
+    } catch (e) {
+        alert(`Failed to update proposed turnover band. Error: ${e.message}`);
+    }
+};
+
+export const excludeProposedTurnoverBand = (uri) => async dispatch => {
+    dispatch(requestUpdateProposedTurnoverBand(uri));
+    try {
+        const data = await deleteJson(`${config.appRoot}${uri}`, {});
+        dispatch(receiveUpdateProposedTurnoverBand(uri, data));
+    } catch (e) {
+        alert(`Failed to exclude proposed turnover band ${uri}. Error: ${e.message}`);
+    }
+};
+
+export const applyTurnoverBandProposal = (uri, financialYear) => async dispatch => {
+    dispatch(requestTurnoverBandProposal(financialYear));
+    try {
+        const data = await postJson(`${config.appRoot}${uri}`, {});
+        dispatch(receiveTurnoverBandProposal(data));
+    } catch (e) {
+        alert(`Failed to apply turnover band proposal. Error: ${e.message}`);
     }
 };

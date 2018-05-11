@@ -7,7 +7,19 @@ import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 
 class TurnoverBandProposal extends Component {
     render() {
-        const { financialYear, loading, proposedTurnoverBands, salesAccounts, discountSchemes, turnoverBandSets, calculateTurnoverBandProposal } = this.props;
+        const {
+            turnoverBandProposal,
+            financialYear,
+            loading,
+            proposedTurnoverBands,
+            salesAccounts,
+            discountSchemes,
+            turnoverBandSets,
+            calculateTurnoverBandProposal,
+            updateProposedTurnoverBand,
+            applyTurnoverBandProposal,
+            excludeProposedTurnoverBand
+        } = this.props;
 
         if (loading) {
             return (<Loading />);
@@ -34,9 +46,10 @@ class TurnoverBandProposal extends Component {
                                         <Col xs={3}>Sales Account</Col>
                                         <Col xs={2}>Discount Scheme</Col>
                                         <Col xs={2}>Current</Col>
-                                        <Col xs={2}>Sales Value</Col>
+                                        <Col xs={1}>Sales</Col>
                                         <Col xs={2}>Proposed</Col>
-                                    </b></Row>
+                                        <Col xs={2}></Col>
+                                        </b></Row>
                                 </ListGroupItem>
                                 <ListGroup>
                                         {proposedTurnoverBands.map((proposalItem) => (
@@ -46,11 +59,20 @@ class TurnoverBandProposal extends Component {
                                                 salesAccount={getSalesAccount(salesAccounts, proposalItem.salesAccountUri)}
                                                 discountSchemes={discountSchemes}
                                                 turnoverBandSets={turnoverBandSets}
+                                                updateProposedTurnoverBand={updateProposedTurnoverBand}
+                                                excludeProposedTurnoverBand={excludeProposedTurnoverBand}
                                             />))}
                                 </ListGroup>
                                 </div>
                                 : <Alert bsStyle="warning">No turnover band proposals created</Alert>
                             }
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={8}>
+                        </Col>
+                        <Col xs={4}>
+                            <Button className="pull-right" onClick={() => applyTurnoverBandProposal(turnoverBandProposal.applyUri, financialYear)} >Apply Proposal To Accounts</Button>
                         </Col>
                     </Row>
                 </Grid>

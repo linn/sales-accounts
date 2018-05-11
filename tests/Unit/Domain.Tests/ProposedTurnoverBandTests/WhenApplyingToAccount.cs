@@ -1,6 +1,5 @@
 ﻿namespace Linn.SalesAccounts.Domain.Tests.ProposedTurnoverBandTests
 {
-
     using FluentAssertions;
 
     using NUnit.Framework;

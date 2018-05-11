@@ -70,6 +70,20 @@
             return new SuccessResult<ProposedTurnoverBand>(proposedTurnoverBand);
         }
 
+        public IResult<ProposedTurnoverBand> ExcludeFromTurnoverBandProposal(int id)
+        {
+            var proposedTurnoverBand = this.proposedTurnoverBandRepository.GetById(id);
+            if (proposedTurnoverBand == null)
+            {
+                return new NotFoundResult<ProposedTurnoverBand>();
+            }
+
+            proposedTurnoverBand.ExcludeFromUpdate();
+            this.transactionManager.Commit();
+
+            return new SuccessResult<ProposedTurnoverBand>(proposedTurnoverBand);
+        }
+
         public IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear)
         {
             var proposal = this.proposedTurnoverBandService.ApplyTurnoverBandProposal(financialYear);

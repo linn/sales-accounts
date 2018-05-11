@@ -22,7 +22,7 @@ const receiveSalesAccounts = data => ({
     payload: { data }
 });
 
-export const fetchAllSalesAccounts = () => async dispatch => {
+export const fetchAllOpenSalesAccounts = () => async dispatch => {
     dispatch(requestSalesAccounts());
     try {
         const data = await fetchJson(`${config.appRoot}/sales/accounts`);

@@ -23,18 +23,44 @@ const turnoverBandProposal = (state = {}, action) => {
             };
 
         case actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL:
-            if (!state.financialYear || state.financialYear === action.payload.financialYear) {
+            if (!state.financialYear || state.financialYear === action.payload.data.financialYear) {
                 return {
                     financialYear: action.payload.data.financialYear,
                     loading: false,
                     proposedTurnoverBands: action.payload.data.proposedTurnoverBands.map(t => getProposedTurnoverBand(t)),
-                    uri: getSelfHref(action.payload.data)
+                    uri: getSelfHref(action.payload.data),
+                    applyUri: getHref(action.payload.data, 'apply-proposal')
                 }
             }
 
             return state;
-    default:
-        return state;
+        case actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND:
+            return {
+                ...state,
+                loading: true
+            };
+
+        case actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND:
+        {
+            const index = state.proposedTurnoverBands.findIndex(p => p.uri === action.payload.uri);
+            return {
+                ...state,
+                loading: false,
+                proposedTurnoverBands: index > -1
+                    ? [
+                        ...state.proposedTurnoverBands.slice(0, index),
+                        getProposedTurnoverBand(action.payload.data),
+                        ...state.proposedTurnoverBands.slice(index + 1)
+                    ]
+                    : [
+                        ...state.proposedTurnoverBands,
+                        getProposedTurnoverBand(action.payload.data)
+                    ]
+            }
+        }
+
+        default:
+            return state;
     }
 }
 

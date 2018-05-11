@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
-import { getSalesAccountTurnoverBandName, getDiscountSchemeName, getTurnoverBandSet } from '../selectors/salesAccountSelectors';
+import { getSalesAccountTurnoverBandName, getDiscountSchemeName } from '../selectors/salesAccountSelectors';
 
 class ActivityItem extends Component {
 

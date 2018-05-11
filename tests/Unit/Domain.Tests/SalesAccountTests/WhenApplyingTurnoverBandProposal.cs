@@ -18,7 +18,6 @@
             this.proposedTurnoverBand = new ProposedTurnoverBand
                                             {
                                                 AppliedToAccount = false,
-                                                IncludeInUpdate = true,
                                                 ProposedTurnoverBandUri = "/tb/888",
                                                 SalesAccount = this.Sut,
                                                 FinancialYear = "2018/19"

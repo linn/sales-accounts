@@ -69,7 +69,7 @@ export const getTurnoverBands = (salesAccount, turnoverBandSets, discountSchemes
         return null;
     }
 
-    const turnoverBandSet = getTurnoverBandSet(turnoverBandSets, getTurnoverBandSetUri(getDiscountScheme(discountSchemes, getDiscountSchemeUri(getSalesAccount(salesAccount)))));
+    const turnoverBandSet = getTurnoverBandSet(turnoverBandSets, getTurnoverBandSetUri(getDiscountScheme(discountSchemes, getDiscountSchemeUri(salesAccount))));
     
     return turnoverBandSet ? turnoverBandSet.turnoverBands : null;
 }

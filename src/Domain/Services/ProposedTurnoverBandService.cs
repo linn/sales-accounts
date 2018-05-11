@@ -42,7 +42,7 @@
             var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear).ToList();
             foreach (var proposedTurnoverBand in proposedTurnoverBands.Where(b => !b.AppliedToAccount))
             {
-                proposedTurnoverBand.IncludeInUpdate = false;
+                proposedTurnoverBand.ExcludeFromUpdate();
             }
 
             var sales = this.salesReportingService.GetSalesByAccount(financialYear).ToList();
@@ -141,7 +141,6 @@
                                                FinancialYear = financialYear,
                                                CalculatedTurnoverBandUri = turnoverBandUri,
                                                ProposedTurnoverBandUri = turnoverBandUri,
-                                               IncludeInUpdate = true,
                                                AppliedToAccount = false,
                                                SalesValueBase = salesForAccount.BaseValue,
                                                SalesValueCurrency = salesForAccount.CurrencyValue
@@ -157,7 +156,7 @@
                     proposedTurnoverBand.ProposedTurnoverBandUri = turnoverBandUri;
                     proposedTurnoverBand.SalesValueBase = salesForAccount.BaseValue;
                     proposedTurnoverBand.SalesValueCurrency = salesForAccount.CurrencyValue;
-                    proposedTurnoverBand.IncludeInUpdate = true;
+                    proposedTurnoverBand.IncludeProposalInUpdate();
                 }
             }
         }

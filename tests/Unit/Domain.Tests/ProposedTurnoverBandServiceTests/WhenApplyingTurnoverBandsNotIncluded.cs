@@ -26,18 +26,18 @@
         {
             this.financialYear = "2018/19";
             this.account = new SalesAccount(new SalesAccountCreateActivity(1, "one")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
-
+            var band = new ProposedTurnoverBand
+                           {
+                               SalesAccount = this.account,
+                               FinancialYear = this.financialYear,
+                               SalesValueCurrency = 1,
+                               CalculatedTurnoverBandUri = "/tb/2",
+                               ProposedTurnoverBandUri = "/tb/2",
+                           };
+            band.ExcludeFromUpdate();
             this.proposedTurnoverBands = new List<ProposedTurnoverBand>
                                             {
-                                                new ProposedTurnoverBand
-                                                    {
-                                                        SalesAccount = this.account,
-                                                        FinancialYear = this.financialYear,
-                                                        SalesValueCurrency = 1,
-                                                        CalculatedTurnoverBandUri = "/tb/2",
-                                                        ProposedTurnoverBandUri = "/tb/2",
-                                                        IncludeInUpdate = false
-                                                    }
+                                                band
                                             };
             this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)
                 .Returns(this.proposedTurnoverBands);
