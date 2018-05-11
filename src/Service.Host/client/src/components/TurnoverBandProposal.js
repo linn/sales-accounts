@@ -49,6 +49,10 @@ class TurnoverBandProposal extends Component {
             excludeProposedTurnoverBand
         } = this.props;
 
+        const styles = {
+            alignright: { 'text-align': 'right' }
+        }
+
         if (loading) {
             return (<Loading />);
         }
@@ -74,7 +78,7 @@ class TurnoverBandProposal extends Component {
                                         <Col xs={3}>Sales Account</Col>
                                         <Col xs={2}>Discount Scheme</Col>
                                         <Col xs={2}>Current</Col>
-                                        <Col xs={1}>Sales</Col>
+                                        <Col style={styles.alignright} xs={1}>Sales</Col>
                                         <Col xs={2}>Proposed</Col>
                                         <Col xs={2}></Col>
                                         </b></Row>

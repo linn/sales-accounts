@@ -35,17 +35,13 @@ const turnoverBandProposal = (state = {}, action) => {
 
             return state;
         case actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND:
-            return {
-                ...state,
-                loading: true
-            };
+            return state;
 
         case actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND:
         {
             const index = state.proposedTurnoverBands.findIndex(p => p.uri === action.payload.uri);
             return {
                 ...state,
-                loading: false,
                 proposedTurnoverBands: index > -1
                     ? [
                         ...state.proposedTurnoverBands.slice(0, index),
