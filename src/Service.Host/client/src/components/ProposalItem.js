@@ -49,22 +49,23 @@ class ProposalItem extends Component {
             button: {
                 padding: '0',
                 outline: 0
-            }
+            }, 
+            column: proposalItem.includeInUpdate ? {} : { 'text-decoration': 'line-through', 'color': 'lightgray' }
         }
 
         return (
             <React.Fragment>
                 <ListGroupItem>
-                    <Row className={proposalItem.includeInUpdate ? '' : 'text-muted'}>
-                        <Col xs={3}>
+                    <Row>
+                        <Col style={styles.column} xs={3}>
                             <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{`Account id ${getSalesAccountId(salesAccount)}`}</Tooltip>}>
                                 <a href={getSalesAccountId(salesAccount)}> {getSalesAccountName(salesAccount)}</a>
                             </OverlayTrigger>
                         </Col>
-                        <Col xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
-                        <Col xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
-                        <Col xs={1}>{proposalItem.salesValueCurrency}</Col>
-                        <Col xs={2}>{
+                        <Col style={styles.column} xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
+                        <Col style={styles.column} xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
+                        <Col style={styles.column} xs={1}>{proposalItem.salesValueCurrency}</Col>
+                        <Col style={styles.column} xs={2}>{
                             displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip1">{proposalItem.appliedToAccount ? `${currentTurnoverBandName} has been applied to ${getSalesAccountName(salesAccount)}.` : `${getSalesAccountName(salesAccount)} has been excluded from proposal`}</Tooltip>}>
                                     <span>{currentTurnoverBandName}</span>
