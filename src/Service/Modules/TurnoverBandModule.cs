@@ -45,7 +45,7 @@
         {
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
             var turnoverBandProposal = this.turnoverBandService.GetProposedTurnoverBands(resource.FinancialYear);
-            return this.Negotiate.WithModel(turnoverBandProposal);
+            return this.Negotiate.WithModel(turnoverBandProposal).WithView("Index");
         }
 
         private object UpdateProposedTurnoverBand(int id)
