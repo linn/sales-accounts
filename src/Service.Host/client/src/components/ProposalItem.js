@@ -3,6 +3,7 @@ import { ListGroupItem, Button, Row, Col, OverlayTrigger, Tooltip, Glyphicon } f
 import { getSalesAccountName, getSalesAccountId, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands } from '../selectors/salesAccountSelectors';
 import { getTurnoverBandName } from '../selectors/turnoverBandSetSelectors';
 import ListSelectItemModal from './ListSelectItemModal';
+import { formatWithCommas } from '../helpers/utilities';
 
 class ProposalItem extends Component {
     constructor() {
@@ -49,22 +50,24 @@ class ProposalItem extends Component {
             button: {
                 padding: '0',
                 outline: 0
-            }
+            },
+            column: proposalItem.includeInUpdate ? {} : { 'text-decoration': 'line-through', 'color': 'lightgray' },
+            alignright: { 'text-align': 'right' }
         }
 
         return (
             <React.Fragment>
                 <ListGroupItem>
-                    <Row className={proposalItem.includeInUpdate ? '' : 'text-muted'}>
-                        <Col xs={3}>
+                    <Row>
+                        <Col style={styles.column} xs={3}>
                             <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip">{`Account id ${getSalesAccountId(salesAccount)}`}</Tooltip>}>
                                 <a href={getSalesAccountId(salesAccount)}> {getSalesAccountName(salesAccount)}</a>
                             </OverlayTrigger>
                         </Col>
-                        <Col xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
-                        <Col xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
-                        <Col xs={1}>{proposalItem.salesValueCurrency}</Col>
-                        <Col xs={2}>{
+                        <Col style={styles.column} xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
+                        <Col style={styles.column} xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
+                        <Col style={styles.column, styles.alignright} xs={1}>{formatWithCommas(proposalItem.salesValueCurrency, 0)}</Col>
+                        <Col style={styles.column} xs={2}>{
                             displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip1">{proposalItem.appliedToAccount ? `${currentTurnoverBandName} has been applied to ${getSalesAccountName(salesAccount)}.` : `${getSalesAccountName(salesAccount)} has been excluded from proposal`}</Tooltip>}>
                                     <span>{currentTurnoverBandName}</span>

@@ -42,7 +42,7 @@
             builder.Entity<SalesAccountUpdateAddressActivity>().HasBaseType<SalesAccountActivity>();
             builder.Entity<SalesAccountApplyTurnoverBandProposalActivity>().HasBaseType<SalesAccountUpdateTurnoverBandUriActivity>();
 
-            builder.Entity<ProposedTurnoverBand>().Property(t => t.Id).ValueGeneratedNever();
+            builder.Entity<ProposedTurnoverBand>().Property(t => t.Id);
             builder.Entity<ProposedTurnoverBand>().HasOne(t => t.SalesAccount);
 
             base.OnModelCreating(builder);

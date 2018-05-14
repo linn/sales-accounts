@@ -96,16 +96,14 @@ describe('turnover band proposal reducer tests', () => {
     });
 
     test('when requesting update to proposed turnover band', () => {
-        const state = [];
+        const state = {};
 
         const action = {
             type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
             payload: { uri : '/1', turnoverBandUri: '/2' }
         };
 
-        const expected = {
-            loading: true
-        }
+        const expected = {}
 
         deepFreeze(state);
 
@@ -115,7 +113,6 @@ describe('turnover band proposal reducer tests', () => {
     test('when receiving update to proposed turnover band', () => {
         const state = {
             financialYear: '2030',
-            loading: true,
             uri: '/sales/accounts/turnover-band-proposals?financialYear=2030',
             proposedTurnoverBands: [{ uri: '/tbp/1' }, { uri: '/tbp/2' }, { uri: '/tbp/3' }]
         };
@@ -137,7 +134,6 @@ describe('turnover band proposal reducer tests', () => {
 
         const expected = {
             financialYear: '2030',
-            loading: false,
             uri: '/sales/accounts/turnover-band-proposals?financialYear=2030',
             proposedTurnoverBands: [
                 { uri: '/tbp/1' },
