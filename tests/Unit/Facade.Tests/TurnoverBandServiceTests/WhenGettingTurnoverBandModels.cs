@@ -42,9 +42,9 @@
                                              };
             this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)
                 .Returns(this.proposedTurnoverBands);
-            this.DiscountingService.GetTurnoverBand("/tb/1").Returns(new TurnoverBand { Name = "turnover band 1" });
-            this.DiscountingService.GetTurnoverBand("/tb/2").Returns(new TurnoverBand { Name = "turnover band 2" });
-            this.DiscountingService.GetTurnoverBand("/tb/3").Returns(new TurnoverBand { Name = "turnover band 3" });
+            this.DiscountingService.GetTurnoverBand("/tb/1").Returns(new TurnoverBand { Name = "turnover band 1", TurnoverBandUri = "/tb/1" });
+            this.DiscountingService.GetTurnoverBand("/tb/2").Returns(new TurnoverBand { Name = "turnover band 2", TurnoverBandUri = "/tb/2" });
+            this.DiscountingService.GetTurnoverBand("/tb/3").Returns(new TurnoverBand { Name = "turnover band 3", TurnoverBandUri = "/tb/3" });
             this.results = this.Sut.GetProposedTurnoverBandModelResults(this.financialYear);
         }
 

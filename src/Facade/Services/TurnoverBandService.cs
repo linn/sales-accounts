@@ -71,14 +71,21 @@
                 financialYear = this.proposedTurnoverBandService.DefaultFinancialYear();
             }
 
-            var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear);
+            var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear).ToList();
+            var turnoverBandUris = proposedTurnoverBands.Select(a => a.CalculatedTurnoverBandUri)
+                .Union(proposedTurnoverBands.Select(a => a.ProposedTurnoverBandUri))
+                .Union(proposedTurnoverBands.Select(a => a.SalesAccount.TurnoverBandUri))
+                .Distinct();
+            var turnoverBands = turnoverBandUris
+                .Where(v => !string.IsNullOrEmpty(v))
+                .Select(u => this.discountingService.GetTurnoverBand(u)).ToList();
 
             return new SuccessResult<IEnumerable<ProposedTurnoverBandModel>>(
                 proposedTurnoverBands.Select(
                     p => p.ToModel(
-                        this.discountingService.GetTurnoverBand(p.SalesAccount.TurnoverBandUri),
-                        this.discountingService.GetTurnoverBand(p.CalculatedTurnoverBandUri),
-                        this.discountingService.GetTurnoverBand(p.ProposedTurnoverBandUri))));
+                        turnoverBands.FirstOrDefault(a => a.TurnoverBandUri == p.SalesAccount.TurnoverBandUri),
+                        turnoverBands.FirstOrDefault(a => a.TurnoverBandUri == p.CalculatedTurnoverBandUri),
+                        turnoverBands.FirstOrDefault(a => a.TurnoverBandUri == p.ProposedTurnoverBandUri))));
         }
 
         public IResult<ProposedTurnoverBand> OverrideTurnoverBand(int id, string turnoverBandUri)
