@@ -5,6 +5,7 @@ import { formatDate } from '../helpers/dates';
 import ProposalItem from './ProposalItem';
 import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 import YesNoModal from './YesNoModal';
+import config from '../config';
 
 class TurnoverBandProposal extends Component {
     constructor() {
@@ -64,7 +65,10 @@ class TurnoverBandProposal extends Component {
                         <Col xs={8}>
                             <h4>Turnover band proposal using sales for {financialYear}</h4>
                         </Col>
-                        <Col xs={4}>
+                        <Col xs={2}>
+                            <Button className="pull-right" href={`${config.appRoot}/sales/accounts/turnover-band-proposals/export`}>Export CSV</Button>
+                        </Col>
+                        <Col xs={2}>
                             <Button className="pull-right" onClick={() => this.handleShowRecalculateYesNoModal()} >Recalculate Proposals</Button>
                         </Col>
                     </Row>

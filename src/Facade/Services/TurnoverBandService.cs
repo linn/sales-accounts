@@ -1,11 +1,15 @@
 ﻿namespace Linn.SalesAccounts.Facade.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Domain.Repositories;
     using Linn.SalesAccounts.Domain.Services;
+    using Linn.SalesAccounts.Facade.Extensions;
 
     public class TurnoverBandService : ITurnoverBandService
     {
@@ -54,6 +58,23 @@
             var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear);
 
             return new SuccessResult<TurnoverBandProposal>(new TurnoverBandProposal(financialYear, proposedTurnoverBands));
+        }
+
+        public IResult<IEnumerable<ProposedTurnoverBandModel>> GetProposedTurnoverBandModelResults(string financialYear)
+        {
+            if (string.IsNullOrEmpty(financialYear))
+            {
+                financialYear = this.proposedTurnoverBandService.DefaultFinancialYear();
+            }
+
+            var proposedTurnoverBands = this.proposedTurnoverBandRepository.GetAllForFinancialYear(financialYear);
+
+            return new SuccessResult<IEnumerable<ProposedTurnoverBandModel>>(
+                proposedTurnoverBands.Select(
+                    p => p.ToModel(
+                        p.SalesAccount.TurnoverBandUri,
+                        p.CalculatedTurnoverBandUri,
+                        p.ProposedTurnoverBandUri)));
         }
 
         public IResult<ProposedTurnoverBand> OverrideTurnoverBand(int id, string turnoverBandUri)
