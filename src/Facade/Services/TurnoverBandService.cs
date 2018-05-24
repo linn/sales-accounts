@@ -19,14 +19,18 @@
 
         private readonly IProposedTurnoverBandRepository proposedTurnoverBandRepository;
 
+        private readonly IDiscountingService discountingService;
+
         public TurnoverBandService(
             ITransactionManager transactionManager,
             IProposedTurnoverBandService proposedTurnoverBandService,
-            IProposedTurnoverBandRepository proposedTurnoverBandRepository)
+            IProposedTurnoverBandRepository proposedTurnoverBandRepository,
+            IDiscountingService discountingService)
         {
             this.transactionManager = transactionManager;
             this.proposedTurnoverBandService = proposedTurnoverBandService;
             this.proposedTurnoverBandRepository = proposedTurnoverBandRepository;
+            this.discountingService = discountingService;
         }
 
         public IResult<TurnoverBandProposal> ProposeTurnoverBands(string financialYear)
@@ -72,9 +76,9 @@
             return new SuccessResult<IEnumerable<ProposedTurnoverBandModel>>(
                 proposedTurnoverBands.Select(
                     p => p.ToModel(
-                        p.SalesAccount.TurnoverBandUri,
-                        p.CalculatedTurnoverBandUri,
-                        p.ProposedTurnoverBandUri)));
+                        this.discountingService.GetTurnoverBand(p.SalesAccount.TurnoverBandUri),
+                        this.discountingService.GetTurnoverBand(p.CalculatedTurnoverBandUri),
+                        this.discountingService.GetTurnoverBand(p.ProposedTurnoverBandUri))));
         }
 
         public IResult<ProposedTurnoverBand> OverrideTurnoverBand(int id, string turnoverBandUri)

@@ -8,6 +8,7 @@
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Activities.SalesAccounts;
+    using Linn.SalesAccounts.Domain.External;
     using Linn.SalesAccounts.Domain.Models;
     using Linn.SalesAccounts.Facade.Extensions;
     using Linn.SalesAccounts.Resources.RequestResources;
@@ -41,9 +42,10 @@
                                                          SalesAccount = new SalesAccount(new SalesAccountCreateActivity(2, "two"))
                                                      }
                                              };
+            var turnoverBand = new TurnoverBand { Name = "n", TurnoverBandUri = "/1" };
             var proposal = new TurnoverBandProposal(this.requestResource.FinancialYear, this.proposedTurnoverBands);
             this.TurnoverBandService.GetProposedTurnoverBandModelResults(this.requestResource.FinancialYear)
-                .Returns(new SuccessResult<IEnumerable<ProposedTurnoverBandModel>>(proposal.ProposedTurnoverBands.Select(a => a.ToModel("a", "b", "c"))));
+                .Returns(new SuccessResult<IEnumerable<ProposedTurnoverBandModel>>(proposal.ProposedTurnoverBands.Select(a => a.ToModel(turnoverBand, turnoverBand, turnoverBand))));
             this.Response = this.Browser.Get(
                 "/sales/accounts/turnover-band-proposals/export",
                 with =>

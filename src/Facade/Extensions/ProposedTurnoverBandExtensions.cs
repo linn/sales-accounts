@@ -1,15 +1,16 @@
 ﻿namespace Linn.SalesAccounts.Facade.Extensions
 {
     using Linn.SalesAccounts.Domain;
+    using Linn.SalesAccounts.Domain.External;
     using Linn.SalesAccounts.Domain.Models;
 
     public static class ProposedTurnoverBandExtensions
     {
         public static ProposedTurnoverBandModel ToModel(
             this ProposedTurnoverBand domain,
-            string currentTurnoverBandName,
-            string calculatedTurnoverBandName,
-            string proposedTurnoverBandName)
+            TurnoverBand currentTurnoverBand,
+            TurnoverBand calculatedTurnoverBand,
+            TurnoverBand proposedTurnoverBand)
         {
             return new ProposedTurnoverBandModel
             {
@@ -20,9 +21,9 @@
                 SalesValueBase = domain.SalesValueBase,
                 SalesAccountId = domain.SalesAccount.Id,
                 SalesAccountName = domain.SalesAccount.Name,
-                CurrentTurnoverBandName = currentTurnoverBandName,
-                CalculatedTurnoverBandName = calculatedTurnoverBandName,
-                ProposedTurnoverBandName = proposedTurnoverBandName
+                CurrentTurnoverBandName = currentTurnoverBand?.Name,
+                CalculatedTurnoverBandName = calculatedTurnoverBand?.Name,
+                ProposedTurnoverBandName = proposedTurnoverBand?.Name
             };
         }
     }

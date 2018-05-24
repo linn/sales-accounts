@@ -20,6 +20,8 @@
 
         protected IProposedTurnoverBandRepository ProposedTurnoverBandRepository { get; private set; }
 
+        protected IDiscountingService DiscountingService{ get; private set; }
+
         protected IResult<TurnoverBandProposal> Results { get; set; }
 
         protected IResult<ProposedTurnoverBand> Result { get; set; }
@@ -32,11 +34,13 @@
             this.TransactionManager = Substitute.For<ITransactionManager>();
             this.ProposedTurnoverBandService = Substitute.For<IProposedTurnoverBandService>();
             this.ProposedTurnoverBandRepository = Substitute.For<IProposedTurnoverBandRepository>();
+            this.DiscountingService = Substitute.For<IDiscountingService>();
 
             this.Sut = new TurnoverBandService(
                 this.TransactionManager,
                 this.ProposedTurnoverBandService,
-                this.ProposedTurnoverBandRepository);
+                this.ProposedTurnoverBandRepository,
+                this.DiscountingService);
         }
     }
 }

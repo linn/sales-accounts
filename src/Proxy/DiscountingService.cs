@@ -96,6 +96,11 @@
 
         public TurnoverBand GetTurnoverBand(string turnoverBandUri)
         {
+            if (string.IsNullOrEmpty(turnoverBandUri))
+            {
+                return null;
+            }
+
             var uri = new Uri($"{this.proxyRoot}{turnoverBandUri}", UriKind.RelativeOrAbsolute);
 
             var response = this.restClient.Get(
