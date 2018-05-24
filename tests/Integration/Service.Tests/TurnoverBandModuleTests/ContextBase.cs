@@ -33,6 +33,7 @@
                         with.Module<TurnoverBandModule>();
                         with.ResponseProcessor<ProposedTurnoverBandJsonResponseProcessor>();
                         with.ResponseProcessor<TurnoverBandProposalJsonResponseProcessor>();
+                        with.ResponseProcessor<ProposedTurnoverBandsCsvResponseProcessor>();
                     });
 
             this.Browser = new Browser(bootstrapper);
