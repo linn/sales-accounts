@@ -10,6 +10,7 @@
     <PackageReference Include="Linn.Common.Facade" Version="1.1.3" />
     <PackageReference Include="Linn.Common.Logging" Version="1.1.1" />
     <PackageReference Include="linn.common.nancy.facade" Version="1.2.3" />
+    <PackageReference Include="linn.common.serialization" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>

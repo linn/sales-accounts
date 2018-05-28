@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Loading } from './common';
-import { Grid, Row, Col, Button, ListGroup, ListGroupItem, Alert } from 'react-bootstrap';
+import { Grid, Row, Col, Button, ListGroup, ListGroupItem, Alert, OverlayTrigger, Tooltip, Glyphicon } from 'react-bootstrap';
 import { formatDate } from '../helpers/dates';
 import ProposalItem from './ProposalItem';
 import { getSalesAccount } from '../selectors/salesAccountsSelectors';
@@ -66,7 +66,9 @@ class TurnoverBandProposal extends Component {
                             <h4>Turnover band proposal using sales for {financialYear}</h4>
                         </Col>
                         <Col xs={2}>
-                            <Button className="pull-right" href={`${config.appRoot}/sales/accounts/turnover-band-proposals/export`}>Export CSV</Button>
+                            <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip1">Download turnover band proposal as a CSV file</Tooltip>}>
+                                <Button href={`${config.appRoot}/sales/accounts/turnover-band-proposals/export`}><Glyphicon className="text-muted" glyph="export" /> Export</Button>
+                            </OverlayTrigger>
                         </Col>
                         <Col xs={2}>
                             <Button className="pull-right" onClick={() => this.handleShowRecalculateYesNoModal()} >Recalculate Proposals</Button>

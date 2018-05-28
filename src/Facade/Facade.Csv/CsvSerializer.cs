@@ -4,10 +4,11 @@
     using System.Collections.Generic;
     using System.IO;
 
-    using Linn.SalesAccounts.Facade.Serialization;
+    using Linn.Common.Serialization;
 
-    using Nancy;
     using Nancy.Responses.Negotiation;
+
+    using ISerializer = Nancy.ISerializer;
 
     public class CsvSerializer : ISerializer
     {
