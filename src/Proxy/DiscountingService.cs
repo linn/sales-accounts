@@ -94,6 +94,37 @@
             return Relation.First(turnoverBand.Links, "self").ToString();
         }
 
+        public TurnoverBand GetTurnoverBand(string turnoverBandUri)
+        {
+            if (string.IsNullOrEmpty(turnoverBandUri))
+            {
+                return null;
+            }
+
+            var uri = new Uri($"{this.proxyRoot}{turnoverBandUri}", UriKind.RelativeOrAbsolute);
+
+            var response = this.restClient.Get(
+                CancellationToken.None,
+                uri,
+                new Dictionary<string, string>(),
+                DefaultHeaders.JsonGetHeaders()).Result;
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                throw new ProxyException("Error retrieving turnover band.");
+            }
+
+            var json = new JsonSerializer();
+            var turnoverBandResource = json.Deserialize<TurnoverBandResource>(response.Value);
+            var turnoverBand = new TurnoverBand
+                                   {
+                                       Name = turnoverBandResource.Name,
+                                       TurnoverBandUri = Relation.First(turnoverBandResource.Links, "self").ToString()
+                                   };
+
+            return turnoverBand;
+        }
+
         private TurnoverBandSetResource GetTurnoverBandSet(string turnoverBandSetUri)
         {
             var uri = new Uri($"{this.proxyRoot}{turnoverBandSetUri}", UriKind.RelativeOrAbsolute);

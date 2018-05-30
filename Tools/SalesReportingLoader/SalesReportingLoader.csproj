@@ -9,10 +9,10 @@
 
   <ItemGroup>
     <PackageReference Include="linn.common.configuration" Version="1.1.0" />
-    <PackageReference Include="linn.common.persistence" Version="1.0.0" />
-    <PackageReference Include="linn.common.persistence.entityframework" Version="1.0.0" />
-    <PackageReference Include="linn.common.proxy" Version="2.0.1" />
-    <PackageReference Include="Linn.Common.Serialization.Json" Version="2.1.1" />
+    <PackageReference Include="linn.common.persistence" Version="2.0.0" />
+    <PackageReference Include="linn.common.persistence.entityframework" Version="2.0.1" />
+    <PackageReference Include="linn.common.proxy" Version="3.0.1" />
+    <PackageReference Include="Linn.Common.Serialization.Json" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>

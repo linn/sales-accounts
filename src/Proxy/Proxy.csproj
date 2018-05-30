@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Linn.Common.Proxy" Version="2.0.1" />
-    <PackageReference Include="linn.common.resources" Version="1.0.0" />
+    <PackageReference Include="Linn.Common.Proxy" Version="3.0.1" />
+    <PackageReference Include="linn.common.resources" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
