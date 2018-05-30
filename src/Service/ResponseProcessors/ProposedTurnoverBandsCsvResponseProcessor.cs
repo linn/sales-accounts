@@ -4,7 +4,6 @@
 
     using Linn.Common.Nancy.Facade;
     using Linn.SalesAccounts.Domain.Models;
-    using Linn.SalesAccounts.Facade.Facade.Csv;
 
     public class ProposedTurnoverBandsCsvResponseProcessor : CsvResponseProcessor<IEnumerable<ProposedTurnoverBandModel>>
     {
