@@ -87,6 +87,7 @@
             firstProposal.FinancialYear.Should().Be(this.financialYear);
             firstProposal.SalesValueBase.Should().Be(111);
             firstProposal.AppliedToAccount.Should().BeFalse();
+            firstProposal.CurrencyCode.Should().Be("GBP");
             var secondProposal = results.First(r => r.SalesAccount.Id == 3);
             secondProposal.ProposedTurnoverBandUri.Should().Be("/tb/2");
             secondProposal.CalculatedTurnoverBandUri.Should().Be("/tb/2");
@@ -95,6 +96,7 @@
             secondProposal.FinancialYear.Should().Be(this.financialYear);
             secondProposal.SalesValueBase.Should().Be(333);
             secondProposal.AppliedToAccount.Should().BeFalse();
+            secondProposal.CurrencyCode.Should().Be("EUR");
             var thirdProposal = results.First(r => r.SalesAccount.Id == 4);
             thirdProposal.ProposedTurnoverBandUri.Should().Be(string.Empty);
             thirdProposal.CalculatedTurnoverBandUri.Should().Be(string.Empty);
@@ -103,6 +105,7 @@
             thirdProposal.FinancialYear.Should().Be(this.financialYear);
             thirdProposal.SalesValueBase.Should().Be(333);
             thirdProposal.AppliedToAccount.Should().BeFalse();
+            thirdProposal.CurrencyCode.Should().Be("NEW");
         }
     }
 }

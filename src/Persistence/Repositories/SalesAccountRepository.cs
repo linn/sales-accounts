@@ -29,6 +29,7 @@
         public IEnumerable<SalesAccount> GetAllOpenAccounts()
         {
             return this.serviceDbContext.SalesAccounts
+                .Include(s => s.Address)
                 .Where(s => s.ClosedOn == null);
         }
 

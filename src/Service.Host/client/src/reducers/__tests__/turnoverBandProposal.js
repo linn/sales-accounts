@@ -39,6 +39,7 @@ describe('turnover band proposal reducer tests', () => {
                         includeInUpdate: true,
                         appliedToAccount: false,
                         salesValueCurrency: 12,
+                        currencyCode: 'GBP',
                         links: [{ rel: 'sales-account', href: '/sales/accounts/1' }, { rel: 'self', href: '/tbp/1' }]
                     }],
                     links: [
@@ -58,6 +59,7 @@ describe('turnover band proposal reducer tests', () => {
                     includeInUpdate: true,
                     appliedToAccount: false,
                     salesValueCurrency: 12,
+                    currencyCode: 'GBP',
                     uri: '/tbp/1'
                 }],
             uri: '/sales/accounts/turnover-band-proposals?financialYear=2030',

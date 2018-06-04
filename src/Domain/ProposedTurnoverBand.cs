@@ -15,6 +15,8 @@
 
         public decimal SalesValueCurrency { get; set; }
 
+        public string CurrencyCode { get; set; }
+
         public string CalculatedTurnoverBandUri { get; set; }
 
         public string ProposedTurnoverBandUri { get; set; }
