@@ -60,7 +60,12 @@
                     financialYear);
             }
 
-            return new TurnoverBandProposal(financialYear, proposedTurnoverBands);
+            foreach (var proposedTurnoverBand in proposedTurnoverBands.Where(p => !p.IncludeInUpdate))
+            {
+                this.proposedTurnoverBandRepository.Remove(proposedTurnoverBand);
+            }
+
+            return new TurnoverBandProposal(financialYear, proposedTurnoverBands.Where(p => p.IncludeInUpdate));
         }
 
         public TurnoverBandProposal ApplyTurnoverBandProposal(string financialYear)

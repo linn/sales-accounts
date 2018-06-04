@@ -11,5 +11,7 @@
         IEnumerable<ProposedTurnoverBand> GetAllForFinancialYear(string financialYear);
 
         void Add(ProposedTurnoverBand proposedTurnoverBand);
+
+        void Remove(ProposedTurnoverBand proposedTurnoverBand);
     }
 }

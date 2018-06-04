@@ -36,5 +36,10 @@
         {
             this.serviceDbContext.ProposedTurnoverBands.Add(proposedTurnoverBand);
         }
+
+        public void Remove(ProposedTurnoverBand proposedTurnoverBand)
+        {
+            this.serviceDbContext.ProposedTurnoverBands.Remove(proposedTurnoverBand);
+        }
     }
 }

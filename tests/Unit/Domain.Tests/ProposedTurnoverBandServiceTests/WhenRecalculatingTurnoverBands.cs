@@ -18,7 +18,9 @@
 
         private string financialYear;
 
-        private SalesAccount account1, account2, account3, account4;
+        private SalesAccount account1, account2, account3, account4, account5;
+
+        private ProposedTurnoverBand proposedTurnoverBand5;
 
         [SetUp]
         public void SetUp()
@@ -28,12 +30,21 @@
             this.account2 = new SalesAccount(new SalesAccountCreateActivity(2, "two")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
             this.account3 = new SalesAccount(new SalesAccountCreateActivity(3, "three")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
             this.account4 = new SalesAccount(new SalesAccountCreateActivity(4, "four")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account5 = new SalesAccount(new SalesAccountCreateActivity(5, "closed")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account5.CloseAccount(new SalesAccountCloseActivity(1.May(2018)));
 
+            this.proposedTurnoverBand5 = new ProposedTurnoverBand
+                                             {
+                                                 SalesAccount = this.account5,
+                                                 FinancialYear = this.financialYear,
+                                                 SalesValueCurrency = 1
+                                             };
             var proposedTurnoverBands = new List<ProposedTurnoverBand>
                                             {
                                                 new ProposedTurnoverBand { SalesAccount = this.account1, FinancialYear = this.financialYear, SalesValueCurrency = 1 },
                                                 new ProposedTurnoverBand { SalesAccount = this.account2, FinancialYear = this.financialYear, SalesValueCurrency = 1 },
-                                                new ProposedTurnoverBand { SalesAccount = this.account3, FinancialYear = this.financialYear, SalesValueCurrency = 1 }
+                                                new ProposedTurnoverBand { SalesAccount = this.account3, FinancialYear = this.financialYear, SalesValueCurrency = 1 },
+                                                this.proposedTurnoverBand5
                                             };
             this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)
                 .Returns(proposedTurnoverBands);
@@ -50,7 +61,8 @@
                              {
                                 new SalesDataDetail { Id = "1", CurrencyValue = 111, CurrencyCode = "GBP", BaseValue = 111 },
                                 new SalesDataDetail { Id = "2", CurrencyValue = 222, CurrencyCode = "GBP", BaseValue = 222 },
-                                new SalesDataDetail { Id = "4", CurrencyValue = 444, CurrencyCode = "GBP", BaseValue = 444 }
+                                new SalesDataDetail { Id = "4", CurrencyValue = 444, CurrencyCode = "GBP", BaseValue = 444 },
+                                new SalesDataDetail { Id = "5", CurrencyValue = 111, CurrencyCode = "GBP", BaseValue = 111 }
                              });
             this.SalesAccountRepository.GetAllOpenAccounts().Returns(new[] { this.account1, this.account2, this.account3, this.account4 });
             this.results = this.Sut.CalculateProposedTurnoverBands(this.financialYear).ProposedTurnoverBands;
@@ -75,9 +87,21 @@
         }
 
         [Test]
-        public void ShouldReturnTurnoverBandProposals()
+        public void ShouldRemoveProposalsForInvalidAccounts()
         {
-            this.results.Should().HaveCount(4);
+            this.ProposedTurnoverBandRepository.Received().Remove(this.proposedTurnoverBand5);
+        }
+
+        [Test]
+        public void ShouldAddNewProposal()
+        {
+            this.ProposedTurnoverBandRepository.Received().Add(Arg.Is<ProposedTurnoverBand>(p => p.SalesAccount.Id == 4));
+        }
+
+        [Test]
+        public void ShouldReturnUpdatedTurnoverBandProposals()
+        {
+            this.results.Count().Should().Be(4);
             var firstProposal = this.results.First(r => r.SalesAccount.Id == 1);
             firstProposal.ProposedTurnoverBandUri.Should().Be("/tb/1");
             firstProposal.CalculatedTurnoverBandUri.Should().Be("/tb/1");

@@ -89,9 +89,15 @@
         }
 
         [Test]
+        public void ShouldRemoveProposalsForInvalidAccounts()
+        {
+            this.ProposedTurnoverBandRepository.Received(1).Remove(Arg.Any<ProposedTurnoverBand>());
+        }
+
+        [Test]
         public void ShouldReturnTurnoverBandProposals()
         {
-            this.results.Should().HaveCount(4);
+            this.results.Should().HaveCount(3);
             var firstProposal = this.results.First(r => r.SalesAccount.Id == 1);
             firstProposal.ProposedTurnoverBandUri.Should().Be("/tb/1");
             firstProposal.CalculatedTurnoverBandUri.Should().Be("/tb/1");
@@ -99,13 +105,6 @@
             firstProposal.IncludeInUpdate.Should().BeTrue();
             firstProposal.FinancialYear.Should().Be(this.financialYear);
             firstProposal.SalesValueBase.Should().Be(111);
-            var secondProposal = this.results.First(r => r.SalesAccount.Id == 2);
-            secondProposal.ProposedTurnoverBandUri.Should().Be("/tb/9");
-            secondProposal.CalculatedTurnoverBandUri.Should().Be("/tb/9");
-            secondProposal.SalesValueCurrency.Should().Be(1m);
-            secondProposal.IncludeInUpdate.Should().BeFalse();
-            secondProposal.FinancialYear.Should().Be(this.financialYear);
-            secondProposal.SalesValueBase.Should().Be(1m);
             var thirdProposal = this.results.First(r => r.SalesAccount.Id == 3);
             thirdProposal.ProposedTurnoverBandUri.Should().Be(string.Empty);
             thirdProposal.CalculatedTurnoverBandUri.Should().Be(string.Empty);
