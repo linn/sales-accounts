@@ -79,7 +79,8 @@ class SalesAccount extends Component {
                 </Grid>
 
                 <ListSelectItemModal
-                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'} items={discountSchemes}
+                    visible={editDiscountSchemeVisible} title={'Select Discounting Scheme'}
+                    items={discountSchemes ? discountSchemes.sort(function (a, b) {return a.name.localeCompare(b.name);}) : [] }
                     currentItemUri={salesAccount.discountSchemeUri} hideModal={hideEditModal} setItem={setDiscountScheme}
                 />
                 <ListSelectItemModal
