@@ -18,6 +18,7 @@
                 IncludeInUpdate = domain.IncludeInUpdate,
                 FinancialYear = domain.FinancialYear,
                 SalesValueCurrency = domain.SalesValueCurrency,
+                CurrencyCode = domain.CurrencyCode,
                 SalesValueBase = domain.SalesValueBase,
                 SalesAccountId = domain.SalesAccount.Id,
                 SalesAccountName = domain.SalesAccount.Name,

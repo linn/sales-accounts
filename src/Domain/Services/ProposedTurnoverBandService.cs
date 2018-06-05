@@ -101,8 +101,7 @@
                                     CurrencyValue = 0m,
                                     BaseValue = 0m,
                                     Id = salesAccount.Id.ToString(),
-                                    Name = salesAccount.Name,
-                                    CurrencyCode = "GBP"
+                                    Name = salesAccount.Name
                                 };
         }
 
@@ -118,7 +117,7 @@
             {
                 return this.discountingService.GetTurnoverBandForTurnoverValue(
                     discountScheme.TurnoverBandSetUri,
-                    salesData.CurrencyCode,
+                    salesData.CurrencyCode ?? "GBP",
                     salesData.CurrencyValue);
             }
 
@@ -148,6 +147,7 @@
                                                ProposedTurnoverBandUri = turnoverBandUri,
                                                AppliedToAccount = false,
                                                SalesValueBase = salesForAccount.BaseValue,
+                                               CurrencyCode = salesForAccount.CurrencyCode,
                                                SalesValueCurrency = salesForAccount.CurrencyValue
                                            };
                 proposedTurnoverBands.Add(proposedTurnoverBand);
@@ -160,6 +160,7 @@
                     proposedTurnoverBand.CalculatedTurnoverBandUri = turnoverBandUri;
                     proposedTurnoverBand.ProposedTurnoverBandUri = turnoverBandUri;
                     proposedTurnoverBand.SalesValueBase = salesForAccount.BaseValue;
+                    proposedTurnoverBand.CurrencyCode = salesForAccount.CurrencyCode ?? proposedTurnoverBand.CurrencyCode;
                     proposedTurnoverBand.SalesValueCurrency = salesForAccount.CurrencyValue;
                     proposedTurnoverBand.IncludeProposalInUpdate();
                 }

@@ -66,7 +66,11 @@ class ProposalItem extends Component {
                         </Col>
                         <Col style={styles.column} xs={2}>{getDiscountSchemeName(salesAccount, discountSchemes)}</Col>
                         <Col style={styles.column} xs={2}>{getSalesAccountTurnoverBandName(salesAccount, turnoverBandSets)}</Col>
-                        <Col style={styles.column, styles.alignright} xs={1}>{formatWithCommas(proposalItem.salesValueCurrency, 0)}</Col>
+                        <Col style={styles.column, styles.alignright} xs={1}>
+                            <OverlayTrigger placement="top" overlay={<Tooltip id="currency-tooltip">{proposalItem.currencyCode ? proposalItem.currencyCode : 'No Sales'}</Tooltip>}>
+                                <span> {formatWithCommas(proposalItem.salesValueCurrency, 0)} </span> 
+                            </OverlayTrigger>
+                        </Col>
                         <Col style={styles.column} xs={2}>{
                             displayOnly
                                 ? <OverlayTrigger placement="top" overlay={<Tooltip id="tooltip1">{proposalItem.appliedToAccount ? `${currentTurnoverBandName} has been applied to ${getSalesAccountName(salesAccount)}.` : `${getSalesAccountName(salesAccount)} has been excluded from proposal`}</Tooltip>}>

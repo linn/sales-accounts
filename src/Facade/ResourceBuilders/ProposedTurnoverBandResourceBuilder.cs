@@ -15,6 +15,7 @@
             return new ProposedTurnoverBandResource
             {
                 SalesValueBase = proposedTurnoverBand.SalesValueBase,
+                CurrencyCode = proposedTurnoverBand.CurrencyCode,
                 SalesValueCurrency = proposedTurnoverBand.SalesValueCurrency,
                 FinancialYear = proposedTurnoverBand.FinancialYear,
                 CalculatedTurnoverBandUri = proposedTurnoverBand.CalculatedTurnoverBandUri,

@@ -8,6 +8,7 @@ const getProposedTurnoverBand = (data) => (
         includeInUpdate: data.includeInUpdate,
         appliedToAccount: data.appliedToAccount,
         salesValueCurrency: data.salesValueCurrency,
+        currencyCode: data.currencyCode,
         salesAccountUri: getHref(data, 'sales-account'),
         uri: getSelfHref(data)
     });
