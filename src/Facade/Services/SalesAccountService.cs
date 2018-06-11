@@ -72,9 +72,10 @@
             return new SuccessResult<IEnumerable<SalesAccount>>(accounts);
         }
 
-        public IResult<SalesAccount> AddSalesAccount(SalesAccountCreateResource createResource)
+        public IResult<SalesAccount> AddSalesAccount(SalesAccountCreateResource createResource, string updatedByUri)
         {
             var createActivity = new SalesAccountCreateActivity(
+                updatedByUri,
                 createResource.AccountId,
                 createResource.Name,
                 string.IsNullOrEmpty(createResource.ClosedOn) ? (DateTime?)null : DateTime.Parse(createResource.ClosedOn));
@@ -86,7 +87,7 @@
             return new CreatedResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource)
+        public IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource, string updatedByUri)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -103,6 +104,7 @@
             try
             {
                 account.UpdateAccount(
+                    updatedByUri,
                     discountScheme,
                     updateResource.TurnoverBandUri,
                     updateResource.EligibleForGoodCreditDiscount,
@@ -120,7 +122,7 @@
             return new SuccessResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address)
+        public IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address, string updatedByUri)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -133,7 +135,7 @@
                 return new BadRequestResult<SalesAccount>("Address cannot be empty.");
             }
 
-            account.UpdateNameAndAddress(name, address.ToDomain());
+            account.UpdateNameAndAddress(updatedByUri, name, address.ToDomain());
 
             this.transactionManager.Commit();
             this.salesAccountUpdatedDispatcher.SendSalesAccountUpdated(account.ToMessage());
@@ -141,7 +143,7 @@
             return new SuccessResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource)
+        public IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource, string updatedByUri)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -149,7 +151,7 @@
                 return new NotFoundResult<SalesAccount>();
             }
 
-            account.CloseAccount(new SalesAccountCloseActivity(DateTime.Parse(closeResource.ClosedOn)));
+            account.CloseAccount(new SalesAccountCloseActivity(updatedByUri, DateTime.Parse(closeResource.ClosedOn)));
             this.transactionManager.Commit();
 
             return new SuccessResult<SalesAccount>(account);

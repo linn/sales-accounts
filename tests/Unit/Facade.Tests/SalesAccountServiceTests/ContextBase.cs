@@ -36,7 +36,7 @@
         [SetUp]
         public void SetUpContext()
         {
-            this.SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
+            this.SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name"));
             this.SalesAccountRepository = Substitute.For<ISalesAccountRepository>();
             this.SalesAccountUpdatedDispatcher = Substitute.For<ISalesAccountUpdatedDispatcher>();
             this.DiscountingService = Substitute.For<IDiscountingService>();

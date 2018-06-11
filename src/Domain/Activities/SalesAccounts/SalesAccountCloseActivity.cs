@@ -4,7 +4,7 @@
 
     public class SalesAccountCloseActivity : SalesAccountActivity
     {
-        public SalesAccountCloseActivity(DateTime closedOn)
+        public SalesAccountCloseActivity(string updatedByUri, DateTime closedOn) : base(updatedByUri)
         {
             this.ClosedOn = closedOn;
         }

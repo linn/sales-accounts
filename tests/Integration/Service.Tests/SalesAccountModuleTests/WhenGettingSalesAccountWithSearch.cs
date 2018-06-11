@@ -23,7 +23,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name"));
             this.SalesAccountRepository.Get("search").Returns(new[] { this.salesAccount });
 
             this.Response = this.Browser.Get(

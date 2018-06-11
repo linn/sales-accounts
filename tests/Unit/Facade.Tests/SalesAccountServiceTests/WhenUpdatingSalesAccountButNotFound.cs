@@ -19,7 +19,7 @@
         {
             this.updateResource = new SalesAccountUpdateResource();
             this.SalesAccountRepository.GetById(2).Returns((SalesAccount)null);
-            this.Result = this.Sut.UpdateSalesAccount(2, this.updateResource);
+            this.Result = this.Sut.UpdateSalesAccount(2, this.updateResource, "/employees/100");
         }
 
         [Test]

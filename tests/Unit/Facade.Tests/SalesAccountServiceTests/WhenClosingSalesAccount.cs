@@ -18,7 +18,7 @@
         public void SetUp()
         {
             this.closeResource = new SalesAccountCloseResource { ClosedOn = 1.December(2020).ToString("O") };
-            this.Result = this.Sut.CloseSalesAccount(1, this.closeResource);
+            this.Result = this.Sut.CloseSalesAccount(1, this.closeResource, "/employees/100");
         }
 
         [Test]

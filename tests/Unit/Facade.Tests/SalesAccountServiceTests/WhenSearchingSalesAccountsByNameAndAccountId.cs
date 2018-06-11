@@ -21,8 +21,8 @@
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount1 = new SalesAccount(new SalesAccountCreateActivity(123, "account 1")) { Id = 1 };
-            this.salesAccount2 = new SalesAccount(new SalesAccountCreateActivity(456, "123rd Street")) { Id = 2 };
+            this.salesAccount1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 123, "account 1")) { Id = 1 };
+            this.salesAccount2 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 456, "123rd Street")) { Id = 2 };
             this.SalesAccountRepository.GetById(123).Returns(this.salesAccount1);
             this.SalesAccountRepository.Get("123").Returns(new[] { this.salesAccount2 });
             this.Results = this.Sut.Get("123");

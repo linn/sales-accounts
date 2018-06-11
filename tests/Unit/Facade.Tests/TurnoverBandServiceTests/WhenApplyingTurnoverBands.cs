@@ -21,7 +21,7 @@
         [SetUp]
         public void SetUp()
         {
-            var account1 = new SalesAccount(new SalesAccountCreateActivity(1, "one"));
+            var account1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"));
             this.financialYear = "2018/19";
             this.ProposedTurnoverBandService.ApplyTurnoverBandProposal(this.financialYear)
                 .Returns(new TurnoverBandProposal(

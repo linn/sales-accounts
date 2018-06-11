@@ -1,6 +1,7 @@
 ﻿namespace Linn.SalesAccounts.Service.Tests.SalesAccountModuleTests
 {
     using System.Collections.Generic;
+    using System.Security.Claims;
 
     using Linn.Common.Facade;
     using Linn.Common.Persistence;
@@ -15,6 +16,7 @@
     using Linn.SalesAccounts.Service.ResponseProcessors;
     using Linn.SalesAccounts.Service.Tests;
 
+    using Nancy.Bootstrapper;
     using Nancy.Testing;
 
     using NSubstitute;
@@ -54,6 +56,19 @@
                         with.ResponseProcessor<SalesAccountJsonResponseProcessor>();
                         with.ResponseProcessor<SalesAccountsJsonResponseProcessor>();
                         with.ResponseProcessor<SalesAcountActivitiesJsonResponseProcessor>();
+
+                        with.RequestStartup(
+                            (container, pipelines, context) =>
+                                {
+                                    var claims = new List<Claim>
+                                                     {
+                                                         new Claim(ClaimTypes.Role, "employee"),
+                                                         new Claim(ClaimTypes.NameIdentifier, "test-user")
+                                                     };
+                                    var user = new ClaimsIdentity(claims, "jwt");
+
+                                    context.CurrentUser = new ClaimsPrincipal(user);
+                                });
                     });
 
             this.Browser = new Browser(bootstrapper);

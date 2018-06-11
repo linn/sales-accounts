@@ -51,7 +51,8 @@
 
         public void ApplyTurnoverBandToAccount()
         {
-            this.SalesAccount.ApplyTurnoverBandProposal(this);
+            // TODO get this using the employee uri
+            this.SalesAccount.ApplyTurnoverBandProposal(null, this);
             this.AppliedToAccount = true;
         }
     }

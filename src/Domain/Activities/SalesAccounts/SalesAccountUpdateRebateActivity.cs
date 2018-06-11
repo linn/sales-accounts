@@ -2,7 +2,7 @@
 {
     public class SalesAccountUpdateRebateActivity : SalesAccountActivity
     {
-        public SalesAccountUpdateRebateActivity(bool eligibleForRebate)
+        public SalesAccountUpdateRebateActivity(string updatedByUri, bool eligibleForRebate) : base(updatedByUri)
         {
             this.EligibleForRebate = eligibleForRebate;
         }

@@ -26,7 +26,7 @@
                                           TurnoverBandUri = "/tb/1",
                                           EligibleForGoodCreditDiscount = true
                                       };
-            this.Result = this.Sut.UpdateSalesAccount(1, this.updateResource);
+            this.Result = this.Sut.UpdateSalesAccount(1, this.updateResource, "/employees/100");
         }
 
         [Test]

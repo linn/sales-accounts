@@ -17,7 +17,7 @@
                                ProposedTurnoverBandUri = "/tb/1",
                                FinancialYear = "2018/19",
                                Id = 1,
-                               SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")),
+                               SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one")),
                                SalesValueCurrency = 1m,
                                SalesValueBase = 1m
             };

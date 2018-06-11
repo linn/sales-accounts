@@ -45,7 +45,7 @@
         [Test]
         public void ShouldCallFacadeToCreateAccount()
         {
-            this.SalesAccountService.Received(1).AddSalesAccount(Arg.Any<SalesAccountCreateResource>());
+            this.SalesAccountService.Received(1).AddSalesAccount(Arg.Any<SalesAccountCreateResource>(), "/employees/100");
         }
 
         [Test]

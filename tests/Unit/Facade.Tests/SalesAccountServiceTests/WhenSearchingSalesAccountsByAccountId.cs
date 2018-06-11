@@ -20,7 +20,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(123, "search something")) { Id = 1 };
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 123, "search something")) { Id = 1 };
             this.SalesAccountRepository.GetById(123).Returns(this.salesAccount);
             this.Results = this.Sut.Get("123");
         }

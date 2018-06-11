@@ -54,7 +54,7 @@
             foreach (var customerResource in uniqueAccounts)
             {
                 var account = this.salesAccountsRepository.GetById(customerResource.SalesAccountId);
-                account?.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(customerResource.GrowthPartner));
+                account?.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity("/employees/100", customerResource.GrowthPartner));
             }
 
             this.transactionManager.Commit();

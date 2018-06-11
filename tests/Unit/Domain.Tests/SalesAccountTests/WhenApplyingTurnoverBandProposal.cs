@@ -22,13 +22,13 @@
                                                 SalesAccount = this.Sut,
                                                 FinancialYear = "2018/19"
                                             };
-            this.Sut.ApplyTurnoverBandProposal(this.proposedTurnoverBand);
+            this.Sut.ApplyTurnoverBandProposal("employees/100", this.proposedTurnoverBand);
         }
 
         [Test]
         public void ShouldUpdateAccount()
         {
-            this.Sut.TurnoverBandUri.Should().Be(this.proposedTurnoverBand.ProposedTurnoverBandUri);
+            this.Sut.TurnoverBandUri.Should().Be(this.proposedTurnoverBand.ProposedTurnoverBandUri);            
         }
 
         [Test]
@@ -40,6 +40,7 @@
                 .As<SalesAccountApplyTurnoverBandProposalActivity>();
             activity.TurnoverBandUri.Should().Be(this.proposedTurnoverBand.ProposedTurnoverBandUri);
             activity.BasedOnFinancialYear.Should().Be(this.proposedTurnoverBand.FinancialYear);
+            activity.UpdatedByUri.Should().Be("employees/100");
         }
     }
 }

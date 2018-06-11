@@ -2,7 +2,7 @@
 {
     public class SalesAccountUpdateNameActivity : SalesAccountActivity
     {
-        public SalesAccountUpdateNameActivity(string name)
+        public SalesAccountUpdateNameActivity(string updatedByUri, string name) : base(updatedByUri)
         {
             this.Name = name;
         }

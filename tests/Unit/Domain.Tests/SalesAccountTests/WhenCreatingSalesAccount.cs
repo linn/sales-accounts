@@ -17,7 +17,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.createActivity = new SalesAccountCreateActivity(1, "n", 1.December(2018));
+            this.createActivity = new SalesAccountCreateActivity("/employees/100", 1, "New Account", 1.December(2018));
             this.result = new SalesAccount(this.createActivity);
         }
 
@@ -33,7 +33,12 @@
         public void ShouldAddActivity()
         {
             this.result.Activities.Should().HaveCount(1);
-            this.result.Activities.First().Should().BeOfType<SalesAccountCreateActivity>();
+            var activity = this.result.Activities.First();
+            activity.Should().BeOfType<SalesAccountCreateActivity>();
+            ((SalesAccountCreateActivity)activity).UpdatedByUri.Should().Be("/employees/100");
+            ((SalesAccountCreateActivity)activity).ClosedOn.Should().Be(1.December(2018));
+            ((SalesAccountCreateActivity)activity).AccountId.Should().Be(1);
+            ((SalesAccountCreateActivity)activity).Name.Should().Be("New Account");
         }
     }
 }

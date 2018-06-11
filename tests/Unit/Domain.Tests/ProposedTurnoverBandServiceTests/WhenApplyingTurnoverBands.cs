@@ -25,10 +25,10 @@
         public void SetUp()
         {
             this.financialYear = "2018/19";
-            this.account1 = new SalesAccount(new SalesAccountCreateActivity(1, "one")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
-            this.account2 = new SalesAccount(new SalesAccountCreateActivity(2, "two")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
-            this.account3 = new SalesAccount(new SalesAccountCreateActivity(3, "three")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
-            this.account4 = new SalesAccount(new SalesAccountCreateActivity(4, "four")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account2 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 2, "two")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account3 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 3, "three")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account4 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 4, "four")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
 
             this.proposedTurnoverBands = new List<ProposedTurnoverBand>
                                             {

@@ -46,6 +46,7 @@
         }
 
         public void UpdateAccount(
+            string updatedByUri,
             DiscountScheme discountScheme,
             string turnoverBandUri,
             bool eligibleForGoodCredit,
@@ -56,35 +57,35 @@
 
             if (discountScheme?.DiscountSchemeUri != this.DiscountSchemeUri)
             {
-                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(discountScheme?.DiscountSchemeUri));
+                this.UpdateDiscountScheme(new SalesAccountUpdateDiscountSchemeUriActivity(updatedByUri, discountScheme?.DiscountSchemeUri));
             }
 
             if (turnoverBandUri != this.TurnoverBandUri)
             {
-                this.UpdateTurnoverBand(new SalesAccountUpdateTurnoverBandUriActivity(turnoverBandUri));
+                this.UpdateTurnoverBand(new SalesAccountUpdateTurnoverBandUriActivity(updatedByUri, turnoverBandUri));
             }
 
             if (eligibleForGoodCredit != this.EligibleForGoodCreditDiscount)
             {
-                this.UpdateGoodCredit(new SalesAccountUpdateGoodCreditActivity(eligibleForGoodCredit));
+                this.UpdateGoodCredit(new SalesAccountUpdateGoodCreditActivity(updatedByUri, eligibleForGoodCredit));
             }
 
             if (eligibleForRebate != this.EligibleForRebate)
             {
-                this.UpdateRebate(new SalesAccountUpdateRebateActivity(eligibleForRebate));
+                this.UpdateRebate(new SalesAccountUpdateRebateActivity(updatedByUri, eligibleForRebate));
             }
 
             if (growthPartner != this.GrowthPartner)
             {
-                this.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(growthPartner));
+                this.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(updatedByUri, growthPartner));
             }
         }
 
-        public void UpdateNameAndAddress(string name, SalesAccountAddress address)
+        public void UpdateNameAndAddress(string updatedByUri, string name, SalesAccountAddress address)
         {
             if (name != this.Name)
             {
-                this.UpdateName(new SalesAccountUpdateNameActivity(name));
+                this.UpdateName(new SalesAccountUpdateNameActivity(updatedByUri, name));
             }
 
             if (address == null)
@@ -99,7 +100,7 @@
                 || address.CountryUri != this.Address?.CountryUri
                 || address.Postcode != this.Address?.Postcode)
             {
-                this.UpdateAddress(new SalesAccountUpdateAddressActivity(address));
+                this.UpdateAddress(new SalesAccountUpdateAddressActivity(updatedByUri, address));
             }
         }
 
@@ -109,9 +110,10 @@
             this.Activities.Add(growthPartnerActivity);
         }
 
-        public void ApplyTurnoverBandProposal(ProposedTurnoverBand proposedTurnoverBand)
+        public void ApplyTurnoverBandProposal(string updatedByUri, ProposedTurnoverBand proposedTurnoverBand)
         {
             var activity = new SalesAccountApplyTurnoverBandProposalActivity(
+                updatedByUri,
                 proposedTurnoverBand.ProposedTurnoverBandUri,
                 proposedTurnoverBand.FinancialYear);
             this.Activities.Add(activity);

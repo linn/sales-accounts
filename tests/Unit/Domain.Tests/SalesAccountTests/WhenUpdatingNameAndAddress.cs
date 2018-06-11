@@ -20,7 +20,7 @@
                 "Address line 4",
                 "/countries/1",
                 "Postcode");
-            this.Sut.UpdateNameAndAddress("New Name", address);
+            this.Sut.UpdateNameAndAddress("/employees/100", "New Name", address);
         }
 
         [Test]
@@ -39,8 +39,14 @@
                 .First(a => a is SalesAccountUpdateNameActivity)
                 .As<SalesAccountUpdateNameActivity>().Name.Should().Be("New Name");
             this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateNameActivity)
+                .As<SalesAccountUpdateNameActivity>().UpdatedByUri.Should().Be("/employees/100");
+            this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateAddressActivity)
                 .As<SalesAccountUpdateAddressActivity>().Address.Line1.Should().Be("Address line 1");
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateAddressActivity)
+                .As<SalesAccountUpdateAddressActivity>().UpdatedByUri.Should().Be("/employees/100");
         }
     }
 }
