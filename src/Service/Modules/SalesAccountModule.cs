@@ -3,6 +3,7 @@
     using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Resources.SalesAccounts;
     using Linn.SalesAccounts.Service.Extensions;
+    using Linn.SalesAccounts.Service.Models;
 
     using Nancy;
     using Nancy.ModelBinding;
@@ -27,7 +28,10 @@
         private object GetSalesAccount(int id)
         {
             var salesAccount = this.salesAccountService.GetById(id);
-            return this.Negotiate.WithModel(salesAccount).WithView("Index");
+            return this.Negotiate
+                .WithModel(salesAccount)
+                .WithMediaRangeModel("text/html", ApplicationSettings.Get)
+                .WithView("Index");
         }
 
         private object GetSalesAccounts()

@@ -2,18 +2,20 @@
 import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import history from './history';
+import reducer from './reducers';
 
-export default function createStoreFunction(reducer, initialState) {
+const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
 
-    const middleware = applyMiddleware(thunkMiddleware, routerMiddleware(history));
+const middleware = [
+    thunkMiddleware,
+    routerMiddleware(history)
+];
 
-    const enhancers = window.__REDUX_DEVTOOLS_EXTENSION__ && process.env.NODE_ENV !== 'production'
-        ? compose(
-            middleware,
-            window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-        )
-        : compose(
-            middleware);
+const configureStore = initialState => {
+    const enhancers = composeEnhancers(applyMiddleware(...middleware));
+    const store = createStore(reducer, initialState, enhancers);
 
-    return createStore(reducer, initialState, enhancers);
-};
+    return store;
+}
+
+export default configureStore;

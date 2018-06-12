@@ -32,7 +32,7 @@ export const fetchAllOpenSalesAccounts = () => async dispatch => {
     }
 };
 
-export const fetchSalesAccount = salesAccountUri => async dispatch => {
+export const fetchSalesAccount = salesAccountUri => async dispatch => {    
     dispatch(requestSalesAccountDetail(salesAccountUri));
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}`);
@@ -155,9 +155,10 @@ const receiveCountry = data => ({
 });
 
 export const fetchCountry = (countryUri) => async dispatch => {
+        console.log(countryUri);
         dispatch(requestCountry());
     try {
-        const data = await fetchJson(`${config.countryRoot}${countryUri}`, { headers: { 'Accept': 'application/json' } });
+        const data = await fetchJson(`${config.proxyRoot}${countryUri}`, { headers: { 'Accept': 'application/json' } });
         dispatch(receiveCountry(data));
     } catch (e) {
         alert(`Failed to fetch country. Error: ${e.message}`);
@@ -174,7 +175,7 @@ const receiveActivities = data => ({
     payload: { data }
 });
 
-export const fetchActivities = salesAccountUri => async dispatch => {
+export const fetchActivities = salesAccountUri => async dispatch => {    
     dispatch(requestActivities(salesAccountUri));
     try {
         const data = await fetchJson(`${config.appRoot}${salesAccountUri}/activities`);
