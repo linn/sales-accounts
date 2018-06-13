@@ -14,8 +14,6 @@
             this.Get("/sales/accounts/signin-oidc-client", _ => this.GetApp());
 
             this.Get("/sales/accounts/signin-oidc-silent", _ => this.SilentRenew());
-
-            this.RequiresAuthentication();
         }
 
         private object GetApp()
