@@ -1,75 +1,143 @@
 ﻿import { fetchJson, postJson, putJson, deleteJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
+import { CALL_API } from 'redux-api-middleware';
 
 const financialYearQueryString = (financialYear) => (financialYear ? `?financialYear=${financialYear}` : '');
 
-const requestTurnoverBandProposal = (financialYear) => ({
-    type: actionTypes.REQUEST_TURNOVER_BAND_PROPOSAL,
-    payload: { financialYear }
+export const fetchTurnoverBandProposal = financialYear => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}/sales/accounts/turnover-band-proposals${financialYearQueryString(financialYear)}`,
+        method: 'GET',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json'
+        },
+        types: [
+            {
+                type: actionTypes.REQUEST_TURNOVER_BAND_PROPOSAL,
+                payload: { financialYear }
+            },
+            {
+                type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `turnover band proposal - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
 });
 
-const receiveTurnoverBandProposal = data => ({
-    type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
-    payload: { data }
+export const calculateTurnoverBandProposal = financialYear => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}/sales/accounts/turnover-band-proposals`,
+        method: 'POST',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            financialYear : financialYear ? financialYear : null
+        }),
+        types: [
+            {
+                type: actionTypes.REQUEST_TURNOVER_BAND_PROPOSAL,
+                payload: { financialYear }
+            },
+            {
+                type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `calculate turnover band proposal - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
 });
 
-const requestUpdateProposedTurnoverBand = (uri, turnoverBandUri) => ({
-    type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
-    payload: { uri, turnoverBandUri }
+export const updateProposedTurnoverBand = (uri, turnoverBandUri) => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}${uri}`,
+        method: 'PUT',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            turnoverBandUri
+        }),
+        types: [
+            {
+                type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
+                payload: { uri, turnoverBandUri }
+            },
+            {
+                type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
+                payload: async (action, state, res) => ({ data: await res.json(), uri })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `update proposed turnover band - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
 });
 
-const receiveUpdateProposedTurnoverBand = (uri, data) => ({
-    type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
-    payload: { uri, data }
+export const excludeProposedTurnoverBand = uri => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}${uri}`,
+        method: 'DELETE',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({}),
+        types: [
+            {
+                type: actionTypes.REQUEST_UPDATE_PROPOSED_TURNOVER_BAND,
+                payload: { uri }
+            },
+            {
+                type: actionTypes.RECEIVE_UPDATE_PROPOSED_TURNOVER_BAND,
+                payload: async (action, state, res) => ({ data: await res.json(), uri })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `exclude proposed turnover band - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
 });
 
-export const fetchTurnoverBandProposal = (financialYear) => async dispatch => {
-    dispatch(requestTurnoverBandProposal(financialYear));
-    try {
-        const data = await fetchJson(`${config.appRoot}/sales/accounts/turnover-band-proposals${financialYearQueryString(financialYear)}`);
-        dispatch(receiveTurnoverBandProposal(data));
-    } catch (e) {
-        alert(`Failed to fetch turnover band proposal. Error: ${e.message}`);
+export const applyTurnoverBandProposal = (uri, financialYear) => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}${uri}`,
+        method: 'POST',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({}),
+        types: [
+            {
+                type: actionTypes.REQUEST_TURNOVER_BAND_PROPOSAL,
+                payload: { financialYear }
+            },
+            {
+                type: actionTypes.RECEIVE_TURNOVER_BAND_PROPOSAL,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `apply turnover band proposal - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
     }
-};
-
-export const calculateTurnoverBandProposal = (financialYear) => async dispatch => {
-    dispatch(requestTurnoverBandProposal(financialYear));
-    try {
-        const data = await postJson(`${config.appRoot}/sales/accounts/turnover-band-proposals`, { financialYear : financialYear ? financialYear : null});
-        dispatch(receiveTurnoverBandProposal(data));
-    } catch (e) {
-        alert(`Failed to calculate turnover band proposal. Error: ${e.message}`);
-    }
-};
-
-export const updateProposedTurnoverBand = (uri, turnoverBandUri) => async dispatch => {
-    dispatch(requestUpdateProposedTurnoverBand(uri, turnoverBandUri));
-    try {
-        const data = await putJson(`${config.appRoot}${uri}`, { turnoverBandUri });
-        dispatch(receiveUpdateProposedTurnoverBand(uri, data));
-    } catch (e) {
-        alert(`Failed to update proposed turnover band. Error: ${e.message}`);
-    }
-};
-
-export const excludeProposedTurnoverBand = (uri) => async dispatch => {
-    dispatch(requestUpdateProposedTurnoverBand(uri));
-    try {
-        const data = await deleteJson(`${config.appRoot}${uri}`, {});
-        dispatch(receiveUpdateProposedTurnoverBand(uri, data));
-    } catch (e) {
-        alert(`Failed to exclude proposed turnover band ${uri}. Error: ${e.message}`);
-    }
-};
-
-export const applyTurnoverBandProposal = (uri, financialYear) => async dispatch => {
-    dispatch(requestTurnoverBandProposal(financialYear));
-    try {
-        const data = await postJson(`${config.appRoot}${uri}`, {});
-        dispatch(receiveTurnoverBandProposal(data));
-    } catch (e) {
-        alert(`Failed to apply turnover band proposal. Error: ${e.message}`);
-    }
-};
+});

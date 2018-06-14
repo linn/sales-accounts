@@ -5,6 +5,7 @@
 
     using Nancy;
     using Nancy.ModelBinding;
+    using Nancy.Security;
 
     public sealed class TurnoverBandModule : NancyModule
     {
@@ -25,6 +26,8 @@
 
         private object ExportProposedTurnoverBands()
         {
+            this.RequiresAuthentication();
+
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
             var turnoverBandProposals = this.turnoverBandService.GetProposedTurnoverBandModelResults(resource.FinancialYear);
             return this.Negotiate
@@ -35,6 +38,8 @@
 
         private object AcceptProposedTurnoverBands()
         {
+            this.RequiresAuthentication();
+
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
             var turnoverBandProposal = this.turnoverBandService.ApplyTurnoverBandProposal(resource.FinancialYear);
             return this.Negotiate.WithModel(turnoverBandProposal);
@@ -47,6 +52,8 @@
 
         private object SetProposedTurnoverBands()
         {
+            this.RequiresAuthentication();
+
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
             var turnoverBandProposal = this.turnoverBandService.ProposeTurnoverBands(resource.FinancialYear);
             return this.Negotiate.WithModel(turnoverBandProposal);
@@ -61,6 +68,8 @@
 
         private object UpdateProposedTurnoverBand(int id)
         {
+            this.RequiresAuthentication();
+
             var resource = this.Bind<ProposedTurnoverBandUpdateResource>();
             var turnoverBand = this.turnoverBandService.OverrideTurnoverBand(id, resource.TurnoverBandUri);
             return this.Negotiate.WithModel(turnoverBand);
@@ -68,6 +77,8 @@
 
         private object ExcludeProposedTurnoverBand(int id)
         {
+            this.RequiresAuthentication();
+
             var turnoverBand = this.turnoverBandService.ExcludeFromTurnoverBandProposal(id);
             return this.Negotiate.WithModel(turnoverBand);
         }

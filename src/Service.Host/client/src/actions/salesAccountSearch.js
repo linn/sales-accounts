@@ -1,11 +1,7 @@
 ﻿import { fetchJson } from '../helpers/fetchJson';
 import config from '../config';
 import * as actionTypes from './index';
-
-const requestSalesAccounts = searchTerm => ({
-    type: actionTypes.REQUEST_SALES_ACCOUNTS_SEARCH,
-    payload: { searchTerm }
-});
+import { CALL_API } from 'redux-api-middleware';
 
 const receiveSalesAccounts = (searchTerm, salesAccounts) => ({
     type: actionTypes.RECEIVE_SALES_ACCOUNTS_SEARCH,
@@ -17,16 +13,34 @@ export const clearSalesAccountSearch = () => ({
     payload: {}
 });
 
+const performSearchSalesAccounts = searchTerm => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}/sales/accounts?searchTerm=${searchTerm}`,
+        method: 'GET',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json'
+        },
+        types: [
+            {
+                type: actionTypes.REQUEST_SALES_ACCOUNTS_SEARCH,
+                payload: { searchTerm }
+            },
+            {
+                type: actionTypes.RECEIVE_SALES_ACCOUNTS_SEARCH,
+                payload: async (action, state, res) => ({ salesAccounts: await res.json(), searchTerm })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `Sales Account search - ${res.status} ${res.statusText}` : `Network request failed`,       
+            }
+        ]
+    }
+});
+
 export const searchSalesAccounts = searchTerm => async dispatch => {
     if (searchTerm) {
-        dispatch(requestSalesAccounts(searchTerm));
-        try
-        {
-            const data = await fetchJson(`${config.appRoot}/sales/accounts?searchTerm=${searchTerm}`);
-            dispatch(receiveSalesAccounts(searchTerm, data));
-        } catch (e) {
-            alert(`Failed to search for sales accounts. Error: ${e.message}`);
-        }
+        dispatch(performSearchSalesAccounts(searchTerm));
     } else {
         dispatch(receiveSalesAccounts('', []));
     }

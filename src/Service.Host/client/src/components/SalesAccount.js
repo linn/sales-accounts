@@ -15,7 +15,7 @@ class SalesAccount extends Component {
     render() {
         const { loading,  dirty, saving, 
             hideEditModal, closeAccount, saveAccountUpdate,
-            salesAccount, discountSchemeName, discountSchemeStatus, turnoverBandName, discountSchemes, turnoverBands,
+            salesAccount, salesAccountUri, discountSchemeName, discountSchemeStatus, turnoverBandName, discountSchemes, turnoverBands,
             editDiscountScheme, setDiscountScheme, 
             editTurnoverBand, setTurnoverBand, 
             editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
@@ -72,7 +72,7 @@ class SalesAccount extends Component {
                         </Col>
                     </Row >
                     <Controls 
-                        closedOn={salesAccount.closedOn} dirty={dirty} saving={saving} salesAccount={salesAccount} 
+                        closedOn={salesAccount.closedOn} dirty={dirty} saving={saving} salesAccount={salesAccount} salesAccountUri={salesAccountUri}
                         closeAccount={closeAccount} saveAccountUpdate={saveAccountUpdate} 
                     />
                     <Activities activities={activities} discountSchemes={discountSchemes} turnoverBandSets={turnoverBandSets} />
