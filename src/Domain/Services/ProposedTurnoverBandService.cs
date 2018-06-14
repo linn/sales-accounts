@@ -67,7 +67,8 @@
 
             return new TurnoverBandProposal(financialYear, proposedTurnoverBands.Where(p => p.IncludeInUpdate));
         }
-        
+
+        // TODO does this need employee passed in
         public TurnoverBandProposal ApplyTurnoverBandProposal(string financialYear, string employeeUri)
         {
             if (string.IsNullOrEmpty(financialYear))
@@ -79,7 +80,7 @@
 
             foreach (var proposedTurnoverBand in turnoverBands.Where(t => t.IncludeInUpdate && !t.AppliedToAccount))
             {
-                proposedTurnoverBand.ApplyTurnoverBandToAccount();
+                proposedTurnoverBand.ApplyTurnoverBandToAccount(employeeUri);
             }
 
             return new TurnoverBandProposal(financialYear, turnoverBands);
