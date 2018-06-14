@@ -2,6 +2,7 @@
 {
     using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Resources.RequestResources;
+    using Linn.SalesAccounts.Service.Extensions;
 
     using Nancy;
     using Nancy.ModelBinding;
@@ -40,8 +41,10 @@
         {
             this.RequiresAuthentication();
 
+            var employeeUri = this.Context.CurrentUser.GetEmployeeUri();
+
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
-            var turnoverBandProposal = this.turnoverBandService.ApplyTurnoverBandProposal(resource.FinancialYear);
+            var turnoverBandProposal = this.turnoverBandService.ApplyTurnoverBandProposal(resource.FinancialYear, employeeUri);
             return this.Negotiate.WithModel(turnoverBandProposal);
         }
 

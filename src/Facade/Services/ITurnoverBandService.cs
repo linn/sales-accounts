@@ -20,6 +20,6 @@
 
         IResult<ProposedTurnoverBand> ExcludeFromTurnoverBandProposal(int id);
 
-        IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear);
+        IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear, string employeeUri);
     }
 }

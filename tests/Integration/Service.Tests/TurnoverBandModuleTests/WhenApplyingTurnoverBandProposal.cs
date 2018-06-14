@@ -43,7 +43,7 @@
                                                      }
                                              };
             var proposal = new TurnoverBandProposal(this.requestResource.FinancialYear, this.proposedTurnoverBands);
-            this.TurnoverBandService.ApplyTurnoverBandProposal("2018/19")
+            this.TurnoverBandService.ApplyTurnoverBandProposal("2018/19", null)
                 .Returns(new SuccessResult<TurnoverBandProposal>(proposal));
             this.Response = this.Browser.Post(
                 "/sales/accounts/turnover-band-proposals/apply",
@@ -64,7 +64,7 @@
         [Test]
         public void ShouldCallService()
         {
-            this.TurnoverBandService.Received(1).ApplyTurnoverBandProposal(this.requestResource.FinancialYear);
+            this.TurnoverBandService.Received(1).ApplyTurnoverBandProposal(this.requestResource.FinancialYear, null);
         }
 
         [Test]

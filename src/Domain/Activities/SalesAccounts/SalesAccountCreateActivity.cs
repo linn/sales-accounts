@@ -21,8 +21,7 @@
 
         public string Name { get; private set; }
 
-        // TODO is this needed whats it doing?
-        public string UpdatedByUri { get; private set; }
+        public new string UpdatedByUri { get; private set; }
 
         public DateTime? ClosedOn { get; private set; }
 

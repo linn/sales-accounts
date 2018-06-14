@@ -67,8 +67,8 @@
 
             return new TurnoverBandProposal(financialYear, proposedTurnoverBands.Where(p => p.IncludeInUpdate));
         }
-
-        public TurnoverBandProposal ApplyTurnoverBandProposal(string financialYear)
+        
+        public TurnoverBandProposal ApplyTurnoverBandProposal(string financialYear, string employeeUri)
         {
             if (string.IsNullOrEmpty(financialYear))
             {

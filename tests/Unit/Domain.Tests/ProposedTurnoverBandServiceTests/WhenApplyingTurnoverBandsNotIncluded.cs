@@ -41,7 +41,7 @@
                                             };
             this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)
                 .Returns(this.proposedTurnoverBands);
-            this.results = this.Sut.ApplyTurnoverBandProposal(this.financialYear).ProposedTurnoverBands;
+            this.results = this.Sut.ApplyTurnoverBandProposal(this.financialYear, "/employees/100").ProposedTurnoverBands;
         }
 
         [Test]
