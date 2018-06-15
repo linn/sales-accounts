@@ -56,7 +56,7 @@ class ProposalItem extends Component {
         }
 
         return (
-            <div>
+            <React.Fragment>
                 <ListGroupItem>
                     <Row>
                         <Col style={styles.column} xs={3}>
@@ -108,7 +108,7 @@ class ProposalItem extends Component {
                     visible={this.state.editBand} title={'Select Turnover Band'} items={turnoverBands || []}
                     currentItemUri={proposalItem.proposedTurnoverBandUri} hideModal={() => this.handleCloseModal()} setItem={this.makeSetItemHandler()}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 }
