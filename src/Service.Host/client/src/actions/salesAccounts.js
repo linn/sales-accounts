@@ -1,5 +1,4 @@
-﻿import { fetchJson, putJson, deleteJson } from '../helpers/fetchJson';
-import config from '../config';
+﻿import config from '../config';
 import * as actionTypes from './index';
 import { CALL_API } from 'redux-api-middleware';
 
@@ -114,7 +113,7 @@ export const fetchActivities = salesAccountUri => ({
     [CALL_API]: {
         endpoint: `${config.appRoot}${salesAccountUri}/activities`,
         method: 'GET',
-        // options: { requiresAuth: true },
+        options: { requiresAuth: true },
         headers: {
             Accept: 'application/json'
         },

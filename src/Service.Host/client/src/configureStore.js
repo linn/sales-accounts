@@ -5,13 +5,14 @@ import thunkMiddleware from 'redux-thunk';
 import history from './history';
 import reducer from './reducers';
 import authorization from './middleware/authorization';
-import { fetchErrorHandlingMiddleware, salesAccountsMiddleware } from './middleware';
+import { fetchErrorHandlingMiddleware, salesAccountsMiddleware, activitiesMiddleware } from './middleware';
 
 const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose;
 
 const middleware = [
     authorization,
     api,
+    activitiesMiddleware,
     thunkMiddleware,
     fetchErrorHandlingMiddleware,
     salesAccountsMiddleware,

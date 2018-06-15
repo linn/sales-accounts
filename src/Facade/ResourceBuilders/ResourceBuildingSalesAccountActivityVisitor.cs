@@ -14,6 +14,7 @@
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
                            ClosedOn = DateTime.SpecifyKind(activity.ClosedOn, DateTimeKind.Utc).ToString("o"),
+                           UpdatedByUri = activity.UpdatedByUri
             };
         }
 
@@ -27,8 +28,9 @@
                            ClosedOn = activity.ClosedOn.HasValue
                                           ? DateTime.SpecifyKind(activity.ClosedOn.Value, DateTimeKind.Utc).ToString("o")
                                           : null,
-                           Name = activity.Name
-                       };
+                           Name = activity.Name,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountGrowthPartnerActivity activity)
@@ -37,8 +39,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           GrowthPartner = activity.GrowthPartner
-                       };
+                           GrowthPartner = activity.GrowthPartner,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountUpdateAddressActivity activity)
@@ -52,8 +55,9 @@
                            Line3 = activity.Address?.Line3,
                            Line4 = activity.Address?.Line4,
                            CountryUri = activity.Address?.CountryUri,
-                           Postcode = activity.Address?.Postcode
-                       };
+                           Postcode = activity.Address?.Postcode,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountUpdateDiscountSchemeUriActivity activity)
@@ -62,8 +66,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           DiscountSchemeUri = activity.DiscountSchemeUri
-                       };
+                           DiscountSchemeUri = activity.DiscountSchemeUri,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountUpdateGoodCreditActivity activity)
@@ -72,8 +77,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           EligibleForGoodCreditDiscount = activity.EligibleForGoodCreditDiscount
-                       };
+                           EligibleForGoodCreditDiscount = activity.EligibleForGoodCreditDiscount,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountUpdateNameActivity activity)
@@ -82,8 +88,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           Name = activity.Name
-                       };
+                           Name = activity.Name,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountUpdateRebateActivity activity)
@@ -92,8 +99,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           EligibleForRebate = activity.EligibleForRebate
-                       };
+                           EligibleForRebate = activity.EligibleForRebate,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountUpdateTurnoverBandUriActivity activity)
@@ -102,8 +110,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           TurnoverBandUri = activity.TurnoverBandUri
-                       };
+                           TurnoverBandUri = activity.TurnoverBandUri,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
 
         public SalesAccountActivityResource Visit(SalesAccountApplyTurnoverBandProposalActivity activity)
@@ -112,8 +121,9 @@
                        {
                            ActivityType = activity.GetType().Name,
                            ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
-                           TurnoverBandUri = activity.TurnoverBandUri
-                       };
+                           TurnoverBandUri = activity.TurnoverBandUri,
+                           UpdatedByUri = activity.UpdatedByUri
+            };
         }
     }
 }

@@ -7,6 +7,7 @@ import salesAccounts from './salesAccounts';
 import discountSchemes from './discountSchemes';
 import turnoverBandSets from './turnoverBandSets';
 import turnoverBandProposal from './turnoverBandProposal';
+import employees from './employees';
 
 const rootReducer = combineReducers({
     oidc,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     salesAccounts,
     discountSchemes,
     turnoverBandSets,
-    turnoverBandProposal
+    turnoverBandProposal,
+    employees
 });
 
 export default rootReducer;

@@ -7,7 +7,7 @@ export const salesAccountsMiddleware = ({dispatch, getState}) => next => action 
     const result = next(action);
     
     switch(action.type) {
-        case actionTypes.RECEIVE_SALES_ACCOUNT: 
+        case actionTypes.RECEIVE_SALES_ACCOUNT:
             dispatch(fetchCountry(action.payload.data.address.countryUri));
             break;
 
