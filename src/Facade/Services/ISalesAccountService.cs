@@ -14,13 +14,13 @@
 
         IResult<IEnumerable<SalesAccount>> Get(string searchTerm);
 
-        IResult<SalesAccount> AddSalesAccount(SalesAccountCreateResource createResource);
+        IResult<SalesAccount> AddSalesAccount(SalesAccountCreateResource createResource, string employeeUri);
 
-        IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource);
+        IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource, string employeeUri);
 
-        IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address);
+        IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address, string employeeUri);
 
-        IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource);
+        IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource, string employeeUri);
 
         IResult<IEnumerable<SalesAccountActivity>> GetActivitiesById(int id);
     }

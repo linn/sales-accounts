@@ -7,5 +7,7 @@
         public string ActivityType { get; set; }
 
         public string ChangedOn { get; set; }
+
+        public string UpdatedByUri { get; set; }
     }
 }

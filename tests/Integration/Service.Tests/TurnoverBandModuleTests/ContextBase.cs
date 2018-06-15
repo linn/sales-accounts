@@ -1,5 +1,8 @@
 ﻿namespace Linn.SalesAccounts.Service.Tests.TurnoverBandModuleTests
 {
+    using System.Collections.Generic;
+    using System.Security.Claims;
+
     using Linn.Common.Facade;
     using Linn.SalesAccounts.Domain;
     using Linn.SalesAccounts.Domain.Models;
@@ -34,6 +37,19 @@
                         with.ResponseProcessor<ProposedTurnoverBandJsonResponseProcessor>();
                         with.ResponseProcessor<TurnoverBandProposalJsonResponseProcessor>();
                         with.ResponseProcessor<ProposedTurnoverBandsCsvResponseProcessor>();
+
+                        with.RequestStartup(
+                            (container, pipelines, context) =>
+                                {
+                                    var claims = new List<Claim>
+                                                     {
+                                                         new Claim(ClaimTypes.Role, "employee"),
+                                                         new Claim(ClaimTypes.NameIdentifier, "test-user")
+                                                     };
+                                    var user = new ClaimsIdentity(claims, "jwt");
+
+                                    context.CurrentUser = new ClaimsPrincipal(user);
+                                });
                     });
 
             this.Browser = new Browser(bootstrapper);

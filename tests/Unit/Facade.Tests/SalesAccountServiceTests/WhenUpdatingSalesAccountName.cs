@@ -22,7 +22,7 @@
                 CountryUri = "/countries/1"
             };
 
-            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(1, "New Name", addressResource);
+            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(1, "New Name", addressResource, "/employees/100");
         }
 
         [Test]

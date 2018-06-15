@@ -9,7 +9,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.Sut.ApplyTurnoverBandToAccount();
+            this.Sut.ApplyTurnoverBandToAccount("/employees/100");
         }
 
         [Test]

@@ -14,7 +14,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(1, "name", null);
+            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(1, "name", null, "/employees/100");
         }
 
         [Test]

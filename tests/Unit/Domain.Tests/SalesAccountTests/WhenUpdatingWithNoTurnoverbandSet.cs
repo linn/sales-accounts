@@ -12,7 +12,7 @@
         public void SetUp()
         {
             var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
-            this.Sut.UpdateAccount(discountScheme, "", true, true, true);
+            this.Sut.UpdateAccount("/employees/100", discountScheme, string.Empty, true, true, true);
         }
 
         [Test]
@@ -32,15 +32,30 @@
             this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateDiscountSchemeUriActivity)
                 .As<SalesAccountUpdateDiscountSchemeUriActivity>().DiscountSchemeUri.Should().Be("/ds/1");
-             this.ActivitiesExcludingCreate()
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateDiscountSchemeUriActivity)
+                .As<SalesAccountUpdateDiscountSchemeUriActivity>().UpdatedByUri.Should().Be("/employees/100");
+
+            this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateGoodCreditActivity)
                 .As<SalesAccountUpdateGoodCreditActivity>().EligibleForGoodCreditDiscount.Should().BeTrue();
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateGoodCreditActivity)
+                .As<SalesAccountUpdateGoodCreditActivity>().UpdatedByUri.Should().Be("/employees/100");
+
             this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateRebateActivity)
                 .As<SalesAccountUpdateRebateActivity>().EligibleForRebate.Should().BeTrue();
             this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateRebateActivity)
+                .As<SalesAccountUpdateRebateActivity>().UpdatedByUri.Should().Be("/employees/100");
+
+            this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountGrowthPartnerActivity)
                 .As<SalesAccountGrowthPartnerActivity>().GrowthPartner.Should().BeTrue();
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountGrowthPartnerActivity)
+                .As<SalesAccountGrowthPartnerActivity>().UpdatedByUri.Should().Be("/employees/100");
         }
     }
 }

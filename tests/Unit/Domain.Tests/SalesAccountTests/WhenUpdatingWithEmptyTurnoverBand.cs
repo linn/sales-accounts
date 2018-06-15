@@ -16,6 +16,7 @@
         {
             var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
             this.Sut.UpdateAccount(
+                "/employees/100",
                 discountScheme,
                 null,
                 this.Sut.EligibleForGoodCreditDiscount,
@@ -37,6 +38,9 @@
             this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountUpdateDiscountSchemeUriActivity)
                 .As<SalesAccountUpdateDiscountSchemeUriActivity>().DiscountSchemeUri.Should().Be("/ds/1");
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountUpdateDiscountSchemeUriActivity)
+                .As<SalesAccountUpdateDiscountSchemeUriActivity>().UpdatedByUri.Should().Be("/employees/100");
         }
     }
 }

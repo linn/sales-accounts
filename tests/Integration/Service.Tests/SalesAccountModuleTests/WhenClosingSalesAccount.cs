@@ -23,7 +23,7 @@
         {
             this.salesAccountCloseResource = new SalesAccountCloseResource { ClosedOn = "2018-01-30T11:41:53.0000000+00:00" };
 
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 111 };
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name")) { Id = 111 };
 
             this.SalesAccountRepository.GetById(111).Returns(this.salesAccount);
 

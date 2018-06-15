@@ -15,7 +15,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.closeActivity = new SalesAccountCloseActivity(1.December(2018));
+            this.closeActivity = new SalesAccountCloseActivity("/employees/100", 1.December(2018));
             this.Sut.CloseAccount(this.closeActivity);
         }
 
@@ -32,6 +32,7 @@
             var activity = this.ActivitiesExcludingCreate().First();
             activity.Should().BeOfType<SalesAccountCloseActivity>();
             ((SalesAccountCloseActivity)activity).ClosedOn.Should().Be(this.closeActivity.ClosedOn);
+            ((SalesAccountCloseActivity)activity).UpdatedByUri.Should().Be("/employees/100");
         }
     }
 }

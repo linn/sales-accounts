@@ -4,9 +4,10 @@
 
     public class SalesAccountCreateActivity : SalesAccountActivity
     {
-        public SalesAccountCreateActivity(int accountId, string name, DateTime? closedOn = null)
+        public SalesAccountCreateActivity(string updatedByUri, int accountId, string name, DateTime? closedOn = null) : base(updatedByUri)
         {
             this.AccountId = accountId;
+            this.UpdatedByUri = updatedByUri;
             this.Name = name;
             this.ClosedOn = closedOn;
         }
@@ -19,6 +20,8 @@
         public int AccountId { get; private set; }
 
         public string Name { get; private set; }
+
+        public new string UpdatedByUri { get; private set; }
 
         public DateTime? ClosedOn { get; private set; }
 

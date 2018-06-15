@@ -1,49 +1,167 @@
-﻿import { fetchJson, putJson, deleteJson } from '../helpers/fetchJson';
-import config from '../config';
+﻿import config from '../config';
 import * as actionTypes from './index';
+import { CALL_API } from 'redux-api-middleware';
 
-const requestSalesAccountDetail = salesAccountUri => ({
-    type: actionTypes.REQUEST_SALES_ACCOUNT,
-    payload: { salesAccountUri }
-});
-
-const receiveSalesAccountDetail = data => ({
-    type: actionTypes.RECEIVE_SALES_ACCOUNT,
-    payload: { data }
-});
-
-const requestSalesAccounts = ()=> ({
-    type: actionTypes.REQUEST_SALES_ACCOUNTS,
-    payload: {}
-});
-
-const receiveSalesAccounts = data => ({
-    type: actionTypes.RECEIVE_SALES_ACCOUNTS,
-    payload: { data }
-});
-
-export const fetchAllOpenSalesAccounts = () => async dispatch => {
-    dispatch(requestSalesAccounts());
-    try {
-        const data = await fetchJson(`${config.appRoot}/sales/accounts`);
-        dispatch(receiveSalesAccounts(data));
-    } catch (e) {
-        alert(`Failed to fetch open sales accounts. Error: ${e.message}`);
+export const fetchAllOpenSalesAccounts = () => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}/sales/accounts`,
+        method: 'GET',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json'
+        },
+        types: [
+            {
+                type: actionTypes.REQUEST_SALES_ACCOUNTS,
+                payload: {}
+            },
+            {
+                type: actionTypes.RECEIVE_SALES_ACCOUNTS,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `Sales Accounts - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
     }
-};
+});
 
-export const fetchSalesAccount = salesAccountUri => async dispatch => {
-    dispatch(requestSalesAccountDetail(salesAccountUri));
-    try {
-        const data = await fetchJson(`${config.appRoot}${salesAccountUri}`);
-        dispatch(receiveSalesAccountDetail(data));
-        if (data.address) {
-            dispatch(fetchCountry(data.address.countryUri));
-        }
-    } catch (e) {
-        alert(`Failed to fetch sales account. Error: ${e.message}`);
+export const fetchSalesAccount = salesAccountUri => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}${salesAccountUri}`,
+        method: 'GET',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json'
+        },
+        types: [
+            {
+                type: actionTypes.REQUEST_SALES_ACCOUNT,
+                payload: salesAccountUri,
+            },
+            {
+                type: actionTypes.RECEIVE_SALES_ACCOUNT,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `Sales Account - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
     }
-};
+});
+
+export const saveAccountUpdate = salesAccount => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}/sales/accounts/${salesAccount.id}`,
+        method: 'PUT',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            TurnoverBandUri : salesAccount.turnoverBandUri,
+            DiscountSchemeUri : salesAccount.discountSchemeUri,
+            EligibleForGoodCreditDiscount : salesAccount.eligibleForGoodCreditDiscount,
+            EligibleForRebate : salesAccount.eligibleForRebate,
+            GrowthPartner : salesAccount.growthPartner
+        }),
+        types: [
+            {
+                type: actionTypes.START_SAVE,
+                payload: {}
+            },
+            {
+                type: actionTypes.SAVE_COMPLETE,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },            
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `account save - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
+});
+
+export const fetchCountry = countryUri => ({
+    [CALL_API]: {
+        endpoint: `${config.proxyRoot}${countryUri}`,
+        method: 'GET',
+        headers: {
+            Accept: 'application/json'
+        },
+        types: [
+            {
+                type: actionTypes.REQUEST_COUNTRY,
+                payload: {}
+            },
+            {
+                type: actionTypes.RECEIVE_COUNTRY,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `country - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
+})
+
+export const fetchActivities = salesAccountUri => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}${salesAccountUri}/activities`,
+        method: 'GET',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json'
+        },
+        types: [
+            {
+                type: actionTypes.REQUEST_ACTIVITIES,
+                payload: { salesAccountUri }
+            },
+            {
+                type: actionTypes.RECEIVE_ACTIVITIES,
+                payload: async (action, state, res) => ({ data: await res.json() })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `Sales Account activities - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
+});
+
+export const closeAccount = salesAccountUri => ({
+    [CALL_API]: {
+        endpoint: `${config.appRoot}${salesAccountUri}`,
+        method: 'DELETE',
+        options: { requiresAuth: true },
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            closedOn: new Date()
+        }),
+        types: [
+            {
+                type: actionTypes.REQUEST_CLOSE_SALES_ACCOUNT,
+                payload: { salesAccountUri }
+            },
+            {
+                type: actionTypes.RECEIVE_CLOSE_SALES_ACCOUNT,
+                payload: async (action, state, res) => ({ data: await res.json(), salesAccountUri })
+            },
+            {
+                type: actionTypes.FETCH_ERROR,
+                payload: (action, state, res) => res ? `close Sales Account - ${res.status} ${res.statusText}` : `Network request failed`,
+            }
+        ]
+    }
+});
 
 export const fetchSalesAccounts = (salesAccountUris = []) => async dispatch => {
     salesAccountUris.forEach(salesAccountUri => {
@@ -53,43 +171,6 @@ export const fetchSalesAccounts = (salesAccountUris = []) => async dispatch => {
 
 export const hideEditModal = () => ({
     type: actionTypes.HIDE_EDIT_MODAL,
-    payload: {}
-});
-
-export const closeAccount = id => async dispatch => {
-    const body = { closedOn: new Date() };
-    try {
-        const data = await deleteJson(`${config.appRoot}${'/sales/accounts/'}${id}`, body);
-        window.location.reload();
-    } catch (e) {
-        alert(`Failed to delete sales account. Error: ${e.message}`);
-    }
-};
-
-export const saveAccountUpdate = salesAccount => async dispatch => {
-    dispatch(startSave());
-    const body = {
-        TurnoverBandUri : salesAccount.turnoverBandUri,
-        DiscountSchemeUri : salesAccount.discountSchemeUri,
-        EligibleForGoodCreditDiscount : salesAccount.eligibleForGoodCreditDiscount,
-        EligibleForRebate : salesAccount.eligibleForRebate,
-        GrowthPartner : salesAccount.growthPartner
-    }
-    try {
-        await putJson(`${config.appRoot}/sales/accounts/${salesAccount.id}`, body);
-        dispatch(saveComplete());
-    } catch (e) {
-        alert(`Failed to update sales account. Error: ${e.message}`);
-    }
-};
-
-export const startSave = () => ({
-    type: actionTypes.START_SAVE,
-    payload: {}
-});
-
-export const saveComplete = () => ({
-    type: actionTypes.SAVE_COMPLETE,
     payload: {}
 });
 
@@ -143,43 +224,3 @@ export const setEligibleForRebate = eligible => ({
     type: actionTypes.SET_ELIGIBLE_FOR_REBATE,
     payload: { eligible }
 });
-
-const requestCountry = () => ({
-    type: actionTypes.REQUEST_COUNTRY,
-    payload: { }
-});
-
-const receiveCountry = data => ({
-    type: actionTypes.RECEIVE_COUNTRY,
-    payload: { data }
-});
-
-export const fetchCountry = (countryUri) => async dispatch => {
-        dispatch(requestCountry());
-    try {
-        const data = await fetchJson(`${config.countryRoot}${countryUri}`, { headers: { 'Accept': 'application/json' } });
-        dispatch(receiveCountry(data));
-    } catch (e) {
-        alert(`Failed to fetch country. Error: ${e.message}`);
-    }
-};
-
-const requestActivities = salesAccountUri => ({
-    type: actionTypes.REQUEST_ACTIVITIES,
-    payload: { salesAccountUri }
-});
-
-const receiveActivities = data => ({
-    type: actionTypes.RECEIVE_ACTIVITIES,
-    payload: { data }
-});
-
-export const fetchActivities = salesAccountUri => async dispatch => {
-    dispatch(requestActivities(salesAccountUri));
-    try {
-        const data = await fetchJson(`${config.appRoot}${salesAccountUri}/activities`);
-        dispatch(receiveActivities(data));
-    } catch (e) {
-        alert(`Failed to fetch activities. Error: ${e.message}`);
-    }
-};

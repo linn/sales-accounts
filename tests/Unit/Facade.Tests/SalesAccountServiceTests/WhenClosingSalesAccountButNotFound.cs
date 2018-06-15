@@ -16,7 +16,7 @@
         public void SetUp()
         {
             this.SalesAccountRepository.GetById(2).Returns((SalesAccount)null);
-            this.Result = this.Sut.CloseSalesAccount(2, new SalesAccountCloseResource());
+            this.Result = this.Sut.CloseSalesAccount(2, new SalesAccountCloseResource(), "/employees/100");
         }
 
         [Test]

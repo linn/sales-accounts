@@ -34,16 +34,16 @@
                                                  new ProposedTurnoverBand
                                                      {
                                                          CalculatedTurnoverBandUri = "/1",
-                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one"))
+                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"))
                                                      },
                                                  new ProposedTurnoverBand
                                                      {
                                                          CalculatedTurnoverBandUri = "/2",
-                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity(2, "two"))
+                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 2, "two"))
                                                      }
                                              };
             var proposal = new TurnoverBandProposal(this.requestResource.FinancialYear, this.proposedTurnoverBands);
-            this.TurnoverBandService.ApplyTurnoverBandProposal("2018/19")
+            this.TurnoverBandService.ApplyTurnoverBandProposal("2018/19", null)
                 .Returns(new SuccessResult<TurnoverBandProposal>(proposal));
             this.Response = this.Browser.Post(
                 "/sales/accounts/turnover-band-proposals/apply",
@@ -64,7 +64,7 @@
         [Test]
         public void ShouldCallService()
         {
-            this.TurnoverBandService.Received(1).ApplyTurnoverBandProposal(this.requestResource.FinancialYear);
+            this.TurnoverBandService.Received(1).ApplyTurnoverBandProposal(this.requestResource.FinancialYear, null);
         }
 
         [Test]

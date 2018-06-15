@@ -37,13 +37,15 @@
             this.salesAccountService.UpdateSalesAccountNameAndAddress(
                 resource.AccountId,
                 resource.AccountName,
-                resource.AccountAddress);
+                resource.AccountAddress,
+                "/employees/100");
 
             if (!string.IsNullOrEmpty(resource.DateClosed))
             {
                 this.salesAccountService.CloseSalesAccount(
                     resource.AccountId,
-                    new SalesAccountCloseResource { ClosedOn = resource.DateClosed });
+                    new SalesAccountCloseResource { ClosedOn = resource.DateClosed },
+                    "/employees/100");
             }
 
             this.rabbitTerminator.Close();

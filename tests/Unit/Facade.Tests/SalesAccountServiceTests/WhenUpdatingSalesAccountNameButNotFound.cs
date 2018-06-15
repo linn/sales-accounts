@@ -16,7 +16,7 @@
         public void SetUp()
         {
             this.SalesAccountRepository.GetById(2).Returns((SalesAccount)null);
-            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(2, "Test", null);
+            this.Result = this.Sut.UpdateSalesAccountNameAndAddress(2, "Test", null, "/employees/100");
         }
 
         [Test]

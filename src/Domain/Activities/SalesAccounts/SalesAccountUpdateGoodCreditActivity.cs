@@ -2,7 +2,7 @@
 {
     public class SalesAccountUpdateGoodCreditActivity : SalesAccountActivity
     {
-        public SalesAccountUpdateGoodCreditActivity(bool eligibleForGoodCreditDiscount)
+        public SalesAccountUpdateGoodCreditActivity(string updatedByUri, bool eligibleForGoodCreditDiscount) : base(updatedByUri)
         {
             this.EligibleForGoodCreditDiscount = eligibleForGoodCreditDiscount;
         }

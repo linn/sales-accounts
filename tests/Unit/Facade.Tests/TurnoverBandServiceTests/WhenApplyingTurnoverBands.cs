@@ -21,9 +21,9 @@
         [SetUp]
         public void SetUp()
         {
-            var account1 = new SalesAccount(new SalesAccountCreateActivity(1, "one"));
+            var account1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"));
             this.financialYear = "2018/19";
-            this.ProposedTurnoverBandService.ApplyTurnoverBandProposal(this.financialYear)
+            this.ProposedTurnoverBandService.ApplyTurnoverBandProposal(this.financialYear, "/employees/100")
                 .Returns(new TurnoverBandProposal(
                     this.financialYear,
                     new List<ProposedTurnoverBand>
@@ -35,13 +35,13 @@
                                     CalculatedTurnoverBandUri = "/tb/1"
                                 }
                         }));
-            this.Results = this.Sut.ApplyTurnoverBandProposal(this.financialYear);
+            this.Results = this.Sut.ApplyTurnoverBandProposal(this.financialYear, "/employees/100");
         }
 
         [Test]
         public void ShouldApplyWithService()
         {
-            this.ProposedTurnoverBandService.Received().ApplyTurnoverBandProposal(this.financialYear);
+            this.ProposedTurnoverBandService.Received().ApplyTurnoverBandProposal(this.financialYear, "/employees/100");
         }
 
         [Test]

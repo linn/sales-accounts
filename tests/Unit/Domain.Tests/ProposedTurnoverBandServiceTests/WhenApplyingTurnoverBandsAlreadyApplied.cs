@@ -25,7 +25,7 @@
         public void SetUp()
         {
             this.financialYear = "2018/19";
-            this.account = new SalesAccount(new SalesAccountCreateActivity(1, "one"))
+            this.account = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"))
                                {
                                    DiscountSchemeUri = "/ds/1",
                                    TurnoverBandUri = "/tb/1"
@@ -45,7 +45,7 @@
                                             };
             this.ProposedTurnoverBandRepository.GetAllForFinancialYear(this.financialYear)
                 .Returns(this.proposedTurnoverBands);
-            this.results = this.Sut.ApplyTurnoverBandProposal(this.financialYear).ProposedTurnoverBands;
+            this.results = this.Sut.ApplyTurnoverBandProposal(this.financialYear, "/employees/100").ProposedTurnoverBands;
         }
 
         [Test]

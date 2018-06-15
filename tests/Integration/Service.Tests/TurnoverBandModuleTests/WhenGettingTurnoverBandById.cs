@@ -23,7 +23,7 @@
         {
             this.proposedTurnoverBand = new ProposedTurnoverBand
                                             {
-                                                SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")),
+                                                SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one")),
                                                 CalculatedTurnoverBandUri = "/tb/1"
                                             };
             this.TurnoverBandService.GetProposedTurnoverBand(88)

@@ -34,12 +34,12 @@
                                                  new ProposedTurnoverBand
                                                      {
                                                          CalculatedTurnoverBandUri = "/1",
-                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one"))
+                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"))
                                                      },
                                                  new ProposedTurnoverBand
                                                      {
                                                          CalculatedTurnoverBandUri = "/2",
-                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity(2, "two"))
+                                                         SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 2, "two"))
                                                      }
                                              };
             var proposal = new TurnoverBandProposal(this.requestResource.FinancialYear, this.proposedTurnoverBands);

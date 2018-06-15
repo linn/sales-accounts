@@ -10,7 +10,7 @@ class Controls extends Component {
         showConfirmClose: false
     }
     render() {
-        const { closedOn, dirty, saving, salesAccount, saveAccountUpdate } = this.props;
+        const { closedOn, dirty, saving, salesAccount, saveAccountUpdate, salesAccountUri } = this.props;
 
         return (
             <div>
@@ -52,7 +52,7 @@ class Controls extends Component {
 
     handleCloseAccount() {
         this.setState({showConfirmClose: false});
-        this.props.closeAccount(this.props.salesAccount.id);
+        this.props.closeAccount(this.props.salesAccountUri);
     }
 }
 

@@ -2,7 +2,7 @@
 {
     public class SalesAccountUpdateDiscountSchemeUriActivity : SalesAccountActivity
     {
-        public SalesAccountUpdateDiscountSchemeUriActivity(string discountSchemeUri)
+        public SalesAccountUpdateDiscountSchemeUriActivity(string updatedByUri, string discountSchemeUri) : base(updatedByUri)
         {
             this.DiscountSchemeUri = discountSchemeUri;
         }

@@ -49,9 +49,9 @@
             }
         }
 
-        public void ApplyTurnoverBandToAccount()
-        {
-            this.SalesAccount.ApplyTurnoverBandProposal(this);
+        public void ApplyTurnoverBandToAccount(string employeeUri)
+        {            
+            this.SalesAccount.ApplyTurnoverBandProposal(employeeUri, this);
             this.AppliedToAccount = true;
         }
     }

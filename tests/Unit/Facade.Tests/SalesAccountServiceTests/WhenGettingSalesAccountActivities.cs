@@ -19,9 +19,9 @@
         [SetUp]
         public void SetUp()
         {
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name"));
-            this.salesAccount.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(true));
-            this.salesAccount.CloseAccount(new SalesAccountCloseActivity(16.April(2018)));
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name"));
+            this.salesAccount.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity("/employees/100", true));
+            this.salesAccount.CloseAccount(new SalesAccountCloseActivity("/employees/100", 16.April(2018)));
             this.SalesAccountRepository.GetById(1).Returns(this.salesAccount);
             this.Result = this.Sut.GetById(1);
         }

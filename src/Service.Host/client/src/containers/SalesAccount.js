@@ -16,7 +16,7 @@ import {
 import { getSalesAccount, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemeClosedOn, getActivities } from '../selectors/salesAccountSelectors';
 import { getDiscountSchemes } from '../selectors/discountSchemesSelectors';
 
-const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { match }) => ({
+const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets, employees }, { match }) => ({
     salesAccountUri: match.url,
     salesAccount: getSalesAccount(salesAccount),
     discountSchemeName: getDiscountSchemeName(getSalesAccount(salesAccount), discountSchemes),
@@ -32,7 +32,7 @@ const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets }, { 
     loading: salesAccount.loading || !discountSchemes || !turnoverBandSets,
     dirty: salesAccount.dirty,
     saving: salesAccount.saving,
-    activities: getActivities(salesAccount),
+    activities: getActivities(salesAccount, employees),
     turnoverBandSets: turnoverBandSets
 });
 

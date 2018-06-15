@@ -13,7 +13,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.Sut.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(true));
+            this.Sut.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity("/employees/100", true));
         }
 
         [Test]
@@ -29,6 +29,9 @@
             this.ActivitiesExcludingCreate()
                 .First(a => a is SalesAccountGrowthPartnerActivity)
                 .As<SalesAccountGrowthPartnerActivity>().GrowthPartner.Should().BeTrue();
+            this.ActivitiesExcludingCreate()
+                .First(a => a is SalesAccountGrowthPartnerActivity)
+                .As<SalesAccountGrowthPartnerActivity>().UpdatedByUri.Should().Be("/employees/100");
         }
     }
 }

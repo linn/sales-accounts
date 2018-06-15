@@ -27,7 +27,7 @@
             this.requestResource = new ProposedTurnoverBandUpdateResource { TurnoverBandUri = "/tb/12" };
             this.proposedTurnoverBand = new ProposedTurnoverBand
                                             {
-                                                SalesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "one")),
+                                                SalesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one")),
                                                 ProposedTurnoverBandUri = "/tb/12"
                                             };
             this.TurnoverBandService.OverrideTurnoverBand(88, "/tb/12")

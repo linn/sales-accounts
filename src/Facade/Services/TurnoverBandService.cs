@@ -116,9 +116,9 @@
             return new SuccessResult<ProposedTurnoverBand>(proposedTurnoverBand);
         }
 
-        public IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear)
+        public IResult<TurnoverBandProposal> ApplyTurnoverBandProposal(string financialYear, string employeeUri)
         {
-            var proposal = this.proposedTurnoverBandService.ApplyTurnoverBandProposal(financialYear);
+            var proposal = this.proposedTurnoverBandService.ApplyTurnoverBandProposal(financialYear, employeeUri);
             this.transactionManager.Commit();
             return new SuccessResult<TurnoverBandProposal>(proposal);
         }

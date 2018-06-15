@@ -54,13 +54,13 @@
         [Test]
         public void ShouldCallFacadeToUpdateName()
         {
-            this.SalesAccountService.Received(1).UpdateSalesAccountNameAndAddress(1, "New Name", Arg.Is<AddressResource>(a => a.Line1 == "Address line 1"));
+            this.SalesAccountService.Received(1).UpdateSalesAccountNameAndAddress(1, "New Name", Arg.Is<AddressResource>(a => a.Line1 == "Address line 1"), "/employees/100");
         }
 
         [Test]
         public void ShouldNotCallFacadeToCloseAccount()
         {
-            this.SalesAccountService.DidNotReceiveWithAnyArgs().CloseSalesAccount(1, Arg.Any<SalesAccountCloseResource>());
+            this.SalesAccountService.DidNotReceiveWithAnyArgs().CloseSalesAccount(1, Arg.Any<SalesAccountCloseResource>(), "employees/100");
         }
 
         [Test]

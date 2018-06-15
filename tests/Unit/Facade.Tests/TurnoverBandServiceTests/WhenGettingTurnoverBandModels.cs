@@ -28,7 +28,7 @@
         {
             this.financialYear = "2018/19";
             var salesAccount =
-                new SalesAccount(new SalesAccountCreateActivity(1, "Name")) { TurnoverBandUri = "/tb/3" };
+                new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "Name")) { TurnoverBandUri = "/tb/3" };
             this.proposedTurnoverBands = new List<ProposedTurnoverBand>
                                              {
                                                  new ProposedTurnoverBand

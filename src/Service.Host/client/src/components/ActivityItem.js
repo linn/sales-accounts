@@ -5,24 +5,48 @@ import { getSalesAccountTurnoverBandName, getDiscountSchemeName } from '../selec
 
 class ActivityItem extends Component {
 
-    formatActivity(type, value, changedOn) {
+    formatActivity(type, value, activity) {
         return (
             <span>
                 <strong>{type} </strong>
-                {value ? <span>updated <strong>{value}</strong></span> : <span>removed</span>}
-                <span className="small pull-right text-muted">{moment(changedOn).fromNow()}</span>
+                {value ? <span>updated to <strong>{value} </strong></span> : <span>removed </span>}
+                by <b>{activity.updatedByName ? activity.updatedByName : 'unknown user'}</b>
+                <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );
     }
 
-    formatCreateActivity(type, createdDate, name, closedOn, changedOn) {        
+    formatCreateActivity(type, activity) {
         return (
             <span>
                 <strong>{type} </strong>
-                <span>on <strong>{moment(createdDate).format('DD MMM YYYY ')}</strong></span>
-                {name && <span> with name <strong>{name}</strong></span>}
-                {closedOn && <span> with closed on date <strong>{moment(closedOn).format('DD MMM YYYY ')}</strong></span>}                
-                <span className="small pull-right text-muted">{moment(changedOn).fromNow()}</span>
+                <span>on <strong>{moment(activity.changedOn).format('DD MMM YYYY ')}</strong></span>
+                {activity.name && <span> with name <strong>{activity.name}</strong></span>}
+                {activity.closedOn && <span> with closed on date <strong>{moment(activity.closedOn).format('DD MMM YYYY ') }</strong></span>}
+                by <b>{activity.updatedByName ? activity.updatedByName : 'unknown user'}</b>
+                <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
+            </span>
+        );
+    }
+
+    formatAddressActivity(type, activity) {
+        return (
+            <span>
+                <strong>{type} </strong>
+                <span>updated by </span>
+                <b>{activity.updatedByName ? activity.updatedByName : 'unknown user'}</b>
+                <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
+            </span>
+        );
+    }
+
+    formatApplyTurnoverBanProposalActivity(type, value, activity) {
+        return (
+            <span>
+                <strong>{type} </strong>
+                <span>with turnover band <strong>{value} </strong></span>
+                by <b>{activity.updatedByName ? activity.updatedByName : 'unknown user'}</b>
+                <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );
     }
@@ -31,52 +55,58 @@ class ActivityItem extends Component {
         switch (activity.activityType) {
             case 'SalesAccountCloseActivity':
                 return (
-                    this.formatActivity('Account Closed On', moment(activity.closedOn).format('DD MMM YYYY '), activity.changedOn)
+                    this.formatActivity('Account Closed On', moment(activity.closedOn).format('DD MMM YYYY '), activity)
                 );
 
             case 'SalesAccountCreateActivity':
                 return (
-                    this.formatCreateActivity('Account Created ', activity.changedOn, activity.name, activity.closedOn, activity.changedOn)
+                    this.formatCreateActivity('Account Created ', activity)
                 );
 
             case 'SalesAccountGrowthPartnerActivity':
                 const growthPartner = activity.growthPartner ? 'Yes' : 'No';
                 return (
-                    this.formatActivity('Growth Partner', growthPartner, activity.changedOn)
+                    this.formatActivity('Growth Partner', growthPartner, activity)
                 );
             
             case 'SalesAccountUpdateAddressActivity':                
                 return (
-                    this.formatActivity('Address', ' ', activity.changedOn)
+                    this.formatAddressActivity('Address', activity)
                 );
 
             case 'SalesAccountUpdateDiscountSchemeUriActivity':
                 const discountScheme = getDiscountSchemeName(activity, discountSchemes);
                 return (
-                    this.formatActivity('Discount Scheme', discountScheme, activity.changedOn)
+                    this.formatActivity('Discount Scheme', discountScheme, activity)
                 );
 
             case 'SalesAccountUpdateGoodCreditActivity':
                 const eligibleForGoodCreditDiscount = activity.eligibleForGoodCreditDiscount ? 'Yes' : 'No';
                 return (
-                    this.formatActivity('Eligible For Good Credit', eligibleForGoodCreditDiscount, activity.changedOn)
+                    this.formatActivity('Eligible For Good Credit', eligibleForGoodCreditDiscount, activity)
                 );
 
             case 'SalesAccountUpdateNameActivity':
                 return (
-                    this.formatActivity('Account Name', activity.name, activity.changedOn)
+                    this.formatActivity('Account Name', activity.name, activity)
                 );
 
             case 'SalesAccountUpdateRebateActivity':
                 const eligibleForRebate = activity.eligibleForRebate ? 'Yes' : 'No';
                 return (
-                    this.formatActivity('Eligible For Rebate', eligibleForRebate, activity.changedOn)
+                    this.formatActivity('Eligible For Rebate', eligibleForRebate, activity)
                 );
 
             case 'SalesAccountUpdateTurnoverBandUriActivity':
-                const turnoverBand = getSalesAccountTurnoverBandName(activity, turnoverBandSets);                
+                const turnoverBand = getSalesAccountTurnoverBandName(activity, turnoverBandSets);
                 return (
-                    this.formatActivity('Turnover Band', turnoverBand, activity.changedOn)
+                    this.formatActivity('Turnover Band', turnoverBand, activity)
+                );
+
+            case 'SalesAccountApplyTurnoverBandProposalActivity':
+                const proposalTurnoverBand = getSalesAccountTurnoverBandName(activity, turnoverBandSets);
+                return (
+                    this.formatApplyTurnoverBanProposalActivity('Turnover Band Proposal Applied', proposalTurnoverBand, activity)
                 );
 
             default:

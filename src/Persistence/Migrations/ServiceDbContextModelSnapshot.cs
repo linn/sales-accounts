@@ -33,6 +33,8 @@ namespace Linn.SalesAccounts.Persistence.Migrations
 
                     b.Property<int?>("SalesAccountId");
 
+                    b.Property<string>("UpdatedByUri");
+
                     b.HasKey("Id");
 
                     b.HasIndex("SalesAccountId");

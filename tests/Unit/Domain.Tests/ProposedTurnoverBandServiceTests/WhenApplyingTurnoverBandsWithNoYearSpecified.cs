@@ -15,7 +15,7 @@
         [SetUp]
         public void SetUp()
         {
-            this.action = () => this.Sut.ApplyTurnoverBandProposal(null);
+            this.action = () => this.Sut.ApplyTurnoverBandProposal(null, "/employees/100");
         }
 
         [Test]

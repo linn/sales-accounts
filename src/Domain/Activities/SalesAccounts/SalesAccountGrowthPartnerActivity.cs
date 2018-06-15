@@ -2,7 +2,7 @@
 {
     public class SalesAccountGrowthPartnerActivity : SalesAccountActivity
     {
-        public SalesAccountGrowthPartnerActivity(bool growthPartner)
+        public SalesAccountGrowthPartnerActivity(string updatedByUri, bool growthPartner) : base(updatedByUri)
         {
             this.GrowthPartner = growthPartner;
         }

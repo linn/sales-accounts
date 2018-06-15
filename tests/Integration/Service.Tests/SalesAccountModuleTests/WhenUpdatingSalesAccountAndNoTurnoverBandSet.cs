@@ -25,7 +25,7 @@
                 EligibleForGoodCreditDiscount = true
             };
 
-            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity(1, "name")) { Id = 111 };
+            this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name")) { Id = 111 };
 
             this.discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/10", TurnoverBandUris = new[] { "/tb/10" } };
             this.DiscountingService.GetDiscountScheme(this.salesAccountUpdateResource.DiscountSchemeUri)

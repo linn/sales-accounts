@@ -39,7 +39,8 @@
                         AccountId = resource.AccountId,
                         Name = resource.AccountName,
                         ClosedOn = resource.DateClosed
-                    });
+                    },
+                "/employees/100");
 
             this.rabbitTerminator.Close();
 

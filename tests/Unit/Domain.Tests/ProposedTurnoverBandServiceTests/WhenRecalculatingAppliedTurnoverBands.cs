@@ -24,7 +24,7 @@
         public void SetUp()
         {
             this.financialYear = "2018/19";
-            this.account1 = new SalesAccount(new SalesAccountCreateActivity(1, "one"))
+            this.account1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"))
                                 {
                                     DiscountSchemeUri = "/ds/1",
                                     TurnoverBandUri = "/tb/1"

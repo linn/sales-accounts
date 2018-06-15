@@ -2,8 +2,8 @@
 {
     public class SalesAccountApplyTurnoverBandProposalActivity : SalesAccountUpdateTurnoverBandUriActivity
     {
-        public SalesAccountApplyTurnoverBandProposalActivity(string turnoverBandUri, string financialYear)
-            : base(turnoverBandUri)
+        public SalesAccountApplyTurnoverBandProposalActivity(string updatedByUri, string turnoverBandUri, string financialYear)
+            : base(updatedByUri, turnoverBandUri)
         {
             this.BasedOnFinancialYear = financialYear;
         }

@@ -2,7 +2,7 @@
 {
     public class SalesAccountUpdateTurnoverBandUriActivity : SalesAccountActivity
     {
-        public SalesAccountUpdateTurnoverBandUriActivity(string turnoverBandUri)
+        public SalesAccountUpdateTurnoverBandUriActivity(string updatedByUri, string turnoverBandUri) : base(updatedByUri)
         {
             this.TurnoverBandUri = turnoverBandUri;
         }

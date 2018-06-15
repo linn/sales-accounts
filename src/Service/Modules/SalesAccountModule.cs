@@ -2,9 +2,12 @@
 {
     using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Resources.SalesAccounts;
+    using Linn.SalesAccounts.Service.Extensions;
+    using Linn.SalesAccounts.Service.Models;
 
     using Nancy;
     using Nancy.ModelBinding;
+    using Nancy.Security;
 
     public sealed class SalesAccountModule : NancyModule
     {
@@ -25,7 +28,10 @@
         private object GetSalesAccount(int id)
         {
             var salesAccount = this.salesAccountService.GetById(id);
-            return this.Negotiate.WithModel(salesAccount).WithView("Index");
+            return this.Negotiate
+                .WithModel(salesAccount)
+                .WithMediaRangeModel("text/html", ApplicationSettings.Get)
+                .WithView("Index");
         }
 
         private object GetSalesAccounts()
@@ -37,28 +43,42 @@
 
         private object GetSalesAccountActivities(int id)
         {
+            this.RequiresAuthentication();
+
             var activities = this.salesAccountService.GetActivitiesById(id);
             return this.Negotiate.WithModel(activities);
         }
 
         private object AddSalesAccount()
         {
+            this.RequiresAuthentication();
+
+            var employeeUri = this.Context.CurrentUser.GetEmployeeUri();
+
             var resource = this.Bind<SalesAccountCreateResource>();
-            var salesAccount = this.salesAccountService.AddSalesAccount(resource);
+            var salesAccount = this.salesAccountService.AddSalesAccount(resource, employeeUri);
             return this.Negotiate.WithModel(salesAccount);
         }
 
         private object UpdateSalesAccount(int id)
         {
+            this.RequiresAuthentication();
+
+            var employeeUri = this.Context.CurrentUser.GetEmployeeUri();
+
             var resource = this.Bind<SalesAccountUpdateResource>();
-            var salesAccount = this.salesAccountService.UpdateSalesAccount(id, resource);
+            var salesAccount = this.salesAccountService.UpdateSalesAccount(id, resource, employeeUri);
             return this.Negotiate.WithModel(salesAccount);
         }
 
         private object CloseSalesAccount(int id)
         {
+            this.RequiresAuthentication();
+
+            var employeeUri = this.Context.CurrentUser.GetEmployeeUri();
+
             var resource = this.Bind<SalesAccountCloseResource>();
-            var salesAccount = this.salesAccountService.CloseSalesAccount(id, resource);
+            var salesAccount = this.salesAccountService.CloseSalesAccount(id, resource, employeeUri);
             return this.Negotiate.WithModel(salesAccount);
         }
     }

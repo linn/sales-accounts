@@ -18,7 +18,7 @@
         public void SetUp()
         {
             this.createResource = new SalesAccountCreateResource { AccountId = 1, Name = "name" };
-            this.Result = this.Sut.AddSalesAccount(this.createResource);
+            this.Result = this.Sut.AddSalesAccount(this.createResource, "/employees/100");
         }
 
         [Test]
