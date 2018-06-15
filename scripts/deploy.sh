@@ -18,6 +18,7 @@ if [ "${TRAVIS_BRANCH}" = "master" ]; then
     STACK_NAME=sales-accounts
     TARGET_CLUSTER=internal-colony
     APP_ROOT=http://app.linn.co.uk
+	AUTHORITY_URI=https://www.linn.co.uk/auth/
     PROXY_ROOT=http://app.linn.co.uk
 	ENV_SUFFIX=
     DESIRED_COUNT=2
@@ -30,6 +31,7 @@ if [ "${TRAVIS_BRANCH}" = "master" ]; then
     STACK_NAME=sales-accounts-sys
     TARGET_CLUSTER=internal-colony-test
     APP_ROOT=http://app-sys.linn.co.uk
+	AUTHORITY_URI=https://www-sys.linn.co.uk/auth/
     PROXY_ROOT=http://app-sys.linn.co.uk
     ENV_SUFFIX=-sys
     DESIRED_COUNT=1
@@ -43,6 +45,7 @@ else
     STACK_NAME=sales-accounts-int
     TARGET_CLUSTER=internal-colony-test
     APP_ROOT=http://app-int.linn.co.uk
+	AUTHORITY_URI=https://www-int.linn.co.uk/auth/
     PROXY_ROOT=http://app-int.linn.co.uk
     ENV_SUFFIX=-int
     DESIRED_COUNT=1
@@ -52,6 +55,6 @@ fi
 source ./secrets.env > /dev/null
  
 # deploy the service to amazon
-aws cloudformation deploy --stack-name $STACK_NAME --template-file ./aws/application.yml --parameter-overrides dockerTag=$TRAVIS_BUILD_NUMBER databaseHost=$DATABASE_HOST databaseName=$DATABASE_NAME databaseUserId=$DATABASE_USER_ID databasePassword=$DATABASE_PASSWORD targetCluster=$TARGET_CLUSTER rabbitServer=$RABBIT_SERVER rabbitPort=$RABBIT_PORT rabbitUsername=$RABBIT_USERNAME rabbitPassword=$RABBIT_PASSWORD appRoot=$APP_ROOT proxyRoot=$PROXY_ROOT loggingEnvironment=$LOG_ENVIRONMENT loggingMaxInnerExceptionDepth=$LOG_MAX_INNER_EXCEPTION_DEPTH desiredCount=$DESIRED_COUNT environmentSuffix=$ENV_SUFFIX --capabilities=CAPABILITY_IAM
+aws cloudformation deploy --stack-name $STACK_NAME --template-file ./aws/application.yml --parameter-overrides dockerTag=$TRAVIS_BUILD_NUMBER databaseHost=$DATABASE_HOST databaseName=$DATABASE_NAME databaseUserId=$DATABASE_USER_ID databasePassword=$DATABASE_PASSWORD targetCluster=$TARGET_CLUSTER rabbitServer=$RABBIT_SERVER rabbitPort=$RABBIT_PORT rabbitUsername=$RABBIT_USERNAME rabbitPassword=$RABBIT_PASSWORD appRoot=$APP_ROOT proxyRoot=$PROXY_ROOT authorityUri=$AUTHORITY_URI loggingEnvironment=$LOG_ENVIRONMENT loggingMaxInnerExceptionDepth=$LOG_MAX_INNER_EXCEPTION_DEPTH desiredCount=$DESIRED_COUNT environmentSuffix=$ENV_SUFFIX --capabilities=CAPABILITY_IAM
 
 echo "deploy complete"
