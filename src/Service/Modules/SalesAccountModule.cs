@@ -38,7 +38,10 @@
         {
             var resource = this.Bind<SalesAccountSearchResource>();
             var salesAccounts = this.salesAccountService.Get(resource.SearchTerm);
-            return this.Negotiate.WithModel(salesAccounts).WithView("Index");
+            return this.Negotiate
+                .WithModel(salesAccounts)
+                .WithMediaRangeModel("text/html", ApplicationSettings.Get)
+                .WithView("Index");
         }
 
         private object GetSalesAccountActivities(int id)
