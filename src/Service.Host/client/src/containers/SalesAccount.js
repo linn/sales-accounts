@@ -29,6 +29,7 @@ const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets, empl
     editTurnoverBandVisible: salesAccount.editTurnoverBandVisible,
     editGrowthPartnerVisible: salesAccount.editGrowthPartnerVisible,
     editEligibleForRebateVisible: salesAccount.editEligibleForRebateVisible,
+    // TODO add employees loading (as in dem stock)
     loading: salesAccount.loading || !discountSchemes || !turnoverBandSets,
     dirty: salesAccount.dirty,
     saving: salesAccount.saving,
