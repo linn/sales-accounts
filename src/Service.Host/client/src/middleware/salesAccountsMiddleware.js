@@ -8,7 +8,9 @@ export const salesAccountsMiddleware = ({dispatch, getState}) => next => action 
     
     switch(action.type) {
         case actionTypes.RECEIVE_SALES_ACCOUNT:
-            dispatch(fetchCountry(action.payload.data.address.countryUri));
+            if (action.payload.data.address && action.payload.data.address.countryUri) {
+                dispatch(fetchCountry(action.payload.data.address.countryUri));
+            }
             break;
 
         case actionTypes.RECEIVE_CLOSE_SALES_ACCOUNT:

@@ -15,6 +15,7 @@ import {
 } from '../actions/salesAccounts';
 import { getSalesAccount, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemeClosedOn, getActivities } from '../selectors/salesAccountSelectors';
 import { getDiscountSchemes } from '../selectors/discountSchemesSelectors';
+import { getEmployeesLoading } from '../selectors/utilities/employeeSelectorUtilities';
 
 const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets, employees }, { match }) => ({
     salesAccountUri: match.url,
@@ -29,8 +30,7 @@ const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets, empl
     editTurnoverBandVisible: salesAccount.editTurnoverBandVisible,
     editGrowthPartnerVisible: salesAccount.editGrowthPartnerVisible,
     editEligibleForRebateVisible: salesAccount.editEligibleForRebateVisible,
-    // TODO add employees loading (as in dem stock)
-    loading: salesAccount.loading || !discountSchemes || !turnoverBandSets,
+    loading: salesAccount.loading || !discountSchemes || !turnoverBandSets || getEmployeesLoading(employees),
     dirty: salesAccount.dirty,
     saving: salesAccount.saving,
     activities: getActivities(salesAccount, employees),

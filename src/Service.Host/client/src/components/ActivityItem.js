@@ -22,8 +22,8 @@ class ActivityItem extends Component {
                 <strong>{type} </strong>
                 <span>on <strong>{moment(activity.changedOn).format('DD MMM YYYY ')}</strong></span>
                 {activity.name && <span> with name <strong>{activity.name}</strong></span>}
-                {activity.closedOn && <span> with closed on date <strong>{moment(activity.closedOn).format('DD MMM YYYY ') }</strong></span>}
-                by <b>{activity.updatedByName ? activity.updatedByName : 'unknown user'}</b>
+                {activity.closedOn && <span> with closed on date <strong>{moment(activity.closedOn).format('DD MMM YYYY ')}</strong></span>}
+                <span> by <b>{activity.updatedByName ? activity.updatedByName : 'unknown user'}</b></span>
                 <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );

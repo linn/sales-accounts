@@ -1,6 +1,6 @@
 ﻿import { getDiscountScheme, getDiscountSchemes, getTurnoverBandSetUri } from './discountSchemesSelectors';
 import { getTurnoverBandSet } from './turnoverBandSetSelectors';
-import { getEmployeeName } from './utilities/employeeSelectorUtilities';
+import { getEmployeeName, getEmployeesLoading } from './utilities/employeeSelectorUtilities';
 
 export const getSalesAccount = (salesAccount) => {
     if(!salesAccount || !salesAccount.item){
@@ -96,4 +96,8 @@ export const getActivityEmployeeUris = (salesAccount) => {
     }
 
     return salesAccount.activities.map(a => a.updatedByUri).filter(a => a != null);
+}
+
+export const getSalesAccountLoading = ({ salesAccount, discountSchemes, turnoverBandSets, employees }) => {
+    return salesAccount.loading || !discountSchemes || !turnoverBandSets || getEmployeesLoading(employees);
 }
