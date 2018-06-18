@@ -3,12 +3,14 @@ import { fetchActivities, fetchCountry, fetchSalesAccount } from '../actions/sal
 import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets } from '../actions/turnoverBandSets';
 
-export const salesAccountsMiddleware = ({dispatch, getState}) => next => action => { 
+export const salesAccountsMiddleware = ({ dispatch, getState }) => next => action => {
     const result = next(action);
-    
-    switch(action.type) {
+
+    switch (action.type) {
         case actionTypes.RECEIVE_SALES_ACCOUNT:
-            dispatch(fetchCountry(action.payload.data.address.countryUri));
+            if (action.payload.data.address && action.payload.data.address.countryUri) {
+                dispatch(fetchCountry(action.payload.data.address.countryUri));
+            }
             break;
 
         case actionTypes.RECEIVE_CLOSE_SALES_ACCOUNT:
