@@ -3,7 +3,6 @@ import { Loading } from './common';
 import { Grid, Row, Col, Button, ListGroup, ListGroupItem, Alert, OverlayTrigger, Tooltip, Glyphicon } from 'react-bootstrap';
 import { formatDate } from '../helpers/dates';
 import ProposalItem from '../containers/ProposalItem';
-import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 import YesNoModal from './YesNoModal';
 import config from '../config';
 
