@@ -6,7 +6,7 @@ import { getSalesAccountTurnoverBandName, getTurnoverBands, getSalesAccountDisco
 import { getTurnoverBandName } from '../selectors/turnoverBandSetSelectors';
 import { updateProposedTurnoverBand, excludeProposedTurnoverBand } from '../actions/turnoverBandProposal';
 
-const mapStateToProps = ({ salesAccount, turnoverBandSets, discountSchemes, employees, salesAccounts }, props) => ({
+const mapStateToProps = ({ salesAccount, turnoverBandSets, discountSchemes, salesAccounts }, props) => ({
     proposalItem: props.proposalItem,
     currentTurnoverBandName: getTurnoverBandName(turnoverBandSets, props.proposalItem.proposedTurnoverBandUri),
     calculatedTurnoverBandName: getTurnoverBandName(turnoverBandSets, props.proposalItem.calculatedTurnoverBandUri),
@@ -21,7 +21,11 @@ const mapStateToProps = ({ salesAccount, turnoverBandSets, discountSchemes, empl
         discountSchemes 
     }),
     displayOnly: props.proposalItem.appliedToAccount || !props.proposalItem.includeInUpdate,
-    turnoverBands: getTurnoverBands({ salesAccount, turnoverBandSets, discountSchemes })
+    turnoverBands: getTurnoverBands({ 
+        salesAccount: getSalesAccount(salesAccounts, props.proposalItem.salesAccountUri), 
+        turnoverBandSets, 
+        discountSchemes 
+    })
 });
 
 const mapDispatchToProps = {
