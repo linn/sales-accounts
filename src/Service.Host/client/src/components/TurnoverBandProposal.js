@@ -54,7 +54,7 @@ class TurnoverBandProposal extends Component {
         }
 
         return (
-            <div >
+            <React.Fragment >
                 <Grid>
                     <Row>
                         <Col xs={8}>
@@ -120,7 +120,7 @@ class TurnoverBandProposal extends Component {
                     performYesAction={this.makeApplyHandler()}
                     hideModal={() => this.handleCloseApplyYesNoModal()}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 }
