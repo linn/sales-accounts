@@ -1,101 +1,61 @@
-﻿import { getDiscountScheme, getDiscountSchemes, getTurnoverBandSetUri } from './discountSchemesSelectors';
+﻿import { getDiscountSchemes } from './discountSchemesSelectors';
+import { getTurnoverBandSetUri, getDiscountScheme } from './utilities/discountSchemeSelectorUtilities';
 import { getTurnoverBandSet } from './turnoverBandSetSelectors';
 import { getEmployeeName, getEmployeesLoading } from './utilities/employeeSelectorUtilities';
+import { getSalesAccountItem, getDiscountSchemeUri, getDiscountSchemeName, getTurnoverBandName } from './utilities/salesAccountSelectorUtilities';
 
-export const getSalesAccount = (salesAccount) => {
-    if(!salesAccount || !salesAccount.item){
-        return null;
-    }
-
-    return salesAccount.item;
+export const getSalesAccount = ({ salesAccount }) => {
+    return getSalesAccountItem(salesAccount);
 }
 
-export const getSalesAccountName = (salesAccount) => {
-    if (!salesAccount) {
+export const getSalesAccountDiscountSchemeName = ({ salesAccount, discountSchemes }) => {
+    const salesAccountItem = getSalesAccountItem(salesAccount);
+
+    if (!salesAccountItem || !salesAccountItem.discountSchemeUri || !discountSchemes) {
         return null;
     }
 
-    return salesAccount.name;
+    return getDiscountSchemeName(salesAccountItem.discountSchemeUri, discountSchemes);
 }
 
-export const getSalesAccountId = (salesAccount) => {
-    if (!salesAccount) {
-        return null;
-    }
-
-    return salesAccount.id;
-}
-
-export const getDiscountSchemeName = (salesAccount, discountSchemes) => {
-    if (!salesAccount || !discountSchemes) {
-        return null;
-    }
-
-    var discountScheme = discountSchemes.find(s => s.links.find(l => l.href === salesAccount.discountSchemeUri));
-
-    return discountScheme ? discountScheme.name : null;
-}
-
-export const getDiscountSchemeClosedOn = (salesAccount, discountSchemes) => {
-    if (!salesAccount || !discountSchemes) {
-        return null;
-    }
-
-    const discountScheme = discountSchemes.find(s => s.links.find(l => l.href === salesAccount.discountSchemeUri));
+export const getDiscountSchemeClosedOn = ({ salesAccount, discountSchemes }) => {    
+    const salesAccountItem = getSalesAccountItem(salesAccount);
     
+    if (!salesAccountItem || !discountSchemes) {
+        return null;
+    }
+
+    const discountScheme = discountSchemes.find(s => s.links.find(l => l.href === salesAccountItem.discountSchemeUri));
+
     return discountScheme ? discountScheme.closedOn : null;
 }
 
-export const getSalesAccountTurnoverBandName = (salesAccount, turnoverBandSets) => {
-    if (!turnoverBandSets || !salesAccount){
+export const getSalesAccountTurnoverBandName = ({ salesAccount, turnoverBandSets }) => {
+    const salesAccountItem = getSalesAccountItem(salesAccount);
+
+    if (!salesAccountItem || !salesAccountItem.turnoverBandUri || !turnoverBandSets) {
         return null;
     }
 
-    const allTurnoverBands = turnoverBandSets.reduce((soFar, tbs) => [...soFar, ...tbs.turnoverBands], []);     
-    const turnoverBand = allTurnoverBands.find(tb => tb.links.find(l => l.rel === 'self').href === salesAccount.turnoverBandUri);
-
-    return turnoverBand ? turnoverBand.name : null;
+    return getTurnoverBandName(salesAccountItem.turnoverBandUri, turnoverBandSets);
 }
 
-const getDiscountSchemeUri = (salesAccount) => {
-    if (!salesAccount) {
-        return null;
-    }
-
-    return salesAccount.discountSchemeUri;
-}
-
-export const getTurnoverBands = (salesAccount, turnoverBandSets, discountSchemes) => { 
+export const getTurnoverBands = ({ salesAccount, turnoverBandSets, discountSchemes }) => {
     if (!salesAccount || !turnoverBandSets || !discountSchemes) {
         return null;
     }
 
     const turnoverBandSet = getTurnoverBandSet(turnoverBandSets, getTurnoverBandSetUri(getDiscountScheme(discountSchemes, getDiscountSchemeUri(salesAccount))));
-    
+
     return turnoverBandSet ? turnoverBandSet.turnoverBands : null;
 }
 
-export const getActivities = ( salesAccount, employees ) => {
+export const getSalesAccountActivities = ({ salesAccount }) => {
     if (!salesAccount || !salesAccount.activities) {
         return null;
     }
 
-    if (!employees) {
-        return salesAccount.activities; 
-    }
-
-    return salesAccount.activities.map(activity => ({
-        ...activity,
-        updatedByName: getEmployeeName(activity.updatedByUri, employees)
-    }));
-}
-
-export const getActivityEmployeeUris = (salesAccount) => {
-    if (!salesAccount || !salesAccount.activities) {
-        return null;
-    }
-
-    return salesAccount.activities.map(a => a.updatedByUri).filter(a => a != null);
+    return salesAccount.activities;
 }
 
 export const getSalesAccountLoading = ({ salesAccount, discountSchemes, turnoverBandSets, employees }) => {

@@ -75,7 +75,7 @@ class SalesAccount extends Component {
                         closedOn={salesAccount.closedOn} dirty={dirty} saving={saving} salesAccount={salesAccount} salesAccountUri={salesAccountUri}
                         closeAccount={closeAccount} saveAccountUpdate={saveAccountUpdate} 
                     />
-                    <Activities activities={activities} discountSchemes={discountSchemes} turnoverBandSets={turnoverBandSets} />
+                    <Activities activities={activities} />
                 </Grid>
 
                 <ListSelectItemModal

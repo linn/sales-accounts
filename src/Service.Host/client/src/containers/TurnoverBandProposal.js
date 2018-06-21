@@ -2,20 +2,16 @@
 import TurnoverBandProposal from '../components/TurnoverBandProposal';
 import initialiseOnMount from './common/initialiseOnMount';
 import { fetchAllOpenSalesAccounts } from '../actions/salesAccounts';
-import { fetchTurnoverBandProposal, calculateTurnoverBandProposal, updateProposedTurnoverBand,
-         excludeProposedTurnoverBand, applyTurnoverBandProposal } from '../actions/turnoverBandProposal';
+import { fetchTurnoverBandProposal, calculateTurnoverBandProposal, applyTurnoverBandProposal } from '../actions/turnoverBandProposal';
 import { fetchDiscountSchemes } from '../actions/discountSchemes';
 import { fetchTurnoverBandSets } from '../actions/turnoverBandSets';
 import { getLoading, getProposedTurnoverBands, getFinancialYear } from '../selectors/turnoverBandProposalSelectors';
 
-const mapStateToProps = ({ turnoverBandProposal, salesAccounts, discountSchemes, turnoverBandSets }) => ({
+const mapStateToProps = ({ turnoverBandProposal, discountSchemes, turnoverBandSets }) => ({
     loading: getLoading(turnoverBandProposal),
     proposedTurnoverBands: getProposedTurnoverBands(turnoverBandProposal),
     financialYear: getFinancialYear(turnoverBandProposal),
-    turnoverBandProposal,
-    salesAccounts,
-    discountSchemes,
-    turnoverBandSets
+    turnoverBandProposal
 });
 
 const initialise = () => dispatch => {
@@ -28,8 +24,6 @@ const initialise = () => dispatch => {
 const mapDispatchToProps = {
     initialise,
     calculateTurnoverBandProposal,
-    updateProposedTurnoverBand,
-    excludeProposedTurnoverBand,
     applyTurnoverBandProposal
 };
 

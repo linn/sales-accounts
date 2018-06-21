@@ -2,7 +2,7 @@
 import { Loading } from './common';
 import { Grid, Row, Col, Button, ListGroup, ListGroupItem, Alert, OverlayTrigger, Tooltip, Glyphicon } from 'react-bootstrap';
 import { formatDate } from '../helpers/dates';
-import ProposalItem from './ProposalItem';
+import ProposalItem from '../containers/ProposalItem';
 import { getSalesAccount } from '../selectors/salesAccountsSelectors';
 import YesNoModal from './YesNoModal';
 import config from '../config';
@@ -42,11 +42,7 @@ class TurnoverBandProposal extends Component {
             financialYear,
             loading,
             proposedTurnoverBands,
-            salesAccounts,
-            discountSchemes,
-            turnoverBandSets,
             calculateTurnoverBandProposal,
-            updateProposedTurnoverBand,
             excludeProposedTurnoverBand
         } = this.props;
 
@@ -59,7 +55,7 @@ class TurnoverBandProposal extends Component {
         }
 
         return (
-            <React.Fragment >
+            <div >
                 <Grid>
                     <Row>
                         <Col xs={8}>
@@ -94,11 +90,6 @@ class TurnoverBandProposal extends Component {
                                             <ProposalItem
                                                 proposalItem={proposalItem}
                                                 key={proposalItem.uri}
-                                                salesAccount={getSalesAccount(salesAccounts, proposalItem.salesAccountUri)}
-                                                discountSchemes={discountSchemes}
-                                                turnoverBandSets={turnoverBandSets}
-                                                updateProposedTurnoverBand={updateProposedTurnoverBand}
-                                                excludeProposedTurnoverBand={excludeProposedTurnoverBand}
                                             />))}
                                 </ListGroup>
                                 </div>
@@ -130,7 +121,7 @@ class TurnoverBandProposal extends Component {
                     performYesAction={this.makeApplyHandler()}
                     hideModal={() => this.handleCloseApplyYesNoModal()}
                 />
-            </React.Fragment>
+            </div>
         );
     }
 }

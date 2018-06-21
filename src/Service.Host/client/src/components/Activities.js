@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Button, Alert, ListGroup } from 'react-bootstrap';
 import moment from 'moment';
-import ActivityItem from './ActivityItem';
+import ActivityItem from '../containers/ActivityItem';
 
 class Activities extends Component {    
 
@@ -36,7 +36,7 @@ class Activities extends Component {
                             {activities
                                 .sort((a,b) => this.compare(a,b))
                                 .map((activity, i) => (
-                                    <ActivityItem activity={activity} discountSchemes={discountSchemes} turnoverBandSets={turnoverBandSets} key={i} />
+                                    <ActivityItem activity={activity} key={i} />
                                 ))
                             }
                         </ListGroup>

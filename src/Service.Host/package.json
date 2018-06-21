@@ -10,11 +10,6 @@
     "test:watch": "jest --watch"
   },
   "jest": {
-    "coverageDirectory": "./coverage/",
-    "collectCoverageFrom": [
-      "client/src/**/*.{js}"
-    ],
-    "collectCoverage": true,
     "setupFiles": [
       "./react-animation-test-shim.js",
       "./setup-enzyme.js"
