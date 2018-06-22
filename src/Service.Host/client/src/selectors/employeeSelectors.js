@@ -1,6 +1,6 @@
 import { distinct } from '../helpers/utilities';
 import { getEmployeeUris } from './utilities/employeeSelectorUtilities';
-import { getActivityEmployeeUris } from './salesAccountSelectors';
+import { getActivityEmployeeUris } from './utilities/salesAccountSelectorUtilities';
 
 export const getEmployeesToFetch = ({ salesAccount, employees }) => {
     const urisToFetch = distinct(getActivityEmployeeUris(salesAccount));

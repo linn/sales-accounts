@@ -1,4 +1,4 @@
-export const getEmployeeUris = employees => {
+export const getEmployeeUris = (employees) => {
     if (!employees) {
         return null;
     }
@@ -19,7 +19,7 @@ export const getEmployeeName = (employeeUri, employees) => {
     return employee ? employee.fullName : null;
 }
 
-export const getEmployeesLoading = employees => {
+export const getEmployeesLoading = (employees) => {
     if (!employees.items.length) {
         return false;
     }

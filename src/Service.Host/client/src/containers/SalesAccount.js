@@ -13,27 +13,28 @@ import {
     editEligibleForRebate, setEligibleForRebate,
     fetchCountry, fetchActivities
 } from '../actions/salesAccounts';
-import { getSalesAccount, getDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemeClosedOn, getActivities } from '../selectors/salesAccountSelectors';
+import { getSalesAccount, getSalesAccountDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemeClosedOn, getSalesAccountActivities, getSalesAccountLoading } from '../selectors/salesAccountSelectors';
 import { getDiscountSchemes } from '../selectors/discountSchemesSelectors';
+import { getEmployeesLoading } from '../selectors/utilities/employeeSelectorUtilities';
 
-const mapStateToProps = ({ salesAccount, discountSchemes, turnoverBandSets, employees }, { match }) => ({
+const mapStateToProps = (state, { match }) => ({
     salesAccountUri: match.url,
-    salesAccount: getSalesAccount(salesAccount),
-    discountSchemeName: getDiscountSchemeName(getSalesAccount(salesAccount), discountSchemes),
-    discountSchemeStatus: getDiscountSchemeClosedOn(getSalesAccount(salesAccount), discountSchemes),
-    turnoverBandName: getSalesAccountTurnoverBandName(getSalesAccount(salesAccount),turnoverBandSets),
-    discountSchemes: getDiscountSchemes(discountSchemes),
-    turnoverBands: getTurnoverBands(getSalesAccount(salesAccount), turnoverBandSets, discountSchemes),
-    editGoodCreditVisible: salesAccount.editGoodCreditVisible,
-    editDiscountSchemeVisible: salesAccount.editDiscountSchemeVisible,
-    editTurnoverBandVisible: salesAccount.editTurnoverBandVisible,
-    editGrowthPartnerVisible: salesAccount.editGrowthPartnerVisible,
-    editEligibleForRebateVisible: salesAccount.editEligibleForRebateVisible,
-    loading: salesAccount.loading || !discountSchemes || !turnoverBandSets,
-    dirty: salesAccount.dirty,
-    saving: salesAccount.saving,
-    activities: getActivities(salesAccount, employees),
-    turnoverBandSets: turnoverBandSets
+    salesAccount: getSalesAccount(state),
+    discountSchemeName: getSalesAccountDiscountSchemeName(state),
+    discountSchemeStatus: getDiscountSchemeClosedOn(state),
+    turnoverBandName: getSalesAccountTurnoverBandName(state),
+    discountSchemes: getDiscountSchemes(state),
+    turnoverBands: getTurnoverBands(state),
+    editGoodCreditVisible: state.salesAccount.editGoodCreditVisible,
+    editDiscountSchemeVisible: state.salesAccount.editDiscountSchemeVisible,
+    editTurnoverBandVisible: state.salesAccount.editTurnoverBandVisible,
+    editGrowthPartnerVisible: state.salesAccount.editGrowthPartnerVisible,
+    editEligibleForRebateVisible: state.salesAccount.editEligibleForRebateVisible,
+    loading: getSalesAccountLoading(state),
+    dirty: state.salesAccount.dirty,
+    saving: state.salesAccount.saving,
+    activities: getSalesAccountActivities(state),
+    turnoverBandSets: state.turnoverBandSets
 });
 
 const initialise = ({ salesAccountUri, salesAccount }) => dispatch => {
