@@ -10,7 +10,7 @@ class ActivityItem extends Component {
             <span>
                 <strong>{type} </strong>
                 {value ? <span>updated to <strong>{value} </strong></span> : <span>removed </span>}
-                by <b>{updatedByName ? updatedByName : 'Automated Transaction'}</b>
+                by <b>{updatedByName ? updatedByName : 'Unknown User'}</b>
                 <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );
@@ -23,7 +23,7 @@ class ActivityItem extends Component {
                 <span>on <strong>{moment(activity.changedOn).format('DD MMM YYYY ')}</strong></span>
                 {activity.name && <span> with name <strong>{activity.name}</strong></span>}
                 {activity.closedOn && <span> with closed on date <strong>{moment(activity.closedOn).format('DD MMM YYYY ')}</strong></span>}
-                <span> by <b>{updatedByName ? updatedByName : 'Automated Transaction'}</b></span>
+                <span> by <b>{updatedByName ? updatedByName : 'Unknown User'}</b></span>
                 <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );
@@ -34,7 +34,7 @@ class ActivityItem extends Component {
             <span>
                 <strong>{type} </strong>
                 <span>updated by </span>
-                <b>{updatedByName ? updatedByName : 'Automated Transaction'}</b>
+                <b>{updatedByName ? updatedByName : 'Unknown User'}</b>
                 <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );
@@ -45,7 +45,7 @@ class ActivityItem extends Component {
             <span>
                 <strong>{type} </strong>
                 <span>with turnover band <strong>{value} </strong></span>
-                by <b>{updatedByName ? updatedByName : 'Automated Transaction'}</b>
+                by <b>{updatedByName ? updatedByName : 'Unknown User'}</b>
                 <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
         );
