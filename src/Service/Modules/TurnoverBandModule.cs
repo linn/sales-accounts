@@ -3,6 +3,7 @@
     using Linn.SalesAccounts.Facade.Services;
     using Linn.SalesAccounts.Resources.RequestResources;
     using Linn.SalesAccounts.Service.Extensions;
+    using Linn.SalesAccounts.Service.Models;
 
     using Nancy;
     using Nancy.ModelBinding;
@@ -66,7 +67,10 @@
         {
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
             var turnoverBandProposal = this.turnoverBandService.GetProposedTurnoverBands(resource.FinancialYear);
-            return this.Negotiate.WithModel(turnoverBandProposal).WithView("Index");
+            return this.Negotiate
+                .WithModel(turnoverBandProposal)
+                .WithMediaRangeModel("text/html", ApplicationSettings.Get)
+                .WithView("Index");
         }
 
         private object UpdateProposedTurnoverBand(int id)
