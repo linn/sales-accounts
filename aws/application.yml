@@ -200,6 +200,10 @@ Resources:
   salesAccountsMessagingService:
     Type: AWS::ECS::Service
     Properties:
-      Cluster: !Ref targetCluster
-      DesiredCount: 1
+      # Have to use long form conditional
+      Cluster: !If
+        - isTesting
+        - !Sub ${TestClusterName}
+        - !Sub ${ProductionClusterName}
+      DesiredCount: !If [ isTesting, 1, 1]
       TaskDefinition: !Ref salesAccountsMessagingTaskDefinition
