@@ -28,8 +28,6 @@
 
         private object ExportProposedTurnoverBands()
         {
-            this.RequiresAuthentication();
-
             var resource = this.Bind<ProposedTurnoverBandRequestResource>();
             var turnoverBandProposals = this.turnoverBandService.GetProposedTurnoverBandModelResults(resource.FinancialYear);
             return this.Negotiate
