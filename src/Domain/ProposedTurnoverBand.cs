@@ -50,7 +50,7 @@
         }
 
         public void ApplyTurnoverBandToAccount(string employeeUri)
-        {            
+        {
             this.SalesAccount.ApplyTurnoverBandProposal(employeeUri, this);
             this.AppliedToAccount = true;
         }

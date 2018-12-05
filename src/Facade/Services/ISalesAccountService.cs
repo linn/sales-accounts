@@ -22,6 +22,8 @@
 
         IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource, string employeeUri);
 
+        IResult<SalesAccount> ReopenSalesAccountIfClosed(int salesAccountId, string employeeUri);
+
         IResult<IEnumerable<SalesAccountActivity>> GetActivitiesById(int id);
     }
 }

@@ -45,6 +45,17 @@
             this.Activities.Add(closeAccountActivity);
         }
 
+        public void ReopenAccount(SalesAccountReopenActivity closeAccountActivity)
+        {
+            if (!this.ClosedOn.HasValue)
+            {
+                return;
+            }
+
+            this.ClosedOn = null;
+            this.Activities.Add(closeAccountActivity);
+        }
+
         public void UpdateAccount(
             string updatedByUri,
             DiscountScheme discountScheme,

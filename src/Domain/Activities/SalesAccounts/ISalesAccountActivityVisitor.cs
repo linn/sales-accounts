@@ -4,6 +4,8 @@
     {
         T Visit(SalesAccountCloseActivity activity);
 
+        T Visit(SalesAccountReopenActivity activity);
+
         T Visit(SalesAccountCreateActivity activity);
 
         T Visit(SalesAccountGrowthPartnerActivity activity);

@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { ListGroupItem } from 'react-bootstrap';
 import moment from 'moment';
-import { getSalesAccountActivityTurnoverBandName, getSalesAccountActivityDiscountSchemeName } from '../selectors/utilities/salesAccountSelectorUtilities';
 
 class ActivityItem extends Component {
 
@@ -10,6 +9,16 @@ class ActivityItem extends Component {
             <span>
                 <strong>{type} </strong>
                 {value ? <span>updated to <strong>{value} </strong></span> : <span>removed </span>}
+                by <b>{updatedByName ? updatedByName : 'Unknown User'}</b>
+                <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
+            </span>
+        );
+    }
+
+    formatSimpleActivity(type, activity, updatedByName) {
+        return (
+            <span>
+                <strong>{type} </strong>
                 by <b>{updatedByName ? updatedByName : 'Unknown User'}</b>
                 <span className="small pull-right text-muted">{moment(activity.changedOn).fromNow()}</span>
             </span>
@@ -56,6 +65,11 @@ class ActivityItem extends Component {
             case 'SalesAccountCloseActivity':
                 return (
                     this.formatActivity('Account Closed On', moment(activity.closedOn).format('DD MMM YYYY '), activity, updatedByName)
+                );
+
+            case 'SalesAccountReopenActivity':
+                return (
+                    this.formatSimpleActivity('Account Reopened ', activity, updatedByName)
                 );
 
             case 'SalesAccountCreateActivity':

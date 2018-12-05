@@ -47,6 +47,10 @@
                     new SalesAccountCloseResource { ClosedOn = resource.DateClosed },
                     "/employees/100");
             }
+            else
+            {
+                this.salesAccountService.ReopenSalesAccountIfClosed(resource.AccountId, "/employees/100");
+            }
 
             this.rabbitTerminator.Close();
 

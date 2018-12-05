@@ -87,7 +87,10 @@
             return new CreatedResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> UpdateSalesAccount(int salesAccountId, SalesAccountUpdateResource updateResource, string updatedByUri)
+        public IResult<SalesAccount> UpdateSalesAccount(
+            int salesAccountId,
+            SalesAccountUpdateResource updateResource,
+            string updatedByUri)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -122,7 +125,11 @@
             return new SuccessResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> UpdateSalesAccountNameAndAddress(int salesAccountId, string name, AddressResource address, string updatedByUri)
+        public IResult<SalesAccount> UpdateSalesAccountNameAndAddress(
+            int salesAccountId,
+            string name,
+            AddressResource address,
+            string updatedByUri)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -143,7 +150,10 @@
             return new SuccessResult<SalesAccount>(account);
         }
 
-        public IResult<SalesAccount> CloseSalesAccount(int salesAccountId, SalesAccountCloseResource closeResource, string updatedByUri)
+        public IResult<SalesAccount> CloseSalesAccount(
+            int salesAccountId,
+            SalesAccountCloseResource closeResource,
+            string updatedByUri)
         {
             var account = this.salesAccountRepository.GetById(salesAccountId);
             if (account == null)
@@ -153,6 +163,23 @@
 
             account.CloseAccount(new SalesAccountCloseActivity(updatedByUri, DateTime.Parse(closeResource.ClosedOn)));
             this.transactionManager.Commit();
+
+            return new SuccessResult<SalesAccount>(account);
+        }
+
+        public IResult<SalesAccount> ReopenSalesAccountIfClosed(int salesAccountId, string employeeUri)
+        {
+            var account = this.salesAccountRepository.GetById(salesAccountId);
+            if (account == null)
+            {
+                return new NotFoundResult<SalesAccount>();
+            }
+
+            if (account.ClosedOn.HasValue)
+            {
+                account.ReopenAccount(new SalesAccountReopenActivity(employeeUri));
+                this.transactionManager.Commit();
+            }
 
             return new SuccessResult<SalesAccount>(account);
         }
