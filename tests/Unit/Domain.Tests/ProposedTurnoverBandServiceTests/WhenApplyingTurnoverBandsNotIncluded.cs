@@ -25,7 +25,10 @@
         public void SetUp()
         {
             this.financialYear = "2018/19";
-            this.account = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"))
+                               {
+                                   DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1"
+                               };
             var band = new ProposedTurnoverBand
                            {
                                SalesAccount = this.account,

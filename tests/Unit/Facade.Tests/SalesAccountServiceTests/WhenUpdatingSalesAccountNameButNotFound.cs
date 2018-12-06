@@ -11,7 +11,6 @@
 
     public class WhenUpdatingSalesAccountNameButNotFound : ContextBase
     {
-
         [SetUp]
         public void SetUp()
         {

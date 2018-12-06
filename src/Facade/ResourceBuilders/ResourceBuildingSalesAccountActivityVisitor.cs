@@ -18,6 +18,16 @@
             };
         }
 
+        public SalesAccountActivityResource Visit(SalesAccountReopenActivity activity)
+        {
+            return new SalesAccountReopenActivityResource
+            {
+                           ActivityType = activity.GetType().Name,
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
+                           UpdatedByUri = activity.UpdatedByUri
+            };
+        }
+
         public SalesAccountActivityResource Visit(SalesAccountCreateActivity activity)
         {
             return new SalesAccountCreateActivityResource

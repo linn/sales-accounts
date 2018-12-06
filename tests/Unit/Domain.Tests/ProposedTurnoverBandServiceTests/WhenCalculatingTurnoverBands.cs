@@ -25,10 +25,22 @@
         public void SetUp()
         {
             this.financialYear = "2018/19";
-            this.account1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
-            this.account2 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 2, "two")) { DiscountSchemeUri = "/ds/2" };
-            this.account3 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 3, "three")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
-            this.account4 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 4, "four")) { DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1" };
+            this.account1 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "one"))
+                                {
+                                    DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1"
+                                };
+            this.account2 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 2, "two"))
+                                {
+                                    DiscountSchemeUri = "/ds/2"
+                                };
+            this.account3 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 3, "three"))
+                                {
+                                    DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1"
+                                };
+            this.account4 = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 4, "four"))
+                                {
+                                    DiscountSchemeUri = "/ds/1", TurnoverBandUri = "/tb/1"
+                                };
 
             var discountScheme1 = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandSetUri = "/tbs/1" };
             var discountScheme2 = new DiscountScheme { DiscountSchemeUri = "/ds/2" };
@@ -46,7 +58,8 @@
                                 new SalesDataDetail { Id = "3", CurrencyValue = 333, CurrencyCode = "EUR", BaseValue = 333 },
                                 new SalesDataDetail { Id = "4", CurrencyValue = 333, CurrencyCode = "NEW", BaseValue = 333 }
                              });
-            this.SalesAccountRepository.GetAllOpenAccounts().Returns(new[] { this.account1, this.account2, this.account3, this.account4 });
+            this.SalesAccountRepository.GetAllOpenAccounts()
+                .Returns(new[] { this.account1, this.account2, this.account3, this.account4 });
             this.result = this.Sut.CalculateProposedTurnoverBands(this.financialYear);
         }
 

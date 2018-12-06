@@ -22,7 +22,9 @@
 
             builder.Entity<SalesAccountActivity>().HasKey(a => a.Id);
             builder.Entity<SalesAccountActivity>().HasDiscriminator<string>("ActivityType")
-                .HasValue<SalesAccountCreateActivity>("create").HasValue<SalesAccountCloseActivity>("close")
+                .HasValue<SalesAccountCreateActivity>("create")
+                .HasValue<SalesAccountCloseActivity>("close")
+                .HasValue<SalesAccountReopenActivity>("re-open")
                 .HasValue<SalesAccountUpdateRebateActivity>("update-rebate")
                 .HasValue<SalesAccountUpdateGoodCreditActivity>("update-good-credit")
                 .HasValue<SalesAccountUpdateDiscountSchemeUriActivity>("update-discount-scheme")
