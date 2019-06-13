@@ -97,7 +97,7 @@ Resources:
         Image: !Sub docker.io/linn/sales-accounts:${dockerTag}
         PortMappings:
         - ContainerPort: 5050
-        Memory: '250'
+        Memory: '192'
         LogConfiguration:
           LogDriver: gelf
           Options:
@@ -145,7 +145,7 @@ Resources:
         Image: !Sub docker.io/linn/sales-accounts-messaging:${dockerTag}
         PortMappings:
         - ContainerPort: 5050
-        Memory: '150'
+        Memory: '64'
         LogConfiguration:
           LogDriver: gelf
           Options:
