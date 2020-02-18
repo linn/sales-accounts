@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-
-namespace Linn.SalesAccounts.Persistence.Migrations
+﻿namespace Linn.SalesAccounts.Persistence.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+    using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
+
     public partial class accountid : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
