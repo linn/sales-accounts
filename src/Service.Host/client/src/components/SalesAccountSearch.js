@@ -19,7 +19,7 @@ class SalesAccountSearch extends Component {
                             <ControlLabel>Search for account by name or account Id</ControlLabel>
                             <FormControl autoFocus value={this.state.searchTerm} onChange={e => this.handleSearchTermChange(e)} type="text" placeholder="Enter account name or account id" ></FormControl>
                         </FormGroup>
-                        {salesAccounts.length > 0
+                        { salesAccounts && salesAccounts.length > 0
                             ? (
                                 <ListGroup>
                                     {salesAccounts.map((salesAccount, i) => (
