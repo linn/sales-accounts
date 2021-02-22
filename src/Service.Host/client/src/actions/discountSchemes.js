@@ -1,9 +1,9 @@
 ﻿import config from '../config';
 import * as actionTypes from './index';
-import { CALL_API } from 'redux-api-middleware';
+import { RSAA } from 'redux-api-middleware';
 
 export const fetchDiscountSchemes = () => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.proxyRoot}/sales/discounting/schemes?includeClosedSchemes=true`,
         method: 'GET',
         headers: {

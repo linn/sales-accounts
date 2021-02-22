@@ -1,11 +1,11 @@
 ﻿import config from '../config';
 import * as actionTypes from './index';
-import { CALL_API } from 'redux-api-middleware';
+import { RSAA } from 'redux-api-middleware';
 
 const financialYearQueryString = (financialYear) => (financialYear ? `?financialYear=${financialYear}` : '');
 
 export const fetchTurnoverBandProposal = financialYear => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}/sales/accounts/turnover-band-proposals${financialYearQueryString(financialYear)}`,
         method: 'GET',
         options: { requiresAuth: true },
@@ -30,7 +30,7 @@ export const fetchTurnoverBandProposal = financialYear => ({
 });
 
 export const calculateTurnoverBandProposal = financialYear => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}/sales/accounts/turnover-band-proposals`,
         method: 'POST',
         options: { requiresAuth: true },
@@ -59,7 +59,7 @@ export const calculateTurnoverBandProposal = financialYear => ({
 });
 
 export const updateProposedTurnoverBand = (uri, turnoverBandUri) => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}${uri}`,
         method: 'PUT',
         options: { requiresAuth: true },
@@ -88,7 +88,7 @@ export const updateProposedTurnoverBand = (uri, turnoverBandUri) => ({
 });
 
 export const excludeProposedTurnoverBand = uri => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}${uri}`,
         method: 'DELETE',
         options: { requiresAuth: true },
@@ -115,7 +115,7 @@ export const excludeProposedTurnoverBand = uri => ({
 });
 
 export const applyTurnoverBandProposal = (uri, financialYear) => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}${uri}`,
         method: 'POST',
         options: { requiresAuth: true },

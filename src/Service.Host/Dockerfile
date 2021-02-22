@@ -1,10 +1,11 @@
-﻿FROM microsoft/dotnet:2.1-runtime
+﻿FROM microsoft/dotnet:2.2-runtime
 
 ARG gitBranch=unspecified
+ENV TZ=Europe/London
 
 EXPOSE 5050
 
-COPY bin/release/netcoreapp2.1/publish/ /app/bin/
+COPY bin/release/netcoreapp2.2/publish/ /app/bin/
 COPY client/build/ /app/client/build/
 COPY client/assets/ /app/client/assets/
 COPY views/ /app/views/

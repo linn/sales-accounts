@@ -1,6 +1,6 @@
 ﻿import config from '../config';
 import * as actionTypes from './index';
-import { CALL_API } from 'redux-api-middleware';
+import { RSAA } from 'redux-api-middleware';
 
 const receiveSalesAccounts = (searchTerm, salesAccounts) => ({
     type: actionTypes.RECEIVE_SALES_ACCOUNTS_SEARCH,
@@ -13,7 +13,7 @@ export const clearSalesAccountSearch = () => ({
 });
 
 const performSearchSalesAccounts = searchTerm => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}/sales/accounts?searchTerm=${searchTerm}`,
         method: 'GET',
         options: { requiresAuth: true },

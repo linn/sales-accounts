@@ -1,14 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Linn.SalesAccounts.Facade</AssemblyName>
     <RootNamespace>Linn.SalesAccounts.Facade</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Linn.Common.Facade" Version="2.0.0" />
-    <PackageReference Include="Linn.Common.Logging" Version="1.1.1" />
+    <PackageReference Include="Linn.Common.Logging" Version="2.0.0" />
     <PackageReference Include="linn.common.nancy.facade" Version="2.0.1" />
     <PackageReference Include="linn.common.serialization" Version="2.0.0" />
   </ItemGroup>
