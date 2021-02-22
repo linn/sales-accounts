@@ -1,9 +1,9 @@
 ﻿import config from '../config';
 import * as actionTypes from './index';
-import { CALL_API } from 'redux-api-middleware';
+import { RSAA } from 'redux-api-middleware';
 
 export const fetchAllOpenSalesAccounts = () => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}/sales/accounts`,
         method: 'GET',
         options: { requiresAuth: true },
@@ -28,7 +28,7 @@ export const fetchAllOpenSalesAccounts = () => ({
 });
 
 export const fetchSalesAccount = salesAccountUri => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}${salesAccountUri}`,
         method: 'GET',
         options: { requiresAuth: true },
@@ -53,7 +53,7 @@ export const fetchSalesAccount = salesAccountUri => ({
 });
 
 export const saveAccountUpdate = salesAccount => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}/sales/accounts/${salesAccount.id}`,
         method: 'PUT',
         options: { requiresAuth: true },
@@ -86,7 +86,7 @@ export const saveAccountUpdate = salesAccount => ({
 });
 
 export const fetchCountry = countryUri => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.proxyRoot}${countryUri}`,
         method: 'GET',
         headers: {
@@ -110,7 +110,7 @@ export const fetchCountry = countryUri => ({
 })
 
 export const fetchActivities = salesAccountUri => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}${salesAccountUri}/activities`,
         method: 'GET',
         options: { requiresAuth: true },
@@ -135,7 +135,7 @@ export const fetchActivities = salesAccountUri => ({
 });
 
 export const closeAccount = salesAccountUri => ({
-    [CALL_API]: {
+    [RSAA]: {
         endpoint: `${config.appRoot}${salesAccountUri}`,
         method: 'DELETE',
         options: { requiresAuth: true },
