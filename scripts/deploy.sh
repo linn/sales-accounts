@@ -32,16 +32,7 @@ if [ "${TRAVIS_BRANCH}" = "master" ]; then
     ENV_SUFFIX=-sys
   fi
 else
-  # not master - deploy to int
-  echo deploy to int
-
-    aws s3 cp s3://$S3_BUCKET_NAME/sales-accounts/int.env ./secrets.env
-
-    STACK_NAME=sales-accounts-int
-    APP_ROOT=http://app-int.linn.co.uk
-	  AUTHORITY_URI=https://www-int.linn.co.uk/auth/
-    PROXY_ROOT=http://app-int.linn.co.uk
-    ENV_SUFFIX=-int
+  echo no deploy to int
 fi
 
 # load the secret variables but hide the output from the travis log

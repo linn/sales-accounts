@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{309A3AD8-4D8A-411D-9C52-D6812EB7D776}"
 EndProject
@@ -43,7 +43,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		.travis.yml = .travis.yml
-		codecov.yml = codecov.yml
 		rabbitmq-config.json = rabbitmq-config.json
 		README.md = README.md
 	EndProjectSection
@@ -63,7 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{95A1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{3433F19B-511F-493E-AE11-2361D1A0E5DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesReportingLoader", "Tools\SalesReportingLoader\SalesReportingLoader.csproj", "{868C44CE-3AD4-4D5A-9FAC-7E4C18F9D772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesReportingLoader", "Tools\SalesReportingLoader\SalesReportingLoader.csproj", "{868C44CE-3AD4-4D5A-9FAC-7E4C18F9D772}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
