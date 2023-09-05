@@ -30,6 +30,7 @@
                 $"{this.proxyRoot}/sales/reporting/query?ReportOn=sales&companyCode=LINN&financialYear={year}&groupBy=sales-account",
                 UriKind.RelativeOrAbsolute);
 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             var response = this.restClient.Get(
                 CancellationToken.None,
                 uri,

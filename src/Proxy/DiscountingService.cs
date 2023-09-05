@@ -35,6 +35,7 @@
 
             var uri = new Uri($"{this.proxyRoot}{discountSchemeUri}", UriKind.RelativeOrAbsolute);
 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             var response = this.restClient.Get(
                 CancellationToken.None,
                 uri,
@@ -76,6 +77,7 @@
                 $"{this.proxyRoot}{turnoverBandSetUri}/turnover-bands?currencyUri=/currencies/{currencyCode}&turnoverValue={turnoverValue}",
                 UriKind.RelativeOrAbsolute);
 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             var response = this.restClient.Get(
                 CancellationToken.None,
                 uri,
@@ -103,6 +105,7 @@
 
             var uri = new Uri($"{this.proxyRoot}{turnoverBandUri}", UriKind.RelativeOrAbsolute);
 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             var response = this.restClient.Get(
                 CancellationToken.None,
                 uri,
@@ -129,6 +132,7 @@
         {
             var uri = new Uri($"{this.proxyRoot}{turnoverBandSetUri}", UriKind.RelativeOrAbsolute);
 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
             var response = this.restClient.Get(
                 CancellationToken.None,
                 uri,
