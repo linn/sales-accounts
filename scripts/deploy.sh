@@ -15,9 +15,9 @@ if [ "${TRAVIS_BRANCH}" = "master" ]; then
     aws s3 cp s3://$S3_BUCKET_NAME/sales-accounts/production.env ./secrets.env
 
     STACK_NAME=sales-accounts
-    APP_ROOT=http://app.linn.co.uk
-	  AUTHORITY_URI=https://www.linn.co.uk/auth/
-    PROXY_ROOT=http://app.linn.co.uk
+    APP_ROOT=
+	  AUTHORITY_URI=
+    PROXY_ROOT=
 	  ENV_SUFFIX=
   else
     # pull request based on master - deploy to sys
