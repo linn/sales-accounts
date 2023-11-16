@@ -11,5 +11,7 @@
         public bool EligibleForRebate { get; set; }
 
         public bool GrowthPartner { get; set; }
+
+        public bool OnBoardingAccount { get; set; }
     }
 }

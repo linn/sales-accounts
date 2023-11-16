@@ -135,5 +135,16 @@
                            UpdatedByUri = activity.UpdatedByUri
             };
         }
+
+        public SalesAccountActivityResource Visit(SalesAccountUpdateOnBoardingActivity activity)
+        {
+            return new SalesAccountOnBoardingActivityResource
+                       {
+                           ActivityType = activity.GetType().Name,
+                           ChangedOn = DateTime.SpecifyKind(activity.ChangedOn, DateTimeKind.Utc).ToString("o"),
+                           OnBoardingAccount = activity.OnBoardingAccount,
+                           UpdatedByUri = activity.UpdatedByUri
+                       };
+        }
     }
 }

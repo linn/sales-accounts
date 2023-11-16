@@ -16,7 +16,8 @@
                            EligibleForRebate = salesAccount.EligibleForRebate,
                            GrowthPartner = salesAccount.GrowthPartner,
                            TurnoverBandUri = salesAccount.TurnoverBandUri,
-                           ClosedOn = salesAccount.ClosedOn?.ToString("o")
+                           ClosedOn = salesAccount.ClosedOn?.ToString("o"),
+                           OnBoardingAccount = salesAccount.OnBoardingAccount
                        };
         }
     }

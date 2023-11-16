@@ -66,6 +66,7 @@ export const saveAccountUpdate = salesAccount => ({
             DiscountSchemeUri : salesAccount.discountSchemeUri,
             EligibleForGoodCreditDiscount : salesAccount.eligibleForGoodCreditDiscount,
             EligibleForRebate : salesAccount.eligibleForRebate,
+            OnBoardingAccount: salesAccount.onBoardingAccount,
             GrowthPartner : salesAccount.growthPartner
         }),
         types: [
@@ -223,4 +224,14 @@ export const editEligibleForRebate = () => ({
 export const setEligibleForRebate = eligible => ({
     type: actionTypes.SET_ELIGIBLE_FOR_REBATE,
     payload: { eligible }
+});
+
+export const editOnBoardingAccount = () => ({
+    type: actionTypes.EDIT_ON_BOARDING_ACCOUNT,
+    payload: {}
+});
+
+export const setOnBoardingAccount = onBoardingAccount => ({
+    type: actionTypes.SET_ON_BOARDING_ACCOUNT,
+    payload: { onBoardingAccount }
 });

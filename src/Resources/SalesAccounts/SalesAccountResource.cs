@@ -21,5 +21,7 @@
         public string ClosedOn { get; set; }
 
         public AddressResource Address { get; set; }
+
+        public bool OnBoardingAccount { get; set; }
     }
 }

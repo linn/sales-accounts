@@ -112,7 +112,8 @@
                     updateResource.TurnoverBandUri,
                     updateResource.EligibleForGoodCreditDiscount,
                     updateResource.EligibleForRebate,
-                    updateResource.GrowthPartner);
+                    updateResource.GrowthPartner,
+                    updateResource.OnBoardingAccount);
 
                 this.transactionManager.Commit();
                 this.salesAccountUpdatedDispatcher.SendSalesAccountUpdated(account.ToMessage());

@@ -22,6 +22,7 @@
                 EligibleForRebate = salesAccount.EligibleForRebate,
                 GrowthPartner = salesAccount.GrowthPartner,
                 DiscountSchemeUri = salesAccount.DiscountSchemeUri,
+                OnBoardingAccount = salesAccount.OnBoardingAccount,
                 TurnoverBandUri = salesAccount.TurnoverBandUri,
                 Address = salesAccount.Address?.ToResource(),
                 ClosedOn = salesAccount.ClosedOn == null ? string.Empty : DateTime.SpecifyKind(salesAccount.ClosedOn.Value, DateTimeKind.Utc).ToString("o"),
