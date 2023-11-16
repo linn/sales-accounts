@@ -21,7 +21,9 @@ class SalesAccount extends Component {
             editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
             editGrowthPartner, setGrowthPartner,
             editEligibleForRebate, setEligibleForRebate,
-            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, editGrowthPartnerVisible, editEligibleForRebateVisible,
+            editOnBoardingAccount, setOnBoardingAccount,
+            editDiscountSchemeVisible, editTurnoverBandVisible, editGoodCreditVisible, editGrowthPartnerVisible,
+            editEligibleForRebateVisible, editOnBoardingAccountVisible,
             activities, turnoverBandSets
         } = this.props;
 
@@ -67,6 +69,11 @@ class SalesAccount extends Component {
                                 value={<SalesAccountAddress address={salesAccount.address}/>}
                                 displayOnly
                             />
+                            <SalesAccountItem
+                                title={'OnBoarding Account:'}
+                                value={salesAccount.onBoardingAccount ? <Label bsStyle="success">Yes</Label> : <Label bsStyle="default">No</Label>}
+                                handleClick={editOnBoardingAccount}
+                            />
                             {salesAccount.closedOn && <SalesAccountItem title={'Account Closed:'} value={formatDate(salesAccount.closedOn)} displayOnly />}
                             <br />
                         </Col>
@@ -98,6 +105,10 @@ class SalesAccount extends Component {
                 <BooleanSwitchModal 
                     visible={editEligibleForRebateVisible} title={'Eligible for Rebate?'} trueText={'Yes'} falseText={'No'} 
                     current={salesAccount.eligibleForRebate} hideModal={hideEditModal} setValue={setEligibleForRebate}
+                />
+                <BooleanSwitchModal
+                    visible={editOnBoardingAccountVisible} title={'OnBoarding Account?'} trueText={'Yes'} falseText={'No'}
+                    current={salesAccount.onBoardingAccount} hideModal={hideEditModal} setValue={setOnBoardingAccount}
                 />
             </div>
         );

@@ -18,7 +18,7 @@
         {
             this.updatedByUri = "/employees/100";
             var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/1" } };
-            this.Sut.UpdateAccount(this.updatedByUri, discountScheme, "/tb/1", true, true, true);
+            this.Sut.UpdateAccount(this.updatedByUri, discountScheme, "/tb/1", true, true, true, false);
         }
 
         [Test]

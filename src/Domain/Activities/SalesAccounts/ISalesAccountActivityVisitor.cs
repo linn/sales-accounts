@@ -23,5 +23,7 @@
         T Visit(SalesAccountUpdateTurnoverBandUriActivity activity);
 
         T Visit(SalesAccountApplyTurnoverBandProposalActivity activity);
+
+        T Visit(SalesAccountUpdateOnBoardingActivity activity);
     }
 }

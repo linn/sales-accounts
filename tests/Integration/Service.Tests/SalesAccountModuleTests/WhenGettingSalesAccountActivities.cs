@@ -27,7 +27,7 @@
             var address = new SalesAccountAddress("ln1", "ln2", string.Empty, string.Empty, "/countries/UK", "post");
 
             this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name", 4.May(2018))) { Id = 1 };
-            this.salesAccount.UpdateAccount("/employees/100", discountScheme, "/tb/1", true, true, true);
+            this.salesAccount.UpdateAccount("/employees/100", discountScheme, "/tb/1", true, true, true, false);
             this.salesAccount.UpdateNameAndAddress("/employees/100", "new name", address);
             this.salesAccount.CloseAccount(new SalesAccountCloseActivity("/employees/100", 17.April(2018)));
 

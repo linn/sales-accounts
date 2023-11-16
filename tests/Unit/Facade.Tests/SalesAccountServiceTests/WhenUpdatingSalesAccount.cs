@@ -25,7 +25,8 @@
                                       {
                                           DiscountSchemeUri = "/ds/1",
                                           TurnoverBandUri = "/tb/1",
-                                          EligibleForGoodCreditDiscount = true
+                                          EligibleForGoodCreditDiscount = true,
+                                          OnBoardingAccount = true
                                       };
             this.Result = this.Sut.UpdateSalesAccount(1, this.updateResource, "/employees/100");
         }
@@ -57,6 +58,7 @@
             dataResult.DiscountSchemeUri.Should().Be("/ds/1");
             dataResult.TurnoverBandUri.Should().Be("/tb/1");
             dataResult.EligibleForGoodCreditDiscount.Should().BeTrue();
+            dataResult.OnBoardingAccount.Should().BeTrue();
         }
     }
 }

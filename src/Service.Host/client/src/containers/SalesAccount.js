@@ -11,11 +11,11 @@ import {
     editEligibleForGoodCreditDiscount, setEligibleForGoodCreditDiscount,
     editGrowthPartner, setGrowthPartner,
     editEligibleForRebate, setEligibleForRebate,
+    editOnBoardingAccount, setOnBoardingAccount,
     fetchCountry, fetchActivities
 } from '../actions/salesAccounts';
 import { getSalesAccount, getSalesAccountDiscountSchemeName, getSalesAccountTurnoverBandName, getTurnoverBands, getDiscountSchemeClosedOn, getSalesAccountActivities, getSalesAccountLoading } from '../selectors/salesAccountSelectors';
 import { getDiscountSchemes } from '../selectors/discountSchemesSelectors';
-import { getEmployeesLoading } from '../selectors/utilities/employeeSelectorUtilities';
 
 const mapStateToProps = (state, { match }) => ({
     salesAccountUri: match.url,
@@ -30,6 +30,7 @@ const mapStateToProps = (state, { match }) => ({
     editTurnoverBandVisible: state.salesAccount.editTurnoverBandVisible,
     editGrowthPartnerVisible: state.salesAccount.editGrowthPartnerVisible,
     editEligibleForRebateVisible: state.salesAccount.editEligibleForRebateVisible,
+    editOnBoardingAccountVisible: state.salesAccount.editOnBoardingAccountVisible,
     loading: getSalesAccountLoading(state),
     dirty: state.salesAccount.dirty,
     saving: state.salesAccount.saving,
@@ -59,6 +60,8 @@ const mapDispatchToProps = {
     setGrowthPartner,
     editEligibleForRebate,
     setEligibleForRebate,
+    editOnBoardingAccount,
+    setOnBoardingAccount,
     showConfirmCloseModal,
     hideConfirmCloseModal
 };

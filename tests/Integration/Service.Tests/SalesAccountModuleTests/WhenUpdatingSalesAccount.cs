@@ -27,7 +27,8 @@
                                                   {
                                                       TurnoverBandUri = "/tb/10",
                                                       DiscountSchemeUri = "/ds/10",
-                                                      EligibleForGoodCreditDiscount = true
+                                                      EligibleForGoodCreditDiscount = true,
+                                                      OnBoardingAccount = true
                                                   };
 
             this.salesAccount = new SalesAccount(new SalesAccountCreateActivity("/employees/100", 1, "name")) { Id = 111 };
@@ -65,6 +66,7 @@
             var resource = this.Response.Body.DeserializeJson<SalesAccountResource>();
             resource.Name.Should().Be("name");
             resource.EligibleForGoodCreditDiscount.Should().BeTrue();
+            resource.OnBoardingAccount.Should().BeTrue();
             resource.TurnoverBandUri.Should().Be("/tb/10");
             resource.DiscountSchemeUri.Should().Be("/ds/10");
             resource.Links.Length.Should().Be(1);

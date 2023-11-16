@@ -21,7 +21,8 @@
                 null,
                 this.Sut.EligibleForGoodCreditDiscount,
                 this.Sut.EligibleForRebate,
-                this.Sut.GrowthPartner);
+                this.Sut.GrowthPartner,
+                this.Sut.OnBoardingAccount);
         }
 
         [Test]

@@ -16,7 +16,6 @@
     using Linn.SalesAccounts.Service.ResponseProcessors;
     using Linn.SalesAccounts.Service.Tests;
 
-    using Nancy.Bootstrapper;
     using Nancy.Testing;
 
     using NSubstitute;

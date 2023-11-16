@@ -8,6 +8,7 @@ const defaultState = {
     editGoodCreditVisible: false,
     editGrowthPartnerVisible: false,
     editEligibleForRebateVisible: false,
+    editOnBoardingAccountVisible: false,
     dirty: false,
     saving: false,
     item: null,
@@ -38,6 +39,7 @@ const salesAccount = (state = defaultState, action) => {
                 editGoodCreditVisible: false,
                 editGrowthPartnerVisible: false,
                 editEligibleForRebateVisible: false,
+                editOnBoardingAccountVisible: false
             }
 
         case actionTypes.EDIT_DISCOUNT_SCHEME:
@@ -111,13 +113,30 @@ const salesAccount = (state = defaultState, action) => {
                 editEligibleForRebateVisible: true
             }
 
+        case actionTypes.EDIT_ON_BOARDING_ACCOUNT:
+            return {
+                ...state,
+                editOnBoardingAccountVisible: true
+            }
+
         case actionTypes.SET_ELIGIBLE_FOR_REBATE:
             return {
                 ...state,
                 dirty: true,
                 item: {
                     ...state.item,
-                    eligibleForRebate: action.payload.eligible,
+                    eligibleForRebate: action.payload.eligible
+                }
+            }
+
+
+        case actionTypes.SET_ON_BOARDING_ACCOUNT:
+            return {
+                ...state,
+                dirty: true,
+                item: {
+                    ...state.item,
+                    onBoardingAccount: action.payload.onBoardingAccount
                 }
             }
 

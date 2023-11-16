@@ -17,7 +17,7 @@
         public void SetUp()
         {
             var discountScheme = new DiscountScheme { DiscountSchemeUri = "/ds/1", TurnoverBandUris = new[] { "/tb/2" } };
-            this.action = () => this.Sut.UpdateAccount("/employees/100", discountScheme, "/tb/1", true, true, true);
+            this.action = () => this.Sut.UpdateAccount("/employees/100", discountScheme, "/tb/1", true, true, true, false);
         }
 
         [Test]

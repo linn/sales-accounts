@@ -14,6 +14,7 @@
             this.Id = createActivity.AccountId;
             this.Name = createActivity.Name;
             this.ClosedOn = createActivity.ClosedOn;
+            this.OnBoardingAccount = false;
             this.Activities.Add(createActivity);
         }
 
@@ -37,6 +38,8 @@
         public string DiscountSchemeUri { get; set; }
 
         public SalesAccountAddress Address { get; set; }
+
+        public bool OnBoardingAccount { get; set; }
 
         public void CloseAccount(SalesAccountCloseActivity closeAccountActivity)
         {
@@ -62,7 +65,8 @@
             string turnoverBandUri,
             bool eligibleForGoodCredit,
             bool eligibleForRebate,
-            bool growthPartner)
+            bool growthPartner,
+            bool onBoardingAccount)
         {
             this.CheckUpdate(discountScheme, turnoverBandUri);
 
@@ -89,6 +93,11 @@
             if (growthPartner != this.GrowthPartner)
             {
                 this.UpdateGrowthPartner(new SalesAccountGrowthPartnerActivity(updatedByUri, growthPartner));
+            }
+
+            if (onBoardingAccount != this.OnBoardingAccount)
+            {
+                this.UpdateOnBoardingAccount(new SalesAccountUpdateOnBoardingActivity(updatedByUri, onBoardingAccount));
             }
         }
 
@@ -119,6 +128,12 @@
         {
             this.GrowthPartner = growthPartnerActivity.GrowthPartner;
             this.Activities.Add(growthPartnerActivity);
+        }
+
+        public void UpdateOnBoardingAccount(SalesAccountUpdateOnBoardingActivity onBoardingActivity)
+        {
+            this.OnBoardingAccount = onBoardingActivity.OnBoardingAccount;
+            this.Activities.Add(onBoardingActivity);
         }
 
         public void ApplyTurnoverBandProposal(string updatedByUri, ProposedTurnoverBand proposedTurnoverBand)
